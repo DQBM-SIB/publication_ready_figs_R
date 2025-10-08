@@ -1,0 +1,15 @@
+---
+title: "Schedule"
+---
+
+## Course Schedule
+
+| block | date        | presentation                    | exercise                       |
+|-------|-------------|---------------------------------|--------------------------------|
+| 1     | 13 Oct 2025 | Slides (currently without link) | currently without link         |
+| 2     | 20 Oct 2025 | Slides (currently without link) | currently without link         |
+| 3     | 27 Oct 2025 | Slides (currently without link) | currently without link         |
+| 4     | 03 Nov 2025 | Slides (currently without link) | currently without link         |
+| 5     | 10 Nov 2025 | Slides (currently without link) | currently without link         |
+| 6     | 17 Nov 2025 | Slides (currently without link) | currently without link         |
+| 7     | 24 Nov 2025 | Slides (currently without link) | currently without link         |

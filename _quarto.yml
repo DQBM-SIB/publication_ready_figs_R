@@ -10,6 +10,8 @@ website:
         text: Home
       - href: qmd/precourse_preparation.qmd
         text: Pre-course preparation
+      - href: qmd/schedule.qmd
+        text: Schedule
     right:
       - icon: github
         href: https://github.com/DQBM-SIB/publication_ready_figs_R
