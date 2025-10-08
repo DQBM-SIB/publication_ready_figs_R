@@ -8,9 +8,9 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - href: prerequisites.qmd
+      - href: qmd/prerequisites.qmd
         text: Prerequisites
-      - href: setup.qmd
+      - href: qmd/setup.qmd
         text: Setup
     right:
       - icon: github
