@@ -8,19 +8,20 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - href: qmd/prerequisites.qmd
-        text: Prerequisites
-      - href: qmd/setup.qmd
-        text: Setup
+      - href: qmd/precourse_preparation.qmd
+        text: Pre-course preparation
     right:
       - icon: github
         href: https://github.com/DQBM-SIB/publication_ready_figs_R
   page-footer:
+    left: "This course website is inspired by the [SIB course template](https://github.com/sib-swiss/course_website_template)."
     right: "Copyright 2025, Deepak Tanwar"
 
 format:
   html:
-    theme: litera
+    theme:
+      light: litera
+      dark: darkly
     css: styles.css
     toc: true
 

@@ -4,6 +4,18 @@ title: "Publication-Ready Figure Generation in R"
 
 Welcome to the course website for Publication-Ready Figure Generation in R.
 
+## Teacher & Author
+
+Deepak Tanwar <a href="https://orcid.org/0000-0001-8036-1989" target="_blank"><img alt="ORCID logo" src="https://info.orcid.org/wp-content/uploads/2019/11/orcid_16x16.png" width="16" height="16" /></a>
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+## Copyright
+
+Copyright 2025, Deepak Tanwar
+
 ## Learning Objectives
 
 - **Understand the principles of effective data visualization:**
@@ -30,3 +42,11 @@ Welcome to the course website for Publication-Ready Figure Generation in R.
 - **Follow best practices for reproducibility:**
   - Write clean and reusable R scripts for figure generation.
   - Document code and workflows to ensure reproducibility and transparency.
+
+## Learning experiences
+
+To reach the learning outcomes we will use lectures, exercises, and polls. During exercises, you are free to discuss with other participants. During lectures, focus on the lecture only.
+
+### Exercises
+
+Each block has practical work involved. Some more than others. The practicals are subdivided into chapters, and we’ll have a (short) discussion after each chapter. All answers to the practicals are incorporated, but they are hidden. Do the exercise first by yourself, before checking out the answer. If your answer is different from the answer in the practicals, try to figure out why they are different.

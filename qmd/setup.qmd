@@ -1,9 +1,0 @@
----
-title: "Setup"
----
-
-## Computational Requirements
-
-- R 4.5.1
-- RStudio (latest version)
-- `renv` R package installed: [renv documentation](https://rstudio.github.io/renv/articles/renv.html)
