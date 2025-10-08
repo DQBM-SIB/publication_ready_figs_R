@@ -1,0 +1,25 @@
+project:
+  type: website
+
+website:
+  title: "Publication-Ready Figure Generation in R"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: prerequisites.qmd
+        text: Prerequisites
+      - href: setup.qmd
+        text: Setup
+    right:
+      - icon: github
+        href: https://github.com/DQBM-SIB/publication_ready_figs_R
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+
+

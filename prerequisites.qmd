@@ -1,0 +1,19 @@
+---
+title: "Prerequisites"
+---
+
+## Basic R Programming Skills
+
+- Understanding R syntax (objects, functions, operators).
+- Ability to create and manipulate basic data structures: vectors, factors, data frames, and lists.
+- Familiarity with indexing and subsetting data.
+- Writing simple scripts in RStudio or another R IDE.
+- Reading and importing data (`read.csv()`, `read.table()`, or `readr`).
+
+## Skill Self-Assessment
+
+You can evaluate your skills here:
+
+- [Google Form](https://docs.google.com/forms/d/e/1FAIpQLSdIyeuabd_ZOWXgI1MWHapmaOMu20L9ESkLDZiWnpmkpujyOg/viewform)
+- [Coursera R Programming Skill Assessment](https://www.coursera.org/resources/r-programming-skill-assessment)
+- [NCEAS R Review and Assessment](https://nceas.github.io/oss-lessons/r-review-and-assessment/r-review-and-assessment.html)
