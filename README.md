@@ -48,3 +48,11 @@ You can evaluate your skills here:
 - R 4.5.1
 - RStudio (latest version)
 - `renv` R package installed: [renv documentation](httpss://rstudio.github.io/renv/articles/renv.html)
+
+## Contributing
+
+Contributions are welcome! Please see the [CONTRIBUTING.md](CONTRIBUTING.md) file for details.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.

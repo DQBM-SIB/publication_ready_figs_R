@@ -1,5 +1,12 @@
 [
   {
+    "objectID": "license.html",
+    "href": "license.html",
+    "title": "License",
+    "section": "",
+    "text": "This project is licensed under the MIT License.\nMIT License\n\nCopyright (c) 2025 Deepak Tanwar\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE."
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Publication-Ready Figure Generation in R",
@@ -47,5 +54,54 @@
     "title": "Setup",
     "section": "",
     "text": "R 4.5.1\nRStudio (latest version)\nrenv R package installed: renv documentation"
+  },
+  {
+    "objectID": "CONTRIBUTING.html",
+    "href": "CONTRIBUTING.html",
+    "title": "Contributing",
+    "section": "",
+    "text": "We welcome contributions to this project!\nPlease feel free to: * Report a bug * Discuss the current state of the code * Submit a fix * Propose new features\n\n\nWe use github to host code, to track issues and feature requests, as well as accept pull requests.\n\n\n\nPull requests are the best way to propose changes to the codebase. We actively welcome your pull requests:\n\nFork the repo and create your branch from main.\nIf you’ve added code that should be tested, add tests.\nIf you’ve changed APIs, update the documentation.\nEnsure the test suite passes.\nMake sure your code lints.\nIssue that pull request!\n\n\n\n\nIn short, when you submit code changes, your submissions are understood to be under the same MIT License that covers the project. Feel free to contact the maintainers if that’s a concern.\n\n\n\nWe use GitHub issues to track public bugs. Report a bug by opening a new issue; it’s that easy!\n\n\n\nGreat Bug Reports tend to have:\n\nA quick summary and/or background\nSteps to reproduce\n\nBe specific!\nGive sample code if you can.\n\nWhat you expected would happen\nWhat actually happens\nNotes (possibly including why you think this might be happening, or stuff you tried that didn’t work)\n\nPeople love thorough bug reports. I’m not even kidding.\n\n\n\n\nYou can look around the codebase to get a feel for the style."
+  },
+  {
+    "objectID": "CONTRIBUTING.html#we-develop-with-github",
+    "href": "CONTRIBUTING.html#we-develop-with-github",
+    "title": "Contributing",
+    "section": "",
+    "text": "We use github to host code, to track issues and feature requests, as well as accept pull requests."
+  },
+  {
+    "objectID": "CONTRIBUTING.html#all-code-changes-happen-through-pull-requests",
+    "href": "CONTRIBUTING.html#all-code-changes-happen-through-pull-requests",
+    "title": "Contributing",
+    "section": "",
+    "text": "Pull requests are the best way to propose changes to the codebase. We actively welcome your pull requests:\n\nFork the repo and create your branch from main.\nIf you’ve added code that should be tested, add tests.\nIf you’ve changed APIs, update the documentation.\nEnsure the test suite passes.\nMake sure your code lints.\nIssue that pull request!"
+  },
+  {
+    "objectID": "CONTRIBUTING.html#any-contributions-you-make-will-be-under-the-mit-software-license",
+    "href": "CONTRIBUTING.html#any-contributions-you-make-will-be-under-the-mit-software-license",
+    "title": "Contributing",
+    "section": "",
+    "text": "In short, when you submit code changes, your submissions are understood to be under the same MIT License that covers the project. Feel free to contact the maintainers if that’s a concern."
+  },
+  {
+    "objectID": "CONTRIBUTING.html#report-bugs-using-githubs-issues",
+    "href": "CONTRIBUTING.html#report-bugs-using-githubs-issues",
+    "title": "Contributing",
+    "section": "",
+    "text": "We use GitHub issues to track public bugs. Report a bug by opening a new issue; it’s that easy!"
+  },
+  {
+    "objectID": "CONTRIBUTING.html#write-bug-reports-with-detail-background-and-sample-code",
+    "href": "CONTRIBUTING.html#write-bug-reports-with-detail-background-and-sample-code",
+    "title": "Contributing",
+    "section": "",
+    "text": "Great Bug Reports tend to have:\n\nA quick summary and/or background\nSteps to reproduce\n\nBe specific!\nGive sample code if you can.\n\nWhat you expected would happen\nWhat actually happens\nNotes (possibly including why you think this might be happening, or stuff you tried that didn’t work)\n\nPeople love thorough bug reports. I’m not even kidding."
+  },
+  {
+    "objectID": "CONTRIBUTING.html#use-a-consistent-coding-style",
+    "href": "CONTRIBUTING.html#use-a-consistent-coding-style",
+    "title": "Contributing",
+    "section": "",
+    "text": "You can look around the codebase to get a feel for the style."
   }
 ]

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Setup – Publication-Ready Figure Generation in R</title>
+<title>contributing – Publication-Ready Figure Generation in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,23 +23,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-c1fac2584b48ed01fb6e278e36375074.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-c1fac2584b48ed01fb6e278e36375074.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,7 +69,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -79,7 +79,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Publication-Ready Figure Generation in R</span>
     </a>
   </div>
@@ -90,19 +90,19 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../qmd/prerequisites.html"> 
+    <a class="nav-link" href="./qmd/prerequisites.html"> 
 <span class="menu-text">Prerequisites</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../qmd/setup.html" aria-current="page"> 
+    <a class="nav-link" href="./qmd/setup.html"> 
 <span class="menu-text">Setup</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../license.html"> 
+    <a class="nav-link" href="./license.html"> 
 <span class="menu-text">License</span></a>
   </li>  
 </ul>
@@ -128,41 +128,76 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#computational-requirements" id="toc-computational-requirements" class="nav-link active" data-scroll-target="#computational-requirements">Computational Requirements</a></li>
+  <li><a href="#contributing" id="toc-contributing" class="nav-link active" data-scroll-target="#contributing">Contributing</a>
+  <ul class="collapse">
+  <li><a href="#we-develop-with-github" id="toc-we-develop-with-github" class="nav-link" data-scroll-target="#we-develop-with-github">We Develop with Github</a></li>
+  <li><a href="#all-code-changes-happen-through-pull-requests" id="toc-all-code-changes-happen-through-pull-requests" class="nav-link" data-scroll-target="#all-code-changes-happen-through-pull-requests">All Code Changes Happen Through Pull Requests</a></li>
+  <li><a href="#any-contributions-you-make-will-be-under-the-mit-software-license" id="toc-any-contributions-you-make-will-be-under-the-mit-software-license" class="nav-link" data-scroll-target="#any-contributions-you-make-will-be-under-the-mit-software-license">Any contributions you make will be under the MIT Software License</a></li>
+  <li><a href="#report-bugs-using-githubs-issues" id="toc-report-bugs-using-githubs-issues" class="nav-link" data-scroll-target="#report-bugs-using-githubs-issues">Report bugs using Github’s issues</a></li>
+  <li><a href="#write-bug-reports-with-detail-background-and-sample-code" id="toc-write-bug-reports-with-detail-background-and-sample-code" class="nav-link" data-scroll-target="#write-bug-reports-with-detail-background-and-sample-code">Write bug reports with detail, background, and sample code</a></li>
+  <li><a href="#use-a-consistent-coding-style" id="toc-use-a-consistent-coding-style" class="nav-link" data-scroll-target="#use-a-consistent-coding-style">Use a Consistent Coding Style</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Setup</h1>
-</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
-<div class="quarto-title-meta">
 
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<section id="computational-requirements" class="level2">
-<h2 class="anchored" data-anchor-id="computational-requirements">Computational Requirements</h2>
+<section id="contributing" class="level1">
+<h1>Contributing</h1>
+<p>We welcome contributions to this project!</p>
+<p>Please feel free to: * Report a bug * Discuss the current state of the code * Submit a fix * Propose new features</p>
+<section id="we-develop-with-github" class="level2">
+<h2 class="anchored" data-anchor-id="we-develop-with-github">We Develop with Github</h2>
+<p>We use github to host code, to track issues and feature requests, as well as accept pull requests.</p>
+</section>
+<section id="all-code-changes-happen-through-pull-requests" class="level2">
+<h2 class="anchored" data-anchor-id="all-code-changes-happen-through-pull-requests">All Code Changes Happen Through Pull Requests</h2>
+<p>Pull requests are the best way to propose changes to the codebase. We actively welcome your pull requests:</p>
+<ol type="1">
+<li>Fork the repo and create your branch from <code>main</code>.</li>
+<li>If you’ve added code that should be tested, add tests.</li>
+<li>If you’ve changed APIs, update the documentation.</li>
+<li>Ensure the test suite passes.</li>
+<li>Make sure your code lints.</li>
+<li>Issue that pull request!</li>
+</ol>
+</section>
+<section id="any-contributions-you-make-will-be-under-the-mit-software-license" class="level2">
+<h2 class="anchored" data-anchor-id="any-contributions-you-make-will-be-under-the-mit-software-license">Any contributions you make will be under the MIT Software License</h2>
+<p>In short, when you submit code changes, your submissions are understood to be under the same <a href="http://choosealicense.com/licenses/mit/">MIT License</a> that covers the project. Feel free to contact the maintainers if that’s a concern.</p>
+</section>
+<section id="report-bugs-using-githubs-issues" class="level2">
+<h2 class="anchored" data-anchor-id="report-bugs-using-githubs-issues">Report bugs using Github’s <a href="https://github.com/DQBM-SIB/publication_ready_figs_R/issues">issues</a></h2>
+<p>We use GitHub issues to track public bugs. Report a bug by <a href="">opening a new issue</a>; it’s that easy!</p>
+</section>
+<section id="write-bug-reports-with-detail-background-and-sample-code" class="level2">
+<h2 class="anchored" data-anchor-id="write-bug-reports-with-detail-background-and-sample-code">Write bug reports with detail, background, and sample code</h2>
+<p><strong>Great Bug Reports</strong> tend to have:</p>
 <ul>
-<li>R 4.5.1</li>
-<li>RStudio (latest version)</li>
-<li><code>renv</code> R package installed: <a href="https://rstudio.github.io/renv/articles/renv.html">renv documentation</a></li>
+<li>A quick summary and/or background</li>
+<li>Steps to reproduce
+<ul>
+<li>Be specific!</li>
+<li>Give sample code if you can.</li>
+</ul></li>
+<li>What you expected would happen</li>
+<li>What actually happens</li>
+<li>Notes (possibly including why you think this might be happening, or stuff you tried that didn’t work)</li>
+</ul>
+<p>People <em>love</em> thorough bug reports. I’m not even kidding.</p>
+</section>
+<section id="use-a-consistent-coding-style" class="level2">
+<h2 class="anchored" data-anchor-id="use-a-consistent-coding-style">Use a Consistent Coding Style</h2>
+<ul>
+<li>You can look around the codebase to get a feel for the style.</li>
 </ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

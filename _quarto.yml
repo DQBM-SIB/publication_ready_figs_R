@@ -12,6 +12,8 @@ website:
         text: Prerequisites
       - href: qmd/setup.qmd
         text: Setup
+      - href: license.qmd
+        text: License
     right:
       - icon: github
         href: https://github.com/DQBM-SIB/publication_ready_figs_R
