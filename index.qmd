@@ -18,30 +18,30 @@ Copyright 2025, Deepak Tanwar
 
 ## Learning Objectives
 
-- **Understand the principles of effective data visualization:**
-  - Explain the importance of clarity, accuracy, and aesthetics in creating publication-ready figures.
-  - Identify common pitfalls in data visualization and how to avoid them.
-- **Use base R graphics for figure creation:**
-  - Create basic plots (e.g., scatterplots, bar charts, histograms) using base R functions like `plot()`, `barplot()`, and `hist()`.
-  - Customize plots with titles, labels, legends, and color schemes.
-- **Master ggplot2 for advanced visualizations:**
-  - Build complex and layered visualizations using the `ggplot2` package.
-  - Apply themes, scales, and `geoms` to create polished and publication-ready figures.
-- **Customize figures for specific publication requirements:**
-  - Adjust figure dimensions, resolutions, and formats (e.g., PDF, PNG, TIFF) for journal submissions.
-  - Modify fonts, line weights, and other stylistic elements to meet publication guidelines.
-- **Incorporate statistical annotations and summaries:**
-  - Add statistical summaries (e.g., regression lines, confidence intervals) to figures.
-  - Annotate plots with p-values, correlation coefficients, or other relevant statistics.
-- **Export high-quality figures:**
-  - Use functions like `ggsave()` or `pdf()` to export figures in high resolution.
-  - Ensure exported figures meet the technical requirements of target journals or platforms.
-- **Create multi-panel figures:**
-  - Combine multiple plots into a single figure using tools like `patchwork`.
-  - Align and arrange subplots to effectively communicate complex data.
-- **Follow best practices for reproducibility:**
-  - Write clean and reusable R scripts for figure generation.
-  - Document code and workflows to ensure reproducibility and transparency.
+- **Analyze the principles of effective data visualization:**
+  - **Explain** the importance of clarity, accuracy, and aesthetics in creating publication-ready figures.
+  - **Identify** common pitfalls in data visualization and how to avoid them.
+- **Apply base R graphics for figure creation:**
+  - **Create** basic plots (e.g., scatterplots, bar charts, histograms) using base R functions like `plot()`, `barplot()`, and `hist()`.
+  - **Customize** plots with titles, labels, legends, and color schemes.
+- **Construct advanced visualizations using ggplot2:**
+  - **Build** complex and layered visualizations using the `ggplot2` package.
+  - **Apply** themes, scales, and `geoms` to create polished and publication-ready figures.
+- **Adapt figures for specific publication requirements:**
+  - **Adjust** figure dimensions, resolutions, and formats (e.g., PDF, PNG, TIFF) for journal submissions.
+  - **Modify** fonts, line weights, and other stylistic elements to meet publication guidelines.
+- **Integrate statistical annotations and summaries:**
+  - **Add** statistical summaries (e.g., regression lines, confidence intervals) to figures.
+  - **Annotate** plots with p-values, correlation coefficients, or other relevant statistics.
+- **Generate high-quality figures:**
+  - **Use** functions like `ggsave()` or `pdf()` to export figures in high resolution.
+  - **Ensure** exported figures meet the technical requirements of target journals or platforms.
+- **Assemble multi-panel figures:**
+  - **Combine** multiple plots into a single figure using tools like `patchwork`.
+  - **Align** and **arrange** subplots to effectively communicate complex data.
+- **Implement best practices for reproducibility:**
+  - **Write** clean and reusable R scripts for figure generation.
+  - **Document** code and workflows to ensure reproducibility and transparency.
 
 ## Learning experiences
 
