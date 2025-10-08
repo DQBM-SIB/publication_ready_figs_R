@@ -1,61 +1,5 @@
 [
   {
-    "objectID": "license.html",
-    "href": "license.html",
-    "title": "License",
-    "section": "",
-    "text": "This project is licensed under the MIT License.\nMIT License\n\nCopyright (c) 2025 Deepak Tanwar\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Publication-Ready Figure Generation in R",
-    "section": "",
-    "text": "Welcome to the course website for Publication-Ready Figure Generation in R."
-  },
-  {
-    "objectID": "index.html#learning-objectives",
-    "href": "index.html#learning-objectives",
-    "title": "Publication-Ready Figure Generation in R",
-    "section": "Learning Objectives",
-    "text": "Learning Objectives\n\nUnderstand the principles of effective data visualization:\n\nExplain the importance of clarity, accuracy, and aesthetics in creating publication-ready figures.\nIdentify common pitfalls in data visualization and how to avoid them.\n\nUse base R graphics for figure creation:\n\nCreate basic plots (e.g., scatterplots, bar charts, histograms) using base R functions like plot(), barplot(), and hist().\nCustomize plots with titles, labels, legends, and color schemes.\n\nMaster ggplot2 for advanced visualizations:\n\nBuild complex and layered visualizations using the ggplot2 package.\nApply themes, scales, and geoms to create polished and publication-ready figures.\n\nCustomize figures for specific publication requirements:\n\nAdjust figure dimensions, resolutions, and formats (e.g., PDF, PNG, TIFF) for journal submissions.\nModify fonts, line weights, and other stylistic elements to meet publication guidelines.\n\nIncorporate statistical annotations and summaries:\n\nAdd statistical summaries (e.g., regression lines, confidence intervals) to figures.\nAnnotate plots with p-values, correlation coefficients, or other relevant statistics.\n\nExport high-quality figures:\n\nUse functions like ggsave() or pdf() to export figures in high resolution.\nEnsure exported figures meet the technical requirements of target journals or platforms.\n\nCreate multi-panel figures:\n\nCombine multiple plots into a single figure using tools like patchwork.\nAlign and arrange subplots to effectively communicate complex data.\n\nFollow best practices for reproducibility:\n\nWrite clean and reusable R scripts for figure generation.\nDocument code and workflows to ensure reproducibility and transparency."
-  },
-  {
-    "objectID": "qmd/prerequisites.html",
-    "href": "qmd/prerequisites.html",
-    "title": "Prerequisites",
-    "section": "",
-    "text": "Understanding R syntax (objects, functions, operators).\nAbility to create and manipulate basic data structures: vectors, factors, data frames, and lists.\nFamiliarity with indexing and subsetting data.\nWriting simple scripts in RStudio or another R IDE.\nReading and importing data (read.csv(), read.table(), or readr)."
-  },
-  {
-    "objectID": "qmd/prerequisites.html#basic-r-programming-skills",
-    "href": "qmd/prerequisites.html#basic-r-programming-skills",
-    "title": "Prerequisites",
-    "section": "",
-    "text": "Understanding R syntax (objects, functions, operators).\nAbility to create and manipulate basic data structures: vectors, factors, data frames, and lists.\nFamiliarity with indexing and subsetting data.\nWriting simple scripts in RStudio or another R IDE.\nReading and importing data (read.csv(), read.table(), or readr)."
-  },
-  {
-    "objectID": "qmd/prerequisites.html#skill-self-assessment",
-    "href": "qmd/prerequisites.html#skill-self-assessment",
-    "title": "Prerequisites",
-    "section": "Skill Self-Assessment",
-    "text": "Skill Self-Assessment\nYou can evaluate your skills here:\n\nGoogle Form\nCoursera R Programming Skill Assessment\nNCEAS R Review and Assessment"
-  },
-  {
-    "objectID": "qmd/setup.html",
-    "href": "qmd/setup.html",
-    "title": "Setup",
-    "section": "",
-    "text": "R 4.5.1\nRStudio (latest version)\nrenv R package installed: renv documentation"
-  },
-  {
-    "objectID": "qmd/setup.html#computational-requirements",
-    "href": "qmd/setup.html#computational-requirements",
-    "title": "Setup",
-    "section": "",
-    "text": "R 4.5.1\nRStudio (latest version)\nrenv R package installed: renv documentation"
-  },
-  {
     "objectID": "CONTRIBUTING.html",
     "href": "CONTRIBUTING.html",
     "title": "Contributing",
@@ -103,5 +47,54 @@
     "title": "Contributing",
     "section": "",
     "text": "You can look around the codebase to get a feel for the style."
+  },
+  {
+    "objectID": "qmd/setup.html",
+    "href": "qmd/setup.html",
+    "title": "Setup",
+    "section": "",
+    "text": "R 4.5.1\nRStudio (latest version)\nrenv R package installed: renv documentation"
+  },
+  {
+    "objectID": "qmd/setup.html#computational-requirements",
+    "href": "qmd/setup.html#computational-requirements",
+    "title": "Setup",
+    "section": "",
+    "text": "R 4.5.1\nRStudio (latest version)\nrenv R package installed: renv documentation"
+  },
+  {
+    "objectID": "qmd/prerequisites.html",
+    "href": "qmd/prerequisites.html",
+    "title": "Prerequisites",
+    "section": "",
+    "text": "Understanding R syntax (objects, functions, operators).\nAbility to create and manipulate basic data structures: vectors, factors, data frames, and lists.\nFamiliarity with indexing and subsetting data.\nWriting simple scripts in RStudio or another R IDE.\nReading and importing data (read.csv(), read.table(), or readr)."
+  },
+  {
+    "objectID": "qmd/prerequisites.html#basic-r-programming-skills",
+    "href": "qmd/prerequisites.html#basic-r-programming-skills",
+    "title": "Prerequisites",
+    "section": "",
+    "text": "Understanding R syntax (objects, functions, operators).\nAbility to create and manipulate basic data structures: vectors, factors, data frames, and lists.\nFamiliarity with indexing and subsetting data.\nWriting simple scripts in RStudio or another R IDE.\nReading and importing data (read.csv(), read.table(), or readr)."
+  },
+  {
+    "objectID": "qmd/prerequisites.html#skill-self-assessment",
+    "href": "qmd/prerequisites.html#skill-self-assessment",
+    "title": "Prerequisites",
+    "section": "Skill Self-Assessment",
+    "text": "Skill Self-Assessment\nYou can evaluate your skills here:\n\nGoogle Form\nCoursera R Programming Skill Assessment\nNCEAS R Review and Assessment"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Publication-Ready Figure Generation in R",
+    "section": "",
+    "text": "Welcome to the course website for Publication-Ready Figure Generation in R."
+  },
+  {
+    "objectID": "index.html#learning-objectives",
+    "href": "index.html#learning-objectives",
+    "title": "Publication-Ready Figure Generation in R",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\n\nUnderstand the principles of effective data visualization:\n\nExplain the importance of clarity, accuracy, and aesthetics in creating publication-ready figures.\nIdentify common pitfalls in data visualization and how to avoid them.\n\nUse base R graphics for figure creation:\n\nCreate basic plots (e.g., scatterplots, bar charts, histograms) using base R functions like plot(), barplot(), and hist().\nCustomize plots with titles, labels, legends, and color schemes.\n\nMaster ggplot2 for advanced visualizations:\n\nBuild complex and layered visualizations using the ggplot2 package.\nApply themes, scales, and geoms to create polished and publication-ready figures.\n\nCustomize figures for specific publication requirements:\n\nAdjust figure dimensions, resolutions, and formats (e.g., PDF, PNG, TIFF) for journal submissions.\nModify fonts, line weights, and other stylistic elements to meet publication guidelines.\n\nIncorporate statistical annotations and summaries:\n\nAdd statistical summaries (e.g., regression lines, confidence intervals) to figures.\nAnnotate plots with p-values, correlation coefficients, or other relevant statistics.\n\nExport high-quality figures:\n\nUse functions like ggsave() or pdf() to export figures in high resolution.\nEnsure exported figures meet the technical requirements of target journals or platforms.\n\nCreate multi-panel figures:\n\nCombine multiple plots into a single figure using tools like patchwork.\nAlign and arrange subplots to effectively communicate complex data.\n\nFollow best practices for reproducibility:\n\nWrite clean and reusable R scripts for figure generation.\nDocument code and workflows to ensure reproducibility and transparency."
   }
 ]
