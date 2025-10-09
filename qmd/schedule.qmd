@@ -6,10 +6,10 @@ title: "Schedule"
 
 | block | date        | presentation                    | exercise                       |
 |-------|-------------|---------------------------------|--------------------------------|
-| 1     | 13 Oct 2025 | Slides (currently without link) | currently without link         |
-| 2     | 20 Oct 2025 | Slides (currently without link) | currently without link         |
-| 3     | 27 Oct 2025 | Slides (currently without link) | currently without link         |
-| 4     | 03 Nov 2025 | Slides (currently without link) | currently without link         |
-| 5     | 10 Nov 2025 | Slides (currently without link) | currently without link         |
-| 6     | 17 Nov 2025 | Slides (currently without link) | currently without link         |
-| 7     | 24 Nov 2025 | Slides (currently without link) | currently without link         |
+| 1     | 13 Oct 2025 | [Slides](../slides/slide_block_1.qmd) | [Exercise](../exercises/exercise_block_1.qmd) |
+| 2     | 20 Oct 2025 | [Slides](../slides/slide_block_2.qmd) | [Exercise](../exercises/exercise_block_2.qmd) |
+| 3     | 27 Oct 2025 | [Slides](../slides/slide_block_3.qmd) | [Exercise](../exercises/exercise_block_3.qmd) |
+| 4     | 03 Nov 2025 | [Slides](../slides/slide_block_4.qmd) | [Exercise](../exercises/exercise_block_4.qmd) |
+| 5     | 10 Nov 2025 | [Slides](../slides/slide_block_5.qmd) | [Exercise](../exercises/exercise_block_5.qmd) |
+| 6     | 17 Nov 2025 | [Slides](../slides/slide_block_6.qmd) | [Exercise](../exercises/exercise_block_6.qmd) |
+| 7     | 24 Nov 2025 | [Slides](../slides/slide_block_7.qmd) | [Exercise](../exercises/exercise_block_7.qmd) |
