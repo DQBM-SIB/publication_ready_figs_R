@@ -12,6 +12,38 @@ website:
         text: Pre-course preparation
       - href: qmd/schedule.qmd
         text: Schedule
+      - text: Slides
+        menu:
+          - href: slides/slide_block_1.qmd
+            text: "Block 1"
+          - href: slides/slide_block_2.qmd
+            text: "Block 2"
+          - href: slides/slide_block_3.qmd
+            text: "Block 3"
+          - href: slides/slide_block_4.qmd
+            text: "Block 4"
+          - href: slides/slide_block_5.qmd
+            text: "Block 5"
+          - href: slides/slide_block_6.qmd
+            text: "Block 6"
+          - href: slides/slide_block_7.qmd
+            text: "Block 7"
+      - text: Exercises
+        menu:
+          - href: exercises/exercise_block_1.qmd
+            text: "Block 1"
+          - href: exercises/exercise_block_2.qmd
+            text: "Block 2"
+          - href: exercises/exercise_block_3.qmd
+            text: "Block 3"
+          - href: exercises/exercise_block_4.qmd
+            text: "Block 4"
+          - href: exercises/exercise_block_5.qmd
+            text: "Block 5"
+          - href: exercises/exercise_block_6.qmd
+            text: "Block 6"
+          - href: exercises/exercise_block_7.qmd
+            text: "Block 7"
     right:
       - icon: github
         href: https://github.com/DQBM-SIB/publication_ready_figs_R
