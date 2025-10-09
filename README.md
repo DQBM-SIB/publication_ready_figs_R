@@ -36,6 +36,8 @@ This project is structured as follows:
 - `_quarto.yml`: Configuration file for Quarto.
 - `index.qmd`: The main page of the course website, containing the learning objectives.
 - `qmd/`: Directory containing Quarto markdown files for course content.
+- `slides/`: Directory containing Quarto markdown files for presentation slides.
+- `exercises/`: Directory containing Quarto markdown files for exercises.
 - `styles.css`: Custom CSS for styling the website.
 - `docs/`: Directory where the rendered website is built.
 
