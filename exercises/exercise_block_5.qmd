@@ -1,3 +1,6 @@
 ---
 title: "Exercise - Block 5"
+editor: source
+editor_options: 
+  chunk_output_type: console
 ---
