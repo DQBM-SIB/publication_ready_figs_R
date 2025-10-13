@@ -49,6 +49,118 @@
     "text": "You can look around the codebase to get a feel for the style."
   },
   {
+    "objectID": "slides/slide_block_1.html#introduction",
+    "href": "slides/slide_block_1.html#introduction",
+    "title": "Block 1",
+    "section": "Introduction",
+    "text": "Introduction\n\nName\nResearch group\nTopic of research\nDatasets for your research\nWhy are you attending this course?"
+  },
+  {
+    "objectID": "slides/slide_block_1.html#quiz-1",
+    "href": "slides/slide_block_1.html#quiz-1",
+    "title": "Block 1",
+    "section": "Quiz 1",
+    "text": "Quiz 1\nQuestions 1 to 4"
+  },
+  {
+    "objectID": "slides/slide_block_1.html#why-choosing-the-right-chart-matters",
+    "href": "slides/slide_block_1.html#why-choosing-the-right-chart-matters",
+    "title": "Block 1",
+    "section": "Why choosing the right chart matters?",
+    "text": "Why choosing the right chart matters?\n\nEffective visualizations communicate data clearly and efficiently.\nThe wrong chart can mislead or confuse your audience.\nGood visualizations highlight patterns, trends, and outliers."
+  },
+  {
+    "objectID": "slides/slide_block_1.html#types-of-data",
+    "href": "slides/slide_block_1.html#types-of-data",
+    "title": "Block 1",
+    "section": "Types of data",
+    "text": "Types of data\n\nCategorical: Names or labels (e.g., Region, Product Type)\nNumeric: Quantitative values (e.g., Sales, Temperature)\nTime: Dates or time intervals (e.g., Monthly Revenue)\nGeographic: Locations (e.g., Country, Coordinates)"
+  },
+  {
+    "objectID": "slides/slide_block_1.html#categorical-data",
+    "href": "slides/slide_block_1.html#categorical-data",
+    "title": "Block 1",
+    "section": "Categorical Data",
+    "text": "Categorical Data\n\nUse bar charts to compare categories"
+  },
+  {
+    "objectID": "slides/slide_block_1.html#categorical-data-1",
+    "href": "slides/slide_block_1.html#categorical-data-1",
+    "title": "Block 1",
+    "section": "Categorical Data",
+    "text": "Categorical Data\n\nUse pie charts to show proportions"
+  },
+  {
+    "objectID": "slides/slide_block_1.html#numeric-data",
+    "href": "slides/slide_block_1.html#numeric-data",
+    "title": "Block 1",
+    "section": "Numeric Data",
+    "text": "Numeric Data\n\nUse histograms to show distributions"
+  },
+  {
+    "objectID": "slides/slide_block_1.html#numeric-data-1",
+    "href": "slides/slide_block_1.html#numeric-data-1",
+    "title": "Block 1",
+    "section": "Numeric Data",
+    "text": "Numeric Data\n\nUse boxplots to show spread and outliers"
+  },
+  {
+    "objectID": "slides/slide_block_1.html#relational-data",
+    "href": "slides/slide_block_1.html#relational-data",
+    "title": "Block 1",
+    "section": "Relational Data",
+    "text": "Relational Data\n\nUse scatter plots to show relationships between two numeric variables"
+  },
+  {
+    "objectID": "slides/slide_block_1.html#time-series-data",
+    "href": "slides/slide_block_1.html#time-series-data",
+    "title": "Block 1",
+    "section": "Time Series Data",
+    "text": "Time Series Data\n\nUse line charts to show trends over time"
+  },
+  {
+    "objectID": "slides/slide_block_1.html#geographic-data",
+    "href": "slides/slide_block_1.html#geographic-data",
+    "title": "Block 1",
+    "section": "Geographic Data",
+    "text": "Geographic Data\n\nUse choropleth maps to show values by region"
+  },
+  {
+    "objectID": "slides/slide_block_1.html#conclusion-choosing-the-right-visualization",
+    "href": "slides/slide_block_1.html#conclusion-choosing-the-right-visualization",
+    "title": "Block 1",
+    "section": "Conclusion: Choosing the Right Visualization",
+    "text": "Conclusion: Choosing the Right Visualization\n\nThere is no single “correct” chart for a given dataset. For example, numeric data can be shown as:\n\nHistogram (distribution)\nBoxplot (spread and outliers)\nDensity plot (smooth distribution)"
+  },
+  {
+    "objectID": "slides/slide_block_1.html#conclusion-choosing-the-right-visualization-1",
+    "href": "slides/slide_block_1.html#conclusion-choosing-the-right-visualization-1",
+    "title": "Block 1",
+    "section": "Conclusion: Choosing the Right Visualization",
+    "text": "Conclusion: Choosing the Right Visualization\n\nThe best choice depends on:\n\nYour goal: Compare, show distribution, highlight relationships?\nAudience: Technical vs. non-technical\nClarity: Which chart communicates the message most clearly?"
+  },
+  {
+    "objectID": "slides/slide_block_1.html#from-data-to-visualization",
+    "href": "slides/slide_block_1.html#from-data-to-visualization",
+    "title": "Block 1",
+    "section": "From data to visualization",
+    "text": "From data to visualization\n\nOnly resource you need: data-to-viz.com"
+  },
+  {
+    "objectID": "slides/slide_block_1.html#exercise-read-and-discuss-content",
+    "href": "slides/slide_block_1.html#exercise-read-and-discuss-content",
+    "title": "Block 1",
+    "section": "Exercise: Read and discuss content",
+    "text": "Exercise: Read and discuss content\nGroup 1: data-to-viz.com/caveat/bin_size.html\nGroup 2: data-to-viz.com/caveat/consistency.html\nGroup 3: data-to-viz.com/caveat/simpson.html\nGroup 4: data-to-viz.com/caveat/boxplot.html\n\nWhat is the main problem or risk highlighted by this caveat?\nWhy does this issue occur?\nWhat are the potential consequences of ignoring this caveat?\nHow can we detect or avoid this problem in practice?"
+  },
+  {
+    "objectID": "slides/slide_block_1.html#quiz-2",
+    "href": "slides/slide_block_1.html#quiz-2",
+    "title": "Block 1",
+    "section": "Quiz 2",
+    "text": "Quiz 2\nQuestions 5 to 12"
+  },
+  {
     "objectID": "qmd/schedule.html",
     "href": "qmd/schedule.html",
     "title": "Schedule",
@@ -124,5 +236,19 @@
     "title": "Publication-Ready Figure Generation in R",
     "section": "Learning experiences",
     "text": "Learning experiences\nTo reach the learning outcomes we will use lectures, exercises, and polls. During exercises, you are free to discuss with other participants. During lectures, focus on the lecture only.\n\nExercises\nEach block has practical work involved. Some more than others. The practicals are subdivided into chapters, and we’ll have a (short) discussion after each chapter. All answers to the practicals are incorporated, but they are hidden. Do the exercise first by yourself, before checking out the answer. If your answer is different from the answer in the practicals, try to figure out why they are different."
+  },
+  {
+    "objectID": "exercises/exercise_block_1.html",
+    "href": "exercises/exercise_block_1.html",
+    "title": "Exercise - Block 1",
+    "section": "",
+    "text": "library(ggplot2)"
+  },
+  {
+    "objectID": "exercises/exercise_block_1.html#data-for-the-course",
+    "href": "exercises/exercise_block_1.html#data-for-the-course",
+    "title": "Exercise - Block 1",
+    "section": "",
+    "text": "library(ggplot2)"
   }
 ]
