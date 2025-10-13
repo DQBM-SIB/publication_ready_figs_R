@@ -7,12 +7,237 @@ editor_options:
 
 ## Data for the course
 
+```{r}
+data <- readRDS(gzcon(url(
+  "https://raw.githubusercontent.com/urppeia/publication_figs/main/data.rds"
+)))
+```
+
+```{r}
+str(data)
+```
+
+```{r}
+data$anno
+```
+
+### Overview of the Dataset
+
+This RNA-seq dataset (**GEO: GSE102374**, **SRA: PRJNA397585**) comes from the **tomato plant (*Solanum lycopersicum*)**.
+The experiment investigates how **sucrose treatment** affects **gene expression** in tomato over time.
+Each sequencing run (ERR1736192–ERR1736203) corresponds to one biological replicate under a specific treatment and timepoint.
+
+
+### Biological Context
+
+Sucrose is not only a carbon source but also acts as a **signaling molecule** in plants, influencing growth, metabolism, and stress responses.
+By comparing gene expression profiles after sucrose exposure at **3 h** and **24 h**, the study aims to identify genes involved in **early sugar signaling** and **longer-term metabolic regulation** in tomato.
+
+### Experimental Design
+
+| Condition       | Compound | Dose  | Timepoint | Replicates (ERR IDs)               |
+| --------------- | -------- | ----- | --------- | ---------------------------------- |
+| Control         | none     | none  | 3 h       | ERR1736193, ERR1736197, ERR1736201 |
+| Control         | none     | none  | 24 h      | ERR1736192, ERR1736196, ERR1736200 |
+| Sucrose-treated | sucrose  | 15 mM | 3 h       | ERR1736195, ERR1736199, ERR1736203 |
+| Sucrose-treated | sucrose  | 15 mM | 24 h      | ERR1736194, ERR1736198, ERR1736202 |
+
+* **Total samples:** 12
+* **Design:** 2 × 2 factorial (Treatment × Time)
+* **Replicates:** 3 per condition
+
+### Experimental Aim
+
+To characterize **transcriptional changes in tomato** induced by sucrose at early (3 h) and later (24 h) timepoints, revealing genes and pathways regulated by sugar signaling.
+
+::: {.callout-note}
+### Summary
+
+This is a **plant RNA-seq time-course experiment** from *Solanum lycopersicum*, testing sucrose signaling effects. It illustrates a **balanced factorial design**, ideal for learning how to:
+
+* Interpret replicates and contrasts,
+* Model treatment × time interactions
+* Perform biological interpretation
+:::
+
+## Exploratory data analysis
+
+### Check the number of samples and genes in these data
+
+```{r}
+head(data$counts)
+```
+
+The first column contains gene IDs. We can replace put them as row names, and remove the character column
+
+```{r}
+rownames(data$counts) <- data$counts$Gene_ID
+data$counts <- data$counts[,-1]
+```
+
+```{r}
+head(data$counts)
+```
 
 
 ```{r}
-#| message: false
-#| warning: false
-
-library(ggplot2)
+dim(data$counts)
 ```
 
+### Check if the data is normalized
+```{r}
+boxplot(data$counts)
+```
+
+
+### Exercise 1
+
+**A.** Sample names are not properly readable. Rotate them to make perpendicular to the x-axis.
+
+::: {.callout-tip collapse="true"}
+```{r}
+boxplot(data$counts, las = 2)
+```
+:::
+
+**B.** Remove the boxplot outliers
+
+::: {.callout-tip collapse="true"}
+```{r}
+boxplot(data$counts, las = 2, outline = FALSE)
+```
+:::
+
+
+### Mean expression per sample
+```{r}
+sample_means <- colMeans(data$counts)
+
+barplot(sample_means, las = 2, col = "skyblue",
+        border = "gray40",
+        main = "Mean normalized expression per sample",
+        ylab = "Mean expression",
+        cex.names = 0.8)
+```
+
+
+### Exercise 2
+Can you color the samples by their conditions?
+
+::: {.callout-tip collapse="true"}
+```{r}
+cols <- ifelse(data$anno$compound == "sucrose", "tomato", "steelblue")
+barplot(sample_means, las = 2, col = cols,
+        main = "Mean expression per sample",
+        ylab = "Mean expression", border = "gray40", cex.names = 0.8)
+legend("topright", legend = c("none", "sucrose"),
+       fill = c("steelblue", "tomato"), bty = "n")
+```
+:::
+
+### Volcano plot of results
+```{r}
+head(data$diff)
+```
+
+
+### Expression value distribution
+
+```{r}
+hist(unlist(data$counts),
+     breaks = 40, col = "lightgray", border = "gray40",
+     main = "Distribution of normalized expression values",
+     xlab = "Expression", ylab = "Frequency")
+```
+
+### Exerise 3
+Can you add density curve for smoothness?
+
+::: {.callout-tip collapse="true"}
+```{r}
+hist(unlist(data$counts), breaks = 40, col = "lightgray", border = "gray40",
+     freq = FALSE, main = "Expression value distribution", xlab = "Expression")
+lines(density(unlist(data$counts)), col = "tomato", lwd = 2)
+```
+:::
+
+### Volcano plot of differential results
+#### Sucrose 24h
+```{r}
+# Identify significant genes
+sig_24h <- data$diff$sucrose_24h_pval < 0.05 & abs(data$diff$sucrose_24h_lfc) > 1
+
+# Volcano plot
+plot(data$diff$sucrose_24h_lfc,
+     -log10(data$diff$sucrose_24h_pval),
+     pch = 16, cex = 0.6,
+     col = ifelse(sig_24h, "tomato", "gray70"),
+     main = "Volcano Plot — Sucrose 24h",
+     xlab = "log2 Fold Change",
+     ylab = "-log10(p-value)")
+
+# Add significance thresholds
+abline(v = c(-1, 1), col = "red", lty = 2)
+abline(h = -log10(0.05), col = "blue", lty = 2)
+```
+
+#### Sucrose 3h
+```{r}
+# Identify significant genes
+sig_3h <- data$diff$sucrose_3h_pval < 0.05 & abs(data$diff$sucrose_3h_lfc) > 1
+
+# Volcano plot
+plot(data$diff$sucrose_3h_lfc,
+     -log10(data$diff$sucrose_3h_pval),
+     pch = 16, cex = 0.6,
+     col = ifelse(sig_3h, "tomato", "gray70"),
+     main = "Volcano Plot — Sucrose 3h",
+     xlab = "log2 Fold Change",
+     ylab = "-log10(p-value)")
+
+# Add significance thresholds
+abline(v = c(-1, 1), col = "red", lty = 2)
+abline(h = -log10(0.05), col = "blue", lty = 2)
+```
+
+
+### Exercise 4
+Can you display both the plots together?
+
+::: {.callout-tip collapse="true"}
+```{r}
+par(mfrow = c(1, 2))  # 1 row, 2 columns
+
+# Volcano 24h
+sig_24h <- data$diff$sucrose_24h_pval < 0.05 & abs(data$diff$sucrose_24h_lfc) > 1
+plot(data$diff$sucrose_24h_lfc,
+     -log10(data$diff$sucrose_24h_pval),
+     pch = 16, cex = 0.6,
+     col = ifelse(sig_24h, "tomato", "gray70"),
+     main = "Volcano — Sucrose 24h",
+     xlab = "log2 Fold Change", ylab = "-log10(p-value)")
+abline(v = c(-1, 1), col = "red", lty = 2)
+abline(h = -log10(0.05), col = "blue", lty = 2)
+
+# Volcano 3h
+sig_3h <- data$diff$sucrose_3h_pval < 0.05 & abs(data$diff$sucrose_3h_lfc) > 1
+plot(data$diff$sucrose_3h_lfc,
+     -log10(data$diff$sucrose_3h_pval),
+     pch = 16, cex = 0.6,
+     col = ifelse(sig_3h, "tomato", "gray70"),
+     main = "Volcano — Sucrose 3h",
+     xlab = "log2 Fold Change", ylab = "-log10(p-value)")
+abline(v = c(-1, 1), col = "red", lty = 2)
+abline(h = -log10(0.05), col = "blue", lty = 2)
+
+par(mfrow = c(1, 1))  # Reset layout
+```
+:::
+
+## Session information
+::: {.callout-tip collapse="true"}
+```{r}
+sessionInfo()
+```
+
+:::
