@@ -17,39 +17,40 @@ editor_options:
 
 ## Introduction
 
-- Name
-- Research group
-- Topic of research
-- Datasets for your research
-- Why are you attending this course?
+-   Name
+-   Research group
+-   Topic of research
+-   Datasets for your research
+-   Why are you attending this course?
 
----
+------------------------------------------------------------------------
 
 ## Quiz 1
 
 Questions 1 to 4
 
----
+------------------------------------------------------------------------
 
-![](https://ninjatables.com/wp-content/uploads/2022/12/2-1.png){width=100% fig-align="center"}
+![](https://ninjatables.com/wp-content/uploads/2022/12/2-1.png){width="100%" fig-align="center"}
 
 ## Why choosing the right chart matters?
 
-- Effective visualizations communicate data clearly and efficiently.
-- The wrong chart can mislead or confuse your audience.
-- Good visualizations highlight patterns, trends, and outliers.
+-   Effective visualizations communicate data clearly and efficiently.
+-   The wrong chart can mislead or confuse your audience.
+-   Good visualizations highlight patterns, trends, and outliers.
 
 ## Types of data
 
-- **Categorical**: Names or labels (e.g., Region, Product Type)
-- **Numeric**: Quantitative values (e.g., Sales, Temperature)
-- **Time**: Dates or time intervals (e.g., Monthly Revenue)
-- **Geographic**: Locations (e.g., Country, Coordinates)
+-   **Categorical**: Names or labels (e.g., Region, Product Type)
+-   **Numeric**: Quantitative values (e.g., Sales, Temperature)
+-   **Time**: Dates or time intervals (e.g., Monthly Revenue)
+-   **Geographic**: Locations (e.g., Country, Coordinates)
 
 # What to use for each type?
 
 ## Categorical Data
-- Use **bar charts** to compare categories
+
+-   Use **bar charts** to compare categories
 
 ```{r}
 # Bar plot for categorical data
@@ -60,7 +61,8 @@ barplot(counts, main="Bar Plot Example", col="lightblue",
 ```
 
 ## Categorical Data
-- Use **pie charts** to show proportions
+
+-   Use **pie charts** to show proportions
 
 ```{r}
 # Pie chart for proportions
@@ -69,9 +71,10 @@ labels <- c("A", "B", "C", "D")
 pie(slices, labels=labels, main="Pie Chart Example", col=rainbow(length(slices)))
 ```
 
-
 ## Numeric Data
-- Use **histograms** to show distributions
+
+-   Use **histograms** to show distributions
+
 ```{r}
 # Histogram for numeric distribution
 data <- rnorm(100, mean=50, sd=10)
@@ -79,18 +82,20 @@ hist(data, main="Histogram Example", col="lightgreen",
      xlab="Value", ylab="Frequency", breaks=10)
 ```
 
-
 ## Numeric Data
-- Use **boxplots** to show spread and outliers
+
+-   Use **boxplots** to show spread and outliers
+
 ```{r}
 # Boxplot for spread and outliers
 values <- rnorm(50)
 boxplot(values, main="Boxplot Example", col="orange")
 ```
 
-
 ## Relational Data
-- Use **scatter plots** to show relationships between two numeric variables
+
+-   Use **scatter plots** to show relationships between two numeric variables
+
 ```{r}
 # Scatter plot for two numeric variables
 x <- rnorm(50)
@@ -99,9 +104,10 @@ plot(x, y, main="Scatter Plot Example", xlab="X", ylab="Y",
      col="blue", pch=19)
 ```
 
-
 ## Time Series Data
-- Use **line charts** to show trends over time
+
+-   Use **line charts** to show trends over time
+
 ```{r}
 # Line chart for time series
 time <- 1:12
@@ -111,35 +117,33 @@ plot(time, sales, type="o", col="purple", main="Monthly Sales",
 
 ```
 
-
 ## Geographic Data
-- Use **choropleth maps** to show values by region
+
+-   Use **choropleth maps** to show values by region
+
 ```{r}
 # Simple world map outline
 library(maps)
 map("world", fill=TRUE, col="lightgray")
 ```
 
+## Conclusion: Choosing the Right Visualization
+
+-   There is no single “correct” chart for a given dataset. For example, numeric data can be shown as:
+    -   Histogram (distribution)
+    -   Boxplot (spread and outliers)
+    -   Density plot (smooth distribution)
 
 ## Conclusion: Choosing the Right Visualization
 
-- There is no single “correct” chart for a given dataset. For example, numeric data can be shown as:
-    - Histogram (distribution)
-    - Boxplot (spread and outliers)
-    - Density plot (smooth distribution)
+-   The best choice depends on:
+    -   Your goal: Compare, show distribution, highlight relationships?
+    -   Audience: Technical vs. non-technical
+    -   Clarity: Which chart communicates the message most clearly?
 
-## Conclusion: Choosing the Right Visualization
+------------------------------------------------------------------------
 
-- The best choice depends on:
-    - Your goal: Compare, show distribution, highlight relationships?
-    - Audience: Technical vs. non-technical
-    - Clarity: Which chart communicates the message most clearly?
-
-
----
-
-:::: {.columns}
-
+::::: columns
 ::: {.column width="40%"}
 ```{r}
 library(VennDiagram)
@@ -172,15 +176,12 @@ venn.plot <- draw.triple.venn(
 grid.draw(venn.plot)
 
 ```
-
 :::
+:::::
 
-::::
+------------------------------------------------------------------------
 
----
-
-:::: {.columns}
-
+::::: columns
 ::: {.column width="40%"}
 ```{r}
 library(eulerr)
@@ -203,15 +204,12 @@ dt
 ```{r, fig.height=7, fig.width=7, fig.align='center'}
 plot(fit, fills = c("skyblue", "pink", "lightgreen"), labels = TRUE)
 ```
-
 :::
+:::::
 
-::::
+------------------------------------------------------------------------
 
----
-
-:::: {.columns}
-
+::::: columns
 ::: {.column width="40%"}
 ```{r}
 library(UpSetR)
@@ -230,27 +228,22 @@ dt
 ```{r, fig.height=7, fig.width=7, fig.align='center'}
 upset(fromList(listInput), order.by = "freq")
 ```
-
 :::
-
-::::
-
+:::::
 
 # Tip: Start with the simplest chart that answers the question.
 
+## From data to visualization
 
-## From data to visualization 
-
-![](https://www.data-to-viz.com/img/logo/tree-s.png){width=10% fig-align="center"}
+![](https://www.data-to-viz.com/img/logo/tree-s.png){width="10%" fig-align="center"}
 
 ### Only resource you need: [data-to-viz.com](https://www.data-to-viz.com/)
 
----
+------------------------------------------------------------------------
 
-![](../assets/figs/01_poster.png)
----
+## ![](../assets/figs/01_poster.png)
 
-## Exercise: Read and discuss content 
+## Exercise: Read and discuss content
 
 **Group 1:** [data-to-viz.com/caveat/](data-to-viz.com/caveat/)bin_size.html
 
@@ -260,10 +253,10 @@ upset(fromList(listInput), order.by = "freq")
 
 **Group 4:** [data-to-viz.com/caveat/](data-to-viz.com/caveat/)boxplot.html
 
-1. What is the main problem or risk highlighted by this caveat?
-2. Why does this issue occur?
-3. What are the potential consequences of ignoring this caveat?
-4. How can we detect or avoid this problem in practice?
+1.  What is the main problem or risk highlighted by this caveat?
+2.  Why does this issue occur?
+3.  What are the potential consequences of ignoring this caveat?
+4.  How can we detect or avoid this problem in practice?
 
 ## Quiz 2
 

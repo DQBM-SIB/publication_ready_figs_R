@@ -1,3 +1,105 @@
 ---
-title: "Slides - Block 2"
+title: "Block 2" 
+author: "Deepak Tanwar"
+editor: visual
+format:
+  revealjs: 
+    theme: default
+    controls-layout: bottom-right
+    controls-tutorial: true
+    footer: "Publication ready figures with `R`"
+title-slide-attributes:
+  data-background-size: contain
+  data-background-opacity: "0.8"
+editor_options: 
+  chunk_output_type: console
 ---
+
+## Recap of Block 1
+
+- **Data Types**: We learned about different data types (Numeric, Categorical, Time-series, etc.).
+- **Chart Types**: We explored various chart types and when to use them (Bar, Pie, Histogram, Boxplot, Scatter, etc.).
+- **Base R Plotting**: We used base R functions like `plot()`, `hist()`, and `boxplot()` to create basic visualizations.
+- **Data to Viz**: We were introduced to the [data-to-viz.com](https://www.data-to-viz.com/) resource.
+
+---
+
+## Key Base R Plotting Functions
+
+We used several functions to create plots:
+
+- `plot()`: For scatter plots and general purpose plotting.
+- `hist()`: For histograms to show data distribution.
+- `boxplot()`: For boxplots to see spread and outliers.
+- `barplot()`: For bar charts to compare categorical data.
+
+While powerful, base R plotting can be complex for custom and advanced plots.
+
+## Grammar of data visualization
+
+![](../assets/figs/02_steps.png){width="100%" fig-align="center"}
+
+
+## The Grammar of Graphics (`gg`)
+
+::::: columns
+::: {.column width="40%"}
+1. `data` to be drawn from
+
+2. `aesthetic` mappings from data to some visual marking
+
+3. `geometric` objects on the plot
+:::
+
+::: {.column width="60%"}
+![](../assets/figs/03_gglayers.png){width="100%" fig-align="center"}
+:::
+::::
+
+## The Grammar of Graphics (`gg`)
+
+::::: columns
+::: {.column width="40%"}
+4. `scales` define the range of values
+
+5. `coordinates` to organize location
+
+6. `labels` describe the scale and markings
+
+7. `facets` group into subplots
+
+8. `themes` style the plot elements
+:::
+
+::: {.column width="60%"}
+![](../assets/figs/03_gglayers.png){width="100%" fig-align="center"}
+:::
+::::
+
+
+## Composition of data visualization: `Data`
+
+![](../assets/figs/04_data.png){width="100%" fig-align="center"}
+
+## Composition of data visualization: `Aesthetics`
+
+![](../assets/figs/05_aes.png){width="100%" fig-align="center"}
+
+
+## Composition of data visualization: `Geometric shapes`
+
+![](../assets/figs/06_geom.png){width="100%" fig-align="center"}
+
+## Composition of data visualization: `Scales, Coordinates, Labels`
+
+![](../assets/figs/07_scale.png){width="100%" fig-align="center"}
+
+
+## Introducing `ggplot2`
+
+- **Grammar of Graphics**: `ggplot2` is based on the idea that you can build any plot from the same components: a **data** set, a **coordinate system**, and **geoms** (visual marks that represent data points).
+- **Layers**: You build plots by adding layers. For example, you can add a layer of points, then a layer of lines, then a layer of labels.
+
+---
+
+## [`ggplot2` Flipbook](../assets/ggplot2/ggplot2.html)

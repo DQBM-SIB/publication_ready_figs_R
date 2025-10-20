@@ -264,5 +264,971 @@
     "title": "Exercise - Block 1",
     "section": "Session information",
     "text": "Session information\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nsessionInfo()\n\nR version 4.5.1 (2025-06-13)\nPlatform: aarch64-apple-darwin20\nRunning under: macOS Tahoe 26.0.1\n\nMatrix products: default\nBLAS:   /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib \nLAPACK: /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1\n\nlocale:\n[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8\n\ntime zone: Europe/Zurich\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices datasets  utils     methods   base     \n\nloaded via a namespace (and not attached):\n [1] BiocManager_1.30.26 compiler_4.5.1      fastmap_1.2.0      \n [4] cli_3.6.5           htmltools_0.5.8.1   tools_4.5.1        \n [7] yaml_2.3.10         rmarkdown_2.30      knitr_1.50         \n[10] jsonlite_2.0.0      xfun_0.53           digest_0.6.37      \n[13] rlang_1.1.6         renv_1.1.5          evaluate_1.0.5"
+  },
+  {
+    "objectID": "exercises/exercise_block_2.html",
+    "href": "exercises/exercise_block_2.html",
+    "title": "Block 2: ggplot2",
+    "section": "",
+    "text": "ggplot2 is a powerful and popular R package for creating a wide variety of plots. It is based on the “grammar of graphics” philosophy, which allows you to build plots layer by layer. This makes it easy to create complex and customized visualizations.\n\n\n\n\n\n\n\n\n\n\nFeature\nBase R\nggplot2\n\n\n\n\nPhilosophy\n“Ink on paper” - you draw elements on the plot.\n“Grammar of graphics” - you build plots with layers.\n\n\nSyntax\nFunctions for specific plots (e.g., plot, hist).\nConsistent syntax with ggplot() + geom_*().\n\n\nCustomization\nCan be complex, often requiring many parameters.\nEasy to add layers for themes, labels, and annotations.\n\n\nData Format\nOften requires data in specific formats (vectors, matrices).\nPrefers data in data frames (long format)."
+  },
+  {
+    "objectID": "exercises/exercise_block_2.html#introduction-to-ggplot2",
+    "href": "exercises/exercise_block_2.html#introduction-to-ggplot2",
+    "title": "Block 2: ggplot2",
+    "section": "",
+    "text": "ggplot2 is a powerful and popular R package for creating a wide variety of plots. It is based on the “grammar of graphics” philosophy, which allows you to build plots layer by layer. This makes it easy to create complex and customized visualizations.\n\n\n\n\n\n\n\n\n\n\nFeature\nBase R\nggplot2\n\n\n\n\nPhilosophy\n“Ink on paper” - you draw elements on the plot.\n“Grammar of graphics” - you build plots with layers.\n\n\nSyntax\nFunctions for specific plots (e.g., plot, hist).\nConsistent syntax with ggplot() + geom_*().\n\n\nCustomization\nCan be complex, often requiring many parameters.\nEasy to add layers for themes, labels, and annotations.\n\n\nData Format\nOften requires data in specific formats (vectors, matrices).\nPrefers data in data frames (long format)."
+  },
+  {
+    "objectID": "exercises/exercise_block_2.html#exploratory-data-analysis-with-ggplot2",
+    "href": "exercises/exercise_block_2.html#exploratory-data-analysis-with-ggplot2",
+    "title": "Block 2: ggplot2",
+    "section": "Exploratory data analysis with ggplot2",
+    "text": "Exploratory data analysis with ggplot2\nFirst, let’s load the data and the ggplot2 library.\n\n# install.packages(\"ggplot2\")\nlibrary(ggplot2)\ndata &lt;- readRDS(gzcon(url(\n  \"https://raw.githubusercontent.com/urppeia/publication_figs/main/data.rds\"\n)))\nrownames(data$counts) &lt;- data$counts$Gene_ID\ndata$counts &lt;- data$counts[,-1]\n\n\nBoxplot of normalized data\nIn base R, we used boxplot(). In ggplot2, we use ggplot() and geom_boxplot().\n\n# ggplot2 requires data in a long format data frame\ncounts_long &lt;- stack(as.data.frame(data$counts))\ncolnames(counts_long) &lt;- c(\"expression\", \"sample\")\n\nggplot(counts_long, aes(x = sample, y = expression)) +\n  geom_boxplot() +\n  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +\n  labs(title = \"Normalized expression per sample\",\n       x = \"Sample\",\n       y = \"Expression\")\n\n\n\n\n\n\n\n\n\n\nExercise 1\nA. Color the boxplots by condition (control vs. sucrose).\n\n\n\n\n\n\nTip\n\n\n\n\n\n\n# We need to add the condition information to our long data frame\ncounts_long$condition &lt;- rep(data$anno$compound, each = nrow(data$counts))\n\nggplot(counts_long, aes(x = sample, y = expression, fill = condition)) +\n  geom_boxplot() +\n  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +\n  labs(title = \"Normalized expression per sample\",\n       x = \"Sample\",\n       y = \"Expression\") +\n  scale_fill_manual(values = c(\"none\" = \"steelblue\", \"sucrose\" = \"tomato\"))\n\n\n\n\n\n\n\n\n\n\n\n\n\nBarplot of mean expression\nIn base R, we used barplot(). In ggplot2, we use geom_bar() or geom_col().\n\nsample_means &lt;- colMeans(data$counts)\nsample_means_df &lt;- data.frame(\n  sample = names(sample_means),\n  mean_expression = sample_means,\n  condition = data$anno$compound\n)\n\nggplot(sample_means_df, aes(x = sample, y = mean_expression, fill = condition)) +\n  geom_col() +\n  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +\n  labs(title = \"Mean normalized expression per sample\",\n       x = \"Sample\",\n       y = \"Mean Expression\") +\n  scale_fill_manual(values = c(\"none\" = \"steelblue\", \"sucrose\" = \"tomato\"))\n\n\n\n\n\n\n\n\n\n\nHistogram of expression values\nIn base R, we used hist(). In ggplot2, we use geom_histogram().\n\nggplot(counts_long, aes(x = expression)) +\n  geom_histogram(bins = 40, fill = \"lightgray\", color = \"gray40\") +\n  labs(title = \"Distribution of normalized expression values\",\n       x = \"Expression\",\n       y = \"Frequency\")\n\n\n\n\n\n\n\n\n\n\nExercise 2\nAdd a density curve to the histogram.\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nggplot(counts_long, aes(x = expression)) +\n  geom_histogram(aes(y = ..density..), bins = 40, fill = \"lightgray\", color = \"gray40\") +\n  geom_density(color = \"tomato\", size = 1) +\n  labs(title = \"Distribution of normalized expression values\",\n       x = \"Expression\",\n       y = \"Density\")\n\nWarning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.\nℹ Please use `linewidth` instead.\n\n\nWarning: The dot-dot notation (`..density..`) was deprecated in ggplot2 3.4.0.\nℹ Please use `after_stat(density)` instead.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nVolcano plot of differential results\nIn base R, we used plot(). In ggplot2, we use geom_point().\n\nSucrose 24h\n\ndiff_df_24h &lt;- data.frame(\n  lfc = data$diff$sucrose_24h_lfc,\n  pval = data$diff$sucrose_24h_pval\n)\ndiff_df_24h$significant &lt;- diff_df_24h$pval &lt; 0.05 & abs(diff_df_24h$lfc) &gt; 1\n\nggplot(diff_df_24h, aes(x = lfc, y = -log10(pval), color = significant)) +\n  geom_point(size = 2, alpha = 0.7) +\n  scale_color_manual(values = c(\"gray70\", \"tomato\")) +\n  geom_vline(xintercept = c(-1, 1), linetype = \"dashed\", color = \"red\") +\n  geom_hline(yintercept = -log10(0.05), linetype = \"dashed\", color = \"blue\") +\n  labs(title = \"Volcano Plot — Sucrose 24h\",\n       x = \"log2 Fold Change\",\n       y = \"-log10(p-value)\") +\n  theme_minimal()\n\n\n\n\n\n\n\n\n\n\n\nExercise 3\nCreate a volcano plot for the 3h sucrose treatment.\n\n\n\n\n\n\nTip\n\n\n\n\n\n\ndiff_df_3h &lt;- data.frame(\n  lfc = data$diff$sucrose_3h_lfc,\n  pval = data$diff$sucrose_3h_pval\n)\ndiff_df_3h$significant &lt;- diff_df_3h$pval &lt; 0.05 & abs(diff_df_3h$lfc) &gt; 1\n\nggplot(diff_df_3h, aes(x = lfc, y = -log10(pval), color = significant)) +\n  geom_point(size = 2, alpha = 0.7) +\n  scale_color_manual(values = c(\"gray70\", \"tomato\")) +\n  geom_vline(xintercept = c(-1, 1), linetype = \"dashed\", color = \"red\") +\n  geom_hline(yintercept = -log10(0.05), linetype = \"dashed\", color = \"blue\") +\n  labs(title = \"Volcano Plot — Sucrose 3h\",\n       x = \"log2 Fold Change\",\n       y = \"-log10(p-value)\") +\n  theme_minimal()\n\n\n\n\n\n\n\n\n\n\n\n\n\nCombining plots\nIn base R, we used par(mfrow = ...). In the ggplot2 ecosystem, the patchwork package is a popular choice.\n\n# install.packages(\"patchwork\")\nlibrary(patchwork)\n\np1 &lt;- ggplot(diff_df_24h, aes(x = lfc, y = -log10(pval), color = significant)) +\n  geom_point(size = 2, alpha = 0.7) +\n  scale_color_manual(values = c(\"gray70\", \"tomato\")) +\n  labs(title = \"Sucrose 24h\") +\n  theme_minimal()\n\np2 &lt;- ggplot(diff_df_3h, aes(x = lfc, y = -log10(pval), color = significant)) +\n  geom_point(size = 2, alpha = 0.7) +\n  scale_color_manual(values = c(\"gray70\", \"tomato\")) +\n  labs(title = \"Sucrose 3h\") +\n  theme_minimal()\n\np1 + p2"
+  },
+  {
+    "objectID": "exercises/exercise_block_2.html#session-information",
+    "href": "exercises/exercise_block_2.html#session-information",
+    "title": "Block 2: ggplot2",
+    "section": "Session information",
+    "text": "Session information\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nsessionInfo()\n\nR version 4.5.1 (2025-06-13)\nPlatform: aarch64-apple-darwin20\nRunning under: macOS Tahoe 26.0.1\n\nMatrix products: default\nBLAS:   /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib \nLAPACK: /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1\n\nlocale:\n[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8\n\ntime zone: Europe/Zurich\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices datasets  utils     methods   base     \n\nother attached packages:\n[1] patchwork_1.3.2 ggplot2_4.0.0  \n\nloaded via a namespace (and not attached):\n [1] vctrs_0.6.5         cli_3.6.5           knitr_1.50         \n [4] rlang_1.1.6         xfun_0.53           renv_1.1.5         \n [7] generics_0.1.4      S7_0.2.0            jsonlite_2.0.0     \n[10] labeling_0.4.3      glue_1.8.0          htmltools_0.5.8.1  \n[13] scales_1.4.0        rmarkdown_2.30      grid_4.5.1         \n[16] tibble_3.3.0        evaluate_1.0.5      fastmap_1.2.0      \n[19] yaml_2.3.10         lifecycle_1.0.4     BiocManager_1.30.26\n[22] compiler_4.5.1      dplyr_1.1.4         RColorBrewer_1.1-3 \n[25] pkgconfig_2.0.3     htmlwidgets_1.6.4   rstudioapi_0.17.1  \n[28] farver_2.1.2        digest_0.6.37       R6_2.6.1           \n[31] tidyselect_1.2.1    pillar_1.11.1       magrittr_2.0.4     \n[34] withr_3.0.2         tools_4.5.1         gtable_0.3.6"
+  },
+  {
+    "objectID": "slides/slide_block_2.html#recap-of-block-1",
+    "href": "slides/slide_block_2.html#recap-of-block-1",
+    "title": "Block 2",
+    "section": "Recap of Block 1",
+    "text": "Recap of Block 1\n\nData Types: We learned about different data types (Numeric, Categorical, Time-series, etc.).\nChart Types: We explored various chart types and when to use them (Bar, Pie, Histogram, Boxplot, Scatter, etc.).\nBase R Plotting: We used base R functions like plot(), hist(), and boxplot() to create basic visualizations.\nData to Viz: We were introduced to the data-to-viz.com resource."
+  },
+  {
+    "objectID": "slides/slide_block_2.html#key-base-r-plotting-functions",
+    "href": "slides/slide_block_2.html#key-base-r-plotting-functions",
+    "title": "Block 2",
+    "section": "Key Base R Plotting Functions",
+    "text": "Key Base R Plotting Functions\nWe used several functions to create plots:\n\nplot(): For scatter plots and general purpose plotting.\nhist(): For histograms to show data distribution.\nboxplot(): For boxplots to see spread and outliers.\nbarplot(): For bar charts to compare categorical data.\n\nWhile powerful, base R plotting can be complex for custom and advanced plots."
+  },
+  {
+    "objectID": "slides/slide_block_2.html#introducing-ggplot2",
+    "href": "slides/slide_block_2.html#introducing-ggplot2",
+    "title": "Block 2",
+    "section": "Introducing ggplot2",
+    "text": "Introducing ggplot2\n\nGrammar of Graphics: ggplot2 is based on the idea that you can build any plot from the same components: a data set, a coordinate system, and geoms (visual marks that represent data points).\nLayers: You build plots by adding layers. For example, you can add a layer of points, then a layer of lines, then a layer of labels."
+  },
+  {
+    "objectID": "slides/slide_block_2.html#base-r-vs.-ggplot2",
+    "href": "slides/slide_block_2.html#base-r-vs.-ggplot2",
+    "title": "Block 2",
+    "section": "Base R vs. ggplot2",
+    "text": "Base R vs. ggplot2\nA quick comparison for a scatter plot:\n\n\nBase R\n\nggplot2"
+  },
+  {
+    "objectID": "slides/slide_block_2.html#plan-for-block-2",
+    "href": "slides/slide_block_2.html#plan-for-block-2",
+    "title": "Block 2",
+    "section": "Plan for Block 2",
+    "text": "Plan for Block 2\n\nUnderstand the ggplot2 syntax: Learn about ggplot(), aes(), and geom_*() functions.\nRecreate plots from Block 1: We will recreate the boxplots, barplots, histograms, and volcano plots using ggplot2.\nCustomize plots: Learn how to change colors, labels, themes, and more.\nCombine plots: Use the patchwork package to combine multiple ggplot2 plots into a single figure.\n\nLet’s get started!"
+  },
+  {
+    "objectID": "slides/slide_block_2.html#the-grammar-of-graphics-gg",
+    "href": "slides/slide_block_2.html#the-grammar-of-graphics-gg",
+    "title": "Block 2",
+    "section": "The Grammar of Graphics (gg)",
+    "text": "The Grammar of Graphics (gg)\n\n\n\ndata to be drawn from\naesthetic mappings from data to some visual marking\ngeometric objects on the plot"
+  },
+  {
+    "objectID": "slides/slide_block_2.html#the-grammar-of-graphics-gg-1",
+    "href": "slides/slide_block_2.html#the-grammar-of-graphics-gg-1",
+    "title": "Block 2",
+    "section": "The Grammar of Graphics (gg)",
+    "text": "The Grammar of Graphics (gg)\n\n\n\nscales define the range of values\ncoordinates to organize location\nlabels describe the scale and markings\nfacets group into subplots\nthemes style the plot elements"
+  },
+  {
+    "objectID": "slides/slide_block_2.html#step-by-step-plotting-with-ggplot2",
+    "href": "slides/slide_block_2.html#step-by-step-plotting-with-ggplot2",
+    "title": "Block 2",
+    "section": "Step-by-step plotting with ggplot2",
+    "text": "Step-by-step plotting with ggplot2\nLet’s load the data and libraries."
+  },
+  {
+    "objectID": "slides/slide_block_2.html#building-a-boxplot",
+    "href": "slides/slide_block_2.html#building-a-boxplot",
+    "title": "Block 2",
+    "section": "Building a Boxplot",
+    "text": "Building a Boxplot\nWe start by defining the data and the aesthetic mappings."
+  },
+  {
+    "objectID": "slides/slide_block_2.html#adding-labels",
+    "href": "slides/slide_block_2.html#adding-labels",
+    "title": "Block 2",
+    "section": "Adding Labels",
+    "text": "Adding Labels\nUse the labs() function to add titles, subtitles, and axis labels."
+  },
+  {
+    "objectID": "slides/slide_block_2.html#faceting",
+    "href": "slides/slide_block_2.html#faceting",
+    "title": "Block 2",
+    "section": "Faceting",
+    "text": "Faceting\nWe can split the plot into multiple panels using facet_grid() or facet_wrap()."
+  },
+  {
+    "objectID": "slides/slide_block_2.html#themes",
+    "href": "slides/slide_block_2.html#themes",
+    "title": "Block 2",
+    "section": "Themes",
+    "text": "Themes\nggplot2 has several built-in themes. Let’s try theme_bw()."
+  },
+  {
+    "objectID": "slides/slide_block_2.html#customizing-themes",
+    "href": "slides/slide_block_2.html#customizing-themes",
+    "title": "Block 2",
+    "section": "Customizing Themes",
+    "text": "Customizing Themes\nWe can further customize the theme using the theme() function."
+  },
+  {
+    "objectID": "slides/slide_block_2.html#other-plot-types-barplot",
+    "href": "slides/slide_block_2.html#other-plot-types-barplot",
+    "title": "Block 2",
+    "section": "Other Plot Types: Barplot",
+    "text": "Other Plot Types: Barplot"
+  },
+  {
+    "objectID": "slides/slide_block_2.html#other-plot-types-histogram",
+    "href": "slides/slide_block_2.html#other-plot-types-histogram",
+    "title": "Block 2",
+    "section": "Other Plot Types: Histogram",
+    "text": "Other Plot Types: Histogram"
+  },
+  {
+    "objectID": "slides/slide_block_2.html#other-plot-types-scatter-plot",
+    "href": "slides/slide_block_2.html#other-plot-types-scatter-plot",
+    "title": "Block 2",
+    "section": "Other Plot Types: Scatter Plot",
+    "text": "Other Plot Types: Scatter Plot"
+  },
+  {
+    "objectID": "slides/slide_block_2.html#setup",
+    "href": "slides/slide_block_2.html#setup",
+    "title": "Flipbookr Test",
+    "section": "Setup",
+    "text": "Setup"
+  },
+  {
+    "objectID": "slides/slide_block_2.html#flipbook-example",
+    "href": "slides/slide_block_2.html#flipbook-example",
+    "title": "Flipbookr Test",
+    "section": "Flipbook Example",
+    "text": "Flipbook Example\nThis is a test of flipbookr in Quarto."
+  },
+  {
+    "objectID": "slides/slide_block_2.html#grammar-of-data-visualization",
+    "href": "slides/slide_block_2.html#grammar-of-data-visualization",
+    "title": "Block 2",
+    "section": "Grammar of data visualization",
+    "text": "Grammar of data visualization"
+  },
+  {
+    "objectID": "slides/slide_block_2.html#composition-of-data-visualization-data",
+    "href": "slides/slide_block_2.html#composition-of-data-visualization-data",
+    "title": "Block 2",
+    "section": "Composition of data visualization: Data",
+    "text": "Composition of data visualization: Data"
+  },
+  {
+    "objectID": "slides/slide_block_2.html#composition-of-data-visualization-aesthetics",
+    "href": "slides/slide_block_2.html#composition-of-data-visualization-aesthetics",
+    "title": "Block 2",
+    "section": "Composition of data visualization: Aesthetics",
+    "text": "Composition of data visualization: Aesthetics"
+  },
+  {
+    "objectID": "slides/slide_block_2.html#composition-of-data-visualization-geometric-shapes",
+    "href": "slides/slide_block_2.html#composition-of-data-visualization-geometric-shapes",
+    "title": "Block 2",
+    "section": "Composition of data visualization: Geometric shapes",
+    "text": "Composition of data visualization: Geometric shapes"
+  },
+  {
+    "objectID": "slides/slide_block_2.html#composition-of-data-visualization-scales-coordinates-labels",
+    "href": "slides/slide_block_2.html#composition-of-data-visualization-scales-coordinates-labels",
+    "title": "Block 2",
+    "section": "Composition of data visualization: Scales, Coordinates, Labels",
+    "text": "Composition of data visualization: Scales, Coordinates, Labels"
+  },
+  {
+    "objectID": "slides/slide_block_3.html",
+    "href": "slides/slide_block_3.html",
+    "title": "Slides - Block 3",
+    "section": "",
+    "text": "# install.packages(\"socviz\") ## If needed\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.1     ✔ stringr   1.5.2\n✔ ggplot2   4.0.0     ✔ tibble    3.3.0\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.1.0     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nlibrary(socviz)\n\nlibrary(flipbookr)"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#flipbookr-runthrough",
+    "href": "slides/slide_block_3.html#flipbookr-runthrough",
+    "title": "Slides - Block 3",
+    "section": "Flipbookr Runthrough",
+    "text": "Flipbookr Runthrough\n\n\n\ngss_sm\n\n\n\n\n# A tibble: 2,867 × 32\n    year    id ballot       age childs sibs   degree race  sex   region income16\n   &lt;dbl&gt; &lt;dbl&gt; &lt;labelled&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;labe&gt; &lt;fct&gt;  &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;  &lt;fct&gt;   \n 1  2016     1 1             47      3 2      Bache… White Male  New E… $170000…\n 2  2016     2 2             61      0 3      High … White Male  New E… $50000 …\n 3  2016     3 3             72      2 3      Bache… White Male  New E… $75000 …\n 4  2016     4 1             43      4 3      High … White Fema… New E… $170000…\n 5  2016     5 3             55      2 2      Gradu… White Fema… New E… $170000…\n 6  2016     6 2             53      2 2      Junio… White Fema… New E… $60000 …\n 7  2016     7 1             50      2 2      High … White Male  New E… $170000…\n 8  2016     8 3             23      3 6      High … Other Fema… Middl… $30000 …\n 9  2016     9 1             45      3 5      High … Black Male  Middl… $60000 …\n10  2016    10 3             71      4 1      Junio… White Male  Middl… $60000 …\n# ℹ 2,857 more rows\n# ℹ 21 more variables: relig &lt;fct&gt;, marital &lt;fct&gt;, padeg &lt;fct&gt;, madeg &lt;fct&gt;,\n#   partyid &lt;fct&gt;, polviews &lt;fct&gt;, happy &lt;fct&gt;, partners &lt;fct&gt;, grass &lt;fct&gt;,\n#   zodiac &lt;fct&gt;, pres12 &lt;labelled&gt;, wtssall &lt;dbl&gt;, income_rc &lt;fct&gt;,\n#   agegrp &lt;fct&gt;, ageq &lt;fct&gt;, siblings &lt;fct&gt;, kids &lt;fct&gt;, religion &lt;fct&gt;,\n#   bigregion &lt;fct&gt;, partners_rc &lt;fct&gt;, obama &lt;dbl&gt;"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#flipbookr-runthrough-1",
+    "href": "slides/slide_block_3.html#flipbookr-runthrough-1",
+    "title": "Slides - Block 3",
+    "section": "Flipbookr Runthrough",
+    "text": "Flipbookr Runthrough\n\n\n\ngss_sm |&gt;\n  group_by(bigregion, religion)\n\n\n\n\n# A tibble: 2,867 × 32\n# Groups:   bigregion, religion [24]\n    year    id ballot       age childs sibs   degree race  sex   region income16\n   &lt;dbl&gt; &lt;dbl&gt; &lt;labelled&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;labe&gt; &lt;fct&gt;  &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;  &lt;fct&gt;   \n 1  2016     1 1             47      3 2      Bache… White Male  New E… $170000…\n 2  2016     2 2             61      0 3      High … White Male  New E… $50000 …\n 3  2016     3 3             72      2 3      Bache… White Male  New E… $75000 …\n 4  2016     4 1             43      4 3      High … White Fema… New E… $170000…\n 5  2016     5 3             55      2 2      Gradu… White Fema… New E… $170000…\n 6  2016     6 2             53      2 2      Junio… White Fema… New E… $60000 …\n 7  2016     7 1             50      2 2      High … White Male  New E… $170000…\n 8  2016     8 3             23      3 6      High … Other Fema… Middl… $30000 …\n 9  2016     9 1             45      3 5      High … Black Male  Middl… $60000 …\n10  2016    10 3             71      4 1      Junio… White Male  Middl… $60000 …\n# ℹ 2,857 more rows\n# ℹ 21 more variables: relig &lt;fct&gt;, marital &lt;fct&gt;, padeg &lt;fct&gt;, madeg &lt;fct&gt;,\n#   partyid &lt;fct&gt;, polviews &lt;fct&gt;, happy &lt;fct&gt;, partners &lt;fct&gt;, grass &lt;fct&gt;,\n#   zodiac &lt;fct&gt;, pres12 &lt;labelled&gt;, wtssall &lt;dbl&gt;, income_rc &lt;fct&gt;,\n#   agegrp &lt;fct&gt;, ageq &lt;fct&gt;, siblings &lt;fct&gt;, kids &lt;fct&gt;, religion &lt;fct&gt;,\n#   bigregion &lt;fct&gt;, partners_rc &lt;fct&gt;, obama &lt;dbl&gt;"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#flipbookr-runthrough-2",
+    "href": "slides/slide_block_3.html#flipbookr-runthrough-2",
+    "title": "Slides - Block 3",
+    "section": "Flipbookr Runthrough",
+    "text": "Flipbookr Runthrough\n\n\n\ngss_sm |&gt;\n  group_by(bigregion, religion) |&gt;\n  tally()\n\n\n\n\n# A tibble: 24 × 3\n# Groups:   bigregion [4]\n   bigregion religion       n\n   &lt;fct&gt;     &lt;fct&gt;      &lt;int&gt;\n 1 Northeast Protestant   158\n 2 Northeast Catholic     162\n 3 Northeast Jewish        27\n 4 Northeast None         112\n 5 Northeast Other         28\n 6 Northeast &lt;NA&gt;           1\n 7 Midwest   Protestant   325\n 8 Midwest   Catholic     172\n 9 Midwest   Jewish         3\n10 Midwest   None         157\n# ℹ 14 more rows"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#flipbookr-runthrough-3",
+    "href": "slides/slide_block_3.html#flipbookr-runthrough-3",
+    "title": "Slides - Block 3",
+    "section": "Flipbookr Runthrough",
+    "text": "Flipbookr Runthrough\n\n\n\ngss_sm |&gt;\n  group_by(bigregion, religion) |&gt;\n  tally() |&gt;\n  mutate(pct = round((n/sum(n))*100, 1))\n\n\n\n\n# A tibble: 24 × 4\n# Groups:   bigregion [4]\n   bigregion religion       n   pct\n   &lt;fct&gt;     &lt;fct&gt;      &lt;int&gt; &lt;dbl&gt;\n 1 Northeast Protestant   158  32.4\n 2 Northeast Catholic     162  33.2\n 3 Northeast Jewish        27   5.5\n 4 Northeast None         112  23  \n 5 Northeast Other         28   5.7\n 6 Northeast &lt;NA&gt;           1   0.2\n 7 Midwest   Protestant   325  46.8\n 8 Midwest   Catholic     172  24.7\n 9 Midwest   Jewish         3   0.4\n10 Midwest   None         157  22.6\n# ℹ 14 more rows"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#flipbookr-runthrough-4",
+    "href": "slides/slide_block_3.html#flipbookr-runthrough-4",
+    "title": "Slides - Block 3",
+    "section": "Flipbookr Runthrough",
+    "text": "Flipbookr Runthrough\n\n\n\ngss_sm |&gt;\n  group_by(bigregion, religion) |&gt;\n  tally() |&gt;\n  mutate(pct = round((n/sum(n))*100, 1)) |&gt;\n  drop_na()\n\n\n\n\n# A tibble: 20 × 4\n# Groups:   bigregion [4]\n   bigregion religion       n   pct\n   &lt;fct&gt;     &lt;fct&gt;      &lt;int&gt; &lt;dbl&gt;\n 1 Northeast Protestant   158  32.4\n 2 Northeast Catholic     162  33.2\n 3 Northeast Jewish        27   5.5\n 4 Northeast None         112  23  \n 5 Northeast Other         28   5.7\n 6 Midwest   Protestant   325  46.8\n 7 Midwest   Catholic     172  24.7\n 8 Midwest   Jewish         3   0.4\n 9 Midwest   None         157  22.6\n10 Midwest   Other         33   4.7\n11 South     Protestant   650  61.8\n12 South     Catholic     160  15.2\n13 South     Jewish        11   1  \n14 South     None         170  16.2\n15 South     Other         50   4.8\n16 West      Protestant   238  37.7\n17 West      Catholic     155  24.5\n18 West      Jewish        10   1.6\n19 West      None         180  28.5\n20 West      Other         48   7.6"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#flipbookr-runthrough-5",
+    "href": "slides/slide_block_3.html#flipbookr-runthrough-5",
+    "title": "Slides - Block 3",
+    "section": "Flipbookr Runthrough",
+    "text": "Flipbookr Runthrough\n\n\n\ngss_sm |&gt;\n  group_by(bigregion, religion) |&gt;\n  tally() |&gt;\n  mutate(pct = round((n/sum(n))*100, 1)) |&gt;\n  drop_na() |&gt;\n  ggplot(mapping =\n           aes(x = pct,\n               y = reorder(religion, -pct),\n               fill = religion))"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#flipbookr-runthrough-6",
+    "href": "slides/slide_block_3.html#flipbookr-runthrough-6",
+    "title": "Slides - Block 3",
+    "section": "Flipbookr Runthrough",
+    "text": "Flipbookr Runthrough\n\n\n\ngss_sm |&gt;\n  group_by(bigregion, religion) |&gt;\n  tally() |&gt;\n  mutate(pct = round((n/sum(n))*100, 1)) |&gt;\n  drop_na() |&gt;\n  ggplot(mapping =\n           aes(x = pct,\n               y = reorder(religion, -pct),\n               fill = religion)) +\n  geom_col()"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#flipbookr-runthrough-7",
+    "href": "slides/slide_block_3.html#flipbookr-runthrough-7",
+    "title": "Slides - Block 3",
+    "section": "Flipbookr Runthrough",
+    "text": "Flipbookr Runthrough\n\n\n\ngss_sm |&gt;\n  group_by(bigregion, religion) |&gt;\n  tally() |&gt;\n  mutate(pct = round((n/sum(n))*100, 1)) |&gt;\n  drop_na() |&gt;\n  ggplot(mapping =\n           aes(x = pct,\n               y = reorder(religion, -pct),\n               fill = religion)) +\n  geom_col() +\n    labs(x = \"Percent\", y = NULL)"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#flipbookr-runthrough-8",
+    "href": "slides/slide_block_3.html#flipbookr-runthrough-8",
+    "title": "Slides - Block 3",
+    "section": "Flipbookr Runthrough",
+    "text": "Flipbookr Runthrough\n\n\n\ngss_sm |&gt;\n  group_by(bigregion, religion) |&gt;\n  tally() |&gt;\n  mutate(pct = round((n/sum(n))*100, 1)) |&gt;\n  drop_na() |&gt;\n  ggplot(mapping =\n           aes(x = pct,\n               y = reorder(religion, -pct),\n               fill = religion)) +\n  geom_col() +\n    labs(x = \"Percent\", y = NULL) +\n    guides(fill = \"none\")"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#flipbookr-runthrough-9",
+    "href": "slides/slide_block_3.html#flipbookr-runthrough-9",
+    "title": "Slides - Block 3",
+    "section": "Flipbookr Runthrough",
+    "text": "Flipbookr Runthrough\n\n\n\ngss_sm |&gt;\n  group_by(bigregion, religion) |&gt;\n  tally() |&gt;\n  mutate(pct = round((n/sum(n))*100, 1)) |&gt;\n  drop_na() |&gt;\n  ggplot(mapping =\n           aes(x = pct,\n               y = reorder(religion, -pct),\n               fill = religion)) +\n  geom_col() +\n    labs(x = \"Percent\", y = NULL) +\n    guides(fill = \"none\") +\n    facet_wrap(~ bigregion, ncol = 2)"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#data-used-in-this-course",
+    "href": "slides/slide_block_3.html#data-used-in-this-course",
+    "title": "Slides - Block 3",
+    "section": "Data used in this course",
+    "text": "Data used in this course\n\n\n\n\n\n\n\n\n\n\nSample_ID\ncompound\ndose\ntime\n\n\n\n\nERR1736192\nnone\nnone\n24 hour\n\n\nERR1736193\nnone\nnone\n3 hour\n\n\nERR1736194\nsucrose\n15 millimolar\n24 hour\n\n\nERR1736195\nsucrose\n15 millimolar\n3 hour\n\n\nERR1736196\nnone\nnone\n24 hour\n\n\nERR1736197\nnone\nnone\n3 hour\n\n\nERR1736198\nsucrose\n15 millimolar\n24 hour\n\n\nERR1736199\nsucrose\n15 millimolar\n3 hour\n\n\nERR1736200\nnone\nnone\n24 hour\n\n\nERR1736201\nnone\nnone\n3 hour\n\n\nERR1736202\nsucrose\n15 millimolar\n24 hour\n\n\nERR1736203\nsucrose\n15 millimolar\n3 hour\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nGene_ID\nERR1736192\nERR1736193\nERR1736194\nERR1736195\nERR1736196\nERR1736197\nERR1736198\nERR1736199\nERR1736200\nERR1736201\nERR1736202\nERR1736203\n\n\n\n\nAT1G01090\n8.951818\n8.745436\n8.936055\n8.796355\n8.881562\n8.783848\n8.918614\n8.917665\n8.859714\n8.880689\n8.925662\n8.810786\n\n\nAT1G01100\n10.714686\n11.049205\n10.760942\n10.925465\n10.586018\n11.018331\n10.720866\n11.003460\n10.697236\n11.038316\n10.602965\n10.990252\n\n\nAT1G01300\n8.262611\n8.621839\n8.317833\n8.524731\n8.351529\n8.490846\n8.326726\n8.726843\n8.252066\n8.438347\n8.321741\n8.337898\n\n\nAT1G01320\n10.474282\n9.846080\n10.547565\n10.166405\n10.638864\n9.910971\n10.459285\n9.842758\n10.536018\n9.752592\n10.629175\n10.004448\n\n\nAT1G01620\n9.602057\n9.741940\n9.433688\n9.660392\n9.487521\n9.759061\n9.495713\n9.854984\n9.475491\n9.780328\n9.425490\n9.608561\n\n\nAT1G01960\n7.992299\n8.164980\n7.940793\n8.188539\n8.066384\n8.091465\n7.887148\n8.068782\n8.022251\n7.938457\n7.981151\n8.096472\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nGene_ID\nGene_name\nsucrose_24h_pval\nsucrose_24h_lfc\nsucrose_3h_pval\nsucrose_3h_lfc\n\n\n\n\nAT1G01090\nPDH-E1 ALPHA\n0.5905386\n1.1\n0.9983381\n0.0\n\n\nAT1G01100\nRPP1A\n0.5688959\n1.1\n0.9983381\n-1.1\n\n\nAT1G01300\nAPF2\n0.5650828\n1.1\n0.9983381\n0.0\n\n\nAT1G01320\n\n0.7427942\n0.0\n0.9983381\n1.1\n\n\nAT1G01620\nPIP1-3\n0.8840503\n0.0\n0.9983381\n-1.1\n\n\nAT1G01960\nBIG3\n0.8171195\n0.0\n0.9983381\n0.0"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(dat)"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-1",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-1",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(dat) +\n  aes(x = Sample_ID)"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-2",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-2",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(dat) +\n  aes(x = Sample_ID) +\n  aes(y = expression)"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-3",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-3",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(dat) +\n  aes(x = Sample_ID) +\n  aes(y = expression) +\n  aes(color = compound)"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-4",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-4",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(dat) +\n  aes(x = Sample_ID) +\n  aes(y = expression) +\n  aes(color = compound) +\n  aes(fill = compound)"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-5",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-5",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(dat) +\n  aes(x = Sample_ID) +\n  aes(y = expression) +\n  aes(color = compound) +\n  aes(fill = compound) +\n  geom_boxplot()"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-6",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-6",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(dat) +\n  aes(x = Sample_ID) +\n  aes(y = expression) +\n  aes(color = compound) +\n  aes(fill = compound) +\n  geom_boxplot() +\n  labs(x = \"Samples\")"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-7",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-7",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(dat) +\n  aes(x = Sample_ID) +\n  aes(y = expression) +\n  aes(color = compound) +\n  aes(fill = compound) +\n  geom_boxplot() +\n  labs(x = \"Samples\") +\n  labs(y = \"Expression\")"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-8",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-8",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(dat) +\n  aes(x = Sample_ID) +\n  aes(y = expression) +\n  aes(color = compound) +\n  aes(fill = compound) +\n  geom_boxplot() +\n  labs(x = \"Samples\") +\n  labs(y = \"Expression\") +\n  labs(title = \"Boxplot\")"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-9",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-9",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(dat) +\n  aes(x = Sample_ID) +\n  aes(y = expression) +\n  aes(color = compound) +\n  aes(fill = compound) +\n  geom_boxplot() +\n  labs(x = \"Samples\") +\n  labs(y = \"Expression\") +\n  labs(title = \"Boxplot\") +\n  labs(subtitle = \"Sucrose at 3h and 24h\")"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-10",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-10",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(dat) +\n  aes(x = Sample_ID) +\n  aes(y = expression) +\n  aes(color = compound) +\n  aes(fill = compound) +\n  geom_boxplot() +\n  labs(x = \"Samples\") +\n  labs(y = \"Expression\") +\n  labs(title = \"Boxplot\") +\n  labs(subtitle = \"Sucrose at 3h and 24h\") +\n  labs(caption = \"This is a Boxplot of Sucrose comparison.\")"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#data-for-plotting-longer-format",
+    "href": "slides/slide_block_3.html#data-for-plotting-longer-format",
+    "title": "Slides - Block 3",
+    "section": "Data for plotting: longer format",
+    "text": "Data for plotting: longer format\n\n\n\n\n\n\n\n\nSample_ID\ncompound\ndose\ntime\nGene_ID\nexpression\n\n\n\n\nERR1736192\nnone\nnone\n24 hour\nAT1G01090\n8.951818\n\n\nERR1736193\nnone\nnone\n3 hour\nAT1G01090\n8.951818\n\n\nERR1736194\nsucrose\n15 millimolar\n24 hour\nAT1G01090\n8.951818\n\n\nERR1736195\nsucrose\n15 millimolar\n3 hour\nAT1G01090\n8.951818\n\n\nERR1736196\nnone\nnone\n24 hour\nAT1G01090\n8.951818\n\n\nERR1736197\nnone\nnone\n3 hour\nAT1G01090\n8.951818\n\n\nERR1736198\nsucrose\n15 millimolar\n24 hour\nAT1G01090\n8.951818\n\n\nERR1736199\nsucrose\n15 millimolar\n3 hour\nAT1G01090\n8.951818\n\n\nERR1736200\nnone\nnone\n24 hour\nAT1G01090\n8.951818\n\n\nERR1736201\nnone\nnone\n3 hour\nAT1G01090\n8.951818\n\n\nERR1736202\nsucrose\n15 millimolar\n24 hour\nAT1G01090\n8.951818\n\n\nERR1736203\nsucrose\n15 millimolar\n3 hour\nAT1G01090\n8.951818"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-11",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-11",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(x = Sample_ID) +\n  aes(y = expression) +\n  aes(color = compound) +\n  aes(fill = compound) +\n  geom_boxplot() +\n  labs(x = \"Samples\") +\n  labs(y = \"Expression\") +\n  labs(title = \"Boxplot\") +\n  labs(subtitle = \"Sucrose at 3h and 24h\") +\n  labs(caption = \"This is a Boxplot of Sucrose comparison.\") +\n  facet_wrap(~dose) +\n  facet_grid(dose~time)"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-12",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-12",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(dat))"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-13",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-13",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(x = Sample_ID)"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-14",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-14",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(x = Sample_ID) +\n  aes(y = expression)"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-15",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-15",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(x = Sample_ID) +\n  aes(y = expression) +\n  aes(color = compound)"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-16",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-16",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(x = Sample_ID) +\n  aes(y = expression) +\n  aes(color = compound) +\n  aes(fill = compound)"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-17",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-17",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(x = Sample_ID) +\n  aes(y = expression) +\n  aes(color = compound) +\n  aes(fill = compound) +\n  geom_boxplot()"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-18",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-18",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(x = Sample_ID) +\n  aes(y = expression) +\n  aes(color = compound) +\n  aes(fill = compound) +\n  geom_boxplot() +\n  labs(x = \"Samples\")"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-19",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-19",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(x = Sample_ID) +\n  aes(y = expression) +\n  aes(color = compound) +\n  aes(fill = compound) +\n  geom_boxplot() +\n  labs(x = \"Samples\") +\n  labs(y = \"Expression\")"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-20",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-20",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(x = Sample_ID) +\n  aes(y = expression) +\n  aes(color = compound) +\n  aes(fill = compound) +\n  geom_boxplot() +\n  labs(x = \"Samples\") +\n  labs(y = \"Expression\") +\n  labs(title = \"Boxplot\")"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-21",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-21",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(x = Sample_ID) +\n  aes(y = expression) +\n  aes(color = compound) +\n  aes(fill = compound) +\n  geom_boxplot() +\n  labs(x = \"Samples\") +\n  labs(y = \"Expression\") +\n  labs(title = \"Boxplot\") +\n  labs(subtitle = \"Sucrose at 3h and 24h\")"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-22",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-22",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(x = Sample_ID) +\n  aes(y = expression) +\n  aes(color = compound) +\n  aes(fill = compound) +\n  geom_boxplot() +\n  labs(x = \"Samples\") +\n  labs(y = \"Expression\") +\n  labs(title = \"Boxplot\") +\n  labs(subtitle = \"Sucrose at 3h and 24h\") +\n  labs(caption = \"This is a Boxplot of Sucrose comparison.\")"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-23",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-23",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(x = Sample_ID) +\n  aes(y = expression) +\n  aes(color = compound) +\n  aes(fill = compound) +\n  geom_boxplot() +\n  labs(x = \"Samples\") +\n  labs(y = \"Expression\") +\n  labs(title = \"Boxplot\") +\n  labs(subtitle = \"Sucrose at 3h and 24h\") +\n  labs(caption = \"This is a Boxplot of Sucrose comparison.\") +\n  facet_grid(dose~time)"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-24",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-24",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(x = Sample_ID) +\n  aes(y = expression) +\n  aes(color = compound) +\n  aes(fill = compound) +\n  geom_boxplot() +\n  labs(x = \"Samples\") +\n  labs(y = \"Expression\") +\n  labs(title = \"Boxplot\") +\n  labs(subtitle = \"Sucrose at 3h and 24h\") +\n  labs(caption = \"This is a Boxplot of Sucrose comparison.\") +\n  facet_grid(dose~time) +\n  theme_classic()"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-25",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-25",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(x = Sample_ID) +\n  aes(y = expression) +\n  aes(color = compound) +\n  aes(fill = compound) +\n  geom_boxplot() +\n  labs(x = \"Samples\") +\n  labs(y = \"Expression\") +\n  labs(title = \"Boxplot\") +\n  labs(subtitle = \"Sucrose at 3h and 24h\") +\n  labs(caption = \"This is a Boxplot of Sucrose comparison.\") +\n  facet_grid(dose~time) +\n  theme_classic() +\n  theme_dark()"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-26",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-26",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(x = Sample_ID) +\n  aes(y = expression) +\n  aes(color = compound) +\n  aes(fill = compound) +\n  geom_boxplot() +\n  labs(x = \"Samples\") +\n  labs(y = \"Expression\") +\n  labs(title = \"Boxplot\") +\n  labs(subtitle = \"Sucrose at 3h and 24h\") +\n  labs(caption = \"This is a Boxplot of Sucrose comparison.\") +\n  facet_grid(dose~time) +\n  theme_classic() +\n  theme_dark() +\n  theme_light()"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-27",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-27",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(x = Sample_ID) +\n  aes(y = expression) +\n  aes(color = compound) +\n  aes(fill = compound) +\n  geom_boxplot() +\n  labs(x = \"Samples\") +\n  labs(y = \"Expression\") +\n  labs(title = \"Boxplot\") +\n  labs(subtitle = \"Sucrose at 3h and 24h\") +\n  labs(caption = \"This is a Boxplot of Sucrose comparison.\") +\n  facet_grid(dose~time) +\n  theme_classic() +\n  theme_dark() +\n  theme_light() +\n  theme_linedraw()"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-28",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-28",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(x = Sample_ID) +\n  aes(y = expression) +\n  aes(color = compound) +\n  aes(fill = compound) +\n  geom_boxplot() +\n  labs(x = \"Samples\") +\n  labs(y = \"Expression\") +\n  labs(title = \"Boxplot\") +\n  labs(subtitle = \"Sucrose at 3h and 24h\") +\n  labs(caption = \"This is a Boxplot of Sucrose comparison.\") +\n  facet_grid(dose~time) +\n  theme_classic() +\n  theme_dark() +\n  theme_light() +\n  theme_linedraw() +\n  theme_minimal()"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-29",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-29",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(x = Sample_ID) +\n  aes(y = expression) +\n  aes(color = compound) +\n  aes(fill = compound) +\n  geom_boxplot() +\n  labs(x = \"Samples\") +\n  labs(y = \"Expression\") +\n  labs(title = \"Boxplot\") +\n  labs(subtitle = \"Sucrose at 3h and 24h\") +\n  labs(caption = \"This is a Boxplot of Sucrose comparison.\") +\n  facet_grid(dose~time) +\n  theme_classic() +\n  theme_dark() +\n  theme_light() +\n  theme_linedraw() +\n  theme_minimal() +\n  theme_void()"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-30",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-30",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(x = Sample_ID) +\n  aes(y = expression) +\n  aes(color = compound) +\n  aes(fill = compound) +\n  geom_boxplot() +\n  labs(x = \"Samples\") +\n  labs(y = \"Expression\") +\n  labs(title = \"Boxplot\") +\n  labs(subtitle = \"Sucrose at 3h and 24h\") +\n  labs(caption = \"This is a Boxplot of Sucrose comparison.\") +\n  facet_grid(dose~time) +\n  theme_classic() +\n  theme_dark() +\n  theme_light() +\n  theme_linedraw() +\n  theme_minimal() +\n  theme_void() +\n  theme_bw()"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-31",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-31",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(x = Sample_ID) +\n  aes(y = expression) +\n  aes(color = compound) +\n  aes(fill = compound) +\n  geom_boxplot() +\n  labs(x = \"Samples\") +\n  labs(y = \"Expression\") +\n  labs(title = \"Boxplot\") +\n  labs(subtitle = \"Sucrose at 3h and 24h\") +\n  labs(caption = \"This is a Boxplot of Sucrose comparison.\") +\n  facet_grid(dose~time) +\n  theme_classic() +\n  theme_dark() +\n  theme_light() +\n  theme_linedraw() +\n  theme_minimal() +\n  theme_void() +\n  theme_bw() +\n  theme_bw()"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-32",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-32",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(dat))"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-33",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-33",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(x = Sample_ID)"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-34",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-34",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(x = Sample_ID) +\n  aes(y = expression)"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-35",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-35",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(x = Sample_ID) +\n  aes(y = expression) +\n  aes(color = compound)"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-36",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-36",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(x = Sample_ID) +\n  aes(y = expression) +\n  aes(color = compound) +\n  aes(fill = compound)"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-37",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-37",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(x = Sample_ID) +\n  aes(y = expression) +\n  aes(color = compound) +\n  aes(fill = compound) +\n  geom_boxplot()"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-38",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-38",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(x = Sample_ID) +\n  aes(y = expression) +\n  aes(color = compound) +\n  aes(fill = compound) +\n  geom_boxplot() +\n  labs(x = \"Samples\")"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-39",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-39",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(x = Sample_ID) +\n  aes(y = expression) +\n  aes(color = compound) +\n  aes(fill = compound) +\n  geom_boxplot() +\n  labs(x = \"Samples\") +\n  labs(y = \"Expression\")"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-40",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-40",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(x = Sample_ID) +\n  aes(y = expression) +\n  aes(color = compound) +\n  aes(fill = compound) +\n  geom_boxplot() +\n  labs(x = \"Samples\") +\n  labs(y = \"Expression\") +\n  labs(title = \"Boxplot\")"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-41",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-41",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(x = Sample_ID) +\n  aes(y = expression) +\n  aes(color = compound) +\n  aes(fill = compound) +\n  geom_boxplot() +\n  labs(x = \"Samples\") +\n  labs(y = \"Expression\") +\n  labs(title = \"Boxplot\") +\n  labs(subtitle = \"Sucrose at 3h and 24h\")"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-42",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-42",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(x = Sample_ID) +\n  aes(y = expression) +\n  aes(color = compound) +\n  aes(fill = compound) +\n  geom_boxplot() +\n  labs(x = \"Samples\") +\n  labs(y = \"Expression\") +\n  labs(title = \"Boxplot\") +\n  labs(subtitle = \"Sucrose at 3h and 24h\") +\n  labs(caption = \"This is a Boxplot of Sucrose comparison.\")"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-43",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-43",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(x = Sample_ID) +\n  aes(y = expression) +\n  aes(color = compound) +\n  aes(fill = compound) +\n  geom_boxplot() +\n  labs(x = \"Samples\") +\n  labs(y = \"Expression\") +\n  labs(title = \"Boxplot\") +\n  labs(subtitle = \"Sucrose at 3h and 24h\") +\n  labs(caption = \"This is a Boxplot of Sucrose comparison.\") +\n  facet_grid(dose~time)"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-44",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-44",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(x = Sample_ID) +\n  aes(y = expression) +\n  aes(color = compound) +\n  aes(fill = compound) +\n  geom_boxplot() +\n  labs(x = \"Samples\") +\n  labs(y = \"Expression\") +\n  labs(title = \"Boxplot\") +\n  labs(subtitle = \"Sucrose at 3h and 24h\") +\n  labs(caption = \"This is a Boxplot of Sucrose comparison.\") +\n  facet_grid(dose~time) +\n  theme_bw()"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-45",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-45",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(x = Sample_ID) +\n  aes(y = expression) +\n  aes(color = compound) +\n  aes(fill = compound) +\n  geom_boxplot() +\n  labs(x = \"Samples\") +\n  labs(y = \"Expression\") +\n  labs(title = \"Boxplot\") +\n  labs(subtitle = \"Sucrose at 3h and 24h\") +\n  labs(caption = \"This is a Boxplot of Sucrose comparison.\") +\n  facet_grid(dose~time) +\n  theme_bw() +\n  theme(axis.text.x = element_text(angle = 90))"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-46",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-46",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(x = Sample_ID) +\n  aes(y = expression) +\n  aes(color = compound) +\n  aes(fill = compound) +\n  geom_boxplot() +\n  labs(x = \"Samples\") +\n  labs(y = \"Expression\") +\n  labs(title = \"Boxplot\") +\n  labs(subtitle = \"Sucrose at 3h and 24h\") +\n  labs(caption = \"This is a Boxplot of Sucrose comparison.\") +\n  facet_grid(dose~time) +\n  theme_bw() +\n  theme(axis.text.x = element_text(angle = 90)) +\n  theme(axis.text.x = element_text(vjust = 0.5))"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-47",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-47",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(dat))"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-48",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-48",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(\n    x = Sample_ID,\n    y = expression,\n    color = compound,\n    fill = compound\n    )"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-49",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-49",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(\n    x = Sample_ID,\n    y = expression,\n    color = compound,\n    fill = compound\n    ) +\n  geom_boxplot()"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-50",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-50",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(\n    x = Sample_ID,\n    y = expression,\n    color = compound,\n    fill = compound\n    ) +\n  geom_boxplot() +\n  labs(\n    x = \"Samples\",\n    y = \"Expression\",\n    title = \"Boxplot\",\n    subtitle = \"Sucrose at 3h and 24h\",\n    caption = \"This is a Boxplot of Sucrose comparison.\"\n    )"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-51",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-51",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(\n    x = Sample_ID,\n    y = expression,\n    color = compound,\n    fill = compound\n    ) +\n  geom_boxplot() +\n  labs(\n    x = \"Samples\",\n    y = \"Expression\",\n    title = \"Boxplot\",\n    subtitle = \"Sucrose at 3h and 24h\",\n    caption = \"This is a Boxplot of Sucrose comparison.\"\n    ) +\n  facet_grid(dose~time)"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-52",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-52",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(\n    x = Sample_ID,\n    y = expression,\n    color = compound,\n    fill = compound\n    ) +\n  geom_boxplot() +\n  labs(\n    x = \"Samples\",\n    y = \"Expression\",\n    title = \"Boxplot\",\n    subtitle = \"Sucrose at 3h and 24h\",\n    caption = \"This is a Boxplot of Sucrose comparison.\"\n    ) +\n  facet_grid(dose~time) +\n  theme_bw()"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-53",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-53",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(\n    x = Sample_ID,\n    y = expression,\n    color = compound,\n    fill = compound\n    ) +\n  geom_boxplot() +\n  labs(\n    x = \"Samples\",\n    y = \"Expression\",\n    title = \"Boxplot\",\n    subtitle = \"Sucrose at 3h and 24h\",\n    caption = \"This is a Boxplot of Sucrose comparison.\"\n    ) +\n  facet_grid(dose~time) +\n  theme_bw() +\n  theme(axis.text.x = element_text(angle = 90, vjust = 0.5))"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-54",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-54",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(data$diff))"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-55",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-55",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(data$diff)) +\n  aes(\n    x = sucrose_24h_lfc,\n    y = sucrose_3h_lfc,\n    color = sucrose_24h_pval,\n    size = sucrose_3h_pval\n    )"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-56",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-56",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(data$diff)) +\n  aes(\n    x = sucrose_24h_lfc,\n    y = sucrose_3h_lfc,\n    color = sucrose_24h_pval,\n    size = sucrose_3h_pval\n    ) +\n  geom_point()"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-57",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-57",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(data$diff)) +\n  aes(\n    x = sucrose_24h_lfc,\n    y = sucrose_3h_lfc,\n    color = sucrose_24h_pval,\n    size = sucrose_3h_pval\n    ) +\n  geom_point() +\n  labs(\n    title = \"Scatterplot\",\n    subtitle = \"Sucrose at 3h and 24h\",\n    caption = \"This is a Scatterplot of log-fold-change comparison.\"\n    )"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-58",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-58",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(data$diff)) +\n  aes(\n    x = sucrose_24h_lfc,\n    y = sucrose_3h_lfc,\n    color = sucrose_24h_pval,\n    size = sucrose_3h_pval\n    ) +\n  geom_point() +\n  labs(\n    title = \"Scatterplot\",\n    subtitle = \"Sucrose at 3h and 24h\",\n    caption = \"This is a Scatterplot of log-fold-change comparison.\"\n    ) +\n  theme_bw()"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-59",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-59",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(data$diff)) +\n  aes(\n    x = sucrose_24h_lfc,\n    y = sucrose_3h_lfc,\n    color = sucrose_24h_pval,\n    size = sucrose_3h_pval\n    ) +\n  geom_point() +\n  labs(\n    title = \"Scatterplot\",\n    subtitle = \"Sucrose at 3h and 24h\",\n    caption = \"This is a Scatterplot of log-fold-change comparison.\"\n    ) +\n  theme_bw() +\n  theme(axis.text.x = element_text(angle = 90, vjust = 0.5))"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-60",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-60",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(data$diff)) +\n  aes(\n    x = sucrose_24h_lfc,\n    y = sucrose_3h_lfc,\n    color = sucrose_24h_pval,\n    size = sucrose_3h_pval\n    ) +\n  geom_point() +\n  labs(\n    title = \"Scatterplot\",\n    subtitle = \"Sucrose at 3h and 24h\",\n    caption = \"This is a Scatterplot of log-fold-change comparison.\"\n    ) +\n  theme_bw() +\n  theme(axis.text.x = element_text(angle = 90, vjust = 0.5)) +\n  geom_abline()"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-61",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-61",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(data$diff)) +\n  aes(\n    x = sucrose_24h_lfc,\n    y = sucrose_3h_lfc,\n    color = sucrose_24h_pval,\n    size = sucrose_3h_pval\n    ) +\n  geom_point() +\n  labs(\n    title = \"Scatterplot\",\n    subtitle = \"Sucrose at 3h and 24h\",\n    caption = \"This is a Scatterplot of log-fold-change comparison.\"\n    ) +\n  theme_bw() +\n  theme(axis.text.x = element_text(angle = 90, vjust = 0.5)) +\n  geom_abline() +\n  scale_color_viridis_c()"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-62",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-62",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(\n    x = Sample_ID,\n    y = expression,\n    color = compound,\n    fill = compound\n    ) +\n  geom_boxplot() +\n  labs(\n    x = \"Samples\",\n    y = \"Expression\",\n    title = \"Boxplot\",\n    subtitle = \"Sucrose at 3h and 24h\",\n    caption = \"This is a Boxplot of Sucrose comparison.\"\n    )"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-63",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-63",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(\n    x = Sample_ID,\n    y = expression,\n    color = compound,\n    fill = compound\n    ) +\n  geom_boxplot() +\n  labs(\n    x = \"Samples\",\n    y = \"Expression\",\n    title = \"Boxplot\",\n    subtitle = \"Sucrose at 3h and 24h\",\n    caption = \"This is a Boxplot of Sucrose comparison.\"\n    ) +\n  facet_grid(dose~time)"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-64",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-64",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(\n    x = Sample_ID,\n    y = expression,\n    color = compound,\n    fill = compound\n    ) +\n  geom_boxplot() +\n  labs(\n    x = \"Samples\",\n    y = \"Expression\",\n    title = \"Boxplot\",\n    subtitle = \"Sucrose at 3h and 24h\",\n    caption = \"This is a Boxplot of Sucrose comparison.\"\n    ) +\n  facet_grid(dose~time) +\n  theme_bw()"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-65",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-65",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(\n    x = Sample_ID,\n    y = expression,\n    color = compound,\n    fill = compound\n    ) +\n  geom_boxplot() +\n  labs(\n    x = \"Samples\",\n    y = \"Expression\",\n    title = \"Boxplot\",\n    subtitle = \"Sucrose at 3h and 24h\",\n    caption = \"This is a Boxplot of Sucrose comparison.\"\n    ) +\n  facet_grid(dose~time) +\n  theme_bw() +\n  theme(axis.text.x = element_text(angle = 90, vjust = 0.5))"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-barplot",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-barplot",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Barplot",
+    "text": "Step by step plotting: Barplot\n\n\n\nggplot(data.frame(dat))"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-barplot-1",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-barplot-1",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Barplot",
+    "text": "Step by step plotting: Barplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(\n    x = Sample_ID,\n    y = expression,\n    color = compound,\n    fill = compound\n    )"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-barplot-2",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-barplot-2",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Barplot",
+    "text": "Step by step plotting: Barplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(\n    x = Sample_ID,\n    y = expression,\n    color = compound,\n    fill = compound\n    ) +\n  geom_col()"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-barplot-3",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-barplot-3",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Barplot",
+    "text": "Step by step plotting: Barplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(\n    x = Sample_ID,\n    y = expression,\n    color = compound,\n    fill = compound\n    ) +\n  geom_col() +\n  labs(\n    x = \"Samples\",\n    y = \"Expression\",\n    title = \"Barplot\",\n    subtitle = \"Sucrose at 3h and 24h\",\n    caption = \"This is a Barplot of Sucrose comparison.\"\n    )"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-barplot-4",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-barplot-4",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Barplot",
+    "text": "Step by step plotting: Barplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(\n    x = Sample_ID,\n    y = expression,\n    color = compound,\n    fill = compound\n    ) +\n  geom_col() +\n  labs(\n    x = \"Samples\",\n    y = \"Expression\",\n    title = \"Barplot\",\n    subtitle = \"Sucrose at 3h and 24h\",\n    caption = \"This is a Barplot of Sucrose comparison.\"\n    ) +\n  facet_grid(dose~time)"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-barplot-5",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-barplot-5",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Barplot",
+    "text": "Step by step plotting: Barplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(\n    x = Sample_ID,\n    y = expression,\n    color = compound,\n    fill = compound\n    ) +\n  geom_col() +\n  labs(\n    x = \"Samples\",\n    y = \"Expression\",\n    title = \"Barplot\",\n    subtitle = \"Sucrose at 3h and 24h\",\n    caption = \"This is a Barplot of Sucrose comparison.\"\n    ) +\n  facet_grid(dose~time) +\n  theme_bw()"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-barplot-6",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-barplot-6",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Barplot",
+    "text": "Step by step plotting: Barplot\n\n\n\nggplot(data.frame(dat)) +\n  aes(\n    x = Sample_ID,\n    y = expression,\n    color = compound,\n    fill = compound\n    ) +\n  geom_col() +\n  labs(\n    x = \"Samples\",\n    y = \"Expression\",\n    title = \"Barplot\",\n    subtitle = \"Sucrose at 3h and 24h\",\n    caption = \"This is a Barplot of Sucrose comparison.\"\n    ) +\n  facet_grid(dose~time) +\n  theme_bw() +\n  theme(axis.text.x = element_text(angle = 90, vjust = 0.5))"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-histogram",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-histogram",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Histogram",
+    "text": "Step by step plotting: Histogram\n\n\n\nggplot(data.frame(dat))"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-histogram-1",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-histogram-1",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Histogram",
+    "text": "Step by step plotting: Histogram\n\n\n\nggplot(data.frame(dat)) +\n  aes(x = expression)"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-histogram-2",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-histogram-2",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Histogram",
+    "text": "Step by step plotting: Histogram\n\n\n\nggplot(data.frame(dat)) +\n  aes(x = expression) +\n  geom_histogram()"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-histogram-3",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-histogram-3",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Histogram",
+    "text": "Step by step plotting: Histogram\n\n\n\nggplot(data.frame(dat)) +\n  aes(x = expression) +\n  geom_histogram() +\n  labs(\n    x = \"Expression\",\n    y = \"Counts\",\n    title = \"Histogram\",\n    subtitle = \"Sucrose at 3h and 24h\",\n    caption = \"This is a Histogram of Sucrose comparison.\"\n    )"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-histogram-4",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-histogram-4",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Histogram",
+    "text": "Step by step plotting: Histogram\n\n\n\nggplot(data.frame(dat)) +\n  aes(x = expression) +\n  geom_histogram() +\n  labs(\n    x = \"Expression\",\n    y = \"Counts\",\n    title = \"Histogram\",\n    subtitle = \"Sucrose at 3h and 24h\",\n    caption = \"This is a Histogram of Sucrose comparison.\"\n    ) +\n  facet_grid(dose~time)"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-histogram-5",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-histogram-5",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Histogram",
+    "text": "Step by step plotting: Histogram\n\n\n\nggplot(data.frame(dat)) +\n  aes(x = expression) +\n  geom_histogram() +\n  labs(\n    x = \"Expression\",\n    y = \"Counts\",\n    title = \"Histogram\",\n    subtitle = \"Sucrose at 3h and 24h\",\n    caption = \"This is a Histogram of Sucrose comparison.\"\n    ) +\n  facet_grid(dose~time) +\n  theme_bw()"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-histogram-6",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-histogram-6",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Histogram",
+    "text": "Step by step plotting: Histogram\n\n\n\nggplot(data.frame(dat)) +\n  aes(x = expression) +\n  geom_histogram() +\n  labs(\n    x = \"Expression\",\n    y = \"Counts\",\n    title = \"Histogram\",\n    subtitle = \"Sucrose at 3h and 24h\",\n    caption = \"This is a Histogram of Sucrose comparison.\"\n    ) +\n  facet_grid(dose~time) +\n  theme_bw() +\n  theme(axis.text.x = element_text(angle = 90, vjust = 0.5))"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-scatterplot",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-scatterplot",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Scatterplot",
+    "text": "Step by step plotting: Scatterplot\n\n\n\nggplot(data.frame(data$diff))"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-scatterplot-1",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-scatterplot-1",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Scatterplot",
+    "text": "Step by step plotting: Scatterplot\n\n\n\nggplot(data.frame(data$diff)) +\n  aes(\n    x = sucrose_24h_lfc,\n    y = sucrose_3h_lfc,\n    color = sucrose_24h_pval,\n    size = sucrose_3h_pval\n    )"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-scatterplot-2",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-scatterplot-2",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Scatterplot",
+    "text": "Step by step plotting: Scatterplot\n\n\n\nggplot(data.frame(data$diff)) +\n  aes(\n    x = sucrose_24h_lfc,\n    y = sucrose_3h_lfc,\n    color = sucrose_24h_pval,\n    size = sucrose_3h_pval\n    ) +\n  geom_point()"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-scatterplot-3",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-scatterplot-3",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Scatterplot",
+    "text": "Step by step plotting: Scatterplot\n\n\n\nggplot(data.frame(data$diff)) +\n  aes(\n    x = sucrose_24h_lfc,\n    y = sucrose_3h_lfc,\n    color = sucrose_24h_pval,\n    size = sucrose_3h_pval\n    ) +\n  geom_point() +\n  labs(\n    title = \"Scatterplot\",\n    subtitle = \"Sucrose at 3h and 24h\",\n    caption = \"This is a Scatterplot of log-fold-change comparison.\"\n    )"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-scatterplot-4",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-scatterplot-4",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Scatterplot",
+    "text": "Step by step plotting: Scatterplot\n\n\n\nggplot(data.frame(data$diff)) +\n  aes(\n    x = sucrose_24h_lfc,\n    y = sucrose_3h_lfc,\n    color = sucrose_24h_pval,\n    size = sucrose_3h_pval\n    ) +\n  geom_point() +\n  labs(\n    title = \"Scatterplot\",\n    subtitle = \"Sucrose at 3h and 24h\",\n    caption = \"This is a Scatterplot of log-fold-change comparison.\"\n    ) +\n  theme_bw()"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-scatterplot-5",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-scatterplot-5",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Scatterplot",
+    "text": "Step by step plotting: Scatterplot\n\n\n\nggplot(data.frame(data$diff)) +\n  aes(\n    x = sucrose_24h_lfc,\n    y = sucrose_3h_lfc,\n    color = sucrose_24h_pval,\n    size = sucrose_3h_pval\n    ) +\n  geom_point() +\n  labs(\n    title = \"Scatterplot\",\n    subtitle = \"Sucrose at 3h and 24h\",\n    caption = \"This is a Scatterplot of log-fold-change comparison.\"\n    ) +\n  theme_bw() +\n  theme(axis.text.x = element_text(angle = 90, vjust = 0.5))"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-scatterplot-6",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-scatterplot-6",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Scatterplot",
+    "text": "Step by step plotting: Scatterplot\n\n\n\nggplot(data.frame(data$diff)) +\n  aes(\n    x = sucrose_24h_lfc,\n    y = sucrose_3h_lfc,\n    color = sucrose_24h_pval,\n    size = sucrose_3h_pval\n    ) +\n  geom_point() +\n  labs(\n    title = \"Scatterplot\",\n    subtitle = \"Sucrose at 3h and 24h\",\n    caption = \"This is a Scatterplot of log-fold-change comparison.\"\n    ) +\n  theme_bw() +\n  theme(axis.text.x = element_text(angle = 90, vjust = 0.5)) +\n  geom_abline()"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-scatterplot-7",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-scatterplot-7",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Scatterplot",
+    "text": "Step by step plotting: Scatterplot\n\n\n\nggplot(data.frame(data$diff)) +\n  aes(\n    x = sucrose_24h_lfc,\n    y = sucrose_3h_lfc,\n    color = sucrose_24h_pval,\n    size = sucrose_3h_pval\n    ) +\n  geom_point() +\n  labs(\n    title = \"Scatterplot\",\n    subtitle = \"Sucrose at 3h and 24h\",\n    caption = \"This is a Scatterplot of log-fold-change comparison.\"\n    ) +\n  theme_bw() +\n  theme(axis.text.x = element_text(angle = 90, vjust = 0.5)) +\n  geom_abline() +\n  scale_color_viridis_c()"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-66",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-66",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(data$diff))"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-67",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-67",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(data$diff)) +\n  aes(\n    x = sucrose_24h_lfc,\n    y = sucrose_3h_lfc,\n    color = sucrose_24h_pval,\n    size = sucrose_3h_pval\n    )"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-68",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-68",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(data$diff)) +\n  aes(\n    x = sucrose_24h_lfc,\n    y = sucrose_3h_lfc,\n    color = sucrose_24h_pval,\n    size = sucrose_3h_pval\n    ) +\n  geom_point()"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-69",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-69",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(data$diff)) +\n  aes(\n    x = sucrose_24h_lfc,\n    y = sucrose_3h_lfc,\n    color = sucrose_24h_pval,\n    size = sucrose_3h_pval\n    ) +\n  geom_point() +\n  labs(\n    title = \"Scatterplot\",\n    subtitle = \"Sucrose at 3h and 24h\",\n    caption = \"This is a Scatterplot of log-fold-change comparison.\"\n    )"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-70",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-70",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(data$diff)) +\n  aes(\n    x = sucrose_24h_lfc,\n    y = sucrose_3h_lfc,\n    color = sucrose_24h_pval,\n    size = sucrose_3h_pval\n    ) +\n  geom_point() +\n  labs(\n    title = \"Scatterplot\",\n    subtitle = \"Sucrose at 3h and 24h\",\n    caption = \"This is a Scatterplot of log-fold-change comparison.\"\n    ) +\n  theme_bw()"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-71",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-71",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(data$diff)) +\n  aes(\n    x = sucrose_24h_lfc,\n    y = sucrose_3h_lfc,\n    color = sucrose_24h_pval,\n    size = sucrose_3h_pval\n    ) +\n  geom_point() +\n  labs(\n    title = \"Scatterplot\",\n    subtitle = \"Sucrose at 3h and 24h\",\n    caption = \"This is a Scatterplot of log-fold-change comparison.\"\n    ) +\n  theme_bw() +\n  theme(axis.text.x = element_text(angle = 90, vjust = 0.5))"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-72",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-72",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(data$diff)) +\n  aes(\n    x = sucrose_24h_lfc,\n    y = sucrose_3h_lfc,\n    color = sucrose_24h_pval,\n    size = sucrose_3h_pval\n    ) +\n  geom_point() +\n  labs(\n    title = \"Scatterplot\",\n    subtitle = \"Sucrose at 3h and 24h\",\n    caption = \"This is a Scatterplot of log-fold-change comparison.\"\n    ) +\n  theme_bw() +\n  theme(axis.text.x = element_text(angle = 90, vjust = 0.5)) +\n  geom_abline()"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#step-by-step-plotting-boxplot-73",
+    "href": "slides/slide_block_3.html#step-by-step-plotting-boxplot-73",
+    "title": "Slides - Block 3",
+    "section": "Step by step plotting: Boxplot",
+    "text": "Step by step plotting: Boxplot\n\n\n\nggplot(data.frame(data$diff)) +\n  aes(\n    x = sucrose_24h_lfc,\n    y = sucrose_3h_lfc,\n    color = sucrose_24h_pval,\n    size = sucrose_3h_pval\n    ) +\n  geom_point() +\n  labs(\n    title = \"Scatterplot\",\n    subtitle = \"Sucrose at 3h and 24h\",\n    caption = \"This is a Scatterplot of log-fold-change comparison.\"\n    ) +\n  theme_bw() +\n  theme(axis.text.x = element_text(angle = 90, vjust = 0.5)) +\n  geom_abline() +\n  scale_color_viridis_c()"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#flipbookr-break",
+    "href": "slides/slide_block_3.html#flipbookr-break",
+    "title": "Slides - Block 3",
+    "section": "Flipbookr Break",
+    "text": "Flipbookr Break\n\n\n\nggplot(data.frame(dat)) +\n  aes(x = Sample_ID) +\n  aes(y = expression) +\n  aes(color = compound) +\n  aes(fill = compound) +\n  geom_boxplot() +\n  labs(x = \"Samples\") +\n  labs(y = \"Expression\") +\n  labs(title = \"Boxplot\") +\n  labs(subtitle = \"Sucrose at 3h and 24h\") +\n  labs(caption = \"This is a Boxplot of Sucrose comparison.\") +\n  facet_wrap(~dose) +\n  facet_grid(dose~time)"
+  },
+  {
+    "objectID": "slides/slide_block_2.html#ggplot2-flipbook",
+    "href": "slides/slide_block_2.html#ggplot2-flipbook",
+    "title": "Block 2",
+    "section": "ggplot2 Flipbook",
+    "text": "ggplot2 Flipbook"
   }
 ]

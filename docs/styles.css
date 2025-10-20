@@ -46,3 +46,7 @@ a {
 
 /* GitHub icon size (reverted to default, so no specific font-size here) */
 /* If it's still too small, I might need to add a small font-size here */
+
+.smallcode{
+  size: 0.75em
+}

@@ -1,6 +1,195 @@
 ---
-title: "Exercise - Block 2"
+title: "Block 2: ggplot2"
 editor: source
 editor_options: 
   chunk_output_type: console
 ---
+
+## Introduction to ggplot2
+
+`ggplot2` is a powerful and popular R package for creating a wide variety of plots. It is based on the "grammar of graphics" philosophy, which allows you to build plots layer by layer. This makes it easy to create complex and customized visualizations.
+
+### Base R vs. ggplot2
+
+| Feature | Base R | ggplot2 |
+|---|---|---|
+| **Philosophy** | "Ink on paper" - you draw elements on the plot. | "Grammar of graphics" - you build plots with layers. |
+| **Syntax** | Functions for specific plots (e.g., `plot`, `hist`). | Consistent syntax with `ggplot()` + `geom_*()`. |
+| **Customization** | Can be complex, often requiring many parameters. | Easy to add layers for themes, labels, and annotations. |
+| **Data Format** | Often requires data in specific formats (vectors, matrices). | Prefers data in data frames (long format). |
+
+## Exploratory data analysis with ggplot2
+
+First, let's load the data and the `ggplot2` library.
+
+```{r}
+# install.packages("ggplot2")
+library(ggplot2)
+data <- readRDS(gzcon(url(
+  "https://raw.githubusercontent.com/urppeia/publication_figs/main/data.rds"
+)))
+rownames(data$counts) <- data$counts$Gene_ID
+data$counts <- data$counts[,-1]
+```
+
+### Boxplot of normalized data
+
+In base R, we used `boxplot()`. In `ggplot2`, we use `ggplot()` and `geom_boxplot()`.
+
+```{r}
+# ggplot2 requires data in a long format data frame
+counts_long <- stack(as.data.frame(data$counts))
+colnames(counts_long) <- c("expression", "sample")
+
+ggplot(counts_long, aes(x = sample, y = expression)) +
+  geom_boxplot() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  labs(title = "Normalized expression per sample",
+       x = "Sample",
+       y = "Expression")
+```
+
+### Exercise 1
+
+**A.** Color the boxplots by condition (control vs. sucrose).
+
+::: {.callout-tip collapse="true"}
+```{r}
+# We need to add the condition information to our long data frame
+counts_long$condition <- rep(data$anno$compound, each = nrow(data$counts))
+
+ggplot(counts_long, aes(x = sample, y = expression, fill = condition)) +
+  geom_boxplot() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  labs(title = "Normalized expression per sample",
+       x = "Sample",
+       y = "Expression") +
+  scale_fill_manual(values = c("none" = "steelblue", "sucrose" = "tomato"))
+```
+:::
+
+### Barplot of mean expression
+
+In base R, we used `barplot()`. In `ggplot2`, we use `geom_bar()` or `geom_col()`.
+
+```{r}
+sample_means <- colMeans(data$counts)
+sample_means_df <- data.frame(
+  sample = names(sample_means),
+  mean_expression = sample_means,
+  condition = data$anno$compound
+)
+
+ggplot(sample_means_df, aes(x = sample, y = mean_expression, fill = condition)) +
+  geom_col() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  labs(title = "Mean normalized expression per sample",
+       x = "Sample",
+       y = "Mean Expression") +
+  scale_fill_manual(values = c("none" = "steelblue", "sucrose" = "tomato"))
+```
+
+### Histogram of expression values
+
+In base R, we used `hist()`. In `ggplot2`, we use `geom_histogram()`.
+
+```{r}
+ggplot(counts_long, aes(x = expression)) +
+  geom_histogram(bins = 40, fill = "lightgray", color = "gray40") +
+  labs(title = "Distribution of normalized expression values",
+       x = "Expression",
+       y = "Frequency")
+```
+
+### Exercise 2
+
+Add a density curve to the histogram.
+
+::: {.callout-tip collapse="true"}
+```{r}
+ggplot(counts_long, aes(x = expression)) +
+  geom_histogram(aes(y = ..density..), bins = 40, fill = "lightgray", color = "gray40") +
+  geom_density(color = "tomato", size = 1) +
+  labs(title = "Distribution of normalized expression values",
+       x = "Expression",
+       y = "Density")
+```
+:::
+
+### Volcano plot of differential results
+
+In base R, we used `plot()`. In `ggplot2`, we use `geom_point()`.
+
+#### Sucrose 24h
+
+```{r}
+diff_df_24h <- data.frame(
+  lfc = data$diff$sucrose_24h_lfc,
+  pval = data$diff$sucrose_24h_pval
+)
+diff_df_24h$significant <- diff_df_24h$pval < 0.05 & abs(diff_df_24h$lfc) > 1
+
+ggplot(diff_df_24h, aes(x = lfc, y = -log10(pval), color = significant)) +
+  geom_point(size = 2, alpha = 0.7) +
+  scale_color_manual(values = c("gray70", "tomato")) +
+  geom_vline(xintercept = c(-1, 1), linetype = "dashed", color = "red") +
+  geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "blue") +
+  labs(title = "Volcano Plot — Sucrose 24h",
+       x = "log2 Fold Change",
+       y = "-log10(p-value)") +
+  theme_minimal()
+```
+
+### Exercise 3
+
+Create a volcano plot for the 3h sucrose treatment.
+
+::: {.callout-tip collapse="true"}
+```{r}
+diff_df_3h <- data.frame(
+  lfc = data$diff$sucrose_3h_lfc,
+  pval = data$diff$sucrose_3h_pval
+)
+diff_df_3h$significant <- diff_df_3h$pval < 0.05 & abs(diff_df_3h$lfc) > 1
+
+ggplot(diff_df_3h, aes(x = lfc, y = -log10(pval), color = significant)) +
+  geom_point(size = 2, alpha = 0.7) +
+  scale_color_manual(values = c("gray70", "tomato")) +
+  geom_vline(xintercept = c(-1, 1), linetype = "dashed", color = "red") +
+  geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "blue") +
+  labs(title = "Volcano Plot — Sucrose 3h",
+       x = "log2 Fold Change",
+       y = "-log10(p-value)") +
+  theme_minimal()
+```
+:::
+
+### Combining plots
+
+In base R, we used `par(mfrow = ...)`. In the `ggplot2` ecosystem, the `patchwork` package is a popular choice.
+
+```{r}
+# install.packages("patchwork")
+library(patchwork)
+
+p1 <- ggplot(diff_df_24h, aes(x = lfc, y = -log10(pval), color = significant)) +
+  geom_point(size = 2, alpha = 0.7) +
+  scale_color_manual(values = c("gray70", "tomato")) +
+  labs(title = "Sucrose 24h") +
+  theme_minimal()
+
+p2 <- ggplot(diff_df_3h, aes(x = lfc, y = -log10(pval), color = significant)) +
+  geom_point(size = 2, alpha = 0.7) +
+  scale_color_manual(values = c("gray70", "tomato")) +
+  labs(title = "Sucrose 3h") +
+  theme_minimal()
+
+p1 + p2
+```
+
+## Session information
+::: {.callout-tip collapse="true"}
+```{r}
+sessionInfo()
+```
+:::
