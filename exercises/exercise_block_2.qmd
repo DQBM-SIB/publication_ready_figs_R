@@ -158,7 +158,7 @@ ggplot(data_long, aes(x = Sample_ID, y = Expression, fill = compound)) +
 **D.** A `Raincloud` might be better for visualization. We learnt this in the [first block](https://www.data-to-viz.com/caveat/boxplot.html). Can you make this? 
 
 ::: {.callout-tip collapse="true"}
-```{r}
+```{r, warning=FALSE, message=FALSE}
 library(PupillometryR)
 
 ggplot(data_long, aes(x = Sample_ID, y = Expression, fill = compound, color = compound)) +
