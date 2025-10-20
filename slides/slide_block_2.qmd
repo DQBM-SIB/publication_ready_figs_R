@@ -102,4 +102,4 @@ While powerful, base R plotting can be complex for custom and advanced plots.
 
 ---
 
-## [`ggplot2` Flipbook](../assets/ggplot2/ggplot2.html)
+# [`ggplot2` Flipbook](../assets/ggplot2/ggplot2.html)

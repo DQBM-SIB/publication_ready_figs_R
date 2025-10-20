@@ -1,7 +1,13 @@
 project:
   type: website
   output-dir: docs
+  render:
+    - "*.qmd"
+    - "!*.Rmd"
+    - "!assets/**"
 
+resources:
+  - "assets/**"
 website:
   title: "Publication-Ready Figure Generation in R"
   navbar:
