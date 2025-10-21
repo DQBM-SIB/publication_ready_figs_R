@@ -7,7 +7,7 @@ title: "Schedule"
 | block | date        | presentation                          | exercise                                      | video                                 |
 |-------|-------------|---------------------------------------|-----------------------------------------------|---------------------------------------|
 | 1     | 13 Oct 2025 | [Slides](../slides/slide_block_1.qmd) | [Exercise](../exercises/exercise_block_1.qmd) | [Video](https://youtu.be/DGqqOKO3ugE) |
-| 2     | 20 Oct 2025 | [Slides](../slides/slide_block_2.qmd) | [Exercise](../exercises/exercise_block_2.qmd) |                                       |
+| 2     | 20 Oct 2025 | [Slides](../slides/slide_block_2.qmd) | [Exercise](../exercises/exercise_block_2.qmd) | [Video](https://youtu.be/K_C5rjg_K90) |                                       |
 | 3     | 27 Oct 2025 | [Slides](../slides/slide_block_3.qmd) | [Exercise](../exercises/exercise_block_3.qmd) |                                       |
 | 4     | 03 Nov 2025 | [Slides](../slides/slide_block_4.qmd) | [Exercise](../exercises/exercise_block_4.qmd) |                                       |
 | 5     | 10 Nov 2025 | [Slides](../slides/slide_block_5.qmd) | [Exercise](../exercises/exercise_block_5.qmd) |                                       |
