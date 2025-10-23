@@ -15,3 +15,137 @@ editor_options:
   chunk_output_type: console
 ---
 
+## Recap of Block 2
+
+-   **Grammar of Graphics (`gg`)**: We were introduced to the Grammar of Graphics, a systematic way to describe and build plots.
+-   **`ggplot2` Components**: We learned that `ggplot2` is based on the idea that you can build any plot from the same components: a **data** set, a **coordinate system**, and **geoms** (visual marks that represent data points).
+-   **Layers**: We build plots by adding **layers**.
+
+## Faceting the plots
+
+![](../assets/figs/08_facets.png){width="100%" fig-align="center"}
+
+## Themes
+
+![](../assets/figs/09_themes.png){width="100%" fig-align="center"}
+
+------------------------------------------------------------------------
+
+![](../assets/figs/10_color.png){width="100%" fig-align="center"}
+
+------------------------------------------------------------------------
+
+## Simplified schematic of human color perception
+
+![](../assets/figs/11_eye.png){width="100%" fig-align="center"}
+
+## Rainbow colormap
+
+![](../assets/figs/14_rainbow.png){width="100%" fig-align="center"}
+
+## Perceptually non-uniform color spaces
+
+::::: columns
+::: {.column width="50%"}
+![](../assets/figs/15_rainbow_s.png){width="100%" fig-align="center"}
+
+![](../assets/figs/12_grblhue.png){width="100%" fig-align="center"}
+:::
+
+::: {.column width="50%"}
+![](../assets/figs/13_chroma.jpg){width="100%" fig-align="center"}
+:::
+:::::
+
+**This explains why a majority of the rectangles in are green, and why we see a sudden shift towards blue at the end of the scale.**
+
+## Perceptual color spaces
+
+::::: columns
+::: {.column width="50%"}
+### Non-uniform
+
+![](../assets/figs/12_grblhue.png){width="100%" fig-align="center"}
+:::
+
+::: {.column width="50%"}
+### Uniform
+
+![](../assets/figs/16_proper_hue.png){width="100%" fig-align="center"}
+:::
+:::::
+
+If we want to operate with color as it relates to the human vision, we need a color space built on these human measurements, and that is what **perceptually uniform color spaces are**.
+
+## Color selection is important
+
+![](../assets/figs/17_color_selection.png){width="100%" fig-align="center"}
+
+## Spot the difference
+
+::::: columns
+::: {.column width="50%"}
+![](../assets/figs/18_bad_space.png){width="100%" fig-align="center"}
+:::
+
+::: {.column width="50%"}
+![](../assets/figs/19_good_space.png){width="100%" fig-align="center"}
+:::
+:::::
+
+## Background of plots
+
+::::: columns
+::: {.column width="50%"}
+![](../assets/figs/20_bg_light.png){width="100%" fig-align="center"}
+:::
+
+::: {.column width="50%"}
+![](../assets/figs/21_bg_dark.png){width="100%" fig-align="center"}
+:::
+:::::
+
+# Incorrect use of colors could lead to the effective manipulation of data
+
+## Group exercise
+
+1.  Search on internet "the misuse of colour in science communication"
+
+2.  Go to the Figue 6 of the paper
+
+3.  **Group 1**: Top half of the figure <br> **Group 2**: Bottom half of the figure
+
+4.  Discuss the flowchart
+
+5.  Discuss about the color class type and combination for all the figures we have made in Exercises
+
+## Saving Plots for Publication
+
+-   **`ggsave()`**: The easiest way to save a plot.
+-   **Vector vs. Raster**:
+    -   **Vector (PDF, SVG)**: Best for publications. Scalable without losing quality.
+    -   **Raster (PNG, TIFF)**: Pixel-based. Good for web, but can lose quality when scaled.
+-   **Resolution (DPI)**: Dots Per Inch. Journals often require 300 DPI or higher for raster images.
+
+```{r, eval=FALSE, echo = T}
+my_plot <- ggplot(mtcars, aes(x = wt, y = mpg)) + geom_point()
+
+ggsave("my_plot.pdf", plot = my_plot, width = 6, height = 4)
+ggsave("my_plot.png", plot = my_plot, width = 6, height = 4, dpi = 300)
+```
+
+## Customizing Stylistic Elements
+
+-   **`theme()`**: The powerhouse for customizing the non-data elements of your plot.
+-   **Fonts**: Change font family, size, and face (bold, italic).
+-   **Line Weights**: Adjust the thickness of axis lines, grid lines, and borders.
+
+```{r, eval=FALSE, echo = T}
+my_plot + 
+  theme(
+    text = element_text(family = "Times New Roman", size = 12),
+    axis.title = element_text(size = 14, face = "bold"),
+    axis.line = element_line(linewidth = 0.8),
+    panel.grid.major = element_line(linewidth = 0.2)
+  )
+```

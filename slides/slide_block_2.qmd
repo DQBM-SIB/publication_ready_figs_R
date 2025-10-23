@@ -96,5 +96,4 @@ While powerful, base R plotting can be complex for custom and advanced plots.
 -   **Grammar of Graphics**: `ggplot2` is based on the idea that you can build any plot from the same components: a **data** set, a **coordinate system**, and **geoms** (visual marks that represent data points).
 -   **Layers**: You build plots by adding layers. For example, you can add a layer of points, then a layer of lines, then a layer of labels.
 
-
 # [`ggplot2` Flipbook](../assets/ggplot2/ggplot2.html)

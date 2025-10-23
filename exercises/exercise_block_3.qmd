@@ -4,3 +4,266 @@ editor: source
 editor_options: 
   chunk_output_type: console
 ---
+
+## Introduction to ggplot2 advanced topics
+
+In the last block, we learned the basics of `ggplot2`. In this block, we will explore more advanced topics to make our plots publication-ready. We will cover:
+
+*   **Faceting**: Creating subplots to compare different subsets of your data.
+*   **Themes**: Customizing the appearance of your plots.
+*   **Colors**: Using colors effectively and exploring different color palettes.
+
+## Installing packages
+
+```{r, eval=FALSE}
+renv::install("RColorBrewer")
+renv::install("viridis")
+```
+
+## Packages
+```{r, message=FALSE, warning=FALSE}
+library(ggplot2)
+library(patchwork)
+library(RColorBrewer)
+library(viridis)
+```
+
+## Exploratory data analysis
+
+```{r}
+data <- readRDS(gzcon(url(
+  "https://raw.githubusercontent.com/urppeia/publication_figs/main/data.rds"
+)))
+```
+
+## Faceting
+
+In Block 2, we created two separate volcano plots for the 3h and 24h timepoints. We can use faceting to create a single plot with two panels.
+
+### Exercise 1
+
+Create a single volcano plot faceted by timepoint.
+
+::: {.callout-tip collapse="true"}
+```{r}
+# Create a single data frame for both timepoints
+diff_df <- data.frame(
+  lfc = c(data$diff$sucrose_3h_lfc, data$diff$sucrose_24h_lfc),
+  pval = c(data$diff$sucrose_3h_pval, data$diff$sucrose_24h_pval),
+  timepoint = rep(c("3h", "24h"), each = nrow(data$diff))
+)
+diff_df$significant <- diff_df$pval < 0.05 & abs(diff_df$lfc) > 1
+
+ggplot(diff_df, aes(x = lfc, y = -log10(pval), color = significant)) +
+  geom_point(size = 2, alpha = 0.7) +
+  scale_color_manual(values = c("gray70", "tomato")) +
+  geom_vline(xintercept = c(-1, 1), linetype = "dashed", color = "red") +
+  geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "blue") +
+  labs(
+    title = "Volcano Plot — Sucrose Treatment",
+    x = "log2 Fold Change",
+    y = "-log10(p-value)"
+  ) +
+  facet_wrap(~timepoint)
+```
+:::
+
+## Themes
+
+`ggplot2` comes with several built-in themes. You can also create your own themes to have full control over the appearance of your plots.
+
+### Exercise 2
+
+**A.** Apply the `theme_minimal()` to the faceted volcano plot.
+
+::: {.callout-tip collapse="true"}
+```{r}
+ggplot(diff_df, aes(x = lfc, y = -log10(pval), color = significant)) +
+  geom_point(size = 2, alpha = 0.7) +
+  scale_color_manual(values = c("gray70", "tomato")) +
+  geom_vline(xintercept = c(-1, 1), linetype = "dashed", color = "red") +
+  geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "blue") +
+  labs(
+    title = "Volcano Plot — Sucrose Treatment",
+    x = "log2 Fold Change",
+    y = "-log10(p-value)"
+  ) +
+  facet_wrap(~timepoint) +
+  theme_minimal()
+```
+:::
+
+**B.** Customize the theme. Make the following changes:
+*   Increase the title font size to 16.
+*   Remove the panel grid lines.
+*   Change the panel background to light gray.
+
+::: {.callout-tip collapse="true"}
+```{r}
+ggplot(diff_df, aes(x = lfc, y = -log10(pval), color = significant)) +
+  geom_point(size = 2, alpha = 0.7) +
+  scale_color_manual(values = c("gray70", "tomato")) +
+  geom_vline(xintercept = c(-1, 1), linetype = "dashed", color = "red") +
+  geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "blue") +
+  labs(
+    title = "Volcano Plot — Sucrose Treatment",
+    x = "log2 Fold Change",
+    y = "-log10(p-value)"
+  ) +
+  facet_wrap(~timepoint) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 16),
+    panel.grid = element_blank(),
+    panel.background = element_rect(fill = "lightgray", color = NA)
+  )
+```
+:::
+
+## Colors
+
+Colors are a powerful tool in data visualization. `ggplot2` provides many ways to work with colors.
+
+### Exercise 3
+
+Let's go back to the boxplot of expression data.
+
+```{r}
+data_long <- merge(data$anno, reshape2::melt(data$counts))
+```
+
+**A.** Use a color palette from `RColorBrewer`.
+
+::: {.callout-tip collapse="true"}
+```{r}
+ggplot(data_long, aes(x = Sample_ID, y = value, fill = compound)) +
+  geom_boxplot(outlier.shape = NA) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  labs(
+    title = "Normalized expression per sample",
+    x = "Sample",
+    y = "Expression"
+  ) +
+  scale_fill_brewer(palette = "Set2")
+```
+:::
+
+**B.** Use the `viridis` color palette.
+
+::: {.callout-tip collapse="true"}
+```{r}
+ggplot(data_long, aes(x = Sample_ID, y = value, fill = compound)) +
+  geom_boxplot(outlier.shape = NA) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  labs(
+    title = "Normalized expression per sample",
+    x = "Sample",
+    y = "Expression"
+  ) +
+  scale_fill_viridis_d()
+```
+:::
+
+**C.** Specify colors manually.
+
+::: {.callout-tip collapse="true"}
+```{r}
+ggplot(data_long, aes(x = Sample_ID, y = value, fill = compound)) +
+  geom_boxplot(outlier.shape = NA) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  labs(
+    title = "Normalized expression per sample",
+    x = "Sample",
+    y = "Expression"
+  ) +
+  scale_fill_manual(values = c("none" = "#66c2a5", "sucrose" = "#fc8d62"))
+```
+:::
+
+## Saving plots for publication
+
+When preparing figures for publication, journals often have strict requirements for file format, dimensions, and resolution.
+
+### Exercise 4
+
+Let's save the faceted volcano plot from Exercise 2B.
+
+**A.** Save the plot as a PNG file with a width of 8 inches, a height of 4 inches, and a resolution of 300 dpi.
+
+::: {.callout-tip collapse="true"}
+```{r}
+volcano_plot <- ggplot(diff_df, aes(x = lfc, y = -log10(pval), color = significant)) +
+  geom_point(size = 2, alpha = 0.7) +
+  scale_color_manual(values = c("gray70", "tomato")) +
+  geom_vline(xintercept = c(-1, 1), linetype = "dashed", color = "red") +
+  geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "blue") +
+  labs(
+    title = "Volcano Plot — Sucrose Treatment",
+    x = "log2 Fold Change",
+    y = "-log10(p-value)"
+  ) +
+  facet_wrap(~timepoint) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 16),
+    panel.grid = element_blank(),
+    panel.background = element_rect(fill = "lightgray", color = NA)
+  )
+
+ggsave("volcano_plot.png", plot = volcano_plot, width = 8, height = 4, dpi = 300)
+```
+:::
+
+**B.** Save the plot as a PDF file. PDF is a vector format, which is ideal for publications as it can be scaled without losing quality.
+
+::: {.callout-tip collapse="true"}
+```{r}
+ggsave("volcano_plot.pdf", plot = volcano_plot, width = 8, height = 4)
+```
+:::
+
+**C.** Save the plot as a TIFF file.
+
+::: {.callout-tip collapse="true"}
+```{r}
+ggsave("volcano_plot.tiff", plot = volcano_plot, width = 8, height = 4, dpi = 300)
+```
+:::
+
+## Fine-tuning stylistic elements
+
+Journals often have specific guidelines for fonts and line weights.
+
+### Exercise 5
+
+Let's modify the volcano plot to meet some hypothetical publication guidelines.
+
+**A.** Change the font family to "Arial".
+
+::: {.callout-tip collapse="true"}
+```{r}
+volcano_plot + 
+  theme(text = element_text(family = "Arial"))
+```
+:::
+
+**B.** Adjust the line weights. Make the axis lines thicker (size = 1) and the facet borders thinner (size = 0.5).
+
+::: {.callout-tip collapse="true"}
+```{r}
+volcano_plot + 
+  theme(
+    text = element_text(family = "Arial"),
+    axis.line = element_line(linewidth = 1),
+    strip.background = element_rect(linewidth = 0.5)
+  )
+```
+:::
+
+
+## Session information
+::: {.callout-tip collapse="true"}
+```{r}
+sessionInfo()
+```
+:::
