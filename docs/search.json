@@ -7,6 +7,90 @@
     "text": "Recap of Block 2\n\nGrammar of Graphics (gg): We were introduced to the Grammar of Graphics, a systematic way to describe and build plots.\nggplot2 Components: We learned that ggplot2 is based on the idea that you can build any plot from the same components: a data set, a coordinate system, and geoms (visual marks that represent data points).\nLayers: We build plots by adding layers."
   },
   {
+    "objectID": "slides/slide_block_3.html#faceting-the-plots",
+    "href": "slides/slide_block_3.html#faceting-the-plots",
+    "title": "Block 3",
+    "section": "Faceting the plots",
+    "text": "Faceting the plots"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#themes",
+    "href": "slides/slide_block_3.html#themes",
+    "title": "Block 3",
+    "section": "Themes",
+    "text": "Themes"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#simplified-schematic-of-human-color-perception",
+    "href": "slides/slide_block_3.html#simplified-schematic-of-human-color-perception",
+    "title": "Block 3",
+    "section": "Simplified schematic of human color perception",
+    "text": "Simplified schematic of human color perception"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#rainbow-colormap",
+    "href": "slides/slide_block_3.html#rainbow-colormap",
+    "title": "Block 3",
+    "section": "Rainbow colormap",
+    "text": "Rainbow colormap"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#perceptually-non-uniform-color-spaces",
+    "href": "slides/slide_block_3.html#perceptually-non-uniform-color-spaces",
+    "title": "Block 3",
+    "section": "Perceptually non-uniform color spaces",
+    "text": "Perceptually non-uniform color spaces\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThis explains why a majority of the rectangles in are green, and why we see a sudden shift towards blue at the end of the scale."
+  },
+  {
+    "objectID": "slides/slide_block_3.html#perceptual-color-spaces",
+    "href": "slides/slide_block_3.html#perceptual-color-spaces",
+    "title": "Block 3",
+    "section": "Perceptual color spaces",
+    "text": "Perceptual color spaces\n\n\nNon-uniform\n\n\n\n\n\n\nUniform\n\n\n\n\n\n\nIf we want to operate with color as it relates to the human vision, we need a color space built on these human measurements, and that is what perceptually uniform color spaces are."
+  },
+  {
+    "objectID": "slides/slide_block_3.html#color-selection-is-important",
+    "href": "slides/slide_block_3.html#color-selection-is-important",
+    "title": "Block 3",
+    "section": "Color selection is important",
+    "text": "Color selection is important"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#spot-the-difference",
+    "href": "slides/slide_block_3.html#spot-the-difference",
+    "title": "Block 3",
+    "section": "Spot the difference",
+    "text": "Spot the difference"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#background-of-plots",
+    "href": "slides/slide_block_3.html#background-of-plots",
+    "title": "Block 3",
+    "section": "Background of plots",
+    "text": "Background of plots"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#group-exercise",
+    "href": "slides/slide_block_3.html#group-exercise",
+    "title": "Block 3",
+    "section": "Group exercise",
+    "text": "Group exercise\n\nSearch on internet “the misuse of colour in science communication”\nGo to the Figue 6 of the paper\nGroup 1: Top half of the figure  Group 2: Bottom half of the figure\nDiscuss the flowchart\nDiscuss about the color class type and combination for all the figures we have made in Exercises"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#saving-plots-for-publication",
+    "href": "slides/slide_block_3.html#saving-plots-for-publication",
+    "title": "Block 3",
+    "section": "Saving Plots for Publication",
+    "text": "Saving Plots for Publication\n\nggsave(): The easiest way to save a plot.\nVector vs. Raster:\n\nVector (PDF, SVG): Best for publications. Scalable without losing quality.\nRaster (PNG, TIFF): Pixel-based. Good for web, but can lose quality when scaled.\n\nResolution (DPI): Dots Per Inch. Journals often require 300 DPI or higher for raster images.\n\n\nmy_plot &lt;- ggplot(mtcars, aes(x = wt, y = mpg)) + geom_point()\n\nggsave(\"my_plot.pdf\", plot = my_plot, width = 6, height = 4)\nggsave(\"my_plot.png\", plot = my_plot, width = 6, height = 4, dpi = 300)"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#customizing-stylistic-elements",
+    "href": "slides/slide_block_3.html#customizing-stylistic-elements",
+    "title": "Block 3",
+    "section": "Customizing Stylistic Elements",
+    "text": "Customizing Stylistic Elements\n\ntheme(): The powerhouse for customizing the non-data elements of your plot.\nFonts: Change font family, size, and face (bold, italic).\nLine Weights: Adjust the thickness of axis lines, grid lines, and borders.\n\n\nmy_plot + \n  theme(\n    text = element_text(family = \"Times New Roman\", size = 12),\n    axis.title = element_text(size = 14, face = \"bold\"),\n    axis.line = element_line(linewidth = 0.8),\n    panel.grid.major = element_line(linewidth = 0.2)\n  )"
+  },
+  {
     "objectID": "slides/slide_block_1.html#introduction",
     "href": "slides/slide_block_1.html#introduction",
     "title": "Block 1",
@@ -138,6 +222,83 @@
     "title": "Pre-course Preparation",
     "section": "Setup",
     "text": "Setup\n\nComputational Requirements\n\nR 4.5.1\nRStudio (latest version)\nrenv R package installed: renv documentation"
+  },
+  {
+    "objectID": "exercises/exercise_block_3.html",
+    "href": "exercises/exercise_block_3.html",
+    "title": "Exercise - Block 3",
+    "section": "",
+    "text": "In the last block, we learned the basics of ggplot2. In this block, we will explore more advanced topics to make our plots publication-ready. We will cover:\n\nFaceting: Creating subplots to compare different subsets of your data.\nThemes: Customizing the appearance of your plots.\nColors: Using colors effectively and exploring different color palettes."
+  },
+  {
+    "objectID": "exercises/exercise_block_3.html#introduction-to-ggplot2-advanced-topics",
+    "href": "exercises/exercise_block_3.html#introduction-to-ggplot2-advanced-topics",
+    "title": "Exercise - Block 3",
+    "section": "",
+    "text": "In the last block, we learned the basics of ggplot2. In this block, we will explore more advanced topics to make our plots publication-ready. We will cover:\n\nFaceting: Creating subplots to compare different subsets of your data.\nThemes: Customizing the appearance of your plots.\nColors: Using colors effectively and exploring different color palettes."
+  },
+  {
+    "objectID": "exercises/exercise_block_3.html#installing-packages",
+    "href": "exercises/exercise_block_3.html#installing-packages",
+    "title": "Exercise - Block 3",
+    "section": "Installing packages",
+    "text": "Installing packages\n\nrenv::install(\"RColorBrewer\")\nrenv::install(\"viridis\")"
+  },
+  {
+    "objectID": "exercises/exercise_block_3.html#packages",
+    "href": "exercises/exercise_block_3.html#packages",
+    "title": "Exercise - Block 3",
+    "section": "Packages",
+    "text": "Packages\n\nlibrary(ggplot2)\nlibrary(patchwork)\nlibrary(RColorBrewer)\nlibrary(viridis)"
+  },
+  {
+    "objectID": "exercises/exercise_block_3.html#exploratory-data-analysis",
+    "href": "exercises/exercise_block_3.html#exploratory-data-analysis",
+    "title": "Exercise - Block 3",
+    "section": "Exploratory data analysis",
+    "text": "Exploratory data analysis\n\ndata &lt;- readRDS(gzcon(url(\n  \"https://raw.githubusercontent.com/urppeia/publication_figs/main/data.rds\"\n)))"
+  },
+  {
+    "objectID": "exercises/exercise_block_3.html#faceting",
+    "href": "exercises/exercise_block_3.html#faceting",
+    "title": "Exercise - Block 3",
+    "section": "Faceting",
+    "text": "Faceting\nIn Block 2, we created two separate volcano plots for the 3h and 24h timepoints. We can use faceting to create a single plot with two panels.\n\nExercise 1\nCreate a single volcano plot faceted by timepoint.\n\n\n\n\n\n\nTip\n\n\n\n\n\n\n# Create a single data frame for both timepoints\ndiff_df &lt;- data.frame(\n  lfc = c(data$diff$sucrose_3h_lfc, data$diff$sucrose_24h_lfc),\n  pval = c(data$diff$sucrose_3h_pval, data$diff$sucrose_24h_pval),\n  timepoint = rep(c(\"3h\", \"24h\"), each = nrow(data$diff))\n)\ndiff_df$significant &lt;- diff_df$pval &lt; 0.05 & abs(diff_df$lfc) &gt; 1\n\nggplot(diff_df, aes(x = lfc, y = -log10(pval), color = significant)) +\n  geom_point(size = 2, alpha = 0.7) +\n  scale_color_manual(values = c(\"gray70\", \"tomato\")) +\n  geom_vline(xintercept = c(-1, 1), linetype = \"dashed\", color = \"red\") +\n  geom_hline(yintercept = -log10(0.05), linetype = \"dashed\", color = \"blue\") +\n  labs(\n    title = \"Volcano Plot — Sucrose Treatment\",\n    x = \"log2 Fold Change\",\n    y = \"-log10(p-value)\"\n  ) +\n  facet_wrap(~timepoint)"
+  },
+  {
+    "objectID": "exercises/exercise_block_3.html#themes",
+    "href": "exercises/exercise_block_3.html#themes",
+    "title": "Exercise - Block 3",
+    "section": "Themes",
+    "text": "Themes\nggplot2 comes with several built-in themes. You can also create your own themes to have full control over the appearance of your plots.\n\nExercise 2\nA. Apply the theme_minimal() to the faceted volcano plot.\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nggplot(diff_df, aes(x = lfc, y = -log10(pval), color = significant)) +\n  geom_point(size = 2, alpha = 0.7) +\n  scale_color_manual(values = c(\"gray70\", \"tomato\")) +\n  geom_vline(xintercept = c(-1, 1), linetype = \"dashed\", color = \"red\") +\n  geom_hline(yintercept = -log10(0.05), linetype = \"dashed\", color = \"blue\") +\n  labs(\n    title = \"Volcano Plot — Sucrose Treatment\",\n    x = \"log2 Fold Change\",\n    y = \"-log10(p-value)\"\n  ) +\n  facet_wrap(~timepoint) +\n  theme_minimal()\n\n\n\n\n\n\n\n\n\n\n\nB. Customize the theme. Make the following changes: * Increase the title font size to 16. * Remove the panel grid lines. * Change the panel background to light gray.\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nggplot(diff_df, aes(x = lfc, y = -log10(pval), color = significant)) +\n  geom_point(size = 2, alpha = 0.7) +\n  scale_color_manual(values = c(\"gray70\", \"tomato\")) +\n  geom_vline(xintercept = c(-1, 1), linetype = \"dashed\", color = \"red\") +\n  geom_hline(yintercept = -log10(0.05), linetype = \"dashed\", color = \"blue\") +\n  labs(\n    title = \"Volcano Plot — Sucrose Treatment\",\n    x = \"log2 Fold Change\",\n    y = \"-log10(p-value)\"\n  ) +\n  facet_wrap(~timepoint) +\n  theme_minimal() +\n  theme(\n    plot.title = element_text(size = 16),\n    panel.grid = element_blank(),\n    panel.background = element_rect(fill = \"lightgray\", color = NA)\n  )"
+  },
+  {
+    "objectID": "exercises/exercise_block_3.html#colors",
+    "href": "exercises/exercise_block_3.html#colors",
+    "title": "Exercise - Block 3",
+    "section": "Colors",
+    "text": "Colors\nColors are a powerful tool in data visualization. ggplot2 provides many ways to work with colors.\n\nExercise 3\nLet’s go back to the boxplot of expression data.\n\ndata_long &lt;- merge(data$anno, reshape2::melt(data$counts))\n\nUsing Gene_ID as id variables\n\n\nA. Use a color palette from RColorBrewer.\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nggplot(data_long, aes(x = Sample_ID, y = value, fill = compound)) +\n  geom_boxplot(outlier.shape = NA) +\n  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +\n  labs(\n    title = \"Normalized expression per sample\",\n    x = \"Sample\",\n    y = \"Expression\"\n  ) +\n  scale_fill_brewer(palette = \"Set2\")\n\n\n\n\n\n\n\n\n\n\n\nB. Use the viridis color palette.\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nggplot(data_long, aes(x = Sample_ID, y = value, fill = compound)) +\n  geom_boxplot(outlier.shape = NA) +\n  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +\n  labs(\n    title = \"Normalized expression per sample\",\n    x = \"Sample\",\n    y = \"Expression\"\n  ) +\n  scale_fill_viridis_d()\n\n\n\n\n\n\n\n\n\n\n\nC. Specify colors manually.\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nggplot(data_long, aes(x = Sample_ID, y = value, fill = compound)) +\n  geom_boxplot(outlier.shape = NA) +\n  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +\n  labs(\n    title = \"Normalized expression per sample\",\n    x = \"Sample\",\n    y = \"Expression\"\n  ) +\n  scale_fill_manual(values = c(\"none\" = \"#66c2a5\", \"sucrose\" = \"#fc8d62\"))"
+  },
+  {
+    "objectID": "exercises/exercise_block_3.html#saving-plots-for-publication",
+    "href": "exercises/exercise_block_3.html#saving-plots-for-publication",
+    "title": "Exercise - Block 3",
+    "section": "Saving plots for publication",
+    "text": "Saving plots for publication\nWhen preparing figures for publication, journals often have strict requirements for file format, dimensions, and resolution.\n\nExercise 4\nLet’s save the faceted volcano plot from Exercise 2B.\nA. Save the plot as a PNG file with a width of 8 inches, a height of 4 inches, and a resolution of 300 dpi.\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nvolcano_plot &lt;- ggplot(diff_df, aes(x = lfc, y = -log10(pval), color = significant)) +\n  geom_point(size = 2, alpha = 0.7) +\n  scale_color_manual(values = c(\"gray70\", \"tomato\")) +\n  geom_vline(xintercept = c(-1, 1), linetype = \"dashed\", color = \"red\") +\n  geom_hline(yintercept = -log10(0.05), linetype = \"dashed\", color = \"blue\") +\n  labs(\n    title = \"Volcano Plot — Sucrose Treatment\",\n    x = \"log2 Fold Change\",\n    y = \"-log10(p-value)\"\n  ) +\n  facet_wrap(~timepoint) +\n  theme_minimal() +\n  theme(\n    plot.title = element_text(size = 16),\n    panel.grid = element_blank(),\n    panel.background = element_rect(fill = \"lightgray\", color = NA)\n  )\n\nggsave(\"volcano_plot.png\", plot = volcano_plot, width = 8, height = 4, dpi = 300)\n\n\n\n\nB. Save the plot as a PDF file. PDF is a vector format, which is ideal for publications as it can be scaled without losing quality.\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nggsave(\"volcano_plot.pdf\", plot = volcano_plot, width = 8, height = 4)\n\nWarning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :\nfor 'Volcano Plot — Sucrose Treatment' in 'mbcsToSbcs': - substituted for —\n(U+2014)\n\n\n\n\n\nC. Save the plot as a TIFF file.\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nggsave(\"volcano_plot.tiff\", plot = volcano_plot, width = 8, height = 4, dpi = 300)"
+  },
+  {
+    "objectID": "exercises/exercise_block_3.html#fine-tuning-stylistic-elements",
+    "href": "exercises/exercise_block_3.html#fine-tuning-stylistic-elements",
+    "title": "Exercise - Block 3",
+    "section": "Fine-tuning stylistic elements",
+    "text": "Fine-tuning stylistic elements\nJournals often have specific guidelines for fonts and line weights.\n\nExercise 5\nLet’s modify the volcano plot to meet some hypothetical publication guidelines.\nA. Change the font family to “Arial”.\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nvolcano_plot + \n  theme(text = element_text(family = \"Arial\"))\n\n\n\n\n\n\n\n\n\n\n\nB. Adjust the line weights. Make the axis lines thicker (size = 1) and the facet borders thinner (size = 0.5).\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nvolcano_plot + \n  theme(\n    text = element_text(family = \"Arial\"),\n    axis.line = element_line(linewidth = 1),\n    strip.background = element_rect(linewidth = 0.5)\n  )"
+  },
+  {
+    "objectID": "exercises/exercise_block_3.html#session-information",
+    "href": "exercises/exercise_block_3.html#session-information",
+    "title": "Exercise - Block 3",
+    "section": "Session information",
+    "text": "Session information\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nsessionInfo()\n\nR version 4.5.1 (2025-06-13)\nPlatform: aarch64-apple-darwin20\nRunning under: macOS Tahoe 26.0.1\n\nMatrix products: default\nBLAS:   /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib \nLAPACK: /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1\n\nlocale:\n[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8\n\ntime zone: Europe/Zurich\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices datasets  utils     methods   base     \n\nother attached packages:\n[1] viridis_0.6.5      viridisLite_0.4.2  RColorBrewer_1.1-3 patchwork_1.3.2   \n[5] ggplot2_4.0.0     \n\nloaded via a namespace (and not attached):\n [1] gtable_0.3.6        jsonlite_2.0.0      dplyr_1.1.4        \n [4] compiler_4.5.1      BiocManager_1.30.26 renv_1.1.5         \n [7] Rcpp_1.1.0          tidyselect_1.2.1    stringr_1.5.2      \n[10] gridExtra_2.3       textshaping_1.0.4   systemfonts_1.3.1  \n[13] scales_1.4.0        yaml_2.3.10         fastmap_1.2.0      \n[16] plyr_1.8.9          R6_2.6.1            labeling_0.4.3     \n[19] generics_0.1.4      knitr_1.50          htmlwidgets_1.6.4  \n[22] tibble_3.3.0        pillar_1.11.1       rlang_1.1.6        \n[25] stringi_1.8.7       xfun_0.53           S7_0.2.0           \n[28] cli_3.6.5           withr_3.0.2         magrittr_2.0.4     \n[31] digest_0.6.37       grid_4.5.1          lifecycle_1.0.4    \n[34] vctrs_0.6.5         evaluate_1.0.5      glue_1.8.0         \n[37] farver_2.1.2        ragg_1.5.0          reshape2_1.4.4     \n[40] rmarkdown_2.30      tools_4.5.1         pkgconfig_2.0.3    \n[43] htmltools_0.5.8.1"
   },
   {
     "objectID": "exercises/exercise_block_1.html",
@@ -276,8 +437,8 @@
     "objectID": "slides/slide_block_2.html#recap-of-block-1",
     "href": "slides/slide_block_2.html#recap-of-block-1",
     "title": "Block 2",
-    "section": "",
-    "text": "Data Types: We learned about different data types (Numeric, Categorical, Time-series, etc.).\nChart Types: We explored various chart types and when to use them (Bar, Pie, Histogram, Boxplot, Scatter, etc.).\nBase R Plotting: We used base R functions like plot(), hist(), and boxplot() to create basic visualizations.\nData to Viz: We were introduced to the data-to-viz.com resource."
+    "section": "Recap of Block 1",
+    "text": "Recap of Block 1\n\nData Types: We learned about different data types (Numeric, Categorical, Time-series, etc.).\nChart Types: We explored various chart types and when to use them (Bar, Pie, Histogram, Boxplot, Scatter, etc.).\nBase R Plotting: We used base R functions like plot(), hist(), and boxplot() to create basic visualizations.\nData to Viz: We were introduced to the data-to-viz.com resource."
   },
   {
     "objectID": "slides/slide_block_2.html#key-base-r-plotting-functions",
@@ -341,222 +502,5 @@
     "title": "Block 2",
     "section": "Introducing ggplot2",
     "text": "Introducing ggplot2\n\nGrammar of Graphics: ggplot2 is based on the idea that you can build any plot from the same components: a data set, a coordinate system, and geoms (visual marks that represent data points).\nLayers: You build plots by adding layers. For example, you can add a layer of points, then a layer of lines, then a layer of labels."
-  },
-  {
-    "objectID": "slides/slide_block_3.html#facet_wrap-vs-facet_grid",
-    "href": "slides/slide_block_3.html#facet_wrap-vs-facet_grid",
-    "title": "Block 3",
-    "section": "facet_wrap() vs facet_grid()",
-    "text": "facet_wrap() vs facet_grid()"
-  },
-  {
-    "objectID": "slides/slide_block_3.html#faceting-the-plots",
-    "href": "slides/slide_block_3.html#faceting-the-plots",
-    "title": "Block 3",
-    "section": "Faceting the plots",
-    "text": "Faceting the plots"
-  },
-  {
-    "objectID": "slides/slide_block_3.html#themes",
-    "href": "slides/slide_block_3.html#themes",
-    "title": "Block 3",
-    "section": "Themes",
-    "text": "Themes"
-  },
-  {
-    "objectID": "slides/slide_block_3.html#importance-of-colors-in-research-communications",
-    "href": "slides/slide_block_3.html#importance-of-colors-in-research-communications",
-    "title": "Block 3",
-    "section": "Importance of colors in research communications",
-    "text": "Importance of colors in research communications"
-  },
-  {
-    "objectID": "slides/slide_block_3.html#colour-perception",
-    "href": "slides/slide_block_3.html#colour-perception",
-    "title": "Block 3",
-    "section": "Colour perception",
-    "text": "Colour perception"
-  },
-  {
-    "objectID": "slides/slide_block_3.html#simplified-schematic-of-human-color-perception",
-    "href": "slides/slide_block_3.html#simplified-schematic-of-human-color-perception",
-    "title": "Block 3",
-    "section": "Simplified schematic of human color perception",
-    "text": "Simplified schematic of human color perception"
-  },
-  {
-    "objectID": "slides/slide_block_3.html#perceptually-non-uniform-uniform-color-spaces",
-    "href": "slides/slide_block_3.html#perceptually-non-uniform-uniform-color-spaces",
-    "title": "Block 3",
-    "section": "Perceptually non-uniform/ uniform color spaces",
-    "text": "Perceptually non-uniform/ uniform color spaces"
-  },
-  {
-    "objectID": "slides/slide_block_3.html#perceptual-color-spaces",
-    "href": "slides/slide_block_3.html#perceptual-color-spaces",
-    "title": "Block 3",
-    "section": "Perceptual color spaces",
-    "text": "Perceptual color spaces\n\n\nNon-uniform\n\n\n\n\n\n\nUniform\n\n\n\n\n\n\nIf we want to operate with color as it relates to the human vision, we need a color space built on these human measurements, and that is what perceptually uniform color spaces are."
-  },
-  {
-    "objectID": "slides/slide_block_3.html#perceptually-non-uniform-color-spaces",
-    "href": "slides/slide_block_3.html#perceptually-non-uniform-color-spaces",
-    "title": "Block 3",
-    "section": "Perceptually non-uniform color spaces",
-    "text": "Perceptually non-uniform color spaces\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThis explains why a majority of the rectangles in are green, and why we see a sudden shift towards blue at the end of the scale."
-  },
-  {
-    "objectID": "slides/slide_block_3.html#rainbow-colormap",
-    "href": "slides/slide_block_3.html#rainbow-colormap",
-    "title": "Block 3",
-    "section": "Rainbow colormap",
-    "text": "Rainbow colormap"
-  },
-  {
-    "objectID": "slides/slide_block_3.html#why-proper-color-selection-is-important",
-    "href": "slides/slide_block_3.html#why-proper-color-selection-is-important",
-    "title": "Block 3",
-    "section": "Why proper color selection is important?",
-    "text": "Why proper color selection is important?"
-  },
-  {
-    "objectID": "slides/slide_block_3.html#color-selection-is-important",
-    "href": "slides/slide_block_3.html#color-selection-is-important",
-    "title": "Block 3",
-    "section": "Color selection is important",
-    "text": "Color selection is important"
-  },
-  {
-    "objectID": "slides/slide_block_3.html#spot-the-difference",
-    "href": "slides/slide_block_3.html#spot-the-difference",
-    "title": "Block 3",
-    "section": "Spot the difference",
-    "text": "Spot the difference"
-  },
-  {
-    "objectID": "slides/slide_block_3.html#background-should-not-affect-the-colors",
-    "href": "slides/slide_block_3.html#background-should-not-affect-the-colors",
-    "title": "Block 3",
-    "section": "Background should not affect the colors",
-    "text": "Background should not affect the colors"
-  },
-  {
-    "objectID": "slides/slide_block_3.html#background-of-plots",
-    "href": "slides/slide_block_3.html#background-of-plots",
-    "title": "Block 3",
-    "section": "Background of plots",
-    "text": "Background of plots"
-  },
-  {
-    "objectID": "slides/slide_block_3.html#incorrect-use-of-colors-could-lead-to-the-effective-manipulation-of-data",
-    "href": "slides/slide_block_3.html#incorrect-use-of-colors-could-lead-to-the-effective-manipulation-of-data",
-    "title": "Block 3",
-    "section": "Incorrect use of colors could lead to the effective manipulation of data",
-    "text": "Incorrect use of colors could lead to the effective manipulation of data"
-  },
-  {
-    "objectID": "slides/slide_block_3.html#group-exercise",
-    "href": "slides/slide_block_3.html#group-exercise",
-    "title": "Block 3",
-    "section": "Group exercise",
-    "text": "Group exercise\n\nSearch on internet “the misuse of colour in science communication”\nGo to the Figue 6 of the paper\nGroup 1: Top half of the figure  Group 2: Bottom half of the figure\nDiscuss the flowchart\nDiscuss about the color class type and combination for all the figures we have made in Exercises"
-  },
-  {
-    "objectID": "exercises/exercise_block_3.html",
-    "href": "exercises/exercise_block_3.html",
-    "title": "Exercise - Block 3",
-    "section": "",
-    "text": "In the last block, we learned the basics of ggplot2. In this block, we will explore more advanced topics to make our plots publication-ready. We will cover:\n\nFaceting: Creating subplots to compare different subsets of your data.\nThemes: Customizing the appearance of your plots.\nColors: Using colors effectively and exploring different color palettes."
-  },
-  {
-    "objectID": "exercises/exercise_block_3.html#introduction-to-ggplot2-advanced-topics",
-    "href": "exercises/exercise_block_3.html#introduction-to-ggplot2-advanced-topics",
-    "title": "Exercise - Block 3",
-    "section": "",
-    "text": "In the last block, we learned the basics of ggplot2. In this block, we will explore more advanced topics to make our plots publication-ready. We will cover:\n\nFaceting: Creating subplots to compare different subsets of your data.\nThemes: Customizing the appearance of your plots.\nColors: Using colors effectively and exploring different color palettes."
-  },
-  {
-    "objectID": "exercises/exercise_block_3.html#installing-packages",
-    "href": "exercises/exercise_block_3.html#installing-packages",
-    "title": "Exercise - Block 3",
-    "section": "Installing packages",
-    "text": "Installing packages\n\nrenv::install(\"RColorBrewer\")\nrenv::install(\"viridis\")"
-  },
-  {
-    "objectID": "exercises/exercise_block_3.html#packages",
-    "href": "exercises/exercise_block_3.html#packages",
-    "title": "Exercise - Block 3",
-    "section": "Packages",
-    "text": "Packages\n\nlibrary(ggplot2)\nlibrary(patchwork)\nlibrary(RColorBrewer)\nlibrary(viridis)"
-  },
-  {
-    "objectID": "exercises/exercise_block_3.html#exploratory-data-analysis",
-    "href": "exercises/exercise_block_3.html#exploratory-data-analysis",
-    "title": "Exercise - Block 3",
-    "section": "Exploratory data analysis",
-    "text": "Exploratory data analysis\n\ndata &lt;- readRDS(gzcon(url(\n  \"https://raw.githubusercontent.com/urppeia/publication_figs/main/data.rds\"\n)))"
-  },
-  {
-    "objectID": "exercises/exercise_block_3.html#faceting",
-    "href": "exercises/exercise_block_3.html#faceting",
-    "title": "Exercise - Block 3",
-    "section": "Faceting",
-    "text": "Faceting\nIn Block 2, we created two separate volcano plots for the 3h and 24h timepoints. We can use faceting to create a single plot with two panels.\n\nExercise 1\nCreate a single volcano plot faceted by timepoint.\n\n\n\n\n\n\nTip\n\n\n\n\n\n\n# Create a single data frame for both timepoints\ndiff_df &lt;- data.frame(\n  lfc = c(data$diff$sucrose_3h_lfc, data$diff$sucrose_24h_lfc),\n  pval = c(data$diff$sucrose_3h_pval, data$diff$sucrose_24h_pval),\n  timepoint = rep(c(\"3h\", \"24h\"), each = nrow(data$diff))\n)\ndiff_df$significant &lt;- diff_df$pval &lt; 0.05 & abs(diff_df$lfc) &gt; 1\n\nggplot(diff_df, aes(x = lfc, y = -log10(pval), color = significant)) +\n  geom_point(size = 2, alpha = 0.7) +\n  scale_color_manual(values = c(\"gray70\", \"tomato\")) +\n  geom_vline(xintercept = c(-1, 1), linetype = \"dashed\", color = \"red\") +\n  geom_hline(yintercept = -log10(0.05), linetype = \"dashed\", color = \"blue\") +\n  labs(\n    title = \"Volcano Plot — Sucrose Treatment\",\n    x = \"log2 Fold Change\",\n    y = \"-log10(p-value)\"\n  ) +\n  facet_wrap(~timepoint)"
-  },
-  {
-    "objectID": "exercises/exercise_block_3.html#themes",
-    "href": "exercises/exercise_block_3.html#themes",
-    "title": "Exercise - Block 3",
-    "section": "Themes",
-    "text": "Themes\nggplot2 comes with several built-in themes. You can also create your own themes to have full control over the appearance of your plots.\n\nExercise 2\nA. Apply the theme_minimal() to the faceted volcano plot.\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nggplot(diff_df, aes(x = lfc, y = -log10(pval), color = significant)) +\n  geom_point(size = 2, alpha = 0.7) +\n  scale_color_manual(values = c(\"gray70\", \"tomato\")) +\n  geom_vline(xintercept = c(-1, 1), linetype = \"dashed\", color = \"red\") +\n  geom_hline(yintercept = -log10(0.05), linetype = \"dashed\", color = \"blue\") +\n  labs(\n    title = \"Volcano Plot — Sucrose Treatment\",\n    x = \"log2 Fold Change\",\n    y = \"-log10(p-value)\"\n  ) +\n  facet_wrap(~timepoint) +\n  theme_minimal()\n\n\n\n\n\n\n\n\n\n\n\nB. Customize the theme. Make the following changes: * Increase the title font size to 16. * Remove the panel grid lines. * Change the panel background to light gray.\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nggplot(diff_df, aes(x = lfc, y = -log10(pval), color = significant)) +\n  geom_point(size = 2, alpha = 0.7) +\n  scale_color_manual(values = c(\"gray70\", \"tomato\")) +\n  geom_vline(xintercept = c(-1, 1), linetype = \"dashed\", color = \"red\") +\n  geom_hline(yintercept = -log10(0.05), linetype = \"dashed\", color = \"blue\") +\n  labs(\n    title = \"Volcano Plot — Sucrose Treatment\",\n    x = \"log2 Fold Change\",\n    y = \"-log10(p-value)\"\n  ) +\n  facet_wrap(~timepoint) +\n  theme_minimal() +\n  theme(\n    plot.title = element_text(size = 16),\n    panel.grid = element_blank(),\n    panel.background = element_rect(fill = \"lightgray\", color = NA)\n  )"
-  },
-  {
-    "objectID": "exercises/exercise_block_3.html#colors",
-    "href": "exercises/exercise_block_3.html#colors",
-    "title": "Exercise - Block 3",
-    "section": "Colors",
-    "text": "Colors\nColors are a powerful tool in data visualization. ggplot2 provides many ways to work with colors.\n\nExercise 3\nLet’s go back to the boxplot of expression data.\n\ndata_long &lt;- merge(data$anno, reshape2::melt(data$counts))\n\nUsing Gene_ID as id variables\n\n\nA. Use a color palette from RColorBrewer.\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nggplot(data_long, aes(x = Sample_ID, y = value, fill = compound)) +\n  geom_boxplot(outlier.shape = NA) +\n  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +\n  labs(\n    title = \"Normalized expression per sample\",\n    x = \"Sample\",\n    y = \"Expression\"\n  ) +\n  scale_fill_brewer(palette = \"Set2\")\n\n\n\n\n\n\n\n\n\n\n\nB. Use the viridis color palette.\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nggplot(data_long, aes(x = Sample_ID, y = value, fill = compound)) +\n  geom_boxplot(outlier.shape = NA) +\n  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +\n  labs(\n    title = \"Normalized expression per sample\",\n    x = \"Sample\",\n    y = \"Expression\"\n  ) +\n  scale_fill_viridis_d()\n\n\n\n\n\n\n\n\n\n\n\nC. Specify colors manually.\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nggplot(data_long, aes(x = Sample_ID, y = value, fill = compound)) +\n  geom_boxplot(outlier.shape = NA) +\n  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +\n  labs(\n    title = \"Normalized expression per sample\",\n    x = \"Sample\",\n    y = \"Expression\"\n  ) +\n  scale_fill_manual(values = c(\"none\" = \"#66c2a5\", \"sucrose\" = \"#fc8d62\"))"
-  },
-  {
-    "objectID": "exercises/exercise_block_3.html#session-information",
-    "href": "exercises/exercise_block_3.html#session-information",
-    "title": "Exercise - Block 3",
-    "section": "Session information",
-    "text": "Session information\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nsessionInfo()\n\nR version 4.5.1 (2025-06-13)\nPlatform: aarch64-apple-darwin20\nRunning under: macOS Tahoe 26.0.1\n\nMatrix products: default\nBLAS:   /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib \nLAPACK: /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1\n\nlocale:\n[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8\n\ntime zone: Europe/Zurich\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices datasets  utils     methods   base     \n\nother attached packages:\n[1] viridis_0.6.5      viridisLite_0.4.2  RColorBrewer_1.1-3 patchwork_1.3.2   \n[5] ggplot2_4.0.0     \n\nloaded via a namespace (and not attached):\n [1] gtable_0.3.6        jsonlite_2.0.0      dplyr_1.1.4        \n [4] compiler_4.5.1      BiocManager_1.30.26 renv_1.1.5         \n [7] Rcpp_1.1.0          tidyselect_1.2.1    stringr_1.5.2      \n[10] gridExtra_2.3       textshaping_1.0.4   systemfonts_1.3.1  \n[13] scales_1.4.0        yaml_2.3.10         fastmap_1.2.0      \n[16] plyr_1.8.9          R6_2.6.1            labeling_0.4.3     \n[19] generics_0.1.4      knitr_1.50          htmlwidgets_1.6.4  \n[22] tibble_3.3.0        pillar_1.11.1       rlang_1.1.6        \n[25] stringi_1.8.7       xfun_0.53           S7_0.2.0           \n[28] cli_3.6.5           withr_3.0.2         magrittr_2.0.4     \n[31] digest_0.6.37       grid_4.5.1          rstudioapi_0.17.1  \n[34] lifecycle_1.0.4     vctrs_0.6.5         evaluate_1.0.5     \n[37] glue_1.8.0          farver_2.1.2        ragg_1.5.0         \n[40] reshape2_1.4.4      rmarkdown_2.30      tools_4.5.1        \n[43] pkgconfig_2.0.3     htmltools_0.5.8.1"
-  },
-  {
-    "objectID": "slides/slide_block_2.html",
-    "href": "slides/slide_block_2.html",
-    "title": "Block 2",
-    "section": "",
-    "text": "Data Types: We learned about different data types (Numeric, Categorical, Time-series, etc.).\nChart Types: We explored various chart types and when to use them (Bar, Pie, Histogram, Boxplot, Scatter, etc.).\nBase R Plotting: We used base R functions like plot(), hist(), and boxplot() to create basic visualizations.\nData to Viz: We were introduced to the data-to-viz.com resource."
-  },
-  {
-    "objectID": "exercises/exercise_block_3.html#saving-plots-for-publication",
-    "href": "exercises/exercise_block_3.html#saving-plots-for-publication",
-    "title": "Exercise - Block 3",
-    "section": "Saving plots for publication",
-    "text": "Saving plots for publication\nWhen preparing figures for publication, journals often have strict requirements for file format, dimensions, and resolution.\n\nExercise 4\nLet’s save the faceted volcano plot from Exercise 2B.\nA. Save the plot as a PNG file with a width of 8 inches, a height of 4 inches, and a resolution of 300 dpi.\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nvolcano_plot &lt;- ggplot(diff_df, aes(x = lfc, y = -log10(pval), color = significant)) +\n  geom_point(size = 2, alpha = 0.7) +\n  scale_color_manual(values = c(\"gray70\", \"tomato\")) +\n  geom_vline(xintercept = c(-1, 1), linetype = \"dashed\", color = \"red\") +\n  geom_hline(yintercept = -log10(0.05), linetype = \"dashed\", color = \"blue\") +\n  labs(\n    title = \"Volcano Plot — Sucrose Treatment\",\n    x = \"log2 Fold Change\",\n    y = \"-log10(p-value)\"\n  ) +\n  facet_wrap(~timepoint) +\n  theme_minimal() +\n  theme(\n    plot.title = element_text(size = 16),\n    panel.grid = element_blank(),\n    panel.background = element_rect(fill = \"lightgray\", color = NA)\n  )\n\nggsave(\"volcano_plot.png\", plot = volcano_plot, width = 8, height = 4, dpi = 300)\n\n\n\n\nB. Save the plot as a PDF file. PDF is a vector format, which is ideal for publications as it can be scaled without losing quality.\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nggsave(\"volcano_plot.pdf\", plot = volcano_plot, width = 8, height = 4)\n\nWarning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :\nfor 'Volcano Plot — Sucrose Treatment' in 'mbcsToSbcs': - substituted for —\n(U+2014)\n\n\n\n\n\nC. Save the plot as a TIFF file.\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nggsave(\"volcano_plot.tiff\", plot = volcano_plot, width = 8, height = 4, dpi = 300)"
-  },
-  {
-    "objectID": "exercises/exercise_block_3.html#fine-tuning-stylistic-elements",
-    "href": "exercises/exercise_block_3.html#fine-tuning-stylistic-elements",
-    "title": "Exercise - Block 3",
-    "section": "Fine-tuning stylistic elements",
-    "text": "Fine-tuning stylistic elements\nJournals often have specific guidelines for fonts and line weights.\n\nExercise 5\nLet’s modify the volcano plot to meet some hypothetical publication guidelines.\nA. Change the font family to “Arial”.\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nvolcano_plot + \n  theme(text = element_text(family = \"Arial\"))\n\n\n\n\n\n\n\n\n\n\n\nB. Adjust the line weights. Make the axis lines thicker (size = 1) and the facet borders thinner (size = 0.5).\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nvolcano_plot + \n  theme(\n    text = element_text(family = \"Arial\"),\n    axis.line = element_line(linewidth = 1),\n    strip.background = element_rect(linewidth = 0.5)\n  )"
-  },
-  {
-    "objectID": "slides/slide_block_3.html#saving-plots-for-publication",
-    "href": "slides/slide_block_3.html#saving-plots-for-publication",
-    "title": "Block 3",
-    "section": "Saving Plots for Publication",
-    "text": "Saving Plots for Publication\n\nggsave(): The easiest way to save a plot.\nVector vs. Raster:\n\nVector (PDF, SVG): Best for publications. Scalable without losing quality.\nRaster (PNG, TIFF): Pixel-based. Good for web, but can lose quality when scaled.\n\nResolution (DPI): Dots Per Inch. Journals often require 300 DPI or higher for raster images.\n\n\nmy_plot &lt;- ggplot(mtcars, aes(x = wt, y = mpg)) + geom_point()\n\nggsave(\"my_plot.pdf\", plot = my_plot, width = 6, height = 4)\nggsave(\"my_plot.png\", plot = my_plot, width = 6, height = 4, dpi = 300)"
-  },
-  {
-    "objectID": "slides/slide_block_3.html#customizing-stylistic-elements",
-    "href": "slides/slide_block_3.html#customizing-stylistic-elements",
-    "title": "Block 3",
-    "section": "Customizing Stylistic Elements",
-    "text": "Customizing Stylistic Elements\n\ntheme(): The powerhouse for customizing the non-data elements of your plot.\nFonts: Change font family, size, and face (bold, italic).\nLine Weights: Adjust the thickness of axis lines, grid lines, and borders.\n\n\nmy_plot + \n  theme(\n    text = element_text(family = \"Times New Roman\", size = 12),\n    axis.title = element_text(size = 14, face = \"bold\"),\n    axis.line = element_line(linewidth = 0.8),\n    panel.grid.major = element_line(linewidth = 0.2)\n  )"
   }
 ]
