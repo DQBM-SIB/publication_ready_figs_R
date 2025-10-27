@@ -207,9 +207,13 @@ Deepak Tanwar
 <section id="recap-of-block-2" class="slide level2">
 <h2>Recap of Block 2</h2>
 <ul>
-<li><strong>Grammar of Graphics (<code>gg</code>)</strong>: We were introduced to the Grammar of Graphics, a systematic way to describe and build plots.</li>
-<li><strong><code>ggplot2</code> Components</strong>: We learned that <code>ggplot2</code> is based on the idea that you can build any plot from the same components: a <strong>data</strong> set, a <strong>coordinate system</strong>, and <strong>geoms</strong> (visual marks that represent data points).</li>
-<li><strong>Layers</strong>: We build plots by adding <strong>layers</strong>.</li>
+<li class="fragment"><strong>Grammar of Graphics (<code>gg</code>)</strong>: We were introduced to the Grammar of Graphics, a systematic way to describe and build plots.</li>
+</ul>
+<ul>
+<li class="fragment"><strong><code>ggplot2</code> Components</strong>: We learned that <code>ggplot2</code> is based on the idea that you can build any plot from the same components: a <strong>data</strong> set, a <strong>coordinate system</strong>, and <strong>geoms</strong> (visual marks that represent data points).</li>
+</ul>
+<ul>
+<li class="fragment"><strong>Layers</strong>: We build plots by adding <strong>layers</strong>.</li>
 </ul>
 </section>
 <section id="faceting-the-plots" class="slide level2">
@@ -238,42 +242,42 @@ Deepak Tanwar
 <div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="../assets/figs/15_rainbow_s.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+<p><img data-src="../assets/figs/15_rainbow_s.png" class="fragment quarto-figure quarto-figure-center" style="width:100.0%" data-fragment-index="1"></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="../assets/figs/12_grblhue.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+<p><img data-src="../assets/figs/12_grblhue.png" class="fragment quarto-figure quarto-figure-center" style="width:100.0%" data-fragment-index="2"></p>
 </figure>
 </div>
 </div><div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="../assets/figs/13_chroma.jpg" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+<p><img data-src="../assets/figs/13_chroma.jpg" class="fragment quarto-figure quarto-figure-center" style="width:100.0%" data-fragment-index="3"></p>
 </figure>
 </div>
 </div></div>
-<p><strong>This explains why a majority of the rectangles in are green, and why we see a sudden shift towards blue at the end of the scale.</strong></p>
+<p><strong><span class="fragment" data-fragment-index="4">This explains why a majority of the rectangles are green, and why we see a sudden shift towards blue at the end of the scale.</span></strong></p>
 </section>
-<section id="perceptual-color-spaces" class="slide level2">
-<h2>Perceptual color spaces</h2>
+<section id="perceptually-uniform-color-spaces" class="slide level2">
+<h2>Perceptually uniform color spaces</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<h3 id="non-uniform">Non-uniform</h3>
+<h3 id="non-uniform"><span class="fragment" data-fragment-index="1">Non-uniform</span></h3>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="../assets/figs/12_grblhue.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+<p><img data-src="../assets/figs/12_grblhue.png" class="fragment quarto-figure quarto-figure-center" style="width:100.0%" data-fragment-index="1"></p>
 </figure>
 </div>
 </div><div class="column" style="width:50%;">
-<h3 id="uniform">Uniform</h3>
+<h3 id="uniform"><span class="fragment" data-fragment-index="2">Uniform</span></h3>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="../assets/figs/16_proper_hue.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+<p><img data-src="../assets/figs/16_proper_hue.png" class="fragment quarto-figure quarto-figure-center" style="width:100.0%" data-fragment-index="2"></p>
 </figure>
 </div>
 </div></div>
-<p>If we want to operate with color as it relates to the human vision, we need a color space built on these human measurements, and that is what <strong>perceptually uniform color spaces are</strong>.</p>
+<p><strong><span class="fragment" data-fragment-index="3">If we want to operate with color as it relates to the human vision, we need a color space built on these human measurements, and that is what perceptually uniform color spaces are.</span></strong></p>
 </section>
 <section id="color-selection-is-important" class="slide level2">
 <h2>Color selection is important</h2>
@@ -285,13 +289,13 @@ Deepak Tanwar
 <div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="../assets/figs/18_bad_space.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+<p><img data-src="../assets/figs/18_bad_space.png" class="fragment quarto-figure quarto-figure-center" style="width:100.0%" data-fragment-index="1"></p>
 </figure>
 </div>
 </div><div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="../assets/figs/19_good_space.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+<p><img data-src="../assets/figs/19_good_space.png" class="fragment quarto-figure quarto-figure-center" style="width:100.0%" data-fragment-index="2"></p>
 </figure>
 </div>
 </div></div>
@@ -302,13 +306,13 @@ Deepak Tanwar
 <div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="../assets/figs/20_bg_light.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+<p><img data-src="../assets/figs/20_bg_light.png" class="fragment quarto-figure quarto-figure-center" style="width:100.0%" data-fragment-index="1"></p>
 </figure>
 </div>
 </div><div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="../assets/figs/21_bg_dark.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+<p><img data-src="../assets/figs/21_bg_dark.png" class="fragment quarto-figure quarto-figure-center" style="width:100.0%" data-fragment-index="2"></p>
 </figure>
 </div>
 </div></div>
@@ -332,13 +336,20 @@ Deepak Tanwar
 <h2>Saving Plots for Publication</h2>
 <ul>
 <li><strong><code>ggsave()</code></strong>: The easiest way to save a plot.</li>
-<li><strong>Vector vs.&nbsp;Raster</strong>:
-<ul>
-<li><strong>Vector (PDF, SVG)</strong>: Best for publications. Scalable without losing quality.</li>
-<li><strong>Raster (PNG, TIFF)</strong>: Pixel-based. Good for web, but can lose quality when scaled.</li>
-</ul></li>
-<li><strong>Resolution (DPI)</strong>: Dots Per Inch. Journals often require 300 DPI or higher for raster images.</li>
 </ul>
+<ul>
+<li class="fragment"><strong>Vector vs.&nbsp;Raster</strong>:
+<ul>
+<li class="fragment"><strong>Vector (PDF, SVG)</strong>: Best for publications. Scalable without losing quality.</li>
+<li class="fragment"><strong>Raster (PNG, TIFF)</strong>: Pixel-based. Good for web, but can lose quality when scaled.</li>
+</ul></li>
+</ul>
+<ul>
+<li class="fragment"><strong>Resolution (DPI)</strong>: Dots Per Inch. Journals often require 300 DPI or higher for raster images.</li>
+</ul>
+</section>
+<section id="saving-plots-for-publication-1" class="slide level2">
+<h2>Saving Plots for Publication</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>my_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(<span class="at">x =</span> wt, <span class="at">y =</span> mpg)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span>
 <span id="cb1-2"><a></a></span>
@@ -349,9 +360,9 @@ Deepak Tanwar
 <section id="customizing-stylistic-elements" class="slide level2">
 <h2>Customizing Stylistic Elements</h2>
 <ul>
-<li><strong><code>theme()</code></strong>: The powerhouse for customizing the non-data elements of your plot.</li>
-<li><strong>Fonts</strong>: Change font family, size, and face (bold, italic).</li>
-<li><strong>Line Weights</strong>: Adjust the thickness of axis lines, grid lines, and borders.</li>
+<li class="fragment"><strong><code>theme()</code></strong>: The powerhouse for customizing the non-data elements of your plot.</li>
+<li class="fragment"><strong>Fonts</strong>: Change font family, size, and face (bold, italic).</li>
+<li class="fragment"><strong>Line Weights</strong>: Adjust the thickness of axis lines, grid lines, and borders.</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>my_plot <span class="sc">+</span> </span>

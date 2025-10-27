@@ -17,9 +17,22 @@ editor_options:
 
 ## Recap of Block 2
 
+::: {.incremental}
+
 -   **Grammar of Graphics (`gg`)**: We were introduced to the Grammar of Graphics, a systematic way to describe and build plots.
+
+:::
+
+::: {.incremental}
+
 -   **`ggplot2` Components**: We learned that `ggplot2` is based on the idea that you can build any plot from the same components: a **data** set, a **coordinate system**, and **geoms** (visual marks that represent data points).
+
+:::
+
+::: {.incremental}
+
 -   **Layers**: We build plots by adding **layers**.
+::: 
 
 ## Faceting the plots
 
@@ -47,35 +60,35 @@ editor_options:
 
 ::::: columns
 ::: {.column width="50%"}
-![](../assets/figs/15_rainbow_s.png){width="100%" fig-align="center"}
+![](../assets/figs/15_rainbow_s.png){width="100%" fig-align="center" .fragment data-fragment-index="1"}
 
-![](../assets/figs/12_grblhue.png){width="100%" fig-align="center"}
+![](../assets/figs/12_grblhue.png){width="100%" fig-align="center" .fragment data-fragment-index="2"}
 :::
 
 ::: {.column width="50%"}
-![](../assets/figs/13_chroma.jpg){width="100%" fig-align="center"}
+![](../assets/figs/13_chroma.jpg){width="100%" fig-align="center" .fragment data-fragment-index="3"}
 :::
 :::::
 
-**This explains why a majority of the rectangles in are green, and why we see a sudden shift towards blue at the end of the scale.**
+**<span class="fragment" data-fragment-index="4">This explains why a majority of the rectangles are green, and why we see a sudden shift towards blue at the end of the scale.</span>**
 
-## Perceptual color spaces
+## Perceptually uniform color spaces
 
 ::::: columns
 ::: {.column width="50%"}
-### Non-uniform
+### <span class="fragment" data-fragment-index="1">Non-uniform</span>
 
-![](../assets/figs/12_grblhue.png){width="100%" fig-align="center"}
+![](../assets/figs/12_grblhue.png){width="100%" fig-align="center" .fragment data-fragment-index="1"}
 :::
 
 ::: {.column width="50%"}
-### Uniform
+### <span class="fragment" data-fragment-index="2">Uniform</span>
 
-![](../assets/figs/16_proper_hue.png){width="100%" fig-align="center"}
+![](../assets/figs/16_proper_hue.png){width="100%" fig-align="center" .fragment data-fragment-index="2"}
 :::
 :::::
 
-If we want to operate with color as it relates to the human vision, we need a color space built on these human measurements, and that is what **perceptually uniform color spaces are**.
+**<span class="fragment" data-fragment-index="3">If we want to operate with color as it relates to the human vision, we need a color space built on these human measurements, and that is what perceptually uniform color spaces are.</span>**
 
 ## Color selection is important
 
@@ -85,11 +98,11 @@ If we want to operate with color as it relates to the human vision, we need a co
 
 ::::: columns
 ::: {.column width="50%"}
-![](../assets/figs/18_bad_space.png){width="100%" fig-align="center"}
+![](../assets/figs/18_bad_space.png){width="100%" fig-align="center" .fragment data-fragment-index="1"}
 :::
 
 ::: {.column width="50%"}
-![](../assets/figs/19_good_space.png){width="100%" fig-align="center"}
+![](../assets/figs/19_good_space.png){width="100%" fig-align="center" .fragment data-fragment-index="2"}
 :::
 :::::
 
@@ -97,11 +110,11 @@ If we want to operate with color as it relates to the human vision, we need a co
 
 ::::: columns
 ::: {.column width="50%"}
-![](../assets/figs/20_bg_light.png){width="100%" fig-align="center"}
+![](../assets/figs/20_bg_light.png){width="100%" fig-align="center" .fragment data-fragment-index="1"}
 :::
 
 ::: {.column width="50%"}
-![](../assets/figs/21_bg_dark.png){width="100%" fig-align="center"}
+![](../assets/figs/21_bg_dark.png){width="100%" fig-align="center" .fragment data-fragment-index="2"}
 :::
 :::::
 
@@ -120,12 +133,19 @@ If we want to operate with color as it relates to the human vision, we need a co
 5.  Discuss about the color class type and combination for all the figures we have made in Exercises
 
 ## Saving Plots for Publication
-
 -   **`ggsave()`**: The easiest way to save a plot.
+
+::: {.incremental}
 -   **Vector vs. Raster**:
     -   **Vector (PDF, SVG)**: Best for publications. Scalable without losing quality.
     -   **Raster (PNG, TIFF)**: Pixel-based. Good for web, but can lose quality when scaled.
+:::
+
+::: {.incremental}
 -   **Resolution (DPI)**: Dots Per Inch. Journals often require 300 DPI or higher for raster images.
+:::
+
+## Saving Plots for Publication
 
 ```{r, eval=FALSE, echo = T}
 my_plot <- ggplot(mtcars, aes(x = wt, y = mpg)) + geom_point()
@@ -136,9 +156,11 @@ ggsave("my_plot.png", plot = my_plot, width = 6, height = 4, dpi = 300)
 
 ## Customizing Stylistic Elements
 
+::: {.incremental}
 -   **`theme()`**: The powerhouse for customizing the non-data elements of your plot.
 -   **Fonts**: Change font family, size, and face (bold, italic).
 -   **Line Weights**: Adjust the thickness of axis lines, grid lines, and borders.
+:::
 
 ```{r, eval=FALSE, echo = T}
 my_plot + 

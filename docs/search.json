@@ -4,7 +4,7 @@
     "href": "slides/slide_block_3.html#recap-of-block-2",
     "title": "Block 3",
     "section": "Recap of Block 2",
-    "text": "Recap of Block 2\n\nGrammar of Graphics (gg): We were introduced to the Grammar of Graphics, a systematic way to describe and build plots.\nggplot2 Components: We learned that ggplot2 is based on the idea that you can build any plot from the same components: a data set, a coordinate system, and geoms (visual marks that represent data points).\nLayers: We build plots by adding layers."
+    "text": "Recap of Block 2\n\nGrammar of Graphics (gg): We were introduced to the Grammar of Graphics, a systematic way to describe and build plots.\n\n\nggplot2 Components: We learned that ggplot2 is based on the idea that you can build any plot from the same components: a data set, a coordinate system, and geoms (visual marks that represent data points).\n\n\nLayers: We build plots by adding layers."
   },
   {
     "objectID": "slides/slide_block_3.html#faceting-the-plots",
@@ -39,14 +39,14 @@
     "href": "slides/slide_block_3.html#perceptually-non-uniform-color-spaces",
     "title": "Block 3",
     "section": "Perceptually non-uniform color spaces",
-    "text": "Perceptually non-uniform color spaces\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThis explains why a majority of the rectangles in are green, and why we see a sudden shift towards blue at the end of the scale."
+    "text": "Perceptually non-uniform color spaces\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThis explains why a majority of the rectangles are green, and why we see a sudden shift towards blue at the end of the scale."
   },
   {
     "objectID": "slides/slide_block_3.html#perceptual-color-spaces",
     "href": "slides/slide_block_3.html#perceptual-color-spaces",
     "title": "Block 3",
     "section": "Perceptual color spaces",
-    "text": "Perceptual color spaces\n\n\nNon-uniform\n\n\n\n\n\n\nUniform\n\n\n\n\n\n\nIf we want to operate with color as it relates to the human vision, we need a color space built on these human measurements, and that is what perceptually uniform color spaces are."
+    "text": "Perceptual color spaces"
   },
   {
     "objectID": "slides/slide_block_3.html#color-selection-is-important",
@@ -81,7 +81,7 @@
     "href": "slides/slide_block_3.html#saving-plots-for-publication",
     "title": "Block 3",
     "section": "Saving Plots for Publication",
-    "text": "Saving Plots for Publication\n\nggsave(): The easiest way to save a plot.\nVector vs. Raster:\n\nVector (PDF, SVG): Best for publications. Scalable without losing quality.\nRaster (PNG, TIFF): Pixel-based. Good for web, but can lose quality when scaled.\n\nResolution (DPI): Dots Per Inch. Journals often require 300 DPI or higher for raster images.\n\n\nmy_plot &lt;- ggplot(mtcars, aes(x = wt, y = mpg)) + geom_point()\n\nggsave(\"my_plot.pdf\", plot = my_plot, width = 6, height = 4)\nggsave(\"my_plot.png\", plot = my_plot, width = 6, height = 4, dpi = 300)"
+    "text": "Saving Plots for Publication\n\nggsave(): The easiest way to save a plot.\n\n\nVector vs. Raster:\n\nVector (PDF, SVG): Best for publications. Scalable without losing quality.\nRaster (PNG, TIFF): Pixel-based. Good for web, but can lose quality when scaled.\n\n\n\nResolution (DPI): Dots Per Inch. Journals often require 300 DPI or higher for raster images."
   },
   {
     "objectID": "slides/slide_block_3.html#customizing-stylistic-elements",
@@ -502,5 +502,26 @@
     "title": "Block 2",
     "section": "Introducing ggplot2",
     "text": "Introducing ggplot2\n\nGrammar of Graphics: ggplot2 is based on the idea that you can build any plot from the same components: a data set, a coordinate system, and geoms (visual marks that represent data points).\nLayers: You build plots by adding layers. For example, you can add a layer of points, then a layer of lines, then a layer of labels."
+  },
+  {
+    "objectID": "slides/slide_block_3.html#color-distribution-explanation",
+    "href": "slides/slide_block_3.html#color-distribution-explanation",
+    "title": "Block 3",
+    "section": "Color distribution explanation",
+    "text": "Color distribution explanation\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThis explains why a majority of the rectangles are green, and why we see a sudden shift towards blue at the end of the scale."
+  },
+  {
+    "objectID": "slides/slide_block_3.html#perceptually-uniform-color-spaces",
+    "href": "slides/slide_block_3.html#perceptually-uniform-color-spaces",
+    "title": "Block 3",
+    "section": "Perceptually uniform color spaces",
+    "text": "Perceptually uniform color spaces\n\n\nNon-uniform\n\n\n\n\n\n\nUniform\n\n\n\n\n\n\nIf we want to operate with color as it relates to the human vision, we need a color space built on these human measurements, and that is what perceptually uniform color spaces are."
+  },
+  {
+    "objectID": "slides/slide_block_3.html#saving-plots-for-publication-1",
+    "href": "slides/slide_block_3.html#saving-plots-for-publication-1",
+    "title": "Block 3",
+    "section": "Saving Plots for Publication",
+    "text": "Saving Plots for Publication\n\nmy_plot &lt;- ggplot(mtcars, aes(x = wt, y = mpg)) + geom_point()\n\nggsave(\"my_plot.pdf\", plot = my_plot, width = 6, height = 4)\nggsave(\"my_plot.png\", plot = my_plot, width = 6, height = 4, dpi = 300)"
   }
 ]
