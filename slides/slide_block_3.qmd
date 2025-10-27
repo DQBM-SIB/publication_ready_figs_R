@@ -70,7 +70,9 @@ editor_options:
 :::
 :::::
 
-**<span class="fragment" data-fragment-index="4">This explains why a majority of the rectangles are green, and why we see a sudden shift towards blue at the end of the scale.</span>**
+## Perceptually non-uniform color spaces
+
+This explains why a majority of the rectangles are green, and why we see a sudden shift towards blue at the end of the scale.
 
 ## Perceptually uniform color spaces
 
@@ -172,16 +174,38 @@ my_plot +
   )
 ```
 
-## Interactive Plots with ggplotly
+## Interactive Plots with `ggplotly`
 
 - **`ggplotly()`**: A function from the `plotly` package that transforms a `ggplot` object into an interactive plot.
 - Great for exploring data, as you can hover over points to see values, zoom in and out, and pan around.
 
-```{r, eval=FALSE, echo = T}
-# install.packages("plotly")
+## Interactive Plots with `ggplotly`
+
+```{r}
+#| fig.height: 6
+
+library(ggplot2)
 library(plotly)
-
-my_plot <- ggplot(mtcars, aes(x = wt, y = mpg)) + geom_point()
-
-ggplotly(my_plot)
+cars <- mtcars
+cars$gear <- as.factor(cars$gear) # factor looks nicer than character
+my_plot <- ggplot(cars, aes(x = wt, y = mpg, size = hp, color = gear, text = paste("Car:", rownames(cars), "\nHorsepower:", hp, "\nGear:", gear))) +
+  geom_point(alpha = 0.7) + # semi-transparent points
+  scale_color_brewer(palette = "Dark2") + # more distinct color palette
+  scale_size_continuous(range = c(5, 15)) + # larger range for better horsepower differentiation
+  labs(
+    title = "Fuel Efficiency vs Weight of Cars",
+    subtitle = "Size of points represents horsepower, color indicates gear",
+    x = "Weight (1000 lbs)",
+    y = "Miles per Gallon",
+    color = "Gear",
+    size = "Horsepower"
+  ) +
+  theme_minimal(base_size = 14) + # clean theme
+  theme(
+    plot.title = element_text(face = "bold"),
+    plot.subtitle = element_text(face = "italic"),
+    legend.position = "right"
+  )
+# Make interactive with plotly
+ggplotly(my_plot, tooltip = c("text", "x", "y", "size", "color"))
 ```

@@ -39,7 +39,14 @@
     "href": "slides/slide_block_3.html#perceptually-non-uniform-color-spaces",
     "title": "Block 3",
     "section": "Perceptually non-uniform color spaces",
-    "text": "Perceptually non-uniform color spaces\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThis explains why a majority of the rectangles are green, and why we see a sudden shift towards blue at the end of the scale."
+    "text": "Perceptually non-uniform color spaces"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#perceptually-non-uniform-color-spaces-1",
+    "href": "slides/slide_block_3.html#perceptually-non-uniform-color-spaces-1",
+    "title": "Block 3",
+    "section": "Perceptually non-uniform color spaces",
+    "text": "Perceptually non-uniform color spaces\nThis explains why a majority of the rectangles are green, and why we see a sudden shift towards blue at the end of the scale."
   },
   {
     "objectID": "slides/slide_block_3.html#perceptually-uniform-color-spaces",
@@ -102,7 +109,14 @@
     "href": "slides/slide_block_3.html#interactive-plots-with-ggplotly",
     "title": "Block 3",
     "section": "Interactive Plots with ggplotly",
-    "text": "Interactive Plots with ggplotly\n\nggplotly(): A function from the plotly package that transforms a ggplot object into an interactive plot.\nGreat for exploring data, as you can hover over points to see values, zoom in and out, and pan around.\n\n\n# install.packages(\"plotly\")\nlibrary(plotly)\n\nmy_plot &lt;- ggplot(mtcars, aes(x = wt, y = mpg)) + geom_point()\n\nggplotly(my_plot)"
+    "text": "Interactive Plots with ggplotly\n\nggplotly(): A function from the plotly package that transforms a ggplot object into an interactive plot.\nGreat for exploring data, as you can hover over points to see values, zoom in and out, and pan around."
+  },
+  {
+    "objectID": "slides/slide_block_3.html#interactive-plots-with-ggplotly-1",
+    "href": "slides/slide_block_3.html#interactive-plots-with-ggplotly-1",
+    "title": "Block 3",
+    "section": "Interactive Plots with ggplotly",
+    "text": "Interactive Plots with ggplotly"
   },
   {
     "objectID": "slides/slide_block_1.html#introduction",
