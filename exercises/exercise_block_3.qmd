@@ -12,12 +12,15 @@ In the last block, we learned the basics of `ggplot2`. In this block, we will ex
 *   **Faceting**: Creating subplots to compare different subsets of your data.
 *   **Themes**: Customizing the appearance of your plots.
 *   **Colors**: Using colors effectively and exploring different color palettes.
+*   **Interactivity**: Making your plots interactive with `ggplotly`.
 
 ## Installing packages
 
 ```{r, eval=FALSE}
 renv::install("RColorBrewer")
 renv::install("viridis")
+renv::install("dplyr")
+renv::install("plotly")
 ```
 
 ## Packages
@@ -26,6 +29,8 @@ library(ggplot2)
 library(patchwork)
 library(RColorBrewer)
 library(viridis)
+library(dplyr)
+library(plotly)
 ```
 
 ## Exploratory data analysis
@@ -42,7 +47,7 @@ In Block 2, we created two separate volcano plots for the 3h and 24h timepoints.
 
 ### Exercise 1
 
-Create a single volcano plot faceted by timepoint.
+Create a single volcano plot faceted by timepoint. Store the plot as an object named `p1`.
 
 ::: {.callout-tip collapse="true"}
 ```{r}
@@ -54,7 +59,7 @@ diff_df <- data.frame(
 )
 diff_df$significant <- diff_df$pval < 0.05 & abs(diff_df$lfc) > 1
 
-ggplot(diff_df, aes(x = lfc, y = -log10(pval), color = significant)) +
+p1 <- ggplot(diff_df, aes(x = lfc, y = -log10(pval), color = significant)) +
   geom_point(size = 2, alpha = 0.7) +
   scale_color_manual(values = c("gray70", "tomato")) +
   geom_vline(xintercept = c(-1, 1), linetype = "dashed", color = "red") +
@@ -65,6 +70,8 @@ ggplot(diff_df, aes(x = lfc, y = -log10(pval), color = significant)) +
     y = "-log10(p-value)"
   ) +
   facet_wrap(~timepoint)
+
+p1
 ```
 :::
 
@@ -74,22 +81,12 @@ ggplot(diff_df, aes(x = lfc, y = -log10(pval), color = significant)) +
 
 ### Exercise 2
 
-**A.** Apply the `theme_minimal()` to the faceted volcano plot.
+**A.** Apply the `theme_minimal()` to the faceted volcano plot. Store the plot as `p2a`.
 
 ::: {.callout-tip collapse="true"}
 ```{r}
-ggplot(diff_df, aes(x = lfc, y = -log10(pval), color = significant)) +
-  geom_point(size = 2, alpha = 0.7) +
-  scale_color_manual(values = c("gray70", "tomato")) +
-  geom_vline(xintercept = c(-1, 1), linetype = "dashed", color = "red") +
-  geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "blue") +
-  labs(
-    title = "Volcano Plot — Sucrose Treatment",
-    x = "log2 Fold Change",
-    y = "-log10(p-value)"
-  ) +
-  facet_wrap(~timepoint) +
-  theme_minimal()
+p2a <- p1 + theme_minimal()
+p2a
 ```
 :::
 
@@ -97,26 +94,17 @@ ggplot(diff_df, aes(x = lfc, y = -log10(pval), color = significant)) +
 *   Increase the title font size to 16.
 *   Remove the panel grid lines.
 *   Change the panel background to light gray.
+Store the plot as `p2b`.
 
 ::: {.callout-tip collapse="true"}
 ```{r}
-ggplot(diff_df, aes(x = lfc, y = -log10(pval), color = significant)) +
-  geom_point(size = 2, alpha = 0.7) +
-  scale_color_manual(values = c("gray70", "tomato")) +
-  geom_vline(xintercept = c(-1, 1), linetype = "dashed", color = "red") +
-  geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "blue") +
-  labs(
-    title = "Volcano Plot — Sucrose Treatment",
-    x = "log2 Fold Change",
-    y = "-log10(p-value)"
-  ) +
-  facet_wrap(~timepoint) +
-  theme_minimal() +
+p2b <- p2a +
   theme(
     plot.title = element_text(size = 16),
     panel.grid = element_blank(),
     panel.background = element_rect(fill = "lightgray", color = NA)
   )
+p2b
 ```
 :::
 
@@ -132,11 +120,11 @@ Let's go back to the boxplot of expression data.
 data_long <- merge(data$anno, reshape2::melt(data$counts))
 ```
 
-**A.** Use a color palette from `RColorBrewer`.
+**A.** Use a color palette from `RColorBrewer`. Store the plot as `p3a`.
 
 ::: {.callout-tip collapse="true"}
 ```{r}
-ggplot(data_long, aes(x = Sample_ID, y = value, fill = compound)) +
+p3a <- ggplot(data_long, aes(x = Sample_ID, y = value, fill = compound)) +
   geom_boxplot(outlier.shape = NA) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
   labs(
@@ -145,14 +133,15 @@ ggplot(data_long, aes(x = Sample_ID, y = value, fill = compound)) +
     y = "Expression"
   ) +
   scale_fill_brewer(palette = "Set2")
+p3a
 ```
 :::
 
-**B.** Use the `viridis` color palette.
+**B.** Use the `viridis` color palette. Store the plot as `p3b`.
 
 ::: {.callout-tip collapse="true"}
 ```{r}
-ggplot(data_long, aes(x = Sample_ID, y = value, fill = compound)) +
+p3b <- ggplot(data_long, aes(x = Sample_ID, y = value, fill = compound)) +
   geom_boxplot(outlier.shape = NA) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
   labs(
@@ -161,14 +150,15 @@ ggplot(data_long, aes(x = Sample_ID, y = value, fill = compound)) +
     y = "Expression"
   ) +
   scale_fill_viridis_d()
+p3b
 ```
 :::
 
-**C.** Specify colors manually.
+**C.** Specify colors manually. Store the plot as `p3c`.
 
 ::: {.callout-tip collapse="true"}
 ```{r}
-ggplot(data_long, aes(x = Sample_ID, y = value, fill = compound)) +
+p3c <- ggplot(data_long, aes(x = Sample_ID, y = value, fill = compound)) +
   geom_boxplot(outlier.shape = NA) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
   labs(
@@ -177,6 +167,7 @@ ggplot(data_long, aes(x = Sample_ID, y = value, fill = compound)) +
     y = "Expression"
   ) +
   scale_fill_manual(values = c("none" = "#66c2a5", "sucrose" = "#fc8d62"))
+p3c
 ```
 :::
 
@@ -186,31 +177,13 @@ When preparing figures for publication, journals often have strict requirements 
 
 ### Exercise 4
 
-Let's save the faceted volcano plot from Exercise 2B.
+Let's save the faceted volcano plot from Exercise 2B (`p2b`).
 
 **A.** Save the plot as a PNG file with a width of 8 inches, a height of 4 inches, and a resolution of 300 dpi.
 
 ::: {.callout-tip collapse="true"}
 ```{r}
-volcano_plot <- ggplot(diff_df, aes(x = lfc, y = -log10(pval), color = significant)) +
-  geom_point(size = 2, alpha = 0.7) +
-  scale_color_manual(values = c("gray70", "tomato")) +
-  geom_vline(xintercept = c(-1, 1), linetype = "dashed", color = "red") +
-  geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "blue") +
-  labs(
-    title = "Volcano Plot — Sucrose Treatment",
-    x = "log2 Fold Change",
-    y = "-log10(p-value)"
-  ) +
-  facet_wrap(~timepoint) +
-  theme_minimal() +
-  theme(
-    plot.title = element_text(size = 16),
-    panel.grid = element_blank(),
-    panel.background = element_rect(fill = "lightgray", color = NA)
-  )
-
-ggsave("volcano_plot.png", plot = volcano_plot, width = 8, height = 4, dpi = 300)
+ggsave("volcano_plot.png", plot = p2b, width = 8, height = 4, dpi = 300)
 ```
 :::
 
@@ -218,7 +191,7 @@ ggsave("volcano_plot.png", plot = volcano_plot, width = 8, height = 4, dpi = 300
 
 ::: {.callout-tip collapse="true"}
 ```{r}
-ggsave("volcano_plot.pdf", plot = volcano_plot, width = 8, height = 4)
+ggsave("volcano_plot.pdf", plot = p2b, width = 8, height = 4)
 ```
 :::
 
@@ -226,7 +199,7 @@ ggsave("volcano_plot.pdf", plot = volcano_plot, width = 8, height = 4)
 
 ::: {.callout-tip collapse="true"}
 ```{r}
-ggsave("volcano_plot.tiff", plot = volcano_plot, width = 8, height = 4, dpi = 300)
+ggsave("volcano_plot.tiff", plot = p2b, width = 8, height = 4, dpi = 300)
 ```
 :::
 
@@ -238,28 +211,155 @@ Journals often have specific guidelines for fonts and line weights.
 
 Let's modify the volcano plot to meet some hypothetical publication guidelines.
 
-**A.** Change the font family to "Arial".
+**A.** Change the font family to "Arial". Store the plot as `p5a`.
 
 ::: {.callout-tip collapse="true"}
 ```{r}
-volcano_plot + 
+p5a <- p2b + 
   theme(text = element_text(family = "Arial"))
+p5a
 ```
 :::
 
-**B.** Adjust the line weights. Make the axis lines thicker (size = 1) and the facet borders thinner (size = 0.5).
+**B.** Adjust the line weights. Make the axis lines thicker (size = 1) and the facet borders thinner (size = 0.5). Store the plot as `p5b`.
 
 ::: {.callout-tip collapse="true"}
 ```{r}
-volcano_plot + 
+p5b <- p5a + 
   theme(
-    text = element_text(family = "Arial"),
     axis.line = element_line(linewidth = 1),
     strip.background = element_rect(linewidth = 0.5)
   )
+p5b
 ```
 :::
 
+
+## Additional Plot Types
+
+### Exercise 6: Scatter plot with regression line
+
+Let's explore the relationship between the expression of two samples.
+
+**A.** Create a scatter plot of the expression of the first two samples in the `data$counts` dataframe. Store the plot as `p6a`.
+
+::: {.callout-tip collapse="true"}
+```{r}
+# Create a dataframe with the first two samples
+sample_df <- data.frame(
+  sample1 = data$counts[, 2],
+  sample2 = data$counts[, 3]
+)
+
+p6a <- ggplot(sample_df, aes(x = sample1, y = sample2)) +
+  geom_point() +
+  labs(
+    title = "Sample Expression Correlation",
+    x = "Sample 1 Expression",
+    y = "Sample 2 Expression"
+  )
+p6a
+```
+:::
+
+**B.** Add a linear regression line to the scatter plot. Store the plot as `p6b`.
+
+::: {.callout-tip collapse="true"}
+```{r}
+p6b <- p6a +
+  geom_smooth(method = "lm")
+p6b
+```
+:::
+
+### Exercise 7: Bar plot with error bars
+
+Let's visualize the average expression of each compound.
+
+**A.** Calculate the mean and standard deviation of expression for each compound.
+
+::: {.callout-tip collapse="true"}
+```{r}
+summary_df <- data_long %>%
+  group_by(compound) %>%
+  summarise(
+    mean_expr = mean(value),
+    sd_expr = sd(value)
+  )
+
+print(summary_df)
+```
+:::
+
+**B.** Create a bar plot of the mean expression with error bars representing the standard deviation. Store the plot as `p7`.
+
+::: {.callout-tip collapse="true"}
+```{r}
+p7 <- ggplot(summary_df, aes(x = compound, y = mean_expr, fill = compound)) +
+  geom_bar(stat = "identity") +
+  geom_errorbar(
+    aes(ymin = mean_expr - sd_expr, ymax = mean_expr + sd_expr),
+    width = 0.2
+  ) +
+  labs(
+    title = "Average Gene Expression by Compound",
+    x = "Compound",
+    y = "Mean Expression"
+  ) +
+  theme_minimal()
+p7
+```
+:::
+
+## Interactive plots with ggplotly
+
+`ggplotly` is a function from the `plotly` package that converts a `ggplot` object into an interactive `plotly` object.
+
+### Example
+
+Let's take the volcano plot from Exercise 1 (`p1`) and make it interactive.
+
+```{r}
+ggplotly(p1)
+```
+
+Now, let's try it on the scatter plot from Exercise 6b (`p6b`).
+
+```{r}
+ggplotly(p6b)
+```
+
+### Exercise 8: Your turn!
+
+**A.** Create a scatter plot of `lfc` vs `-log10(pval)` from the `diff_df` dataframe, colored by `timepoint`. Store it as an object called `p8`.
+
+::: {.callout-tip collapse="true"}
+```{r}
+p8 <- ggplot(diff_df, aes(x = lfc, y = -log10(pval), color = timepoint)) +
+  geom_point(alpha = 0.7) +
+  labs(
+    title = "Volcano Plot by Timepoint",
+    x = "log2 Fold Change",
+    y = "-log10(p-value)"
+  )
+p8
+```
+:::
+
+**B.** Now, use `ggplotly` to make the plot interactive.
+
+::: {.callout-tip collapse="true"}
+```{r}
+ggplotly(p8)
+```
+:::
+
+
+**C.** What if one just want to see 24h dots?.
+
+::: {.callout-tip collapse="true"}
+One can simply click on 3h dot in the legend, and they will disappear.
+:::
 
 ## Session information
 ::: {.callout-tip collapse="true"}

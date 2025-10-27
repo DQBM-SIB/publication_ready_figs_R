@@ -171,3 +171,17 @@ my_plot +
     panel.grid.major = element_line(linewidth = 0.2)
   )
 ```
+
+## Interactive Plots with ggplotly
+
+- **`ggplotly()`**: A function from the `plotly` package that transforms a `ggplot` object into an interactive plot.
+- Great for exploring data, as you can hover over points to see values, zoom in and out, and pan around.
+
+```{r, eval=FALSE, echo = T}
+# install.packages("plotly")
+library(plotly)
+
+my_plot <- ggplot(mtcars, aes(x = wt, y = mpg)) + geom_point()
+
+ggplotly(my_plot)
+```

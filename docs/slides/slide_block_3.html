@@ -373,6 +373,21 @@ Deepak Tanwar
 <span id="cb2-6"><a></a>    <span class="at">panel.grid.major =</span> <span class="fu">element_line</span>(<span class="at">linewidth =</span> <span class="fl">0.2</span>)</span>
 <span id="cb2-7"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="interactive-plots-with-ggplotly" class="slide level2">
+<h2>Interactive Plots with ggplotly</h2>
+<ul>
+<li><strong><code>ggplotly()</code></strong>: A function from the <code>plotly</code> package that transforms a <code>ggplot</code> object into an interactive plot.</li>
+<li>Great for exploring data, as you can hover over points to see values, zoom in and out, and pan around.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="co"># install.packages("plotly")</span></span>
+<span id="cb3-2"><a></a><span class="fu">library</span>(plotly)</span>
+<span id="cb3-3"><a></a></span>
+<span id="cb3-4"><a></a>my_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(<span class="at">x =</span> wt, <span class="at">y =</span> mpg)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span>
+<span id="cb3-5"><a></a></span>
+<span id="cb3-6"><a></a><span class="fu">ggplotly</span>(my_plot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
 </section></section>
