@@ -340,7 +340,7 @@
     "href": "exercises/exercise_block_3.html#session-information",
     "title": "Exercise - Block 3",
     "section": "Session information",
-    "text": "Session information\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nsessionInfo()\n\nR version 4.5.1 (2025-06-13)\nPlatform: aarch64-apple-darwin20\nRunning under: macOS Tahoe 26.0.1\n\nMatrix products: default\nBLAS:   /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib \nLAPACK: /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1\n\nlocale:\n[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8\n\ntime zone: Europe/Zurich\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices datasets  utils     methods   base     \n\nother attached packages:\n[1] plotly_4.11.0      dplyr_1.1.4        viridis_0.6.5      viridisLite_0.4.2 \n[5] RColorBrewer_1.1-3 patchwork_1.3.2    ggplot2_4.0.0     \n\nloaded via a namespace (and not attached):\n [1] utf8_1.2.6          generics_0.1.4      tidyr_1.3.1        \n [4] renv_1.1.5          stringi_1.8.7       lattice_0.22-7     \n [7] digest_0.6.37       magrittr_2.0.4      evaluate_1.0.5     \n[10] grid_4.5.1          fastmap_1.2.0       plyr_1.8.9         \n[13] jsonlite_2.0.0      Matrix_1.7-3        gridExtra_2.3      \n[16] BiocManager_1.30.26 httr_1.4.7          mgcv_1.9-3         \n[19] purrr_1.1.0         crosstalk_1.2.2     scales_1.4.0       \n[22] lazyeval_0.2.2      textshaping_1.0.4   cli_3.6.5          \n[25] rlang_1.1.6         splines_4.5.1       withr_3.0.2        \n[28] yaml_2.3.10         tools_4.5.1         reshape2_1.4.4     \n[31] vctrs_0.6.5         R6_2.6.1            lifecycle_1.0.4    \n[34] stringr_1.5.2       htmlwidgets_1.6.4   ragg_1.5.0         \n[37] pkgconfig_2.0.3     pillar_1.11.1       gtable_0.3.6       \n[40] data.table_1.17.8   glue_1.8.0          Rcpp_1.1.0         \n[43] systemfonts_1.3.1   xfun_0.53           tibble_3.3.0       \n[46] tidyselect_1.2.1    knitr_1.50          farver_2.1.2       \n[49] htmltools_0.5.8.1   nlme_3.1-168        rmarkdown_2.30     \n[52] labeling_0.4.3      compiler_4.5.1      S7_0.2.0"
+    "text": "Session information\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nsessionInfo()\n\nR version 4.5.1 (2025-06-13)\nPlatform: aarch64-apple-darwin20\nRunning under: macOS Tahoe 26.0.1\n\nMatrix products: default\nBLAS:   /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib \nLAPACK: /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1\n\nlocale:\n[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8\n\ntime zone: Europe/Zurich\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices datasets  utils     methods   base     \n\nother attached packages:\n[1] plotly_4.11.0      dplyr_1.1.4        viridis_0.6.5      viridisLite_0.4.2 \n[5] RColorBrewer_1.1-3 patchwork_1.3.2    ggplot2_4.0.0     \n\nloaded via a namespace (and not attached):\n [1] Matrix_1.7-3        gtable_0.3.6        jsonlite_2.0.0     \n [4] compiler_4.5.1      BiocManager_1.30.26 renv_1.1.5         \n [7] Rcpp_1.1.0          tidyselect_1.2.1    stringr_1.5.2      \n[10] gridExtra_2.3       tidyr_1.3.1         splines_4.5.1      \n[13] scales_1.4.0        yaml_2.3.10         fastmap_1.2.0      \n[16] lattice_0.22-7      plyr_1.8.9          R6_2.6.1           \n[19] labeling_0.4.3      generics_0.1.4      knitr_1.50         \n[22] htmlwidgets_1.6.4   tibble_3.3.0        pillar_1.11.1      \n[25] rlang_1.1.6         utf8_1.2.6          stringi_1.8.7      \n[28] xfun_0.53           S7_0.2.0            lazyeval_0.2.2     \n[31] cli_3.6.5           mgcv_1.9-3          withr_3.0.2        \n[34] magrittr_2.0.4      crosstalk_1.2.2     digest_0.6.37      \n[37] grid_4.5.1          nlme_3.1-168        lifecycle_1.0.4    \n[40] vctrs_0.6.5         evaluate_1.0.5      glue_1.8.0         \n[43] data.table_1.17.8   farver_2.1.2        reshape2_1.4.4     \n[46] purrr_1.1.0         httr_1.4.7          rmarkdown_2.30     \n[49] tools_4.5.1         pkgconfig_2.0.3     htmltools_0.5.8.1"
   },
   {
     "objectID": "exercises/exercise_block_1.html",
@@ -418,6 +418,90 @@
     "title": "Exercise - Block 2",
     "section": "Session information",
     "text": "Session information\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nsessionInfo()\n\nR version 4.5.1 (2025-06-13)\nPlatform: aarch64-apple-darwin20\nRunning under: macOS Tahoe 26.0.1\n\nMatrix products: default\nBLAS:   /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib \nLAPACK: /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1\n\nlocale:\n[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8\n\ntime zone: Europe/Zurich\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices datasets  utils     methods   base     \n\nother attached packages:\n[1] PupillometryR_0.0.5 rlang_1.1.6         dplyr_1.1.4        \n[4] patchwork_1.3.2     reshape2_1.4.4      ggplot2_4.0.0      \n\nloaded via a namespace (and not attached):\n [1] gtable_0.3.6        jsonlite_2.0.0      compiler_4.5.1     \n [4] BiocManager_1.30.26 renv_1.1.5          tidyselect_1.2.1   \n [7] Rcpp_1.1.0          stringr_1.5.2       tidyr_1.3.1        \n[10] scales_1.4.0        yaml_2.3.10         fastmap_1.2.0      \n[13] R6_2.6.1            plyr_1.8.9          labeling_0.4.3     \n[16] generics_0.1.4      knitr_1.50          htmlwidgets_1.6.4  \n[19] tibble_3.3.0        pillar_1.11.1       RColorBrewer_1.1-3 \n[22] stringi_1.8.7       xfun_0.53           S7_0.2.0           \n[25] cli_3.6.5           withr_3.0.2         magrittr_2.0.4     \n[28] digest_0.6.37       grid_4.5.1          lifecycle_1.0.4    \n[31] vctrs_0.6.5         evaluate_1.0.5      glue_1.8.0         \n[34] farver_2.1.2        purrr_1.1.0         rmarkdown_2.30     \n[37] tools_4.5.1         pkgconfig_2.0.3     htmltools_0.5.8.1"
+  },
+  {
+    "objectID": "exercises/exercise_block_4.html",
+    "href": "exercises/exercise_block_4.html",
+    "title": "Exercise - Block 4",
+    "section": "",
+    "text": "Upon completing this exercise block, you will be able to:\n\nAdd statistical summaries and regression lines to ggplot2 plots using geom_smooth().\nIncorporate correlation coefficients and p-values into plots using functions from the ggpubr package.\nCompare groups and display statistical test results (e.g., t-test p-values) on boxplots.\nCreate informative volcano plots to visualize differential expression data.\nLabel specific points on plots using ggrepel to avoid overplotting."
+  },
+  {
+    "objectID": "exercises/exercise_block_4.html#learning-objectives",
+    "href": "exercises/exercise_block_4.html#learning-objectives",
+    "title": "Exercise - Block 4",
+    "section": "",
+    "text": "Upon completing this exercise block, you will be able to:\n\nAdd statistical summaries and regression lines to ggplot2 plots using geom_smooth().\nIncorporate correlation coefficients and p-values into plots using functions from the ggpubr package.\nCompare groups and display statistical test results (e.g., t-test p-values) on boxplots.\nCreate informative volcano plots to visualize differential expression data.\nLabel specific points on plots using ggrepel to avoid overplotting."
+  },
+  {
+    "objectID": "exercises/exercise_block_4.html#introduction-to-statistical-annotations",
+    "href": "exercises/exercise_block_4.html#introduction-to-statistical-annotations",
+    "title": "Exercise - Block 4",
+    "section": "Introduction to Statistical Annotations",
+    "text": "Introduction to Statistical Annotations\nIn this block, we will delve into enhancing our ggplot2 visualizations with statistical summaries and annotations. This is crucial for presenting data analysis results effectively and making plots more informative. We will explore how to add regression lines and their confidence intervals using geom_smooth(), incorporate correlation coefficients and p-values with the ggpubr package, and create specialized plots like volcano plots. Furthermore, we will learn to use ggrepel for intelligent labeling of data points, ensuring readability even with many labels."
+  },
+  {
+    "objectID": "exercises/exercise_block_4.html#installing-packages",
+    "href": "exercises/exercise_block_4.html#installing-packages",
+    "title": "Exercise - Block 4",
+    "section": "Installing packages",
+    "text": "Installing packages\n\nrenv::install(\"ggpubr\")"
+  },
+  {
+    "objectID": "exercises/exercise_block_4.html#packages",
+    "href": "exercises/exercise_block_4.html#packages",
+    "title": "Exercise - Block 4",
+    "section": "Packages",
+    "text": "Packages\n\nlibrary(ggplot2)\nlibrary(ggpubr)\nlibrary(dplyr)"
+  },
+  {
+    "objectID": "exercises/exercise_block_4.html#exploratory-data-analysis",
+    "href": "exercises/exercise_block_4.html#exploratory-data-analysis",
+    "title": "Exercise - Block 4",
+    "section": "Exploratory data analysis",
+    "text": "Exploratory data analysis\n\ndata &lt;- readRDS(gzcon(url(\n  \"https://raw.githubusercontent.com/urppeia/publication_figs/main/data.rds\"\n)))\n\nrownames(data$counts) &lt;- data$counts$Gene_ID\ndata$counts &lt;- data$counts[, -1]"
+  },
+  {
+    "objectID": "exercises/exercise_block_4.html#exercise-1-scatter-plot-with-regression-line",
+    "href": "exercises/exercise_block_4.html#exercise-1-scatter-plot-with-regression-line",
+    "title": "Exercise - Block 4",
+    "section": "Exercise 1: Scatter plot with regression line",
+    "text": "Exercise 1: Scatter plot with regression line\nLet’s investigate the relationship between the log-fold change (LFC) at 3h and 24h. Understanding this correlation can reveal how gene expression changes evolve over time. We will use geom_smooth() to visualize this relationship with a linear regression line and its confidence interval, providing insight into the trend and variability.\nA. Create a scatter plot of sucrose_3h_lfc vs. sucrose_24h_lfc from the data$diff dataframe.\n\nB. Add a linear regression line and confidence interval to the plot.\n\n\n\n\n\n\nSolution\n\n\n\n\n\n\np1 &lt;- ggplot(data$diff, aes(x = sucrose_3h_lfc, y = sucrose_24h_lfc)) +\n  geom_point() +\n  labs(\n    title = \"LFC Correlation: 3h vs. 24h\",\n    x = \"LFC at 3h\",\n    y = \"LFC at 24h\"\n  ) +\n  theme_bw() # Apply black and white theme for cleaner look\np1 + geom_smooth(method = \"lm\")\n\n`geom_smooth()` using formula = 'y ~ x'"
+  },
+  {
+    "objectID": "exercises/exercise_block_4.html#exercise-2-adding-correlation-coefficient",
+    "href": "exercises/exercise_block_4.html#exercise-2-adding-correlation-coefficient",
+    "title": "Exercise - Block 4",
+    "section": "Exercise 2: Adding correlation coefficient",
+    "text": "Exercise 2: Adding correlation coefficient\nNow, let’s add the Pearson correlation coefficient and p-value to the plot from Exercise 1. The stat_cor() function from the ggpubr package is particularly useful for this, as it automatically calculates and displays these statistical metrics directly on the plot, providing a quantitative measure of the relationship.\nA. Use stat_cor() from the ggpubr package to add the correlation.\n\n\n\n\n\n\nSolution\n\n\n\n\n\n\np2 &lt;- p1 + stat_cor(method = \"pearson\") + theme_bw() # Apply black and white theme\np2"
+  },
+  {
+    "objectID": "exercises/exercise_block_4.html#exercise-3-boxplot-with-p-values",
+    "href": "exercises/exercise_block_4.html#exercise-3-boxplot-with-p-values",
+    "title": "Exercise - Block 4",
+    "section": "Exercise 3: Boxplot with p-values",
+    "text": "Exercise 3: Boxplot with p-values\nLet’s compare the expression of a single gene between the “none” and “sucrose” conditions at 24h. Boxplots are excellent for visualizing the distribution of expression levels across different conditions. Gene expression data is often log-transformed to better visualize the variance and make the distribution more symmetric. We will use a log2(expression + 1) transformation.\nTo statistically compare these groups, we will use stat_compare_means() from ggpubr, which can perform various statistical tests (e.g., t-test) and display the resulting p-values directly on the plot.\nA. First, prepare the data. Choose a gene that is significantly differentially expressed at 24h.\n\nB. Create a boxplot of the log2 transformed expression for the selected gene, comparing “none” and “sucrose” conditions.\n\nC. Add the p-value from a t-test comparing the two groups. Use stat_compare_means().\n\n\n\n\n\n\nSolution\n\n\n\n\n\n\n# Find a significant gene at 24h\nsig_gene_24h &lt;- data$diff[data$diff$sucrose_24h_pval &lt; 0.05 & abs(data$diff$sucrose_24h_lfc) &gt; 1, ][1, \"Gene_ID\"]\n\n# Prepare the data for plotting\nplot_data &lt;- data.frame(\n  expression = as.numeric(data$counts[sig_gene_24h, ]),\n  compound = data$anno$compound,\n  time = data$anno$time\n) %&gt;%\n  filter(time == \"24 hour\")\n\n# Create the plot\np3 &lt;- ggplot(plot_data, aes(x = compound, y = log2(expression + 1), fill = compound)) +\n  geom_boxplot() +\n  labs(\n    title = paste(\"Expression of gene\", sig_gene_24h, \"at 24h\"),\n    x = \"Compound\",\n    y = expression(\"Log\"[2] * \" Expression Levels\")\n  ) +\n  theme_bw() # Apply black and white theme\n\n# Add the p-value\np3 + stat_compare_means(method = \"t.test\")"
+  },
+  {
+    "objectID": "exercises/exercise_block_4.html#exercise-4-volcano-plot",
+    "href": "exercises/exercise_block_4.html#exercise-4-volcano-plot",
+    "title": "Exercise - Block 4",
+    "section": "Exercise 4: Volcano plot",
+    "text": "Exercise 4: Volcano plot\nLet’s create a volcano plot to visualize the differential expression results at 24h. A volcano plot is a powerful visualization that combines information about fold-change (on the x-axis) and statistical significance (on the y-axis). By plotting -log10(p-value), we can easily spot the most statistically significant genes, as smaller p-values will correspond to larger values on the y-axis. This allows us to quickly identify genes that are both substantially and statistically differentially expressed. We will also use ggrepel::geom_text_repel() to add labels to significant genes without overlapping, ensuring readability.\nA. Create a scatter plot of sucrose_24h_lfc vs. -log10(sucrose_24h_pval).\n\nB. Color the points based on significance. For example, use red for genes with sucrose_24h_pval &lt; 0.05 and abs(sucrose_24h_lfc) &gt; 1.\n\nC. Add labels to the significant genes.\n\n\n\n\n\n\nSolution\n\n\n\n\n\n\n# Add a column to indicate significance\ndata$diff$significant &lt;- ifelse(data$diff$sucrose_24h_pval &lt; 0.05 & abs(data$diff$sucrose_24h_lfc) &gt; 1, \"yes\", \"no\")\n\n# Create the volcano plot\np4 &lt;- ggplot(data$diff, aes(x = sucrose_24h_lfc, y = -log10(sucrose_24h_pval), color = significant)) +\n  geom_point(alpha = 0.5) +\n  scale_color_manual(values = c(\"yes\" = \"red\", \"no\" = \"grey\")) +\n  labs(\n    title = \"Volcano Plot at 24h\",\n    x = \"Log2 Fold Change\",\n    y = expression(\"-Log\"[10] * \" (\" * italic(p) * \"-value)\")\n  ) +\n  theme(legend.position = \"none\") +\n  theme_bw() # Apply black and white theme\n\n# Add labels to significant genes\np4 + ggrepel::geom_text_repel(\n  data = subset(data$diff, significant == \"yes\"),\n  aes(label = Gene_ID),\n  size = 3,\n  box.padding = 0.5\n)\n\nWarning: ggrepel: 63 unlabeled data points (too many overlaps). Consider\nincreasing max.overlaps"
+  },
+  {
+    "objectID": "exercises/exercise_block_4.html#exercise-5-correlation-of-two-genes",
+    "href": "exercises/exercise_block_4.html#exercise-5-correlation-of-two-genes",
+    "title": "Exercise - Block 4",
+    "section": "Exercise 5: Correlation of two genes",
+    "text": "Exercise 5: Correlation of two genes\nAnother common task is to investigate the correlation between the expression of two specific genes. This can reveal co-regulation or related functions. Log-transforming the expression data can make the relationship between genes more linear and easier to interpret, especially with a wide dynamic range. Let’s dynamically select the top 2 most expressed genes for this exercise.\nA. Find the top 2 most expressed genes in the data$counts dataframe.\n\nB. Create a scatter plot of the log2 transformed expression of these two genes.\n\nC. Add a regression line and the Pearson correlation coefficient to the plot.\n\n\n\n\n\n\nSolution\n\n\n\n\n\n\n# Find the top 2 most expressed genes\ngene_means &lt;- rowMeans(data$counts, na.rm = TRUE)\ntop_genes &lt;- names(sort(gene_means, decreasing = TRUE)[1:2])\ngene1 &lt;- top_genes[1]\ngene2 &lt;- top_genes[2]\n\n# Prepare the data for plotting\nplot_data_corr &lt;- data.frame(\n  gene1_expr = as.numeric(data$counts[gene1, ]),\n  gene2_expr = as.numeric(data$counts[gene2, ]),\n  compound = data$anno$compound,\n  time = data$anno$time\n)\n\n# Remove rows with NA values\nplot_data_corr &lt;- na.omit(plot_data_corr)\n\n# Create the scatter plot\np5 &lt;- ggplot(plot_data_corr, aes(x = log2(gene1_expr + 1), y = log2(gene2_expr + 1))) +\n  geom_point(aes(color = compound, shape = time)) +\n  geom_smooth(method = \"lm\", formula = \"y ~ x\") +\n  stat_cor(method = \"pearson\") +\n  labs(\n    title = paste(\"Correlation between\", gene1, \"and\", gene2),\n    x = expression(\"Log\"[2] * \" Expression Levels\"),\n    y = expression(\"Log\"[2] * \" Expression Levels\")\n  ) +\n  theme_bw()\np5"
+  },
+  {
+    "objectID": "exercises/exercise_block_4.html#session-information",
+    "href": "exercises/exercise_block_4.html#session-information",
+    "title": "Exercise - Block 4",
+    "section": "Session information",
+    "text": "Session information\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nsessionInfo()\n\nR version 4.5.1 (2025-06-13)\nPlatform: aarch64-apple-darwin20\nRunning under: macOS Tahoe 26.0.1\n\nMatrix products: default\nBLAS:   /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib \nLAPACK: /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1\n\nlocale:\n[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8\n\ntime zone: Europe/Zurich\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices datasets  utils     methods   base     \n\nother attached packages:\n[1] dplyr_1.1.4   ggpubr_0.6.2  ggplot2_4.0.0\n\nloaded via a namespace (and not attached):\n [1] Matrix_1.7-3        gtable_0.3.6        jsonlite_2.0.0     \n [4] compiler_4.5.1      BiocManager_1.30.26 ggsignif_0.6.4     \n [7] renv_1.1.5          Rcpp_1.1.0          tidyselect_1.2.1   \n[10] tidyr_1.3.1         splines_4.5.1       scales_1.4.0       \n[13] yaml_2.3.10         fastmap_1.2.0       lattice_0.22-7     \n[16] R6_2.6.1            labeling_0.4.3      generics_0.1.4     \n[19] Formula_1.2-5       knitr_1.50          backports_1.5.0    \n[22] htmlwidgets_1.6.4   ggrepel_0.9.6       tibble_3.3.0       \n[25] car_3.1-3           pillar_1.11.1       RColorBrewer_1.1-3 \n[28] rlang_1.1.6         broom_1.0.10        xfun_0.53          \n[31] S7_0.2.0            cli_3.6.5           mgcv_1.9-3         \n[34] withr_3.0.2         magrittr_2.0.4      digest_0.6.37      \n[37] grid_4.5.1          nlme_3.1-168        lifecycle_1.0.4    \n[40] vctrs_0.6.5         rstatix_0.7.3       evaluate_1.0.5     \n[43] glue_1.8.0          farver_2.1.2        abind_1.4-8        \n[46] carData_3.0-5       rmarkdown_2.30      purrr_1.1.0        \n[49] tools_4.5.1         pkgconfig_2.0.3     htmltools_0.5.8.1"
   },
   {
     "objectID": "index.html",
@@ -544,5 +628,96 @@
     "title": "Block 2",
     "section": "Introducing ggplot2",
     "text": "Introducing ggplot2\n\nGrammar of Graphics: ggplot2 is based on the idea that you can build any plot from the same components: a data set, a coordinate system, and geoms (visual marks that represent data points).\nLayers: You build plots by adding layers. For example, you can add a layer of points, then a layer of lines, then a layer of labels."
+  },
+  {
+    "objectID": "slides/slide_block_4.html#recap-of-block-3",
+    "href": "slides/slide_block_4.html#recap-of-block-3",
+    "title": "Block 4",
+    "section": "Recap of Block 3",
+    "text": "Recap of Block 3\n\nFaceting: We learned how to create subplots to compare different subsets of data using facet_wrap() and facet_grid().\n\n\nThemes: We explored customizing the appearance of plots using built-in themes like theme_minimal() and by modifying individual theme elements.\n\n\nColors: We discussed the importance of color selection, explored RColorBrewer and viridis palettes, and learned to specify colors manually."
+  },
+  {
+    "objectID": "slides/slide_block_4.html#recap-of-block-3-1",
+    "href": "slides/slide_block_4.html#recap-of-block-3-1",
+    "title": "Block 4",
+    "section": "Recap of Block 3",
+    "text": "Recap of Block 3\n\nSaving Plots: We covered saving plots for publication in various formats (PNG, PDF, TIFF) with specific dimensions and resolutions using ggsave().\n\n\nStylistic Elements: We fine-tuned stylistic elements like fonts and line weights using theme().\n\n\nInteractive Plots: We learned to create interactive plots using ggplotly() from the plotly package."
+  },
+  {
+    "objectID": "slides/slide_block_4.html#statistical-annotations-and-summaries",
+    "href": "slides/slide_block_4.html#statistical-annotations-and-summaries",
+    "title": "Block 4",
+    "section": "Statistical Annotations and Summaries",
+    "text": "Statistical Annotations and Summaries"
+  },
+  {
+    "objectID": "slides/slide_block_4.html#what-is-a-confidence-interval",
+    "href": "slides/slide_block_4.html#what-is-a-confidence-interval",
+    "title": "Block 4",
+    "section": "What is a Confidence Interval?",
+    "text": "What is a Confidence Interval?\nA confidence interval (CI) is a range of values that’s likely to include a population value with a certain degree of confidence.\n\nIt’s a measure of the uncertainty around an estimate.\nA 95% CI means that if you were to take 100 different samples and compute a 95% CI for each sample, then approximately 95 of the 100 confidence intervals will contain the true mean value.\n\nWhen to include it? When you want to show the uncertainty of a statistical estimate, such as a mean or a regression line."
+  },
+  {
+    "objectID": "slides/slide_block_4.html#adding-statistical-summaries",
+    "href": "slides/slide_block_4.html#adding-statistical-summaries",
+    "title": "Block 4",
+    "section": "Adding Statistical Summaries",
+    "text": "Adding Statistical Summaries\nggplot2 makes it easy to add statistical summaries to your plots.\n\ngeom_smooth(): Adds a smoothed conditional mean, like a regression line. You can specify the method (\"lm\", \"glm\", \"gam\", \"loess\").\nConfidence Intervals: geom_smooth() also displays a confidence interval around the smooth."
+  },
+  {
+    "objectID": "slides/slide_block_4.html#example-geom_smooth",
+    "href": "slides/slide_block_4.html#example-geom_smooth",
+    "title": "Block 4",
+    "section": "Example: geom_smooth()",
+    "text": "Example: geom_smooth()\nBiological Question: Is there a correlation between the log-fold changes at 3h and 24h after sucrose treatment?\n\n\n\n\nlibrary(ggplot2)\n\nggplot(data$diff, aes(\n  x = sucrose_3h_lfc,\n  y = sucrose_24h_lfc\n)) +\n  geom_point(alpha = 0.5) +\n  geom_smooth(method = \"lm\") +\n  labs(\n    title = \"LFC Correlation: 3h vs. 24h\",\n    x = \"LFC at 3h\",\n    y = \"LFC at 24h\"\n  ) +\n  theme_bw()"
+  },
+  {
+    "objectID": "slides/slide_block_4.html#what-is-a-correlation-coefficient",
+    "href": "slides/slide_block_4.html#what-is-a-correlation-coefficient",
+    "title": "Block 4",
+    "section": "What is a Correlation Coefficient?",
+    "text": "What is a Correlation Coefficient?\nA correlation coefficient is a statistical measure of the strength and direction of a linear relationship between two variables.\n\nIt ranges from -1 to 1.\n1: Perfect positive correlation\n-1: Perfect negative correlation\n0: No correlation\n\nWhen to include it? When you want to quantify the linear relationship between two numeric variables."
+  },
+  {
+    "objectID": "slides/slide_block_4.html#the-ggpubr-package",
+    "href": "slides/slide_block_4.html#the-ggpubr-package",
+    "title": "Block 4",
+    "section": "The ggpubr Package",
+    "text": "The ggpubr Package\nThe ggpubr package provides functions to make ggplot2 plots more publication-ready. It simplifies the process of:\n\nAdding p-values and significance levels to plots.\nAdding correlation coefficients.\nCustomizing plots with a cleaner theme.\nArranging multiple plots."
+  },
+  {
+    "objectID": "slides/slide_block_4.html#annotating-plots-with-statistics",
+    "href": "slides/slide_block_4.html#annotating-plots-with-statistics",
+    "title": "Block 4",
+    "section": "Annotating Plots with Statistics",
+    "text": "Annotating Plots with Statistics\nFor more advanced statistical annotations, we can use the ggpubr package.\n\nstat_cor(): Adds correlation coefficients and p-values.\nstat_compare_means(): Adds p-values from statistical tests (t-test, ANOVA, etc.)."
+  },
+  {
+    "objectID": "slides/slide_block_4.html#example-stat_cor",
+    "href": "slides/slide_block_4.html#example-stat_cor",
+    "title": "Block 4",
+    "section": "Example: stat_cor()",
+    "text": "Example: stat_cor()\nBiological Question: How strong is the correlation between the log-fold changes at 3h and 24h?\n\n\n\nlibrary(ggpubr)\nggplot(\n  data$diff,\n  aes(\n    x = sucrose_3h_lfc,\n    y = sucrose_24h_lfc\n  )\n) +\n  geom_point(alpha = 0.5) +\n  stat_cor(method = \"pearson\") +\n  labs(\n    title = \"LFC Correlation: 3h vs. 24h\",\n    x = \"LFC at 3h\",\n    y = \"LFC at 24h\"\n  ) +\n  theme_bw()"
+  },
+  {
+    "objectID": "slides/slide_block_4.html#example-stat_compare_means",
+    "href": "slides/slide_block_4.html#example-stat_compare_means",
+    "title": "Block 4",
+    "section": "Example: stat_compare_means()",
+    "text": "Example: stat_compare_means()\nBiological Question: Is there a significant difference in the expression of a specific gene between the “none” and “sucrose” conditions at 24h?\n\n\n\nsig_gene_24h &lt;- data$diff[\n  data$diff$sucrose_24h_pval &lt; 0.05 &\n    abs(data$diff$sucrose_24h_lfc) &gt; 1,\n][1, \"Gene_ID\"]\n\nplot_data &lt;- data.frame(\n  expression = as.numeric(data$counts[sig_gene_24h, ]),\n  compound = data$anno$compound,\n  time = data$anno$time\n) %&gt;%\n  dplyr::filter(time == \"24 hour\")\n\nggplot(\n  plot_data,\n  aes(\n    x = compound,\n    y = expression,\n    fill = compound\n  )\n) +\n  geom_boxplot() +\n  stat_compare_means(method = \"t.test\") +\n  labs(\n    title = paste(\"Expression of gene\", sig_gene_24h, \"at 24h\"),\n    x = \"Compound\",\n    y = \"Normalized Expression\"\n  ) +\n  theme_bw()"
+  },
+  {
+    "objectID": "slides/slide_block_4.html#comparing-multiple-groups",
+    "href": "slides/slide_block_4.html#comparing-multiple-groups",
+    "title": "Block 4",
+    "section": "Comparing Multiple Groups",
+    "text": "Comparing Multiple Groups\nBiological Question: Is there a significant difference in the expression of a gene between the different time points for the sucrose treatment?\n\n\n\n# Prepare data for comparing multiple groups\nsig_gene &lt;- data$diff[\n  data$diff$sucrose_24h_pval &lt; 0.05 &\n    abs(data$diff$sucrose_24h_lfc) &gt; 1,\n][1, \"Gene_ID\"]\n\nplot_data_multi &lt;- data.frame(\n  expression = as.numeric(data$counts[sig_gene, ]),\n  compound = data$anno$compound,\n  time = data$anno$time\n)\n\n# Perform pairwise comparisons\nmy_comparisons &lt;- list(c(\"3 hour\", \"24 hour\"))\nggplot(\n  plot_data_multi,\n  aes(\n    x = time,\n    y = expression,\n    fill = compound\n  )\n) +\n  geom_boxplot() +\n  facet_wrap(~compound) +\n  stat_compare_means(\n    comparisons = my_comparisons,\n    method = \"t.test\"\n  ) +\n  labs(\n    title = paste(\"Expression of gene\", sig_gene, \"across time\"),\n    x = \"Time\",\n    y = \"Normalized Expression\"\n  ) +\n  theme_bw()"
+  },
+  {
+    "objectID": "slides/slide_block_4.html#lets-practice",
+    "href": "slides/slide_block_4.html#lets-practice",
+    "title": "Block 4",
+    "section": "Let’s Practice!",
+    "text": "Let’s Practice!\nNow, let’s apply these concepts in Exercise."
   }
 ]

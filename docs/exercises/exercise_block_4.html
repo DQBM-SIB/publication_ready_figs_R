@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -356,8 +391,24 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
+  <li><a href="#introduction-to-statistical-annotations" id="toc-introduction-to-statistical-annotations" class="nav-link" data-scroll-target="#introduction-to-statistical-annotations">Introduction to Statistical Annotations</a></li>
+  <li><a href="#installing-packages" id="toc-installing-packages" class="nav-link" data-scroll-target="#installing-packages">Installing packages</a></li>
+  <li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages">Packages</a></li>
+  <li><a href="#exploratory-data-analysis" id="toc-exploratory-data-analysis" class="nav-link" data-scroll-target="#exploratory-data-analysis">Exploratory data analysis</a></li>
+  <li><a href="#exercise-1-scatter-plot-with-regression-line" id="toc-exercise-1-scatter-plot-with-regression-line" class="nav-link" data-scroll-target="#exercise-1-scatter-plot-with-regression-line">Exercise 1: Scatter plot with regression line</a></li>
+  <li><a href="#exercise-2-adding-correlation-coefficient" id="toc-exercise-2-adding-correlation-coefficient" class="nav-link" data-scroll-target="#exercise-2-adding-correlation-coefficient">Exercise 2: Adding correlation coefficient</a></li>
+  <li><a href="#exercise-3-boxplot-with-p-values" id="toc-exercise-3-boxplot-with-p-values" class="nav-link" data-scroll-target="#exercise-3-boxplot-with-p-values">Exercise 3: Boxplot with p-values</a></li>
+  <li><a href="#exercise-4-volcano-plot" id="toc-exercise-4-volcano-plot" class="nav-link" data-scroll-target="#exercise-4-volcano-plot">Exercise 4: Volcano plot</a></li>
+  <li><a href="#exercise-5-correlation-of-two-genes" id="toc-exercise-5-correlation-of-two-genes" class="nav-link" data-scroll-target="#exercise-5-correlation-of-two-genes">Exercise 5: Correlation of two genes</a></li>
+  <li><a href="#session-information" id="toc-session-information" class="nav-link" data-scroll-target="#session-information">Session information</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -382,8 +433,361 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
+<p>Upon completing this exercise block, you will be able to:</p>
+<ul>
+<li>Add statistical summaries and regression lines to <code>ggplot2</code> plots using <code>geom_smooth()</code>.</li>
+<li>Incorporate correlation coefficients and p-values into plots using functions from the <code>ggpubr</code> package.</li>
+<li>Compare groups and display statistical test results (e.g., t-test p-values) on boxplots.</li>
+<li>Create informative volcano plots to visualize differential expression data.</li>
+<li>Label specific points on plots using <code>ggrepel</code> to avoid overplotting.</li>
+</ul>
+</section>
+<section id="introduction-to-statistical-annotations" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-to-statistical-annotations">Introduction to Statistical Annotations</h2>
+<p>In this block, we will delve into enhancing our <code>ggplot2</code> visualizations with statistical summaries and annotations. This is crucial for presenting data analysis results effectively and making plots more informative. We will explore how to add regression lines and their confidence intervals using <code>geom_smooth()</code>, incorporate correlation coefficients and p-values with the <code>ggpubr</code> package, and create specialized plots like volcano plots. Furthermore, we will learn to use <code>ggrepel</code> for intelligent labeling of data points, ensuring readability even with many labels.</p>
+</section>
+<section id="installing-packages" class="level2">
+<h2 class="anchored" data-anchor-id="installing-packages">Installing packages</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">install</span>(<span class="st">"ggpubr"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="packages" class="level2">
+<h2 class="anchored" data-anchor-id="packages">Packages</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exploratory-data-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="exploratory-data-analysis">Exploratory data analysis</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">gzcon</span>(<span class="fu">url</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://raw.githubusercontent.com/urppeia/publication_figs/main/data.rds"</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>)))</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(data<span class="sc">$</span>counts) <span class="ot">&lt;-</span> data<span class="sc">$</span>counts<span class="sc">$</span>Gene_ID</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>counts <span class="ot">&lt;-</span> data<span class="sc">$</span>counts[, <span class="sc">-</span><span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercise-1-scatter-plot-with-regression-line" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-1-scatter-plot-with-regression-line">Exercise 1: Scatter plot with regression line</h2>
+<p>Let’s investigate the relationship between the log-fold change (LFC) at 3h and 24h. Understanding this correlation can reveal how gene expression changes evolve over time. We will use <code>geom_smooth()</code> to visualize this relationship with a linear regression line and its confidence interval, providing insight into the trend and variability.</p>
+<p><strong>A.</strong> Create a scatter plot of <code>sucrose_3h_lfc</code> vs.&nbsp;<code>sucrose_24h_lfc</code> from the <code>data$diff</code> dataframe.</p>
+<p><br></p>
+<p><strong>B.</strong> Add a linear regression line and confidence interval to the plot.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data<span class="sc">$</span>diff, <span class="fu">aes</span>(<span class="at">x =</span> sucrose_3h_lfc, <span class="at">y =</span> sucrose_24h_lfc)) <span class="sc">+</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"LFC Correlation: 3h vs. 24h"</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"LFC at 3h"</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"LFC at 24h"</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="co"># Apply black and white theme for cleaner look</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>p1 <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="exercise_block_4_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-2-adding-correlation-coefficient" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-2-adding-correlation-coefficient">Exercise 2: Adding correlation coefficient</h2>
+<p>Now, let’s add the Pearson correlation coefficient and p-value to the plot from Exercise 1. The <code>stat_cor()</code> function from the <code>ggpubr</code> package is particularly useful for this, as it automatically calculates and displays these statistical metrics directly on the plot, providing a quantitative measure of the relationship.</p>
+<p><strong>A.</strong> Use <code>stat_cor()</code> from the <code>ggpubr</code> package to add the correlation.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> p1 <span class="sc">+</span> <span class="fu">stat_cor</span>(<span class="at">method =</span> <span class="st">"pearson"</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="co"># Apply black and white theme</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>p2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="exercise_block_4_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-3-boxplot-with-p-values" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-3-boxplot-with-p-values">Exercise 3: Boxplot with p-values</h2>
+<p>Let’s compare the expression of a single gene between the “none” and “sucrose” conditions at 24h. Boxplots are excellent for visualizing the distribution of expression levels across different conditions. Gene expression data is often log-transformed to better visualize the variance and make the distribution more symmetric. We will use a <code>log2(expression + 1)</code> transformation.</p>
+<p>To statistically compare these groups, we will use <code>stat_compare_means()</code> from <code>ggpubr</code>, which can perform various statistical tests (e.g., t-test) and display the resulting p-values directly on the plot.</p>
+<p><strong>A.</strong> First, prepare the data. Choose a gene that is significantly differentially expressed at 24h.</p>
+<p><br></p>
+<p><strong>B.</strong> Create a boxplot of the <code>log2</code> transformed expression for the selected gene, comparing “none” and “sucrose” conditions.</p>
+<p><br></p>
+<p><strong>C.</strong> Add the p-value from a t-test comparing the two groups. Use <code>stat_compare_means()</code>.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find a significant gene at 24h</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>sig_gene_24h <span class="ot">&lt;-</span> data<span class="sc">$</span>diff[data<span class="sc">$</span>diff<span class="sc">$</span>sucrose_24h_pval <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> <span class="fu">abs</span>(data<span class="sc">$</span>diff<span class="sc">$</span>sucrose_24h_lfc) <span class="sc">&gt;</span> <span class="dv">1</span>, ][<span class="dv">1</span>, <span class="st">"Gene_ID"</span>]</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare the data for plotting</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>plot_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">expression =</span> <span class="fu">as.numeric</span>(data<span class="sc">$</span>counts[sig_gene_24h, ]),</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">compound =</span> data<span class="sc">$</span>anno<span class="sc">$</span>compound,</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> data<span class="sc">$</span>anno<span class="sc">$</span>time</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(time <span class="sc">==</span> <span class="st">"24 hour"</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the plot</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(plot_data, <span class="fu">aes</span>(<span class="at">x =</span> compound, <span class="at">y =</span> <span class="fu">log2</span>(expression <span class="sc">+</span> <span class="dv">1</span>), <span class="at">fill =</span> compound)) <span class="sc">+</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="fu">paste</span>(<span class="st">"Expression of gene"</span>, sig_gene_24h, <span class="st">"at 24h"</span>),</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Compound"</span>,</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">expression</span>(<span class="st">"Log"</span>[<span class="dv">2</span>] <span class="sc">*</span> <span class="st">" Expression Levels"</span>)</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="co"># Apply black and white theme</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the p-value</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>p3 <span class="sc">+</span> <span class="fu">stat_compare_means</span>(<span class="at">method =</span> <span class="st">"t.test"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="exercise_block_4_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-4-volcano-plot" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-4-volcano-plot">Exercise 4: Volcano plot</h2>
+<p>Let’s create a volcano plot to visualize the differential expression results at 24h. A volcano plot is a powerful visualization that combines information about fold-change (on the x-axis) and statistical significance (on the y-axis). By plotting <code>-log10(p-value)</code>, we can easily spot the most statistically significant genes, as smaller p-values will correspond to larger values on the y-axis. This allows us to quickly identify genes that are both substantially and statistically differentially expressed. We will also use <code>ggrepel::geom_text_repel()</code> to add labels to significant genes without overlapping, ensuring readability.</p>
+<p><strong>A.</strong> Create a scatter plot of <code>sucrose_24h_lfc</code> vs.&nbsp;<code>-log10(sucrose_24h_pval)</code>.</p>
+<p><br></p>
+<p><strong>B.</strong> Color the points based on significance. For example, use red for genes with <code>sucrose_24h_pval &lt; 0.05</code> and <code>abs(sucrose_24h_lfc) &gt; 1</code>.</p>
+<p><br></p>
+<p><strong>C.</strong> Add labels to the significant genes.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a column to indicate significance</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>diff<span class="sc">$</span>significant <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(data<span class="sc">$</span>diff<span class="sc">$</span>sucrose_24h_pval <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> <span class="fu">abs</span>(data<span class="sc">$</span>diff<span class="sc">$</span>sucrose_24h_lfc) <span class="sc">&gt;</span> <span class="dv">1</span>, <span class="st">"yes"</span>, <span class="st">"no"</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the volcano plot</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>p4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data<span class="sc">$</span>diff, <span class="fu">aes</span>(<span class="at">x =</span> sucrose_24h_lfc, <span class="at">y =</span> <span class="sc">-</span><span class="fu">log10</span>(sucrose_24h_pval), <span class="at">color =</span> significant)) <span class="sc">+</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"yes"</span> <span class="ot">=</span> <span class="st">"red"</span>, <span class="st">"no"</span> <span class="ot">=</span> <span class="st">"grey"</span>)) <span class="sc">+</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Volcano Plot at 24h"</span>,</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Log2 Fold Change"</span>,</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">expression</span>(<span class="st">"-Log"</span>[<span class="dv">10</span>] <span class="sc">*</span> <span class="st">" ("</span> <span class="sc">*</span> <span class="fu">italic</span>(p) <span class="sc">*</span> <span class="st">"-value)"</span>)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="co"># Apply black and white theme</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Add labels to significant genes</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>p4 <span class="sc">+</span> ggrepel<span class="sc">::</span><span class="fu">geom_text_repel</span>(</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">subset</span>(data<span class="sc">$</span>diff, significant <span class="sc">==</span> <span class="st">"yes"</span>),</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">label =</span> Gene_ID),</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="dv">3</span>,</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">box.padding =</span> <span class="fl">0.5</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: ggrepel: 63 unlabeled data points (too many overlaps). Consider
+increasing max.overlaps</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="exercise_block_4_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-5-correlation-of-two-genes" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-5-correlation-of-two-genes">Exercise 5: Correlation of two genes</h2>
+<p>Another common task is to investigate the correlation between the expression of two specific genes. This can reveal co-regulation or related functions. Log-transforming the expression data can make the relationship between genes more linear and easier to interpret, especially with a wide dynamic range. Let’s dynamically select the top 2 most expressed genes for this exercise.</p>
+<p><strong>A.</strong> Find the top 2 most expressed genes in the <code>data$counts</code> dataframe.</p>
+<p><br></p>
+<p><strong>B.</strong> Create a scatter plot of the <code>log2</code> transformed expression of these two genes.</p>
+<p><br></p>
+<p><strong>C.</strong> Add a regression line and the Pearson correlation coefficient to the plot.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the top 2 most expressed genes</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>gene_means <span class="ot">&lt;-</span> <span class="fu">rowMeans</span>(data<span class="sc">$</span>counts, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>top_genes <span class="ot">&lt;-</span> <span class="fu">names</span>(<span class="fu">sort</span>(gene_means, <span class="at">decreasing =</span> <span class="cn">TRUE</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>gene1 <span class="ot">&lt;-</span> top_genes[<span class="dv">1</span>]</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>gene2 <span class="ot">&lt;-</span> top_genes[<span class="dv">2</span>]</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare the data for plotting</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>plot_data_corr <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">gene1_expr =</span> <span class="fu">as.numeric</span>(data<span class="sc">$</span>counts[gene1, ]),</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">gene2_expr =</span> <span class="fu">as.numeric</span>(data<span class="sc">$</span>counts[gene2, ]),</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">compound =</span> data<span class="sc">$</span>anno<span class="sc">$</span>compound,</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> data<span class="sc">$</span>anno<span class="sc">$</span>time</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove rows with NA values</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>plot_data_corr <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(plot_data_corr)</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the scatter plot</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>p5 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(plot_data_corr, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log2</span>(gene1_expr <span class="sc">+</span> <span class="dv">1</span>), <span class="at">y =</span> <span class="fu">log2</span>(gene2_expr <span class="sc">+</span> <span class="dv">1</span>))) <span class="sc">+</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> compound, <span class="at">shape =</span> time)) <span class="sc">+</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">formula =</span> <span class="st">"y ~ x"</span>) <span class="sc">+</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_cor</span>(<span class="at">method =</span> <span class="st">"pearson"</span>) <span class="sc">+</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="fu">paste</span>(<span class="st">"Correlation between"</span>, gene1, <span class="st">"and"</span>, gene2),</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">expression</span>(<span class="st">"Log"</span>[<span class="dv">2</span>] <span class="sc">*</span> <span class="st">" Expression Levels"</span>),</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">expression</span>(<span class="st">"Log"</span>[<span class="dv">2</span>] <span class="sc">*</span> <span class="st">" Expression Levels"</span>)</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>p5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="exercise_block_4_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="session-information" class="level2">
+<h2 class="anchored" data-anchor-id="session-information">Session information</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>R version 4.5.1 (2025-06-13)
+Platform: aarch64-apple-darwin20
+Running under: macOS Tahoe 26.0.1
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib 
+LAPACK: /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+time zone: Europe/Zurich
+tzcode source: internal
+
+attached base packages:
+[1] stats     graphics  grDevices datasets  utils     methods   base     
+
+other attached packages:
+[1] dplyr_1.1.4   ggpubr_0.6.2  ggplot2_4.0.0
+
+loaded via a namespace (and not attached):
+ [1] Matrix_1.7-3        gtable_0.3.6        jsonlite_2.0.0     
+ [4] compiler_4.5.1      BiocManager_1.30.26 ggsignif_0.6.4     
+ [7] renv_1.1.5          Rcpp_1.1.0          tidyselect_1.2.1   
+[10] tidyr_1.3.1         splines_4.5.1       scales_1.4.0       
+[13] yaml_2.3.10         fastmap_1.2.0       lattice_0.22-7     
+[16] R6_2.6.1            labeling_0.4.3      generics_0.1.4     
+[19] Formula_1.2-5       knitr_1.50          backports_1.5.0    
+[22] htmlwidgets_1.6.4   ggrepel_0.9.6       tibble_3.3.0       
+[25] car_3.1-3           pillar_1.11.1       RColorBrewer_1.1-3 
+[28] rlang_1.1.6         broom_1.0.10        xfun_0.53          
+[31] S7_0.2.0            cli_3.6.5           mgcv_1.9-3         
+[34] withr_3.0.2         magrittr_2.0.4      digest_0.6.37      
+[37] grid_4.5.1          nlme_3.1-168        lifecycle_1.0.4    
+[40] vctrs_0.6.5         rstatix_0.7.3       evaluate_1.0.5     
+[43] glue_1.8.0          farver_2.1.2        abind_1.4-8        
+[46] carData_3.0-5       rmarkdown_2.30      purrr_1.1.0        
+[49] tools_4.5.1         pkgconfig_2.0.3     htmltools_0.5.8.1  </code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

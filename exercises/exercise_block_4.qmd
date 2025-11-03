@@ -1,6 +1,226 @@
 ---
 title: "Exercise - Block 4"
 editor: source
-editor_options: 
+editor_options:
   chunk_output_type: console
 ---
+
+## Learning Objectives
+
+Upon completing this exercise block, you will be able to:
+
+*   Add statistical summaries and regression lines to `ggplot2` plots using `geom_smooth()`.
+*   Incorporate correlation coefficients and p-values into plots using functions from the `ggpubr` package.
+*   Compare groups and display statistical test results (e.g., t-test p-values) on boxplots.
+*   Create informative volcano plots to visualize differential expression data.
+*   Label specific points on plots using `ggrepel` to avoid overplotting.
+
+## Introduction to Statistical Annotations
+
+In this block, we will delve into enhancing our `ggplot2` visualizations with statistical summaries and annotations. This is crucial for presenting data analysis results effectively and making plots more informative. We will explore how to add regression lines and their confidence intervals using `geom_smooth()`, incorporate correlation coefficients and p-values with the `ggpubr` package, and create specialized plots like volcano plots. Furthermore, we will learn to use `ggrepel` for intelligent labeling of data points, ensuring readability even with many labels.
+
+## Installing packages
+
+```{r, eval=FALSE}
+renv::install("ggpubr")
+```
+
+## Packages
+```{r, message=FALSE, warning=FALSE}
+library(ggplot2)
+library(ggpubr)
+library(dplyr)
+```
+
+## Exploratory data analysis
+
+```{r}
+data <- readRDS(gzcon(url(
+  "https://raw.githubusercontent.com/urppeia/publication_figs/main/data.rds"
+)))
+
+rownames(data$counts) <- data$counts$Gene_ID
+data$counts <- data$counts[, -1]
+```
+
+## Exercise 1: Scatter plot with regression line
+
+Let's investigate the relationship between the log-fold change (LFC) at 3h and 24h. Understanding this correlation can reveal how gene expression changes evolve over time. We will use `geom_smooth()` to visualize this relationship with a linear regression line and its confidence interval, providing insight into the trend and variability.
+
+**A.** Create a scatter plot of `sucrose_3h_lfc` vs. `sucrose_24h_lfc` from the `data$diff` dataframe.
+
+<br>
+
+**B.** Add a linear regression line and confidence interval to the plot.
+
+::: {.callout-tip collapse="true"}
+### Solution
+```{r}
+p1 <- ggplot(data$diff, aes(x = sucrose_3h_lfc, y = sucrose_24h_lfc)) +
+  geom_point() +
+  labs(
+    title = "LFC Correlation: 3h vs. 24h",
+    x = "LFC at 3h",
+    y = "LFC at 24h"
+  ) +
+  theme_bw() # Apply black and white theme for cleaner look
+p1 + geom_smooth(method = "lm")
+```
+:::
+
+## Exercise 2: Adding correlation coefficient
+
+Now, let's add the Pearson correlation coefficient and p-value to the plot from Exercise 1. The `stat_cor()` function from the `ggpubr` package is particularly useful for this, as it automatically calculates and displays these statistical metrics directly on the plot, providing a quantitative measure of the relationship.
+
+**A.** Use `stat_cor()` from the `ggpubr` package to add the correlation.
+
+::: {.callout-tip collapse="true"}
+### Solution
+```{r}
+p2 <- p1 + stat_cor(method = "pearson") + theme_bw() # Apply black and white theme
+p2
+```
+:::
+
+## Exercise 3: Boxplot with p-values
+
+Let's compare the expression of a single gene between the "none" and "sucrose" conditions at 24h. Boxplots are excellent for visualizing the distribution of expression levels across different conditions. Gene expression data is often log-transformed to better visualize the variance and make the distribution more symmetric. We will use a `log2(expression + 1)` transformation.
+
+To statistically compare these groups, we will use `stat_compare_means()` from `ggpubr`, which can perform various statistical tests (e.g., t-test) and display the resulting p-values directly on the plot.
+
+**A.** First, prepare the data. Choose a gene that is significantly differentially expressed at 24h.
+
+<br>
+
+**B.** Create a boxplot of the `log2` transformed expression for the selected gene, comparing "none" and "sucrose" conditions.
+
+<br>
+
+**C.** Add the p-value from a t-test comparing the two groups. Use `stat_compare_means()`.
+
+::: {.callout-tip collapse="true"}
+### Solution
+```{r}
+# Find a significant gene at 24h
+sig_gene_24h <- data$diff[data$diff$sucrose_24h_pval < 0.05 & abs(data$diff$sucrose_24h_lfc) > 1, ][1, "Gene_ID"]
+
+# Prepare the data for plotting
+plot_data <- data.frame(
+  expression = as.numeric(data$counts[sig_gene_24h, ]),
+  compound = data$anno$compound,
+  time = data$anno$time
+) %>%
+  filter(time == "24 hour")
+
+# Create the plot
+p3 <- ggplot(plot_data, aes(x = compound, y = log2(expression + 1), fill = compound)) +
+  geom_boxplot() +
+  labs(
+    title = paste("Expression of gene", sig_gene_24h, "at 24h"),
+    x = "Compound",
+    y = expression("Log"[2] * " Expression Levels")
+  ) +
+  theme_bw() # Apply black and white theme
+
+# Add the p-value
+p3 + stat_compare_means(method = "t.test")
+```
+:::
+
+## Exercise 4: Volcano plot
+
+Let's create a volcano plot to visualize the differential expression results at 24h. A volcano plot is a powerful visualization that combines information about fold-change (on the x-axis) and statistical significance (on the y-axis). By plotting `-log10(p-value)`, we can easily spot the most statistically significant genes, as smaller p-values will correspond to larger values on the y-axis. This allows us to quickly identify genes that are both substantially and statistically differentially expressed. We will also use `ggrepel::geom_text_repel()` to add labels to significant genes without overlapping, ensuring readability.
+
+**A.** Create a scatter plot of `sucrose_24h_lfc` vs. `-log10(sucrose_24h_pval)`.
+
+<br>
+
+**B.** Color the points based on significance. For example, use red for genes with `sucrose_24h_pval < 0.05` and `abs(sucrose_24h_lfc) > 1`.
+
+<br>
+
+**C.** Add labels to the significant genes.
+
+::: {.callout-tip collapse="true"}
+### Solution
+```{r}
+# Add a column to indicate significance
+data$diff$significant <- ifelse(data$diff$sucrose_24h_pval < 0.05 & abs(data$diff$sucrose_24h_lfc) > 1, "yes", "no")
+
+# Create the volcano plot
+p4 <- ggplot(data$diff, aes(x = sucrose_24h_lfc, y = -log10(sucrose_24h_pval), color = significant)) +
+  geom_point(alpha = 0.5) +
+  scale_color_manual(values = c("yes" = "red", "no" = "grey")) +
+  labs(
+    title = "Volcano Plot at 24h",
+    x = "Log2 Fold Change",
+    y = expression("-Log"[10] * " (" * italic(p) * "-value)")
+  ) +
+  theme(legend.position = "none") +
+  theme_bw() # Apply black and white theme
+
+# Add labels to significant genes
+p4 + ggrepel::geom_text_repel(
+  data = subset(data$diff, significant == "yes"),
+  aes(label = Gene_ID),
+  size = 3,
+  box.padding = 0.5
+)
+```
+:::
+
+## Exercise 5: Correlation of two genes
+
+Another common task is to investigate the correlation between the expression of two specific genes. This can reveal co-regulation or related functions. Log-transforming the expression data can make the relationship between genes more linear and easier to interpret, especially with a wide dynamic range. Let's dynamically select the top 2 most expressed genes for this exercise.
+
+**A.** Find the top 2 most expressed genes in the `data$counts` dataframe.
+
+<br>
+
+**B.** Create a scatter plot of the `log2` transformed expression of these two genes.
+
+<br>
+
+**C.** Add a regression line and the Pearson correlation coefficient to the plot.
+
+::: {.callout-tip collapse="true"}
+### Solution
+```{r}
+# Find the top 2 most expressed genes
+gene_means <- rowMeans(data$counts, na.rm = TRUE)
+top_genes <- names(sort(gene_means, decreasing = TRUE)[1:2])
+gene1 <- top_genes[1]
+gene2 <- top_genes[2]
+
+# Prepare the data for plotting
+plot_data_corr <- data.frame(
+  gene1_expr = as.numeric(data$counts[gene1, ]),
+  gene2_expr = as.numeric(data$counts[gene2, ]),
+  compound = data$anno$compound,
+  time = data$anno$time
+)
+
+# Remove rows with NA values
+plot_data_corr <- na.omit(plot_data_corr)
+
+# Create the scatter plot
+p5 <- ggplot(plot_data_corr, aes(x = log2(gene1_expr + 1), y = log2(gene2_expr + 1))) +
+  geom_point(aes(color = compound, shape = time)) +
+  geom_smooth(method = "lm", formula = "y ~ x") +
+  stat_cor(method = "pearson") +
+  labs(
+    title = paste("Correlation between", gene1, "and", gene2),
+    x = expression("Log"[2] * " Expression Levels"),
+    y = expression("Log"[2] * " Expression Levels")
+  ) +
+  theme_bw()
+p5
+```
+:::
+
+## Session information
+::: {.callout-tip collapse="true"}
+```{r}
+sessionInfo()
+```
+:::

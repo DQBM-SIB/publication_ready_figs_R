@@ -50,3 +50,7 @@ a {
 .smallcode{
   size: 0.75em
 }
+
+.reveal pre.sourceCode code {
+	height: 200px;
+}
