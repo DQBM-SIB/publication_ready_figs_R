@@ -8,6 +8,7 @@ format:
     controls-layout: bottom-right
     controls-tutorial: true
     footer: "Publication ready figures with `R`"
+    code-block-height: "6"
     css: ../custom.css
 title-slide-attributes:
   data-background-size: contain
@@ -75,10 +76,9 @@ A **confidence interval (CI)** is a range of values that's likely to include a p
 
 **Biological Question:** Is there a correlation between the log-fold changes at 3h and 24h after sucrose treatment?
 
-::::: columns
-::: {.column width="50%"}
-::: {.small}
-
+:::::: columns
+:::: {.column width="50%"}
+::: small
 ```{r, echo=TRUE, eval=FALSE, dpi=300}
 library(ggplot2)
 
@@ -96,7 +96,7 @@ ggplot(data$diff, aes(
   theme_bw()
 ```
 :::
-:::
+::::
 
 ::: {.column width="50%"}
 ```{r, echo = FALSE, fig.align="center", fig.height=9, dpi=300}
@@ -112,7 +112,7 @@ ggplot(data$diff, aes(x = sucrose_3h_lfc, y = sucrose_24h_lfc)) +
   theme_bw()
 ```
 :::
-:::::
+::::::
 
 ## What is a Correlation Coefficient?
 
