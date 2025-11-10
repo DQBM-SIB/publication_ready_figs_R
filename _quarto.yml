@@ -48,8 +48,8 @@ website:
             text: "Block 5"
           - href: exercises/exercise_block_6.qmd
             text: "Block 6"
-          - href: exercises/exercise_block_7.qmd
-            text: "Block 7"
+          # - href: exercises/exercise_block_7.qmd
+          #   text: "Block 7"
     right:
       - icon: github
         href: https://github.com/DQBM-SIB/publication_ready_figs_R

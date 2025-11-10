@@ -29,14 +29,13 @@ You've created a beautiful plot. Now, how do you get it into your manuscript cor
 -   **Vector vs. Raster Formats**:
     -   **Vector (PDF, SVG, EPS)**: Infinitely scalable. Lines and text are stored as mathematical equations. **This is the preferred format for most journals.**
     -   **Raster (PNG, TIFF, JPG)**: Pixel-based. Can become blurry when resized. Necessary for images with complex color gradients like photos.
-
 -   **Resolution (DPI)**: For raster images, journals typically require **300 DPI** for color/grayscale and **600-1200 DPI** for line art.
 
 ## Mastering `ggsave()`
 
 `ggsave()` is your best friend for exporting `ggplot2` plots.
 
-```r
+``` r
 my_ggplot <- ggplot(mtcars, aes(wt, mpg)) + geom_point()
 
 # Save as a PDF (vector)
@@ -46,10 +45,7 @@ ggsave("my_plot.pdf", plot = my_ggplot, width = 180, height = 100, units = "mm")
 ggsave("my_plot.tiff", plot = my_ggplot, width = 180, height = 100, units = "mm", dpi = 300)
 ```
 
-**Key Parameters**:
-- `width`, `height`, `units`: Always specify the physical size required by the journal.
-- `dpi`: Crucial for raster formats.
-- `device`: Can be used to specify the graphics device (e.g., `cairo_pdf` for better font embedding).
+**Key Parameters**: - `width`, `height`, `units`: Always specify the physical size required by the journal. - `dpi`: Crucial for raster formats. - `device`: Can be used to specify the graphics device (e.g., `cairo_pdf` for better font embedding).
 
 ## The Importance of Reproducibility
 
@@ -65,11 +61,9 @@ A publication-ready figure is not just about aesthetics; it's about scientific i
     -   Keep your code in R scripts (`.R`), not just in your R console history.
     -   Use comments to explain the *why*, not the *what*.
     -   Organize scripts logically: data loading, data cleaning, analysis, figure generation.
-
 2.  **Manage Your Environment**:
     -   The `renv` package (which this course uses!) saves the versions of all packages you use. This is critical for long-term reproducibility.
     -   Always run `renv::snapshot()` to save the state of your project.
-
 3.  **Use Version Control**:
     -   Tools like `git` track every change you make to your code.
     -   It's like a "lab notebook" for your analysis, allowing you to go back in time and understand how your analysis evolved.
@@ -92,10 +86,6 @@ A publication-ready figure is not just about aesthetics; it's about scientific i
 2.  **Bottom-Left Panel**: A `ggplot` volcano plot of the 24h differential expression results.
 3.  **Bottom-Right Panel**: A `ggplot` boxplot showing the expression of a single, highly significant gene.
 
-**Requirements**:
--   All plots must share a consistent visual style (fonts, colors).
--   The final figure should be assembled using `grid` graphics.
--   The figure should be saved as a 300 DPI TIFF and a vector PDF.
--   The code should be clean, commented, and reproducible.
+**Requirements**: - All plots must share a consistent visual style (fonts, colors). - The final figure should be assembled using `grid` graphics. - The figure should be saved as a 300 DPI TIFF and a vector PDF. - The code should be clean, commented, and reproducible.
 
 ## Thank You & Final Q&A
