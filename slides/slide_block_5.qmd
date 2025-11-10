@@ -41,7 +41,7 @@ You can store a `theme()` configuration in an object.
 
 ::::: columns
 ::: {.column width="50%"}
-```r
+``` r
 # Define a universal theme
 theme_publication <- function() {
   theme_bw(base_size = 12) +
@@ -56,12 +56,16 @@ theme_publication <- function() {
 }
 ```
 :::
+
 ::: {.column width="50%"}
 ```{r, echo=FALSE, fig.align="center", fig.height=9, dpi=300}
 library(ggplot2)
 data <- readRDS(gzcon(url(
   "https://raw.githubusercontent.com/urppeia/publication_figs/main/data.rds"
 )))
+
+rownames(data$counts) <- data$counts$Gene_ID
+data$counts <- data$counts[, -1]
 
 # Define a universal theme
 theme_publication <- function() {
@@ -119,7 +123,7 @@ p_box <- ggplot(plot_data, aes(x = time, y = expression, fill = compound)) +
 
 ::::: columns
 ::: {.column width="50%"}
-```r
+``` r
 library(patchwork)
 
 # Combine scatter plot and boxplot
@@ -135,6 +139,7 @@ layout +
   )
 ```
 :::
+
 ::: {.column width="50%"}
 ```{r, echo=FALSE, fig.align="center", fig.height=9, dpi=300}
 library(patchwork)
@@ -172,13 +177,14 @@ p_bar <- ggplot(sig_counts, aes(x = timepoint, y = count, fill = timepoint)) +
 
 ::::: columns
 ::: {.column width="50%"}
-```r
+``` r
 # p_scatter and p_box are from the previous slide
 
 # Nesting plots: (scatter + boxplot) / bar chart
 (p_scatter + p_box) / p_bar
 ```
 :::
+
 ::: {.column width="50%"}
 ```{r, echo=FALSE, fig.align="center", fig.height=9, dpi=300}
 (p_scatter + p_box) / p_bar

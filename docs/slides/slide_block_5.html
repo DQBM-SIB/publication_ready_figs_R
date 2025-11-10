@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.7.31">
 
   <meta name="author" content="Deepak Tanwar">
-  <title>Publication-Ready Figure Generation in R – Block 3</title>
+  <title>Publication-Ready Figure Generation in R – Block 5</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -95,7 +95,8 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-f563837468303362081e247dddd440d0.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-aabaf2c226465e118ce3ee90c9cf6ea5.css">
+  <link rel="stylesheet" href="../custom.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -187,22 +188,13 @@
       margin-right: 0; 
     }
   </style>
-  <link href="../site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
-  <script src="../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
-  <script src="../site_libs/plotly-binding-4.11.0/plotly.js"></script>
-  <script src="../site_libs/typedarray-0.1/typedarray.min.js"></script>
-  <script src="../site_libs/jquery-3.5.1/jquery.min.js"></script>
-  <link href="../site_libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
-  <script src="../site_libs/crosstalk-1.2.2/js/crosstalk.min.js"></script>
-  <link href="../site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
-  <script src="../site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
     <div class="slides">
 
 <section id="title-slide" data-background-opacity="0.8" data-background-size="contain" class="quarto-title-block center">
-  <h1 class="title">Block 3</h1>
+  <h1 class="title">Block 5</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -213,197 +205,119 @@ Deepak Tanwar
 </div>
 
 </section>
-<section id="recap-of-block-2" class="slide level2">
-<h2>Recap of Block 2</h2>
+<section id="recap-of-block-4" class="slide level2">
+<h2>Recap of Block 4</h2>
 <ul>
-<li class="fragment"><strong>Grammar of Graphics (<code>gg</code>)</strong>: We were introduced to the Grammar of Graphics, a systematic way to describe and build plots.</li>
-</ul>
-<ul>
-<li class="fragment"><strong><code>ggplot2</code> Components</strong>: We learned that <code>ggplot2</code> is based on the idea that you can build any plot from the same components: a <strong>data</strong> set, a <strong>coordinate system</strong>, and <strong>geoms</strong> (visual marks that represent data points).</li>
-</ul>
-<ul>
-<li class="fragment"><strong>Layers</strong>: We build plots by adding <strong>layers</strong>.</li>
+<li class="fragment"><strong>Statistical Summaries</strong>: We learned to add regression lines and confidence intervals using <code>geom_smooth()</code>.</li>
+<li class="fragment"><strong><code>ggpubr</code> Package</strong>: We used <code>stat_cor()</code> to add correlation coefficients and <code>stat_compare_means()</code> to add p-values from statistical tests.</li>
+<li class="fragment"><strong>Advanced Annotations</strong>: We explored how to label specific points on plots using <code>ggrepel</code> to avoid overlapping text.</li>
 </ul>
 </section>
-<section id="faceting-the-plots" class="slide level2">
-<h2>Faceting the plots</h2>
-
-<img data-src="../assets/figs/08_facets.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"></section>
-<section id="themes" class="slide level2">
-<h2>Themes</h2>
-
-<img data-src="../assets/figs/09_themes.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"></section>
-<section class="slide level2">
-
-
-<img data-src="../assets/figs/10_color.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"></section>
-<section id="simplified-schematic-of-human-color-perception" class="slide level2">
-<h2>Simplified schematic of human color perception</h2>
-
-<img data-src="../assets/figs/11_eye.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"></section>
-<section id="rainbow-colormap" class="slide level2">
-<h2>Rainbow colormap</h2>
-
-<img data-src="../assets/figs/14_rainbow.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"></section>
-<section id="perceptually-non-uniform-color-spaces" class="slide level2">
-<h2>Perceptually non-uniform color spaces</h2>
+<section id="advanced-theming" class="slide level2">
+<h2>Advanced Theming</h2>
+<p>Creating a consistent and professional look for all your plots is key for publication. Instead of customizing each plot individually, you can create a reusable theme object.</p>
+<p><strong>Why create a “universal” theme?</strong></p>
+<ul>
+<li><strong>Consistency</strong>: Ensures all figures in a publication have the same style.</li>
+<li><strong>Efficiency</strong>: Saves time by applying a complex set of customizations in one line.</li>
+<li><strong>Reproducibility</strong>: Makes it easy to share and reuse your style.</li>
+</ul>
+</section>
+<section id="creating-a-reusable-theme" class="slide level2">
+<h2>Creating a Reusable Theme</h2>
+<p>You can store a <code>theme()</code> configuration in an object.</p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="../assets/figs/15_rainbow_s.png" class="fragment quarto-figure quarto-figure-center" style="width:100.0%" data-fragment-index="1"></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="../assets/figs/12_grblhue.png" class="fragment quarto-figure quarto-figure-center" style="width:100.0%" data-fragment-index="2"></p>
-</figure>
-</div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="co"># Define a universal theme</span></span>
+<span id="cb1-2"><a></a>theme_publication <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb1-3"><a></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">12</span>) <span class="sc">+</span></span>
+<span id="cb1-4"><a></a>    <span class="fu">theme</span>(</span>
+<span id="cb1-5"><a></a>      <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">14</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb1-6"><a></a>      <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb1-7"><a></a>      <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"black"</span>),</span>
+<span id="cb1-8"><a></a>      <span class="at">panel.grid.major =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"grey90"</span>),</span>
+<span id="cb1-9"><a></a>      <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb1-10"><a></a>      <span class="at">legend.position =</span> <span class="st">"bottom"</span></span>
+<span id="cb1-11"><a></a>    )</span>
+<span id="cb1-12"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="../assets/figs/13_chroma.jpg" class="fragment quarto-figure quarto-figure-center" style="width:100.0%" data-fragment-index="3"></p>
-</figure>
-</div>
-</div></div>
-</section>
-<section id="perceptually-non-uniform-color-spaces-1" class="slide level2">
-<h2>Perceptually non-uniform color spaces</h2>
-<p>This explains why a majority of the rectangles are green, and why we see a sudden shift towards blue at the end of the scale.</p>
-</section>
-<section id="perceptually-uniform-color-spaces" class="slide level2">
-<h2>Perceptually uniform color spaces</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<h3 id="non-uniform"><span class="fragment" data-fragment-index="1">Non-uniform</span></h3>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="../assets/figs/12_grblhue.png" class="fragment quarto-figure quarto-figure-center" style="width:100.0%" data-fragment-index="1"></p>
-</figure>
-</div>
-</div><div class="column" style="width:50%;">
-<h3 id="uniform"><span class="fragment" data-fragment-index="2">Uniform</span></h3>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="../assets/figs/16_proper_hue.png" class="fragment quarto-figure quarto-figure-center" style="width:100.0%" data-fragment-index="2"></p>
-</figure>
-</div>
-</div></div>
-<p><strong><span class="fragment" data-fragment-index="3">If we want to operate with color as it relates to the human vision, we need a color space built on these human measurements, and that is what perceptually uniform color spaces are.</span></strong></p>
-</section>
-<section id="color-selection-is-important" class="slide level2">
-<h2>Color selection is important</h2>
-
-<img data-src="../assets/figs/17_color_selection.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"></section>
-<section id="spot-the-difference" class="slide level2">
-<h2>Spot the difference</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="../assets/figs/18_bad_space.png" class="fragment quarto-figure quarto-figure-center" style="width:100.0%" data-fragment-index="1"></p>
-</figure>
-</div>
-</div><div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="../assets/figs/19_good_space.png" class="fragment quarto-figure quarto-figure-center" style="width:100.0%" data-fragment-index="2"></p>
-</figure>
-</div>
-</div></div>
-</section>
-<section id="background-of-plots" class="slide level2">
-<h2>Background of plots</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="../assets/figs/20_bg_light.png" class="fragment quarto-figure quarto-figure-center" style="width:100.0%" data-fragment-index="1"></p>
-</figure>
-</div>
-</div><div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="../assets/figs/21_bg_dark.png" class="fragment quarto-figure quarto-figure-center" style="width:100.0%" data-fragment-index="2"></p>
-</figure>
-</div>
-</div></div>
-</section>
-<section>
-<section id="incorrect-use-of-colors-could-lead-to-the-effective-manipulation-of-data" class="title-slide slide level1 center">
-<h1>Incorrect use of colors could lead to the effective manipulation of data</h1>
-
-</section>
-<section id="group-exercise" class="slide level2">
-<h2>Group exercise</h2>
-<ol type="1">
-<li><p>Search on internet “the misuse of colour in science communication”</p></li>
-<li><p>Go to the Figue 6 of the paper</p></li>
-<li><p><strong>Group 1</strong>: Top half of the figure <br> <strong>Group 2</strong>: Bottom half of the figure</p></li>
-<li><p>Discuss the flowchart</p></li>
-<li><p>Discuss about the color class type and combination for all the figures we have made in Exercises</p></li>
-</ol>
-</section>
-<section id="saving-plots-for-publication" class="slide level2">
-<h2>Saving Plots for Publication</h2>
-<ul>
-<li><strong><code>ggsave()</code></strong>: The easiest way to save a plot.</li>
-</ul>
-<ul>
-<li class="fragment"><strong>Vector vs.&nbsp;Raster</strong>:
-<ul>
-<li class="fragment"><strong>Vector (PDF, SVG)</strong>: Best for publications. Scalable without losing quality.</li>
-<li class="fragment"><strong>Raster (PNG, TIFF)</strong>: Pixel-based. Good for web, but can lose quality when scaled.</li>
-</ul></li>
-</ul>
-<ul>
-<li class="fragment"><strong>Resolution (DPI)</strong>: Dots Per Inch. Journals often require 300 DPI or higher for raster images.</li>
-</ul>
-</section>
-<section id="saving-plots-for-publication-1" class="slide level2">
-<h2>Saving Plots for Publication</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>my_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(<span class="at">x =</span> wt, <span class="at">y =</span> mpg)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span>
-<span id="cb1-2"><a></a></span>
-<span id="cb1-3"><a></a><span class="fu">ggsave</span>(<span class="st">"my_plot.pdf"</span>, <span class="at">plot =</span> my_plot, <span class="at">width =</span> <span class="dv">6</span>, <span class="at">height =</span> <span class="dv">4</span>)</span>
-<span id="cb1-4"><a></a><span class="fu">ggsave</span>(<span class="st">"my_plot.png"</span>, <span class="at">plot =</span> my_plot, <span class="at">width =</span> <span class="dv">6</span>, <span class="at">height =</span> <span class="dv">4</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="customizing-stylistic-elements" class="slide level2">
-<h2>Customizing Stylistic Elements</h2>
-<ul>
-<li class="fragment"><strong><code>theme()</code></strong>: The powerhouse for customizing the non-data elements of your plot.</li>
-<li class="fragment"><strong>Fonts</strong>: Change font family, size, and face (bold, italic).</li>
-<li class="fragment"><strong>Line Weights</strong>: Adjust the thickness of axis lines, grid lines, and borders.</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>my_plot <span class="sc">+</span> </span>
-<span id="cb2-2"><a></a>  <span class="fu">theme</span>(</span>
-<span id="cb2-3"><a></a>    <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"Times New Roman"</span>, <span class="at">size =</span> <span class="dv">12</span>),</span>
-<span id="cb2-4"><a></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
-<span id="cb2-5"><a></a>    <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">linewidth =</span> <span class="fl">0.8</span>),</span>
-<span id="cb2-6"><a></a>    <span class="at">panel.grid.major =</span> <span class="fu">element_line</span>(<span class="at">linewidth =</span> <span class="fl">0.2</span>)</span>
-<span id="cb2-7"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="interactive-plots-with-ggplotly" class="slide level2">
-<h2>Interactive Plots with <code>ggplotly</code></h2>
-<ul>
-<li><strong><code>ggplotly()</code></strong>: A function from the <code>plotly</code> package that transforms a <code>ggplot</code> object into an interactive plot.</li>
-<li>Great for exploring data, as you can hover over points to see values, zoom in and out, and pan around.</li>
-</ul>
-</section>
-<section id="interactive-plots-with-ggplotly-1" class="slide level2">
-<h2>Interactive Plots with <code>ggplotly</code></h2>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="plotly html-widget html-fill-item" id="htmlwidget-4fd8cdad058eecfae459" style="width:960px;height:576px;"></div>
-<script type="application/json" data-for="htmlwidget-4fd8cdad058eecfae459">{"x":{"data":[{"x":[3.2149999999999999,3.4399999999999999,3.46,3.5699999999999998,4.0700000000000003,3.73,3.7799999999999998,5.25,5.4240000000000004,5.3449999999999998,2.4649999999999999,3.52,3.4350000000000001,3.8399999999999999,3.8450000000000002],"y":[21.399999999999999,18.699999999999999,18.100000000000001,14.300000000000001,16.399999999999999,17.300000000000001,15.199999999999999,10.4,10.4,14.699999999999999,21.5,15.5,15.199999999999999,13.300000000000001,19.199999999999999],"text":["wt: 3.215<br />mpg: 21.4<br />hp: 110<br />gear: 3<br />Car: Hornet 4 Drive <br />Horsepower: 110 <br />Gear: 3","wt: 3.440<br />mpg: 18.7<br />hp: 175<br />gear: 3<br />Car: Hornet Sportabout <br />Horsepower: 175 <br />Gear: 3","wt: 3.460<br />mpg: 18.1<br />hp: 105<br />gear: 3<br />Car: Valiant <br />Horsepower: 105 <br />Gear: 3","wt: 3.570<br />mpg: 14.3<br />hp: 245<br />gear: 3<br />Car: Duster 360 <br />Horsepower: 245 <br />Gear: 3","wt: 4.070<br />mpg: 16.4<br />hp: 180<br />gear: 3<br />Car: Merc 450SE <br />Horsepower: 180 <br />Gear: 3","wt: 3.730<br />mpg: 17.3<br />hp: 180<br />gear: 3<br />Car: Merc 450SL <br />Horsepower: 180 <br />Gear: 3","wt: 3.780<br />mpg: 15.2<br />hp: 180<br />gear: 3<br />Car: Merc 450SLC <br />Horsepower: 180 <br />Gear: 3","wt: 5.250<br />mpg: 10.4<br />hp: 205<br />gear: 3<br />Car: Cadillac Fleetwood <br />Horsepower: 205 <br />Gear: 3","wt: 5.424<br />mpg: 10.4<br />hp: 215<br />gear: 3<br />Car: Lincoln Continental <br />Horsepower: 215 <br />Gear: 3","wt: 5.345<br />mpg: 14.7<br />hp: 230<br />gear: 3<br />Car: Chrysler Imperial <br />Horsepower: 230 <br />Gear: 3","wt: 2.465<br />mpg: 21.5<br />hp:  97<br />gear: 3<br />Car: Toyota Corona <br />Horsepower: 97 <br />Gear: 3","wt: 3.520<br />mpg: 15.5<br />hp: 150<br />gear: 3<br />Car: Dodge Challenger <br />Horsepower: 150 <br />Gear: 3","wt: 3.435<br />mpg: 15.2<br />hp: 150<br />gear: 3<br />Car: AMC Javelin <br />Horsepower: 150 <br />Gear: 3","wt: 3.840<br />mpg: 13.3<br />hp: 245<br />gear: 3<br />Car: Camaro Z28 <br />Horsepower: 245 <br />Gear: 3","wt: 3.845<br />mpg: 19.2<br />hp: 175<br />gear: 3<br />Car: Pontiac Firebird <br />Horsepower: 175 <br />Gear: 3"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(27,158,119,1)","opacity":0.69999999999999996,"size":[36.007964239820993,43.814701031272186,35.25383105710501,50.109735171052698,44.316100638792477,44.316100638792477,44.316100638792477,46.687731685549281,47.58153126306371,48.872300154228128,33.968932271376872,41.138792783352876,41.138792783352876,50.109735171052698,43.814701031272186],"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(27,158,119,1)"}},"hoveron":"points","name":"3","legendgroup":"3","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2.6200000000000001,2.875,2.3199999999999998,3.1899999999999999,3.1499999999999999,3.4399999999999999,3.4399999999999999,2.2000000000000002,1.615,1.835,1.9350000000000001,2.7799999999999998],"y":[21,21,22.800000000000001,24.399999999999999,22.800000000000001,19.199999999999999,17.800000000000001,32.399999999999999,30.399999999999999,33.899999999999999,27.300000000000001,21.399999999999999],"text":["wt: 2.620<br />mpg: 21.0<br />hp: 110<br />gear: 4<br />Car: Mazda RX4 <br />Horsepower: 110 <br />Gear: 4","wt: 2.875<br />mpg: 21.0<br />hp: 110<br />gear: 4<br />Car: Mazda RX4 Wag <br />Horsepower: 110 <br />Gear: 4","wt: 2.320<br />mpg: 22.8<br />hp:  93<br />gear: 4<br />Car: Datsun 710 <br />Horsepower: 93 <br />Gear: 4","wt: 3.190<br />mpg: 24.4<br />hp:  62<br />gear: 4<br />Car: Merc 240D <br />Horsepower: 62 <br />Gear: 4","wt: 3.150<br />mpg: 22.8<br />hp:  95<br />gear: 4<br />Car: Merc 230 <br />Horsepower: 95 <br />Gear: 4","wt: 3.440<br />mpg: 19.2<br />hp: 123<br />gear: 4<br />Car: Merc 280 <br />Horsepower: 123 <br />Gear: 4","wt: 3.440<br />mpg: 17.8<br />hp: 123<br />gear: 4<br />Car: Merc 280C <br />Horsepower: 123 <br />Gear: 4","wt: 2.200<br />mpg: 32.4<br />hp:  66<br />gear: 4<br />Car: Fiat 128 <br />Horsepower: 66 <br />Gear: 4","wt: 1.615<br />mpg: 30.4<br />hp:  52<br />gear: 4<br />Car: Honda Civic <br />Horsepower: 52 <br />Gear: 4","wt: 1.835<br />mpg: 33.9<br />hp:  65<br />gear: 4<br />Car: Toyota Corolla <br />Horsepower: 65 <br />Gear: 4","wt: 1.935<br />mpg: 27.3<br />hp:  66<br />gear: 4<br />Car: Fiat X1-9 <br />Horsepower: 66 <br />Gear: 4","wt: 2.780<br />mpg: 21.4<br />hp: 109<br />gear: 4<br />Car: Volvo 142E <br />Horsepower: 109 <br />Gear: 4"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(217,95,2,1)","opacity":0.69999999999999996,"size":[36.007964239820993,36.007964239820993,33.283510961993152,26.002314145482632,33.630208242319874,37.82863420044292,37.82863420044292,27.304004219460765,18.897637795275593,26.998215173064704,27.304004219460765,35.859820096936851],"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(217,95,2,1)"}},"hoveron":"points","name":"4","legendgroup":"4","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2.1400000000000001,1.5129999999999999,3.1699999999999999,2.77,3.5699999999999998],"y":[26,30.399999999999999,15.800000000000001,19.699999999999999,15],"text":["wt: 2.140<br />mpg: 26.0<br />hp:  91<br />gear: 5<br />Car: Porsche 914-2 <br />Horsepower: 91 <br />Gear: 5","wt: 1.513<br />mpg: 30.4<br />hp: 113<br />gear: 5<br />Car: Lotus Europa <br />Horsepower: 113 <br />Gear: 5","wt: 3.170<br />mpg: 15.8<br />hp: 264<br />gear: 5<br />Car: Ford Pantera L <br />Horsepower: 264 <br />Gear: 5","wt: 2.770<br />mpg: 19.7<br />hp: 175<br />gear: 5<br />Car: Ferrari Dino <br />Horsepower: 175 <br />Gear: 5","wt: 3.570<br />mpg: 15.0<br />hp: 335<br />gear: 5<br />Car: Maserati Bora <br />Horsepower: 335 <br />Gear: 5"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(117,112,179,1)","opacity":0.69999999999999996,"size":[32.928249384249405,36.444893958313365,51.610024318934421,43.814701031272186,56.692913385826778],"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(117,112,179,1)"}},"hoveron":"points","name":"5","legendgroup":"5","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":47.614777916147787,"r":9.2984640929846396,"b":47.422166874221674,"l":47.422166874221666},"paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":18.596928185969286},"title":{"text":"<b> Fuel Efficiency vs Weight of Cars <\/b>","font":{"color":"rgba(0,0,0,1)","family":"","size":22.316313823163149},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[1.3174499999999998,5.6195500000000003],"tickmode":"array","ticktext":["2","3","4","5"],"tickvals":[2,3,4,5],"categoryorder":"array","categoryarray":["2","3","4","5"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":4.6492320464923216,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":14.87754254877543},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0,"zeroline":false,"anchor":"y","title":{"text":"Weight (1000 lbs)","font":{"color":"rgba(0,0,0,1)","family":"","size":18.596928185969286}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[9.2249999999999996,35.074999999999996],"tickmode":"array","ticktext":["10","15","20","25","30","35"],"tickvals":[10,15,20,25,30,35],"categoryorder":"array","categoryarray":["10","15","20","25","30","35"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":4.6492320464923198,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":14.877542548775427},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0,"zeroline":false,"anchor":"x","title":{"text":"Miles per Gallon","font":{"color":"rgba(0,0,0,1)","family":"","size":18.596928185969286}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","layer":"below","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":14.87754254877543},"title":{"text":"Gear<br />Horsepower","font":{"color":"rgba(0,0,0,1)","family":"","size":18.596928185969286}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"d92e1551a0bc":{"x":{},"y":{},"size":{},"colour":{},"text":{},"type":"scatter"}},"cur_data":"d92e1551a0bc","visdat":{"d92e1551a0bc":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="slide_block_5_files/figure-revealjs/unnamed-chunk-1-1.png" class="quarto-figure quarto-figure-center" width="3000"></p>
+</figure>
 </div>
 </div>
+</div>
+</div></div>
+</section>
+<section id="advanced-patchwork" class="slide level2">
+<h2>Advanced <code>patchwork</code></h2>
+<p>We’ve used <code>+</code> and <code>/</code> to combine plots. <code>patchwork</code> offers much more control over complex layouts.</p>
+<ul>
+<li><code>|</code>: A synonym for <code>+</code> to place plots side-by-side.</li>
+<li><code>plot_layout()</code>: Fine-tune the dimensions of plots in a layout (<code>widths</code>, <code>heights</code>, <code>guides</code>).</li>
+<li><code>plot_annotation()</code>: Add titles, captions, and tags to the entire composition.</li>
+</ul>
+</section>
+<section id="example-complex-layout" class="slide level2">
+<h2>Example: Complex Layout</h2>
+<p>Let’s create two different plots and arrange them in a more complex layout.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb2-2"><a></a></span>
+<span id="cb2-3"><a></a><span class="co"># Combine scatter plot and boxplot</span></span>
+<span id="cb2-4"><a></a><span class="co"># Make the scatter plot twice as wide as the boxplot</span></span>
+<span id="cb2-5"><a></a>layout <span class="ot">&lt;-</span> p_scatter <span class="sc">+</span> p_box <span class="sc">+</span></span>
+<span id="cb2-6"><a></a>  <span class="fu">plot_layout</span>(<span class="at">widths =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>))</span>
+<span id="cb2-7"><a></a></span>
+<span id="cb2-8"><a></a><span class="co"># Add a title and tags</span></span>
+<span id="cb2-9"><a></a>layout <span class="sc">+</span></span>
+<span id="cb2-10"><a></a>  <span class="fu">plot_annotation</span>(</span>
+<span id="cb2-11"><a></a>    <span class="at">title =</span> <span class="st">'Gene Expression Analysis'</span>,</span>
+<span id="cb2-12"><a></a>    <span class="at">tag_levels =</span> <span class="st">'A'</span></span>
+<span id="cb2-13"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="slide_block_5_files/figure-revealjs/unnamed-chunk-3-1.png" class="quarto-figure quarto-figure-center" width="3000"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="aligning-plots-with-nesting" class="slide level2">
+<h2>Aligning Plots with Nesting</h2>
+<p>You can create more advanced layouts by nesting combined plots.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="co"># p_scatter and p_box are from the previous slide</span></span>
+<span id="cb3-2"><a></a></span>
+<span id="cb3-3"><a></a><span class="co"># Nesting plots: (scatter + boxplot) / bar chart</span></span>
+<span id="cb3-4"><a></a>(p_scatter <span class="sc">+</span> p_box) <span class="sc">/</span> p_bar</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="slide_block_5_files/figure-revealjs/unnamed-chunk-5-1.png" class="quarto-figure quarto-figure-center" width="3000"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="lets-practice" class="slide level2">
+<h2>Let’s Practice!</h2>
+<p>Now, let’s apply these concepts in the exercise for Block 5.</p>
 
 
-</section></section>
+</section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">

@@ -1,5 +1,740 @@
 [
   {
+    "objectID": "slides/slide_block_7.html#recap-of-block-6",
+    "href": "slides/slide_block_7.html#recap-of-block-6",
+    "title": "Block 7",
+    "section": "Recap of Block 6",
+    "text": "Recap of Block 6\n\nComplexHeatmap: We learned how to create and annotate complex heatmaps to visualize large data matrices effectively.\nCustomization: We explored how to customize heatmaps with annotations and colors to reveal patterns in the data.\nCross-System Composition: We discussed the need for the grid graphics system to combine plots from different systems like ComplexHeatmap and ggplot2."
+  },
+  {
+    "objectID": "slides/slide_block_7.html#finalizing-figures-for-publication",
+    "href": "slides/slide_block_7.html#finalizing-figures-for-publication",
+    "title": "Block 7",
+    "section": "Finalizing Figures for Publication",
+    "text": "Finalizing Figures for Publication\nYou’ve created a beautiful plot. Now, how do you get it into your manuscript correctly?\n\nVector vs. Raster Formats:\n\nVector (PDF, SVG, EPS): Infinitely scalable. Lines and text are stored as mathematical equations. This is the preferred format for most journals.\nRaster (PNG, TIFF, JPG): Pixel-based. Can become blurry when resized. Necessary for images with complex color gradients like photos.\n\nResolution (DPI): For raster images, journals typically require 300 DPI for color/grayscale and 600-1200 DPI for line art."
+  },
+  {
+    "objectID": "slides/slide_block_7.html#mastering-ggsave",
+    "href": "slides/slide_block_7.html#mastering-ggsave",
+    "title": "Block 7",
+    "section": "Mastering ggsave()",
+    "text": "Mastering ggsave()\nggsave() is your best friend for exporting ggplot2 plots.\nmy_ggplot &lt;- ggplot(mtcars, aes(wt, mpg)) + geom_point()\n\n# Save as a PDF (vector)\nggsave(\"my_plot.pdf\", plot = my_ggplot, width = 180, height = 100, units = \"mm\")\n\n# Save as a high-resolution TIFF (raster)\nggsave(\"my_plot.tiff\", plot = my_ggplot, width = 180, height = 100, units = \"mm\", dpi = 300)\nKey Parameters: - width, height, units: Always specify the physical size required by the journal. - dpi: Crucial for raster formats. - device: Can be used to specify the graphics device (e.g., cairo_pdf for better font embedding)."
+  },
+  {
+    "objectID": "slides/slide_block_7.html#the-importance-of-reproducibility",
+    "href": "slides/slide_block_7.html#the-importance-of-reproducibility",
+    "title": "Block 7",
+    "section": "The Importance of Reproducibility",
+    "text": "The Importance of Reproducibility\n“Can you just re-run the analysis with this one small change?”\nA publication-ready figure is not just about aesthetics; it’s about scientific integrity. A figure is only as good as the code that produced it.\nReproducibility means that someone else (or you, 6 months from now) can run your code and get the exact same result."
+  },
+  {
+    "objectID": "slides/slide_block_7.html#best-practices-for-reproducibility",
+    "href": "slides/slide_block_7.html#best-practices-for-reproducibility",
+    "title": "Block 7",
+    "section": "Best Practices for Reproducibility",
+    "text": "Best Practices for Reproducibility\n\nStructure Your Code:\n\nKeep your code in R scripts (.R), not just in your R console history.\nUse comments to explain the why, not the what.\nOrganize scripts logically: data loading, data cleaning, analysis, figure generation.\n\nManage Your Environment:\n\nThe renv package (which this course uses!) saves the versions of all packages you use. This is critical for long-term reproducibility.\nAlways run renv::snapshot() to save the state of your project.\n\nUse Version Control:\n\nTools like git track every change you make to your code.\nIt’s like a “lab notebook” for your analysis, allowing you to go back in time and understand how your analysis evolved."
+  },
+  {
+    "objectID": "slides/slide_block_7.html#course-review-what-weve-learned",
+    "href": "slides/slide_block_7.html#course-review-what-weve-learned",
+    "title": "Block 7",
+    "section": "Course Review: What We’ve Learned",
+    "text": "Course Review: What We’ve Learned\n\nBlock 1: Principles of effective data visualization and base R graphics.\nBlock 2: The “Grammar of Graphics” and building plots with ggplot2.\nBlock 3: Advanced ggplot2 (faceting, themes, colors).\nBlock 4: Adding statistical annotations and summaries.\nBlock 5: Creating universal themes and assembling multi-panel ggplot figures with patchwork.\nBlock 6: Building complex heatmaps and combining them with ggplot objects.\nBlock 7: Finalizing figures for publication and ensuring reproducibility."
+  },
+  {
+    "objectID": "slides/slide_block_7.html#capstone-project-idea",
+    "href": "slides/slide_block_7.html#capstone-project-idea",
+    "title": "Block 7",
+    "section": "Capstone Project Idea",
+    "text": "Capstone Project Idea\nChallenge: Create a final, publication-ready, multi-panel figure.\n\nTop Panel: A ComplexHeatmap of the top 50 most variable genes, with annotations for compound and time.\nBottom-Left Panel: A ggplot volcano plot of the 24h differential expression results.\nBottom-Right Panel: A ggplot boxplot showing the expression of a single, highly significant gene.\n\nRequirements: - All plots must share a consistent visual style (fonts, colors). - The final figure should be assembled using grid graphics. - The figure should be saved as a 300 DPI TIFF and a vector PDF. - The code should be clean, commented, and reproducible."
+  },
+  {
+    "objectID": "slides/slide_block_7.html#thank-you-final-qa",
+    "href": "slides/slide_block_7.html#thank-you-final-qa",
+    "title": "Block 7",
+    "section": "Thank You & Final Q&A",
+    "text": "Thank You & Final Q&A"
+  },
+  {
+    "objectID": "slides/slide_block_5.html#recap-of-block-4",
+    "href": "slides/slide_block_5.html#recap-of-block-4",
+    "title": "Block 5",
+    "section": "Recap of Block 4",
+    "text": "Recap of Block 4\n\nStatistical Summaries: We learned to add regression lines and confidence intervals using geom_smooth().\nggpubr Package: We used stat_cor() to add correlation coefficients and stat_compare_means() to add p-values from statistical tests.\nAdvanced Annotations: We explored how to label specific points on plots using ggrepel to avoid overlapping text."
+  },
+  {
+    "objectID": "slides/slide_block_5.html#advanced-theming",
+    "href": "slides/slide_block_5.html#advanced-theming",
+    "title": "Block 5",
+    "section": "Advanced Theming",
+    "text": "Advanced Theming\nCreating a consistent and professional look for all your plots is key for publication. Instead of customizing each plot individually, you can create a reusable theme object.\nWhy create a “universal” theme?\n\nConsistency: Ensures all figures in a publication have the same style.\nEfficiency: Saves time by applying a complex set of customizations in one line.\nReproducibility: Makes it easy to share and reuse your style."
+  },
+  {
+    "objectID": "slides/slide_block_5.html#creating-a-reusable-theme",
+    "href": "slides/slide_block_5.html#creating-a-reusable-theme",
+    "title": "Block 5",
+    "section": "Creating a Reusable Theme",
+    "text": "Creating a Reusable Theme\nYou can store a theme() configuration in an object.\n\n\n# Define a universal theme\ntheme_publication &lt;- function() {\n  theme_bw(base_size = 12) +\n    theme(\n      plot.title = element_text(face = \"bold\", size = 14, hjust = 0.5),\n      axis.title = element_text(face = \"bold\"),\n      axis.text = element_text(color = \"black\"),\n      panel.grid.major = element_line(color = \"grey90\"),\n      panel.grid.minor = element_blank(),\n      legend.position = \"bottom\"\n    )\n}"
+  },
+  {
+    "objectID": "slides/slide_block_5.html#advanced-patchwork",
+    "href": "slides/slide_block_5.html#advanced-patchwork",
+    "title": "Block 5",
+    "section": "Advanced patchwork",
+    "text": "Advanced patchwork\nWe’ve used + and / to combine plots. patchwork offers much more control over complex layouts.\n\n|: A synonym for + to place plots side-by-side.\nplot_layout(): Fine-tune the dimensions of plots in a layout (widths, heights, guides).\nplot_annotation(): Add titles, captions, and tags to the entire composition."
+  },
+  {
+    "objectID": "slides/slide_block_5.html#example-complex-layout",
+    "href": "slides/slide_block_5.html#example-complex-layout",
+    "title": "Block 5",
+    "section": "Example: Complex Layout",
+    "text": "Example: Complex Layout\nLet’s create two different plots and arrange them in a more complex layout.\n\n\nlibrary(patchwork)\n\n# Combine scatter plot and boxplot\n# Make the scatter plot twice as wide as the boxplot\nlayout &lt;- p_scatter + p_box +\n  plot_layout(widths = c(2, 1))\n\n# Add a title and tags\nlayout +\n  plot_annotation(\n    title = 'Gene Expression Analysis',\n    tag_levels = 'A'\n  )"
+  },
+  {
+    "objectID": "slides/slide_block_5.html#aligning-plots-with-nesting",
+    "href": "slides/slide_block_5.html#aligning-plots-with-nesting",
+    "title": "Block 5",
+    "section": "Aligning Plots with Nesting",
+    "text": "Aligning Plots with Nesting\nYou can create more advanced layouts by nesting combined plots.\n\n\n# p_scatter and p_box are from the previous slide\n\n# Nesting plots: (scatter + boxplot) / bar chart\n(p_scatter + p_box) / p_bar"
+  },
+  {
+    "objectID": "slides/slide_block_5.html#lets-practice",
+    "href": "slides/slide_block_5.html#lets-practice",
+    "title": "Block 5",
+    "section": "Let’s Practice!",
+    "text": "Let’s Practice!\nNow, let’s apply these concepts in the exercise for Block 5."
+  },
+  {
+    "objectID": "slides/slide_block_3.html#recap-of-block-2",
+    "href": "slides/slide_block_3.html#recap-of-block-2",
+    "title": "Block 3",
+    "section": "Recap of Block 2",
+    "text": "Recap of Block 2\n\nGrammar of Graphics (gg): We were introduced to the Grammar of Graphics, a systematic way to describe and build plots.\n\n\nggplot2 Components: We learned that ggplot2 is based on the idea that you can build any plot from the same components: a data set, a coordinate system, and geoms (visual marks that represent data points).\n\n\nLayers: We build plots by adding layers."
+  },
+  {
+    "objectID": "slides/slide_block_3.html#faceting-the-plots",
+    "href": "slides/slide_block_3.html#faceting-the-plots",
+    "title": "Block 3",
+    "section": "Faceting the plots",
+    "text": "Faceting the plots"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#themes",
+    "href": "slides/slide_block_3.html#themes",
+    "title": "Block 3",
+    "section": "Themes",
+    "text": "Themes"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#simplified-schematic-of-human-color-perception",
+    "href": "slides/slide_block_3.html#simplified-schematic-of-human-color-perception",
+    "title": "Block 3",
+    "section": "Simplified schematic of human color perception",
+    "text": "Simplified schematic of human color perception"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#rainbow-colormap",
+    "href": "slides/slide_block_3.html#rainbow-colormap",
+    "title": "Block 3",
+    "section": "Rainbow colormap",
+    "text": "Rainbow colormap"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#perceptually-non-uniform-color-spaces",
+    "href": "slides/slide_block_3.html#perceptually-non-uniform-color-spaces",
+    "title": "Block 3",
+    "section": "Perceptually non-uniform color spaces",
+    "text": "Perceptually non-uniform color spaces"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#perceptually-non-uniform-color-spaces-1",
+    "href": "slides/slide_block_3.html#perceptually-non-uniform-color-spaces-1",
+    "title": "Block 3",
+    "section": "Perceptually non-uniform color spaces",
+    "text": "Perceptually non-uniform color spaces\nThis explains why a majority of the rectangles are green, and why we see a sudden shift towards blue at the end of the scale."
+  },
+  {
+    "objectID": "slides/slide_block_3.html#perceptually-uniform-color-spaces",
+    "href": "slides/slide_block_3.html#perceptually-uniform-color-spaces",
+    "title": "Block 3",
+    "section": "Perceptually uniform color spaces",
+    "text": "Perceptually uniform color spaces\n\n\nNon-uniform\n\n\n\n\n\n\nUniform\n\n\n\n\n\n\nIf we want to operate with color as it relates to the human vision, we need a color space built on these human measurements, and that is what perceptually uniform color spaces are."
+  },
+  {
+    "objectID": "slides/slide_block_3.html#color-selection-is-important",
+    "href": "slides/slide_block_3.html#color-selection-is-important",
+    "title": "Block 3",
+    "section": "Color selection is important",
+    "text": "Color selection is important"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#spot-the-difference",
+    "href": "slides/slide_block_3.html#spot-the-difference",
+    "title": "Block 3",
+    "section": "Spot the difference",
+    "text": "Spot the difference"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#background-of-plots",
+    "href": "slides/slide_block_3.html#background-of-plots",
+    "title": "Block 3",
+    "section": "Background of plots",
+    "text": "Background of plots"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#group-exercise",
+    "href": "slides/slide_block_3.html#group-exercise",
+    "title": "Block 3",
+    "section": "Group exercise",
+    "text": "Group exercise\n\nSearch on internet “the misuse of colour in science communication”\nGo to the Figue 6 of the paper\nGroup 1: Top half of the figure  Group 2: Bottom half of the figure\nDiscuss the flowchart\nDiscuss about the color class type and combination for all the figures we have made in Exercises"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#saving-plots-for-publication",
+    "href": "slides/slide_block_3.html#saving-plots-for-publication",
+    "title": "Block 3",
+    "section": "Saving Plots for Publication",
+    "text": "Saving Plots for Publication\n\nggsave(): The easiest way to save a plot.\n\n\nVector vs. Raster:\n\nVector (PDF, SVG): Best for publications. Scalable without losing quality.\nRaster (PNG, TIFF): Pixel-based. Good for web, but can lose quality when scaled.\n\n\n\nResolution (DPI): Dots Per Inch. Journals often require 300 DPI or higher for raster images."
+  },
+  {
+    "objectID": "slides/slide_block_3.html#saving-plots-for-publication-1",
+    "href": "slides/slide_block_3.html#saving-plots-for-publication-1",
+    "title": "Block 3",
+    "section": "Saving Plots for Publication",
+    "text": "Saving Plots for Publication\n\nmy_plot &lt;- ggplot(mtcars, aes(x = wt, y = mpg)) + geom_point()\n\nggsave(\"my_plot.pdf\", plot = my_plot, width = 6, height = 4)\nggsave(\"my_plot.png\", plot = my_plot, width = 6, height = 4, dpi = 300)"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#customizing-stylistic-elements",
+    "href": "slides/slide_block_3.html#customizing-stylistic-elements",
+    "title": "Block 3",
+    "section": "Customizing Stylistic Elements",
+    "text": "Customizing Stylistic Elements\n\ntheme(): The powerhouse for customizing the non-data elements of your plot.\nFonts: Change font family, size, and face (bold, italic).\nLine Weights: Adjust the thickness of axis lines, grid lines, and borders.\n\n\nmy_plot + \n  theme(\n    text = element_text(family = \"Times New Roman\", size = 12),\n    axis.title = element_text(size = 14, face = \"bold\"),\n    axis.line = element_line(linewidth = 0.8),\n    panel.grid.major = element_line(linewidth = 0.2)\n  )"
+  },
+  {
+    "objectID": "slides/slide_block_3.html#interactive-plots-with-ggplotly",
+    "href": "slides/slide_block_3.html#interactive-plots-with-ggplotly",
+    "title": "Block 3",
+    "section": "Interactive Plots with ggplotly",
+    "text": "Interactive Plots with ggplotly\n\nggplotly(): A function from the plotly package that transforms a ggplot object into an interactive plot.\nGreat for exploring data, as you can hover over points to see values, zoom in and out, and pan around."
+  },
+  {
+    "objectID": "slides/slide_block_3.html#interactive-plots-with-ggplotly-1",
+    "href": "slides/slide_block_3.html#interactive-plots-with-ggplotly-1",
+    "title": "Block 3",
+    "section": "Interactive Plots with ggplotly",
+    "text": "Interactive Plots with ggplotly"
+  },
+  {
+    "objectID": "slides/slide_block_1.html#introduction",
+    "href": "slides/slide_block_1.html#introduction",
+    "title": "Block 1",
+    "section": "Introduction",
+    "text": "Introduction\n\nName\nResearch group\nTopic of research\nDatasets for your research\nWhy are you attending this course?"
+  },
+  {
+    "objectID": "slides/slide_block_1.html#quiz-1",
+    "href": "slides/slide_block_1.html#quiz-1",
+    "title": "Block 1",
+    "section": "Quiz 1",
+    "text": "Quiz 1\nQuestions 1 to 4"
+  },
+  {
+    "objectID": "slides/slide_block_1.html#why-choosing-the-right-chart-matters",
+    "href": "slides/slide_block_1.html#why-choosing-the-right-chart-matters",
+    "title": "Block 1",
+    "section": "Why choosing the right chart matters?",
+    "text": "Why choosing the right chart matters?\n\nEffective visualizations communicate data clearly and efficiently.\nThe wrong chart can mislead or confuse your audience.\nGood visualizations highlight patterns, trends, and outliers."
+  },
+  {
+    "objectID": "slides/slide_block_1.html#types-of-data",
+    "href": "slides/slide_block_1.html#types-of-data",
+    "title": "Block 1",
+    "section": "Types of data",
+    "text": "Types of data\n\nCategorical: Names or labels (e.g., Region, Product Type)\nNumeric: Quantitative values (e.g., Sales, Temperature)\nTime: Dates or time intervals (e.g., Monthly Revenue)\nGeographic: Locations (e.g., Country, Coordinates)"
+  },
+  {
+    "objectID": "slides/slide_block_1.html#categorical-data",
+    "href": "slides/slide_block_1.html#categorical-data",
+    "title": "Block 1",
+    "section": "Categorical Data",
+    "text": "Categorical Data\n\nUse bar charts to compare categories"
+  },
+  {
+    "objectID": "slides/slide_block_1.html#categorical-data-1",
+    "href": "slides/slide_block_1.html#categorical-data-1",
+    "title": "Block 1",
+    "section": "Categorical Data",
+    "text": "Categorical Data\n\nUse pie charts to show proportions"
+  },
+  {
+    "objectID": "slides/slide_block_1.html#numeric-data",
+    "href": "slides/slide_block_1.html#numeric-data",
+    "title": "Block 1",
+    "section": "Numeric Data",
+    "text": "Numeric Data\n\nUse histograms to show distributions"
+  },
+  {
+    "objectID": "slides/slide_block_1.html#numeric-data-1",
+    "href": "slides/slide_block_1.html#numeric-data-1",
+    "title": "Block 1",
+    "section": "Numeric Data",
+    "text": "Numeric Data\n\nUse boxplots to show spread and outliers"
+  },
+  {
+    "objectID": "slides/slide_block_1.html#relational-data",
+    "href": "slides/slide_block_1.html#relational-data",
+    "title": "Block 1",
+    "section": "Relational Data",
+    "text": "Relational Data\n\nUse scatter plots to show relationships between two numeric variables"
+  },
+  {
+    "objectID": "slides/slide_block_1.html#time-series-data",
+    "href": "slides/slide_block_1.html#time-series-data",
+    "title": "Block 1",
+    "section": "Time Series Data",
+    "text": "Time Series Data\n\nUse line charts to show trends over time"
+  },
+  {
+    "objectID": "slides/slide_block_1.html#geographic-data",
+    "href": "slides/slide_block_1.html#geographic-data",
+    "title": "Block 1",
+    "section": "Geographic Data",
+    "text": "Geographic Data\n\nUse choropleth maps to show values by region"
+  },
+  {
+    "objectID": "slides/slide_block_1.html#conclusion-choosing-the-right-visualization",
+    "href": "slides/slide_block_1.html#conclusion-choosing-the-right-visualization",
+    "title": "Block 1",
+    "section": "Conclusion: Choosing the Right Visualization",
+    "text": "Conclusion: Choosing the Right Visualization\n\nThere is no single “correct” chart for a given dataset. For example, numeric data can be shown as:\n\nHistogram (distribution)\nBoxplot (spread and outliers)\nDensity plot (smooth distribution)"
+  },
+  {
+    "objectID": "slides/slide_block_1.html#conclusion-choosing-the-right-visualization-1",
+    "href": "slides/slide_block_1.html#conclusion-choosing-the-right-visualization-1",
+    "title": "Block 1",
+    "section": "Conclusion: Choosing the Right Visualization",
+    "text": "Conclusion: Choosing the Right Visualization\n\nThe best choice depends on:\n\nYour goal: Compare, show distribution, highlight relationships?\nAudience: Technical vs. non-technical\nClarity: Which chart communicates the message most clearly?"
+  },
+  {
+    "objectID": "slides/slide_block_1.html#from-data-to-visualization",
+    "href": "slides/slide_block_1.html#from-data-to-visualization",
+    "title": "Block 1",
+    "section": "From data to visualization",
+    "text": "From data to visualization\n\nOnly resource you need: data-to-viz.com"
+  },
+  {
+    "objectID": "slides/slide_block_1.html#exercise-read-and-discuss-content",
+    "href": "slides/slide_block_1.html#exercise-read-and-discuss-content",
+    "title": "Block 1",
+    "section": "Exercise: Read and discuss content",
+    "text": "Exercise: Read and discuss content\nGroup 1: data-to-viz.com/caveat/bin_size.html\nGroup 2: data-to-viz.com/caveat/consistency.html\nGroup 3: data-to-viz.com/caveat/simpson.html\nGroup 4: data-to-viz.com/caveat/boxplot.html\n\nWhat is the main problem or risk highlighted by this caveat?\nWhy does this issue occur?\nWhat are the potential consequences of ignoring this caveat?\nHow can we detect or avoid this problem in practice?"
+  },
+  {
+    "objectID": "slides/slide_block_1.html#quiz-2",
+    "href": "slides/slide_block_1.html#quiz-2",
+    "title": "Block 1",
+    "section": "Quiz 2",
+    "text": "Quiz 2\nQuestions 5 to 12"
+  },
+  {
+    "objectID": "qmd/precourse_preparation.html",
+    "href": "qmd/precourse_preparation.html",
+    "title": "Pre-course Preparation",
+    "section": "",
+    "text": "Understanding R syntax (objects, functions, operators).\nAbility to create and manipulate basic data structures: vectors, factors, data frames, and lists.\nFamiliarity with indexing and subsetting data.\nWriting simple scripts in RStudio or another R IDE.\nReading and importing data (read.csv(), read.table(), or readr).\n\n\n\n\nYou can evaluate your skills here:\n\nGoogle Form\nCoursera R Programming Skill Assessment\nNCEAS R Review and Assessment"
+  },
+  {
+    "objectID": "qmd/precourse_preparation.html#prerequisites",
+    "href": "qmd/precourse_preparation.html#prerequisites",
+    "title": "Pre-course Preparation",
+    "section": "",
+    "text": "Understanding R syntax (objects, functions, operators).\nAbility to create and manipulate basic data structures: vectors, factors, data frames, and lists.\nFamiliarity with indexing and subsetting data.\nWriting simple scripts in RStudio or another R IDE.\nReading and importing data (read.csv(), read.table(), or readr).\n\n\n\n\nYou can evaluate your skills here:\n\nGoogle Form\nCoursera R Programming Skill Assessment\nNCEAS R Review and Assessment"
+  },
+  {
+    "objectID": "qmd/precourse_preparation.html#setup",
+    "href": "qmd/precourse_preparation.html#setup",
+    "title": "Pre-course Preparation",
+    "section": "Setup",
+    "text": "Setup\n\nComputational Requirements\n\nR 4.5.1\nRStudio (latest version)\nrenv R package installed: renv documentation"
+  },
+  {
+    "objectID": "exercises/exercise_block_3.html",
+    "href": "exercises/exercise_block_3.html",
+    "title": "Exercise - Block 3",
+    "section": "",
+    "text": "In the last block, we learned the basics of ggplot2. In this block, we will explore more advanced topics to make our plots publication-ready. We will cover:\n\nFaceting: Creating subplots to compare different subsets of your data.\nThemes: Customizing the appearance of your plots.\nColors: Using colors effectively and exploring different color palettes.\nInteractivity: Making your plots interactive with ggplotly."
+  },
+  {
+    "objectID": "exercises/exercise_block_3.html#introduction-to-ggplot2-advanced-topics",
+    "href": "exercises/exercise_block_3.html#introduction-to-ggplot2-advanced-topics",
+    "title": "Exercise - Block 3",
+    "section": "",
+    "text": "In the last block, we learned the basics of ggplot2. In this block, we will explore more advanced topics to make our plots publication-ready. We will cover:\n\nFaceting: Creating subplots to compare different subsets of your data.\nThemes: Customizing the appearance of your plots.\nColors: Using colors effectively and exploring different color palettes.\nInteractivity: Making your plots interactive with ggplotly."
+  },
+  {
+    "objectID": "exercises/exercise_block_3.html#installing-packages",
+    "href": "exercises/exercise_block_3.html#installing-packages",
+    "title": "Exercise - Block 3",
+    "section": "Installing packages",
+    "text": "Installing packages\n\nrenv::install(\"RColorBrewer\")\nrenv::install(\"viridis\")\nrenv::install(\"dplyr\")\nrenv::install(\"plotly\")"
+  },
+  {
+    "objectID": "exercises/exercise_block_3.html#packages",
+    "href": "exercises/exercise_block_3.html#packages",
+    "title": "Exercise - Block 3",
+    "section": "Packages",
+    "text": "Packages\n\nlibrary(ggplot2)\nlibrary(patchwork)\nlibrary(RColorBrewer)\nlibrary(viridis)\nlibrary(dplyr)\nlibrary(plotly)"
+  },
+  {
+    "objectID": "exercises/exercise_block_3.html#exploratory-data-analysis",
+    "href": "exercises/exercise_block_3.html#exploratory-data-analysis",
+    "title": "Exercise - Block 3",
+    "section": "Exploratory data analysis",
+    "text": "Exploratory data analysis\n\ndata &lt;- readRDS(gzcon(url(\n  \"https://raw.githubusercontent.com/urppeia/publication_figs/main/data.rds\"\n)))"
+  },
+  {
+    "objectID": "exercises/exercise_block_3.html#faceting",
+    "href": "exercises/exercise_block_3.html#faceting",
+    "title": "Exercise - Block 3",
+    "section": "Faceting",
+    "text": "Faceting\nIn Block 2, we created two separate volcano plots for the 3h and 24h timepoints. We can use faceting to create a single plot with two panels.\n\nExercise 1\nCreate a single volcano plot faceted by timepoint. Store the plot as an object named p1.\n\n\n\n\n\n\nTip\n\n\n\n\n\n\n# Create a single data frame for both timepoints\ndiff_df &lt;- data.frame(\n  lfc = c(data$diff$sucrose_3h_lfc, data$diff$sucrose_24h_lfc),\n  pval = c(data$diff$sucrose_3h_pval, data$diff$sucrose_24h_pval),\n  timepoint = rep(c(\"3h\", \"24h\"), each = nrow(data$diff))\n)\ndiff_df$significant &lt;- diff_df$pval &lt; 0.05 & abs(diff_df$lfc) &gt; 1\n\np1 &lt;- ggplot(diff_df, aes(x = lfc, y = -log10(pval), color = significant)) +\n  geom_point(size = 2, alpha = 0.7) +\n  scale_color_manual(values = c(\"gray70\", \"tomato\")) +\n  geom_vline(xintercept = c(-1, 1), linetype = \"dashed\", color = \"red\") +\n  geom_hline(yintercept = -log10(0.05), linetype = \"dashed\", color = \"blue\") +\n  labs(\n    title = \"Volcano Plot — Sucrose Treatment\",\n    x = \"log2 Fold Change\",\n    y = \"-log10(p-value)\"\n  ) +\n  facet_wrap(~timepoint)\n\np1"
+  },
+  {
+    "objectID": "exercises/exercise_block_3.html#themes",
+    "href": "exercises/exercise_block_3.html#themes",
+    "title": "Exercise - Block 3",
+    "section": "Themes",
+    "text": "Themes\nggplot2 comes with several built-in themes. You can also create your own themes to have full control over the appearance of your plots.\n\nExercise 2\nA. Apply the theme_minimal() to the faceted volcano plot. Store the plot as p2a.\n\n\n\n\n\n\nTip\n\n\n\n\n\n\np2a &lt;- p1 + theme_minimal()\np2a\n\n\n\n\n\n\n\n\n\n\n\nB. Customize the theme. Make the following changes: * Increase the title font size to 16. * Remove the panel grid lines. * Change the panel background to light gray. Store the plot as p2b.\n\n\n\n\n\n\nTip\n\n\n\n\n\n\np2b &lt;- p2a +\n  theme(\n    plot.title = element_text(size = 16),\n    panel.grid = element_blank(),\n    panel.background = element_rect(fill = \"lightgray\", color = NA)\n  )\np2b"
+  },
+  {
+    "objectID": "exercises/exercise_block_3.html#colors",
+    "href": "exercises/exercise_block_3.html#colors",
+    "title": "Exercise - Block 3",
+    "section": "Colors",
+    "text": "Colors\nColors are a powerful tool in data visualization. ggplot2 provides many ways to work with colors.\n\nExercise 3\nLet’s go back to the boxplot of expression data.\n\ndata_long &lt;- merge(data$anno, reshape2::melt(data$counts))\n\nUsing Gene_ID as id variables\n\n\nA. Use a color palette from RColorBrewer. Store the plot as p3a.\n\n\n\n\n\n\nTip\n\n\n\n\n\n\np3a &lt;- ggplot(data_long, aes(x = Sample_ID, y = value, fill = compound)) +\n  geom_boxplot(outlier.shape = NA) +\n  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +\n  labs(\n    title = \"Normalized expression per sample\",\n    x = \"Sample\",\n    y = \"Expression\"\n  ) +\n  scale_fill_brewer(palette = \"Set2\")\np3a\n\n\n\n\n\n\n\n\n\n\n\nB. Use the viridis color palette. Store the plot as p3b.\n\n\n\n\n\n\nTip\n\n\n\n\n\n\np3b &lt;- ggplot(data_long, aes(x = Sample_ID, y = value, fill = compound)) +\n  geom_boxplot(outlier.shape = NA) +\n  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +\n  labs(\n    title = \"Normalized expression per sample\",\n    x = \"Sample\",\n    y = \"Expression\"\n  ) +\n  scale_fill_viridis_d()\np3b\n\n\n\n\n\n\n\n\n\n\n\nC. Specify colors manually. Store the plot as p3c.\n\n\n\n\n\n\nTip\n\n\n\n\n\n\np3c &lt;- ggplot(data_long, aes(x = Sample_ID, y = value, fill = compound)) +\n  geom_boxplot(outlier.shape = NA) +\n  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +\n  labs(\n    title = \"Normalized expression per sample\",\n    x = \"Sample\",\n    y = \"Expression\"\n  ) +\n  scale_fill_manual(values = c(\"none\" = \"#66c2a5\", \"sucrose\" = \"#fc8d62\"))\np3c"
+  },
+  {
+    "objectID": "exercises/exercise_block_3.html#saving-plots-for-publication",
+    "href": "exercises/exercise_block_3.html#saving-plots-for-publication",
+    "title": "Exercise - Block 3",
+    "section": "Saving plots for publication",
+    "text": "Saving plots for publication\nWhen preparing figures for publication, journals often have strict requirements for file format, dimensions, and resolution.\n\nExercise 4\nLet’s save the faceted volcano plot from Exercise 2B (p2b).\nA. Save the plot as a PNG file with a width of 8 inches, a height of 4 inches, and a resolution of 300 dpi.\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nggsave(\"volcano_plot.png\", plot = p2b, width = 8, height = 4, dpi = 300)\n\n\n\n\nB. Save the plot as a PDF file. PDF is a vector format, which is ideal for publications as it can be scaled without losing quality.\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nggsave(\"volcano_plot.pdf\", plot = p2b, width = 8, height = 4)\n\nWarning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :\nfor 'Volcano Plot — Sucrose Treatment' in 'mbcsToSbcs': - substituted for —\n(U+2014)\n\n\n\n\n\nC. Save the plot as a TIFF file.\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nggsave(\"volcano_plot.tiff\", plot = p2b, width = 8, height = 4, dpi = 300)"
+  },
+  {
+    "objectID": "exercises/exercise_block_3.html#fine-tuning-stylistic-elements",
+    "href": "exercises/exercise_block_3.html#fine-tuning-stylistic-elements",
+    "title": "Exercise - Block 3",
+    "section": "Fine-tuning stylistic elements",
+    "text": "Fine-tuning stylistic elements\nJournals often have specific guidelines for fonts and line weights.\n\nExercise 5\nLet’s modify the volcano plot to meet some hypothetical publication guidelines.\nA. Change the font family to “Arial”. Store the plot as p5a.\n\n\n\n\n\n\nTip\n\n\n\n\n\n\np5a &lt;- p2b + \n  theme(text = element_text(family = \"Arial\"))\np5a\n\n\n\n\n\n\n\n\n\n\n\nB. Adjust the line weights. Make the axis lines thicker (size = 1) and the facet borders thinner (size = 0.5). Store the plot as p5b.\n\n\n\n\n\n\nTip\n\n\n\n\n\n\np5b &lt;- p5a + \n  theme(\n    axis.line = element_line(linewidth = 1),\n    strip.background = element_rect(linewidth = 0.5)\n  )\np5b"
+  },
+  {
+    "objectID": "exercises/exercise_block_3.html#additional-plot-types",
+    "href": "exercises/exercise_block_3.html#additional-plot-types",
+    "title": "Exercise - Block 3",
+    "section": "Additional Plot Types",
+    "text": "Additional Plot Types\n\nExercise 6: Scatter plot with regression line\nLet’s explore the relationship between the expression of two samples.\nA. Create a scatter plot of the expression of the first two samples in the data$counts dataframe. Store the plot as p6a.\n\n\n\n\n\n\nTip\n\n\n\n\n\n\n# Create a dataframe with the first two samples\nsample_df &lt;- data.frame(\n  sample1 = data$counts[, 2],\n  sample2 = data$counts[, 3]\n)\n\np6a &lt;- ggplot(sample_df, aes(x = sample1, y = sample2)) +\n  geom_point() +\n  labs(\n    title = \"Sample Expression Correlation\",\n    x = \"Sample 1 Expression\",\n    y = \"Sample 2 Expression\"\n  )\np6a\n\n\n\n\n\n\n\n\n\n\n\nB. Add a linear regression line to the scatter plot. Store the plot as p6b.\n\n\n\n\n\n\nTip\n\n\n\n\n\n\np6b &lt;- p6a +\n  geom_smooth(method = \"lm\")\np6b\n\n`geom_smooth()` using formula = 'y ~ x'\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nExercise 7: Bar plot with error bars\nLet’s visualize the average expression of each compound.\nA. Calculate the mean and standard deviation of expression for each compound.\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nsummary_df &lt;- data_long %&gt;%\n  group_by(compound) %&gt;%\n  summarise(\n    mean_expr = mean(value),\n    sd_expr = sd(value)\n  )\n\nprint(summary_df)\n\n# A tibble: 2 × 3\n  compound mean_expr sd_expr\n  &lt;chr&gt;        &lt;dbl&gt;   &lt;dbl&gt;\n1 none          8.86   0.939\n2 sucrose       8.86   0.939\n\n\n\n\n\nB. Create a bar plot of the mean expression with error bars representing the standard deviation. Store the plot as p7.\n\n\n\n\n\n\nTip\n\n\n\n\n\n\np7 &lt;- ggplot(summary_df, aes(x = compound, y = mean_expr, fill = compound)) +\n  geom_bar(stat = \"identity\") +\n  geom_errorbar(\n    aes(ymin = mean_expr - sd_expr, ymax = mean_expr + sd_expr),\n    width = 0.2\n  ) +\n  labs(\n    title = \"Average Gene Expression by Compound\",\n    x = \"Compound\",\n    y = \"Mean Expression\"\n  ) +\n  theme_minimal()\np7"
+  },
+  {
+    "objectID": "exercises/exercise_block_3.html#interactive-plots-with-ggplotly",
+    "href": "exercises/exercise_block_3.html#interactive-plots-with-ggplotly",
+    "title": "Exercise - Block 3",
+    "section": "Interactive plots with ggplotly",
+    "text": "Interactive plots with ggplotly\nggplotly is a function from the plotly package that converts a ggplot object into an interactive plotly object.\n\nExample\nLet’s take the volcano plot from Exercise 1 (p1) and make it interactive.\n\nggplotly(p1)\n\n\n\n\n\nNow, let’s try it on the scatter plot from Exercise 6b (p6b).\n\nggplotly(p6b)\n\n`geom_smooth()` using formula = 'y ~ x'\n\n\n\n\n\n\n\n\nExercise 8: Your turn!\nA. Create a scatter plot of lfc vs -log10(pval) from the diff_df dataframe, colored by timepoint. Store it as an object called p8.\n\n\n\n\n\n\nTip\n\n\n\n\n\n\np8 &lt;- ggplot(diff_df, aes(x = lfc, y = -log10(pval), color = timepoint)) +\n  geom_point(alpha = 0.7) +\n  labs(\n    title = \"Volcano Plot by Timepoint\",\n    x = \"log2 Fold Change\",\n    y = \"-log10(p-value)\"\n  )\np8\n\n\n\n\n\n\n\n\n\n\n\nB. Now, use ggplotly to make the plot interactive.\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nggplotly(p8)\n\n\n\n\n\n\n\n\nC. What if one just want to see 24h dots?.\n\n\n\n\n\n\nTip\n\n\n\n\n\nOne can simply click on 3h dot in the legend, and they will disappear."
+  },
+  {
+    "objectID": "exercises/exercise_block_3.html#session-information",
+    "href": "exercises/exercise_block_3.html#session-information",
+    "title": "Exercise - Block 3",
+    "section": "Session information",
+    "text": "Session information\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nsessionInfo()\n\nR version 4.5.1 (2025-06-13)\nPlatform: aarch64-apple-darwin20\nRunning under: macOS Tahoe 26.1\n\nMatrix products: default\nBLAS:   /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib \nLAPACK: /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1\n\nlocale:\n[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8\n\ntime zone: Europe/Zurich\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices datasets  utils     methods   base     \n\nother attached packages:\n[1] plotly_4.11.0      dplyr_1.1.4        viridis_0.6.5      viridisLite_0.4.2 \n[5] RColorBrewer_1.1-3 patchwork_1.3.2    ggplot2_4.0.0     \n\nloaded via a namespace (and not attached):\n [1] utf8_1.2.6          generics_0.1.4      tidyr_1.3.1        \n [4] renv_1.1.5          stringi_1.8.7       lattice_0.22-7     \n [7] digest_0.6.37       magrittr_2.0.4      evaluate_1.0.5     \n[10] grid_4.5.1          fastmap_1.2.0       plyr_1.8.9         \n[13] jsonlite_2.0.0      Matrix_1.7-3        gridExtra_2.3      \n[16] BiocManager_1.30.26 httr_1.4.7          mgcv_1.9-3         \n[19] purrr_1.1.0         crosstalk_1.2.2     scales_1.4.0       \n[22] lazyeval_0.2.2      cli_3.6.5           rlang_1.1.6        \n[25] splines_4.5.1       withr_3.0.2         yaml_2.3.10        \n[28] tools_4.5.1         reshape2_1.4.4      vctrs_0.6.5        \n[31] R6_2.6.1            lifecycle_1.0.4     stringr_1.5.2      \n[34] htmlwidgets_1.6.4   pkgconfig_2.0.3     pillar_1.11.1      \n[37] gtable_0.3.6        data.table_1.17.8   glue_1.8.0         \n[40] Rcpp_1.1.0          xfun_0.53           tibble_3.3.0       \n[43] tidyselect_1.2.1    rstudioapi_0.17.1   knitr_1.50         \n[46] farver_2.1.2        htmltools_0.5.8.1   nlme_3.1-168       \n[49] rmarkdown_2.30      labeling_0.4.3      compiler_4.5.1     \n[52] S7_0.2.0"
+  },
+  {
+    "objectID": "exercises/exercise_block_1.html",
+    "href": "exercises/exercise_block_1.html",
+    "title": "Exercise - Block 1",
+    "section": "",
+    "text": "data &lt;- readRDS(gzcon(url(\n  \"https://raw.githubusercontent.com/urppeia/publication_figs/main/data.rds\"\n)))\n\n\nstr(data)\n\nList of 3\n $ counts:'data.frame': 1642 obs. of  13 variables:\n  ..$ Gene_ID   : chr [1:1642] \"AT1G01090\" \"AT1G01100\" \"AT1G01300\" \"AT1G01320\" ...\n  ..$ ERR1736192: num [1:1642] 8.95 10.71 8.26 10.47 9.6 ...\n  ..$ ERR1736193: num [1:1642] 8.75 11.05 8.62 9.85 9.74 ...\n  ..$ ERR1736194: num [1:1642] 8.94 10.76 8.32 10.55 9.43 ...\n  ..$ ERR1736195: num [1:1642] 8.8 10.93 8.52 10.17 9.66 ...\n  ..$ ERR1736196: num [1:1642] 8.88 10.59 8.35 10.64 9.49 ...\n  ..$ ERR1736197: num [1:1642] 8.78 11.02 8.49 9.91 9.76 ...\n  ..$ ERR1736198: num [1:1642] 8.92 10.72 8.33 10.46 9.5 ...\n  ..$ ERR1736199: num [1:1642] 8.92 11 8.73 9.84 9.85 ...\n  ..$ ERR1736200: num [1:1642] 8.86 10.7 8.25 10.54 9.48 ...\n  ..$ ERR1736201: num [1:1642] 8.88 11.04 8.44 9.75 9.78 ...\n  ..$ ERR1736202: num [1:1642] 8.93 10.6 8.32 10.63 9.43 ...\n  ..$ ERR1736203: num [1:1642] 8.81 10.99 8.34 10 9.61 ...\n $ diff  :'data.frame': 1642 obs. of  6 variables:\n  ..$ Gene_ID         : chr [1:1642] \"AT1G01090\" \"AT1G01100\" \"AT1G01300\" \"AT1G01320\" ...\n  ..$ Gene_name       : chr [1:1642] \"PDH-E1 ALPHA\" \"RPP1A\" \"APF2\" \"\" ...\n  ..$ sucrose_24h_pval: num [1:1642] 0.591 0.569 0.565 0.743 0.884 ...\n  ..$ sucrose_24h_lfc : num [1:1642] 1.1 1.1 1.1 0 0 0 0 1.1 0 1.1 ...\n  ..$ sucrose_3h_pval : num [1:1642] 0.998 0.998 0.998 0.998 0.998 ...\n  ..$ sucrose_3h_lfc  : num [1:1642] 0 -1.1 0 1.1 -1.1 0 1.1 0 0 1.1 ...\n $ anno  :'data.frame': 12 obs. of  4 variables:\n  ..$ Sample_ID: chr [1:12] \"ERR1736192\" \"ERR1736193\" \"ERR1736194\" \"ERR1736195\" ...\n  ..$ compound : chr [1:12] \"none\" \"none\" \"sucrose\" \"sucrose\" ...\n  ..$ dose     : chr [1:12] \"none\" \"none\" \"15 millimolar\" \"15 millimolar\" ...\n  ..$ time     : chr [1:12] \"24 hour\" \"3 hour\" \"24 hour\" \"3 hour\" ...\n\n\n\ndata$anno\n\n    Sample_ID compound          dose    time\n1  ERR1736192     none          none 24 hour\n2  ERR1736193     none          none  3 hour\n3  ERR1736194  sucrose 15 millimolar 24 hour\n4  ERR1736195  sucrose 15 millimolar  3 hour\n5  ERR1736196     none          none 24 hour\n6  ERR1736197     none          none  3 hour\n7  ERR1736198  sucrose 15 millimolar 24 hour\n8  ERR1736199  sucrose 15 millimolar  3 hour\n9  ERR1736200     none          none 24 hour\n10 ERR1736201     none          none  3 hour\n11 ERR1736202  sucrose 15 millimolar 24 hour\n12 ERR1736203  sucrose 15 millimolar  3 hour\n\n\n\n\nThis RNA-seq dataset (GEO: GSE102374, SRA: PRJNA397585) comes from the tomato plant (Solanum lycopersicum). The experiment investigates how sucrose treatment affects gene expression in tomato over time. Each sequencing run (ERR1736192–ERR1736203) corresponds to one biological replicate under a specific treatment and timepoint.\n\n\n\nSucrose is not only a carbon source but also acts as a signaling molecule in plants, influencing growth, metabolism, and stress responses. By comparing gene expression profiles after sucrose exposure at 3 h and 24 h, the study aims to identify genes involved in early sugar signaling and longer-term metabolic regulation in tomato.\n\n\n\n\n\n\n\n\n\n\n\n\n\nCondition\nCompound\nDose\nTimepoint\nReplicates (ERR IDs)\n\n\n\n\nControl\nnone\nnone\n3 h\nERR1736193, ERR1736197, ERR1736201\n\n\nControl\nnone\nnone\n24 h\nERR1736192, ERR1736196, ERR1736200\n\n\nSucrose-treated\nsucrose\n15 mM\n3 h\nERR1736195, ERR1736199, ERR1736203\n\n\nSucrose-treated\nsucrose\n15 mM\n24 h\nERR1736194, ERR1736198, ERR1736202\n\n\n\n\nTotal samples: 12\nDesign: 2 × 2 factorial (Treatment × Time)\nReplicates: 3 per condition\n\n\n\n\nTo characterize transcriptional changes in tomato induced by sucrose at early (3 h) and later (24 h) timepoints, revealing genes and pathways regulated by sugar signaling.\n\n\n\n\n\n\nSummary\n\n\n\nThis is a plant RNA-seq time-course experiment from Solanum lycopersicum, testing sucrose signaling effects. It illustrates a balanced factorial design, ideal for learning how to:\n\nInterpret replicates and contrasts,\nModel treatment × time interactions\nPerform biological interpretation"
+  },
+  {
+    "objectID": "exercises/exercise_block_1.html#data-for-the-course",
+    "href": "exercises/exercise_block_1.html#data-for-the-course",
+    "title": "Exercise - Block 1",
+    "section": "",
+    "text": "data &lt;- readRDS(gzcon(url(\n  \"https://raw.githubusercontent.com/urppeia/publication_figs/main/data.rds\"\n)))\n\n\nstr(data)\n\nList of 3\n $ counts:'data.frame': 1642 obs. of  13 variables:\n  ..$ Gene_ID   : chr [1:1642] \"AT1G01090\" \"AT1G01100\" \"AT1G01300\" \"AT1G01320\" ...\n  ..$ ERR1736192: num [1:1642] 8.95 10.71 8.26 10.47 9.6 ...\n  ..$ ERR1736193: num [1:1642] 8.75 11.05 8.62 9.85 9.74 ...\n  ..$ ERR1736194: num [1:1642] 8.94 10.76 8.32 10.55 9.43 ...\n  ..$ ERR1736195: num [1:1642] 8.8 10.93 8.52 10.17 9.66 ...\n  ..$ ERR1736196: num [1:1642] 8.88 10.59 8.35 10.64 9.49 ...\n  ..$ ERR1736197: num [1:1642] 8.78 11.02 8.49 9.91 9.76 ...\n  ..$ ERR1736198: num [1:1642] 8.92 10.72 8.33 10.46 9.5 ...\n  ..$ ERR1736199: num [1:1642] 8.92 11 8.73 9.84 9.85 ...\n  ..$ ERR1736200: num [1:1642] 8.86 10.7 8.25 10.54 9.48 ...\n  ..$ ERR1736201: num [1:1642] 8.88 11.04 8.44 9.75 9.78 ...\n  ..$ ERR1736202: num [1:1642] 8.93 10.6 8.32 10.63 9.43 ...\n  ..$ ERR1736203: num [1:1642] 8.81 10.99 8.34 10 9.61 ...\n $ diff  :'data.frame': 1642 obs. of  6 variables:\n  ..$ Gene_ID         : chr [1:1642] \"AT1G01090\" \"AT1G01100\" \"AT1G01300\" \"AT1G01320\" ...\n  ..$ Gene_name       : chr [1:1642] \"PDH-E1 ALPHA\" \"RPP1A\" \"APF2\" \"\" ...\n  ..$ sucrose_24h_pval: num [1:1642] 0.591 0.569 0.565 0.743 0.884 ...\n  ..$ sucrose_24h_lfc : num [1:1642] 1.1 1.1 1.1 0 0 0 0 1.1 0 1.1 ...\n  ..$ sucrose_3h_pval : num [1:1642] 0.998 0.998 0.998 0.998 0.998 ...\n  ..$ sucrose_3h_lfc  : num [1:1642] 0 -1.1 0 1.1 -1.1 0 1.1 0 0 1.1 ...\n $ anno  :'data.frame': 12 obs. of  4 variables:\n  ..$ Sample_ID: chr [1:12] \"ERR1736192\" \"ERR1736193\" \"ERR1736194\" \"ERR1736195\" ...\n  ..$ compound : chr [1:12] \"none\" \"none\" \"sucrose\" \"sucrose\" ...\n  ..$ dose     : chr [1:12] \"none\" \"none\" \"15 millimolar\" \"15 millimolar\" ...\n  ..$ time     : chr [1:12] \"24 hour\" \"3 hour\" \"24 hour\" \"3 hour\" ...\n\n\n\ndata$anno\n\n    Sample_ID compound          dose    time\n1  ERR1736192     none          none 24 hour\n2  ERR1736193     none          none  3 hour\n3  ERR1736194  sucrose 15 millimolar 24 hour\n4  ERR1736195  sucrose 15 millimolar  3 hour\n5  ERR1736196     none          none 24 hour\n6  ERR1736197     none          none  3 hour\n7  ERR1736198  sucrose 15 millimolar 24 hour\n8  ERR1736199  sucrose 15 millimolar  3 hour\n9  ERR1736200     none          none 24 hour\n10 ERR1736201     none          none  3 hour\n11 ERR1736202  sucrose 15 millimolar 24 hour\n12 ERR1736203  sucrose 15 millimolar  3 hour\n\n\n\n\nThis RNA-seq dataset (GEO: GSE102374, SRA: PRJNA397585) comes from the tomato plant (Solanum lycopersicum). The experiment investigates how sucrose treatment affects gene expression in tomato over time. Each sequencing run (ERR1736192–ERR1736203) corresponds to one biological replicate under a specific treatment and timepoint.\n\n\n\nSucrose is not only a carbon source but also acts as a signaling molecule in plants, influencing growth, metabolism, and stress responses. By comparing gene expression profiles after sucrose exposure at 3 h and 24 h, the study aims to identify genes involved in early sugar signaling and longer-term metabolic regulation in tomato.\n\n\n\n\n\n\n\n\n\n\n\n\n\nCondition\nCompound\nDose\nTimepoint\nReplicates (ERR IDs)\n\n\n\n\nControl\nnone\nnone\n3 h\nERR1736193, ERR1736197, ERR1736201\n\n\nControl\nnone\nnone\n24 h\nERR1736192, ERR1736196, ERR1736200\n\n\nSucrose-treated\nsucrose\n15 mM\n3 h\nERR1736195, ERR1736199, ERR1736203\n\n\nSucrose-treated\nsucrose\n15 mM\n24 h\nERR1736194, ERR1736198, ERR1736202\n\n\n\n\nTotal samples: 12\nDesign: 2 × 2 factorial (Treatment × Time)\nReplicates: 3 per condition\n\n\n\n\nTo characterize transcriptional changes in tomato induced by sucrose at early (3 h) and later (24 h) timepoints, revealing genes and pathways regulated by sugar signaling.\n\n\n\n\n\n\nSummary\n\n\n\nThis is a plant RNA-seq time-course experiment from Solanum lycopersicum, testing sucrose signaling effects. It illustrates a balanced factorial design, ideal for learning how to:\n\nInterpret replicates and contrasts,\nModel treatment × time interactions\nPerform biological interpretation"
+  },
+  {
+    "objectID": "exercises/exercise_block_1.html#exploratory-data-analysis",
+    "href": "exercises/exercise_block_1.html#exploratory-data-analysis",
+    "title": "Exercise - Block 1",
+    "section": "Exploratory data analysis",
+    "text": "Exploratory data analysis\n\nCheck the number of samples and genes in these data\n\nhead(data$counts)\n\n    Gene_ID ERR1736192 ERR1736193 ERR1736194 ERR1736195 ERR1736196 ERR1736197\n1 AT1G01090   8.951818   8.745436   8.936055   8.796355   8.881562   8.783848\n2 AT1G01100  10.714686  11.049205  10.760942  10.925465  10.586018  11.018331\n3 AT1G01300   8.262611   8.621839   8.317833   8.524731   8.351529   8.490846\n4 AT1G01320  10.474282   9.846080  10.547565  10.166405  10.638864   9.910971\n5 AT1G01620   9.602057   9.741940   9.433688   9.660392   9.487521   9.759061\n6 AT1G01960   7.992299   8.164980   7.940793   8.188539   8.066384   8.091465\n  ERR1736198 ERR1736199 ERR1736200 ERR1736201 ERR1736202 ERR1736203\n1   8.918614   8.917665   8.859714   8.880689   8.925662   8.810786\n2  10.720866  11.003460  10.697236  11.038316  10.602965  10.990252\n3   8.326726   8.726843   8.252066   8.438347   8.321741   8.337898\n4  10.459285   9.842758  10.536018   9.752592  10.629175  10.004448\n5   9.495713   9.854984   9.475491   9.780328   9.425490   9.608561\n6   7.887148   8.068782   8.022251   7.938457   7.981151   8.096472\n\n\nThe first column contains gene IDs. We can replace put them as row names, and remove the character column\n\nrownames(data$counts) &lt;- data$counts$Gene_ID\ndata$counts &lt;- data$counts[,-1]\n\n\nhead(data$counts)\n\n          ERR1736192 ERR1736193 ERR1736194 ERR1736195 ERR1736196 ERR1736197\nAT1G01090   8.951818   8.745436   8.936055   8.796355   8.881562   8.783848\nAT1G01100  10.714686  11.049205  10.760942  10.925465  10.586018  11.018331\nAT1G01300   8.262611   8.621839   8.317833   8.524731   8.351529   8.490846\nAT1G01320  10.474282   9.846080  10.547565  10.166405  10.638864   9.910971\nAT1G01620   9.602057   9.741940   9.433688   9.660392   9.487521   9.759061\nAT1G01960   7.992299   8.164980   7.940793   8.188539   8.066384   8.091465\n          ERR1736198 ERR1736199 ERR1736200 ERR1736201 ERR1736202 ERR1736203\nAT1G01090   8.918614   8.917665   8.859714   8.880689   8.925662   8.810786\nAT1G01100  10.720866  11.003460  10.697236  11.038316  10.602965  10.990252\nAT1G01300   8.326726   8.726843   8.252066   8.438347   8.321741   8.337898\nAT1G01320  10.459285   9.842758  10.536018   9.752592  10.629175  10.004448\nAT1G01620   9.495713   9.854984   9.475491   9.780328   9.425490   9.608561\nAT1G01960   7.887148   8.068782   8.022251   7.938457   7.981151   8.096472\n\n\n\ndim(data$counts)\n\n[1] 1642   12\n\n\n\n\nCheck if the data is normalized\n\nboxplot(data$counts)\n\n\n\n\n\n\n\n\n\n\nExercise 1\nA. Sample names are not properly readable. Rotate them to make perpendicular to the x-axis.\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nboxplot(data$counts, las = 2)\n\n\n\n\n\n\n\n\n\n\n\nB. Remove the boxplot outliers\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nboxplot(data$counts, las = 2, outline = FALSE)\n\n\n\n\n\n\n\n\n\n\n\n\n\nMean expression per sample\n\nsample_means &lt;- colMeans(data$counts)\n\nbarplot(sample_means, las = 2, col = \"skyblue\",\n        border = \"gray40\",\n        main = \"Mean normalized expression per sample\",\n        ylab = \"Mean expression\",\n        cex.names = 0.8)\n\n\n\n\n\n\n\n\n\n\nExercise 2\nCan you color the samples by their conditions?\n\n\n\n\n\n\nTip\n\n\n\n\n\n\ncols &lt;- ifelse(data$anno$compound == \"sucrose\", \"tomato\", \"steelblue\")\nbarplot(sample_means, las = 2, col = cols,\n        main = \"Mean expression per sample\",\n        ylab = \"Mean expression\", border = \"gray40\", cex.names = 0.8)\nlegend(\"topright\", legend = c(\"none\", \"sucrose\"),\n       fill = c(\"steelblue\", \"tomato\"), bty = \"n\")\n\n\n\n\n\n\n\n\n\n\n\n\n\nVolcano plot of results\n\nhead(data$diff)\n\n      Gene_ID    Gene_name sucrose_24h_pval sucrose_24h_lfc sucrose_3h_pval\n10  AT1G01090 PDH-E1 ALPHA        0.5905386             1.1       0.9983381\n11  AT1G01100        RPP1A        0.5688959             1.1       0.9983381\n33  AT1G01300         APF2        0.5650828             1.1       0.9983381\n36  AT1G01320                     0.7427942             0.0       0.9983381\n69  AT1G01620       PIP1-3        0.8840503             0.0       0.9983381\n105 AT1G01960         BIG3        0.8171195             0.0       0.9983381\n    sucrose_3h_lfc\n10             0.0\n11            -1.1\n33             0.0\n36             1.1\n69            -1.1\n105            0.0\n\n\n\n\nExpression value distribution\n\nhist(unlist(data$counts),\n     breaks = 40, col = \"lightgray\", border = \"gray40\",\n     main = \"Distribution of normalized expression values\",\n     xlab = \"Expression\", ylab = \"Frequency\")\n\n\n\n\n\n\n\n\n\n\nExerise 3\nCan you add density curve for smoothness?\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nhist(unlist(data$counts), breaks = 40, col = \"lightgray\", border = \"gray40\",\n     freq = FALSE, main = \"Expression value distribution\", xlab = \"Expression\")\nlines(density(unlist(data$counts)), col = \"tomato\", lwd = 2)\n\n\n\n\n\n\n\n\n\n\n\n\n\nVolcano plot of differential results\n\nSucrose 24h\n\n# Identify significant genes\nsig_24h &lt;- data$diff$sucrose_24h_pval &lt; 0.05 & abs(data$diff$sucrose_24h_lfc) &gt; 1\n\n# Volcano plot\nplot(data$diff$sucrose_24h_lfc,\n     -log10(data$diff$sucrose_24h_pval),\n     pch = 16, cex = 0.6,\n     col = ifelse(sig_24h, \"tomato\", \"gray70\"),\n     main = \"Volcano Plot — Sucrose 24h\",\n     xlab = \"log2 Fold Change\",\n     ylab = \"-log10(p-value)\")\n\n# Add significance thresholds\nabline(v = c(-1, 1), col = \"red\", lty = 2)\nabline(h = -log10(0.05), col = \"blue\", lty = 2)\n\n\n\n\n\n\n\n\n\n\nSucrose 3h\n\n# Identify significant genes\nsig_3h &lt;- data$diff$sucrose_3h_pval &lt; 0.05 & abs(data$diff$sucrose_3h_lfc) &gt; 1\n\n# Volcano plot\nplot(data$diff$sucrose_3h_lfc,\n     -log10(data$diff$sucrose_3h_pval),\n     pch = 16, cex = 0.6,\n     col = ifelse(sig_3h, \"tomato\", \"gray70\"),\n     main = \"Volcano Plot — Sucrose 3h\",\n     xlab = \"log2 Fold Change\",\n     ylab = \"-log10(p-value)\")\n\n# Add significance thresholds\nabline(v = c(-1, 1), col = \"red\", lty = 2)\nabline(h = -log10(0.05), col = \"blue\", lty = 2)\n\n\n\n\n\n\n\n\n\n\n\nExercise 4\nCan you display both the plots together?\n\n\n\n\n\n\nTip\n\n\n\n\n\n\npar(mfrow = c(1, 2))  # 1 row, 2 columns\n\n# Volcano 24h\nsig_24h &lt;- data$diff$sucrose_24h_pval &lt; 0.05 & abs(data$diff$sucrose_24h_lfc) &gt; 1\nplot(data$diff$sucrose_24h_lfc,\n     -log10(data$diff$sucrose_24h_pval),\n     pch = 16, cex = 0.6,\n     col = ifelse(sig_24h, \"tomato\", \"gray70\"),\n     main = \"Volcano — Sucrose 24h\",\n     xlab = \"log2 Fold Change\", ylab = \"-log10(p-value)\")\nabline(v = c(-1, 1), col = \"red\", lty = 2)\nabline(h = -log10(0.05), col = \"blue\", lty = 2)\n\n# Volcano 3h\nsig_3h &lt;- data$diff$sucrose_3h_pval &lt; 0.05 & abs(data$diff$sucrose_3h_lfc) &gt; 1\nplot(data$diff$sucrose_3h_lfc,\n     -log10(data$diff$sucrose_3h_pval),\n     pch = 16, cex = 0.6,\n     col = ifelse(sig_3h, \"tomato\", \"gray70\"),\n     main = \"Volcano — Sucrose 3h\",\n     xlab = \"log2 Fold Change\", ylab = \"-log10(p-value)\")\nabline(v = c(-1, 1), col = \"red\", lty = 2)\nabline(h = -log10(0.05), col = \"blue\", lty = 2)\n\n\n\n\n\n\n\npar(mfrow = c(1, 1))  # Reset layout"
+  },
+  {
+    "objectID": "exercises/exercise_block_1.html#session-information",
+    "href": "exercises/exercise_block_1.html#session-information",
+    "title": "Exercise - Block 1",
+    "section": "Session information",
+    "text": "Session information\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nsessionInfo()\n\nR version 4.5.1 (2025-06-13)\nPlatform: aarch64-apple-darwin20\nRunning under: macOS Tahoe 26.1\n\nMatrix products: default\nBLAS:   /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib \nLAPACK: /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1\n\nlocale:\n[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8\n\ntime zone: Europe/Zurich\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices datasets  utils     methods   base     \n\nloaded via a namespace (and not attached):\n [1] htmlwidgets_1.6.4   BiocManager_1.30.26 compiler_4.5.1     \n [4] fastmap_1.2.0       cli_3.6.5           htmltools_0.5.8.1  \n [7] tools_4.5.1         rstudioapi_0.17.1   yaml_2.3.10        \n[10] rmarkdown_2.30      knitr_1.50          jsonlite_2.0.0     \n[13] xfun_0.53           digest_0.6.37       rlang_1.1.6        \n[16] renv_1.1.5          evaluate_1.0.5"
+  },
+  {
+    "objectID": "exercises/exercise_block_2.html",
+    "href": "exercises/exercise_block_2.html",
+    "title": "Exercise - Block 2",
+    "section": "",
+    "text": "ggplot2 is a powerful and popular R package for creating a wide variety of plots. It is based on the “grammar of graphics” philosophy, which allows you to build plots layer by layer. This makes it easy to create complex and customized visualizations.\n\n\n\n\n\n\n\n\n\n\nFeature\nBase R\nggplot2\n\n\n\n\nPhilosophy\n“Ink on paper” - you draw elements on the plot.\n“Grammar of graphics” - you build plots with layers.\n\n\nSyntax\nFunctions for specific plots (e.g., plot, hist).\nConsistent syntax with ggplot() + geom_*().\n\n\nCustomization\nCan be complex, often requiring many parameters.\nEasy to add layers for themes, labels, and annotations.\n\n\nData Format\nOften requires data in specific formats (vectors, matrices).\nPrefers data in data frames (long format)."
+  },
+  {
+    "objectID": "exercises/exercise_block_2.html#introduction-to-ggplot2",
+    "href": "exercises/exercise_block_2.html#introduction-to-ggplot2",
+    "title": "Exercise - Block 2",
+    "section": "",
+    "text": "ggplot2 is a powerful and popular R package for creating a wide variety of plots. It is based on the “grammar of graphics” philosophy, which allows you to build plots layer by layer. This makes it easy to create complex and customized visualizations.\n\n\n\n\n\n\n\n\n\n\nFeature\nBase R\nggplot2\n\n\n\n\nPhilosophy\n“Ink on paper” - you draw elements on the plot.\n“Grammar of graphics” - you build plots with layers.\n\n\nSyntax\nFunctions for specific plots (e.g., plot, hist).\nConsistent syntax with ggplot() + geom_*().\n\n\nCustomization\nCan be complex, often requiring many parameters.\nEasy to add layers for themes, labels, and annotations.\n\n\nData Format\nOften requires data in specific formats (vectors, matrices).\nPrefers data in data frames (long format)."
+  },
+  {
+    "objectID": "exercises/exercise_block_2.html#installing-packages",
+    "href": "exercises/exercise_block_2.html#installing-packages",
+    "title": "Exercise - Block 2",
+    "section": "Installing packages",
+    "text": "Installing packages\nInstalling packages in R could be a time-consuming and a difficult process. Hence, we will use renv R package for installing packages throughout this course.\n\nrenv::install(\"ggplot2\")\nrenv::install(\"reshape2\")\nrenv::install(\"patchwork\")"
+  },
+  {
+    "objectID": "exercises/exercise_block_2.html#packages",
+    "href": "exercises/exercise_block_2.html#packages",
+    "title": "Exercise - Block 2",
+    "section": "Packages",
+    "text": "Packages\n\nlibrary(ggplot2)\nlibrary(reshape2)\nlibrary(patchwork)"
+  },
+  {
+    "objectID": "exercises/exercise_block_2.html#exploratory-data-analysis",
+    "href": "exercises/exercise_block_2.html#exploratory-data-analysis",
+    "title": "Exercise - Block 2",
+    "section": "Exploratory data analysis",
+    "text": "Exploratory data analysis\n\ndata &lt;- readRDS(gzcon(url(\n  \"https://raw.githubusercontent.com/urppeia/publication_figs/main/data.rds\"\n)))\n\n\nstr(data)\n\nList of 3\n $ counts:'data.frame': 1642 obs. of  13 variables:\n  ..$ Gene_ID   : chr [1:1642] \"AT1G01090\" \"AT1G01100\" \"AT1G01300\" \"AT1G01320\" ...\n  ..$ ERR1736192: num [1:1642] 8.95 10.71 8.26 10.47 9.6 ...\n  ..$ ERR1736193: num [1:1642] 8.75 11.05 8.62 9.85 9.74 ...\n  ..$ ERR1736194: num [1:1642] 8.94 10.76 8.32 10.55 9.43 ...\n  ..$ ERR1736195: num [1:1642] 8.8 10.93 8.52 10.17 9.66 ...\n  ..$ ERR1736196: num [1:1642] 8.88 10.59 8.35 10.64 9.49 ...\n  ..$ ERR1736197: num [1:1642] 8.78 11.02 8.49 9.91 9.76 ...\n  ..$ ERR1736198: num [1:1642] 8.92 10.72 8.33 10.46 9.5 ...\n  ..$ ERR1736199: num [1:1642] 8.92 11 8.73 9.84 9.85 ...\n  ..$ ERR1736200: num [1:1642] 8.86 10.7 8.25 10.54 9.48 ...\n  ..$ ERR1736201: num [1:1642] 8.88 11.04 8.44 9.75 9.78 ...\n  ..$ ERR1736202: num [1:1642] 8.93 10.6 8.32 10.63 9.43 ...\n  ..$ ERR1736203: num [1:1642] 8.81 10.99 8.34 10 9.61 ...\n $ diff  :'data.frame': 1642 obs. of  6 variables:\n  ..$ Gene_ID         : chr [1:1642] \"AT1G01090\" \"AT1G01100\" \"AT1G01300\" \"AT1G01320\" ...\n  ..$ Gene_name       : chr [1:1642] \"PDH-E1 ALPHA\" \"RPP1A\" \"APF2\" \"\" ...\n  ..$ sucrose_24h_pval: num [1:1642] 0.591 0.569 0.565 0.743 0.884 ...\n  ..$ sucrose_24h_lfc : num [1:1642] 1.1 1.1 1.1 0 0 0 0 1.1 0 1.1 ...\n  ..$ sucrose_3h_pval : num [1:1642] 0.998 0.998 0.998 0.998 0.998 ...\n  ..$ sucrose_3h_lfc  : num [1:1642] 0 -1.1 0 1.1 -1.1 0 1.1 0 0 1.1 ...\n $ anno  :'data.frame': 12 obs. of  4 variables:\n  ..$ Sample_ID: chr [1:12] \"ERR1736192\" \"ERR1736193\" \"ERR1736194\" \"ERR1736195\" ...\n  ..$ compound : chr [1:12] \"none\" \"none\" \"sucrose\" \"sucrose\" ...\n  ..$ dose     : chr [1:12] \"none\" \"none\" \"15 millimolar\" \"15 millimolar\" ...\n  ..$ time     : chr [1:12] \"24 hour\" \"3 hour\" \"24 hour\" \"3 hour\" ...\n\n\n\ndata$anno\n\n    Sample_ID compound          dose    time\n1  ERR1736192     none          none 24 hour\n2  ERR1736193     none          none  3 hour\n3  ERR1736194  sucrose 15 millimolar 24 hour\n4  ERR1736195  sucrose 15 millimolar  3 hour\n5  ERR1736196     none          none 24 hour\n6  ERR1736197     none          none  3 hour\n7  ERR1736198  sucrose 15 millimolar 24 hour\n8  ERR1736199  sucrose 15 millimolar  3 hour\n9  ERR1736200     none          none 24 hour\n10 ERR1736201     none          none  3 hour\n11 ERR1736202  sucrose 15 millimolar 24 hour\n12 ERR1736203  sucrose 15 millimolar  3 hour\n\n\n\nhead(data$counts)\n\n    Gene_ID ERR1736192 ERR1736193 ERR1736194 ERR1736195 ERR1736196 ERR1736197\n1 AT1G01090   8.951818   8.745436   8.936055   8.796355   8.881562   8.783848\n2 AT1G01100  10.714686  11.049205  10.760942  10.925465  10.586018  11.018331\n3 AT1G01300   8.262611   8.621839   8.317833   8.524731   8.351529   8.490846\n4 AT1G01320  10.474282   9.846080  10.547565  10.166405  10.638864   9.910971\n5 AT1G01620   9.602057   9.741940   9.433688   9.660392   9.487521   9.759061\n6 AT1G01960   7.992299   8.164980   7.940793   8.188539   8.066384   8.091465\n  ERR1736198 ERR1736199 ERR1736200 ERR1736201 ERR1736202 ERR1736203\n1   8.918614   8.917665   8.859714   8.880689   8.925662   8.810786\n2  10.720866  11.003460  10.697236  11.038316  10.602965  10.990252\n3   8.326726   8.726843   8.252066   8.438347   8.321741   8.337898\n4  10.459285   9.842758  10.536018   9.752592  10.629175  10.004448\n5   9.495713   9.854984   9.475491   9.780328   9.425490   9.608561\n6   7.887148   8.068782   8.022251   7.938457   7.981151   8.096472\n\n\n\nhead(data$diff)\n\n      Gene_ID    Gene_name sucrose_24h_pval sucrose_24h_lfc sucrose_3h_pval\n10  AT1G01090 PDH-E1 ALPHA        0.5905386             1.1       0.9983381\n11  AT1G01100        RPP1A        0.5688959             1.1       0.9983381\n33  AT1G01300         APF2        0.5650828             1.1       0.9983381\n36  AT1G01320                     0.7427942             0.0       0.9983381\n69  AT1G01620       PIP1-3        0.8840503             0.0       0.9983381\n105 AT1G01960         BIG3        0.8171195             0.0       0.9983381\n    sucrose_3h_lfc\n10             0.0\n11            -1.1\n33             0.0\n36             1.1\n69            -1.1\n105            0.0"
+  },
+  {
+    "objectID": "exercises/exercise_block_2.html#long-format-data",
+    "href": "exercises/exercise_block_2.html#long-format-data",
+    "title": "Exercise - Block 2",
+    "section": "Long format data",
+    "text": "Long format data\n\nLong format of counts\n\ncounts_long &lt;- melt(data$counts,\n  variable.name = \"Sample_ID\",\n  value.name = \"Expression\"\n)\n\nUsing Gene_ID as id variables\n\n\n\nhead(counts_long)\n\n    Gene_ID  Sample_ID Expression\n1 AT1G01090 ERR1736192   8.951818\n2 AT1G01100 ERR1736192  10.714686\n3 AT1G01300 ERR1736192   8.262611\n4 AT1G01320 ERR1736192  10.474282\n5 AT1G01620 ERR1736192   9.602057\n6 AT1G01960 ERR1736192   7.992299\n\n\n\n\nMerging samples annotation\n\ndata_long &lt;- merge(data$anno, counts_long)\n\n\nhead(data_long)\n\n   Sample_ID compound dose    time   Gene_ID Expression\n1 ERR1736192     none none 24 hour AT1G01090   8.951818\n2 ERR1736192     none none 24 hour AT1G01100  10.714686\n3 ERR1736192     none none 24 hour AT1G01300   8.262611\n4 ERR1736192     none none 24 hour AT1G01320  10.474282\n5 ERR1736192     none none 24 hour AT1G01620   9.602057\n6 ERR1736192     none none 24 hour AT1G01960   7.992299\n\n\n\n\nBoxplot of normalized data\nIn base R, we used boxplot(). In ggplot2, we use ggplot() and geom_boxplot().\n\nggplot(data_long, aes(x = Sample_ID, y = Expression)) +\n  geom_boxplot() +\n  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +\n  labs(\n    title = \"Normalized expression per sample\",\n    x = \"Sample\",\n    y = \"Expression\"\n  )\n\n\n\n\n\n\n\n\n\n\nExercise 1\nA. Color the boxplots by condition (control vs. sucrose).\n\n\n\n\n\n\nTip\n\n\n\n\n\n\n# We need to add the condition information to our long data frame\nggplot(data_long, aes(x = Sample_ID, y = Expression, fill = compound)) +\n  geom_boxplot() +\n  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +\n  labs(\n    title = \"Normalized expression per sample\",\n    x = \"Sample\",\n    y = \"Expression\"\n  ) +\n  scale_fill_manual(values = c(\"none\" = \"steelblue\", \"sucrose\" = \"tomato\"))\n\n\n\n\n\n\n\n\n\n\n\nB. Remove the boxplot outliers.\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nggplot(data_long, aes(x = Sample_ID, y = Expression, fill = compound)) +\n  geom_boxplot(outlier.shape = NA) +\n  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +\n  labs(\n    title = \"Normalized expression per sample\",\n    x = \"Sample\",\n    y = \"Expression\"\n  ) +\n  scale_fill_manual(values = c(\"none\" = \"steelblue\", \"sucrose\" = \"tomato\"))\n\n\n\n\n\n\n\n\n\n\n\nC. Make a Violin plot.\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nggplot(data_long, aes(x = Sample_ID, y = Expression, fill = compound)) +\n  geom_violin() +\n  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +\n  labs(\n    title = \"Normalized expression per sample\",\n    x = \"Sample\",\n    y = \"Expression\"\n  ) +\n  scale_fill_manual(values = c(\"none\" = \"steelblue\", \"sucrose\" = \"tomato\"))\n\n\n\n\n\n\n\n\n\n\n\nD. A Raincloud might be better for visualization. We learnt this in the first block. Can you make this?\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nlibrary(PupillometryR)\n\nggplot(data_long, aes(x = Sample_ID, y = Expression, fill = compound, color = compound)) +\n  # flat violin (half-violin for Raincloud look)\n  geom_flat_violin(\n    color = \"black\",\n    alpha = 0.5,\n    position = position_nudge(x = -0.15)\n  ) +\n\n  # stacked dots for “rain”\n  geom_dotplot(\n    binaxis = \"y\",\n    stackdir = \"down\",\n    dotsize = 0.02,\n    binwidth = 0.1,\n    position = position_nudge(x = 0.05),\n    alpha = 0.8\n  ) +\n\n  # colors\n  scale_fill_manual(values = c(\"none\" = \"steelblue\", \"sucrose\" = \"tomato\")) +\n  scale_color_manual(values = c(\"none\" = \"steelblue\", \"sucrose\" = \"tomato\")) +\n  # labels\n  labs(\n    x = \"Samples\",\n    y = \"Expression\",\n    title = \"Boxplot\",\n    subtitle = \"Sucrose at 3h and 24h\",\n    caption = \"This is a Boxplot of Sucrose comparison.\"\n  ) +\n  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +\n  facet_grid(compound~dose)\n\n\n\n\n\n\n\n\n\n\n\n\n\nBarplot of mean expression\nIn base R, we used barplot(). In ggplot2, we use geom_bar() or geom_col().\n\nggplot(data_long, aes(x = Sample_ID, y = Expression, fill = compound)) +\n  geom_bar(stat = \"summary\", fun = mean, position = \"dodge\") +\n  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +\n  labs(\n    title = \"Mean normalized expression per sample\",\n    x = \"Sample\",\n    y = \"Mean Expression\"\n  ) +\n  scale_fill_manual(values = c(\"none\" = \"steelblue\", \"sucrose\" = \"tomato\"))\n\n\n\n\n\n\n\n\n\n\nHistogram of expression values\nIn base R, we used hist(). In ggplot2, we use geom_histogram().\n\nggplot(data_long, aes(x = Expression)) +\n  geom_histogram(bins = 40, fill = \"lightgray\", color = \"gray40\") +\n  labs(\n    title = \"Distribution of normalized expression values\",\n    x = \"Expression\",\n    y = \"Frequency\"\n  )\n\n\n\n\n\n\n\n\n\n\nExercise 2\nAdd a density curve to the histogram.\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nggplot(data_long, aes(x = Expression)) +\n  geom_histogram(aes(y = after_stat(density)),\n    bins = 40,\n    fill = \"lightgray\", color = \"gray40\"\n  ) +\n  geom_density(color = \"tomato\", linewidth = 1) +\n  labs(\n    title = \"Distribution of normalized expression values\",\n    x = \"Expression\",\n    y = \"Density\"\n  )\n\n\n\n\n\n\n\n\n\n\n\n\n\nVolcano plot of differential results\nIn base R, we used plot(). In ggplot2, we use geom_point().\n\nSucrose 24h\n\ndiff_df_24h &lt;- data.frame(\n  lfc = data$diff$sucrose_24h_lfc,\n  pval = data$diff$sucrose_24h_pval\n)\ndiff_df_24h$significant &lt;- diff_df_24h$pval &lt; 0.05 & abs(diff_df_24h$lfc) &gt; 1\n\nggplot(diff_df_24h, aes(x = lfc, y = -log10(pval), color = significant)) +\n  geom_point(size = 2, alpha = 0.7) +\n  scale_color_manual(values = c(\"gray70\", \"tomato\")) +\n  geom_vline(xintercept = c(-1, 1), linetype = \"dashed\", color = \"red\") +\n  geom_hline(yintercept = -log10(0.05), linetype = \"dashed\", color = \"blue\") +\n  labs(\n    title = \"Volcano Plot — Sucrose 24h\",\n    x = \"log2 Fold Change\",\n    y = \"-log10(p-value)\"\n  )\n\n\n\n\n\n\n\n\n\n\n\nExercise 3\nCreate a volcano plot for the 3h sucrose treatment.\n\n\n\n\n\n\nTip\n\n\n\n\n\n\ndiff_df_3h &lt;- data.frame(\n  lfc = data$diff$sucrose_3h_lfc,\n  pval = data$diff$sucrose_3h_pval\n)\ndiff_df_3h$significant &lt;- diff_df_3h$pval &lt; 0.05 & abs(diff_df_3h$lfc) &gt; 1\n\nggplot(diff_df_3h, aes(x = lfc, y = -log10(pval), color = significant)) +\n  geom_point(size = 2, alpha = 0.7) +\n  scale_color_manual(values = c(\"gray70\", \"tomato\")) +\n  geom_vline(xintercept = c(-1, 1), linetype = \"dashed\", color = \"red\") +\n  geom_hline(yintercept = -log10(0.05), linetype = \"dashed\", color = \"blue\") +\n  labs(\n    title = \"Volcano Plot — Sucrose 3h\",\n    x = \"log2 Fold Change\",\n    y = \"-log10(p-value)\"\n  )\n\n\n\n\n\n\n\n\n\n\n\n\n\nCombining plots\nIn base R, we used par(mfrow = ...). In the ggplot2 ecosystem, the patchwork package is a popular choice.\n\nlibrary(patchwork)\n\np1 &lt;- ggplot(diff_df_24h, aes(x = lfc, y = -log10(pval), color = significant)) +\n  geom_point(size = 2, alpha = 0.7) +\n  scale_color_manual(values = c(\"gray70\", \"tomato\")) +\n  labs(title = \"Sucrose 24h\")\n\np2 &lt;- ggplot(diff_df_3h, aes(x = lfc, y = -log10(pval), color = significant)) +\n  geom_point(size = 2, alpha = 0.7) +\n  scale_color_manual(values = c(\"gray70\", \"tomato\")) +\n  labs(title = \"Sucrose 3h\")\n\n\np1 | p2\n\n\n\n\n\n\n\n\n\np1 / p2"
+  },
+  {
+    "objectID": "exercises/exercise_block_2.html#session-information",
+    "href": "exercises/exercise_block_2.html#session-information",
+    "title": "Exercise - Block 2",
+    "section": "Session information",
+    "text": "Session information\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nsessionInfo()\n\nR version 4.5.1 (2025-06-13)\nPlatform: aarch64-apple-darwin20\nRunning under: macOS Tahoe 26.1\n\nMatrix products: default\nBLAS:   /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib \nLAPACK: /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1\n\nlocale:\n[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8\n\ntime zone: Europe/Zurich\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices datasets  utils     methods   base     \n\nother attached packages:\n[1] PupillometryR_0.0.5 rlang_1.1.6         dplyr_1.1.4        \n[4] patchwork_1.3.2     reshape2_1.4.4      ggplot2_4.0.0      \n\nloaded via a namespace (and not attached):\n [1] gtable_0.3.6        jsonlite_2.0.0      compiler_4.5.1     \n [4] BiocManager_1.30.26 renv_1.1.5          tidyselect_1.2.1   \n [7] Rcpp_1.1.0          stringr_1.5.2       tidyr_1.3.1        \n[10] scales_1.4.0        yaml_2.3.10         fastmap_1.2.0      \n[13] R6_2.6.1            plyr_1.8.9          labeling_0.4.3     \n[16] generics_0.1.4      knitr_1.50          htmlwidgets_1.6.4  \n[19] tibble_3.3.0        pillar_1.11.1       RColorBrewer_1.1-3 \n[22] stringi_1.8.7       xfun_0.53           S7_0.2.0           \n[25] cli_3.6.5           withr_3.0.2         magrittr_2.0.4     \n[28] digest_0.6.37       grid_4.5.1          rstudioapi_0.17.1  \n[31] lifecycle_1.0.4     vctrs_0.6.5         evaluate_1.0.5     \n[34] glue_1.8.0          farver_2.1.2        purrr_1.1.0        \n[37] rmarkdown_2.30      tools_4.5.1         pkgconfig_2.0.3    \n[40] htmltools_0.5.8.1"
+  },
+  {
+    "objectID": "exercises/exercise_block_4.html",
+    "href": "exercises/exercise_block_4.html",
+    "title": "Exercise - Block 4",
+    "section": "",
+    "text": "Upon completing this exercise block, you will be able to:\n\nAdd statistical summaries and regression lines to ggplot2 plots using geom_smooth().\nIncorporate correlation coefficients and p-values into plots using functions from the ggpubr package.\nCompare groups and display statistical test results (e.g., t-test p-values) on boxplots.\nCreate informative volcano plots to visualize differential expression data.\nLabel specific points on plots using ggrepel to avoid overplotting."
+  },
+  {
+    "objectID": "exercises/exercise_block_4.html#learning-objectives",
+    "href": "exercises/exercise_block_4.html#learning-objectives",
+    "title": "Exercise - Block 4",
+    "section": "",
+    "text": "Upon completing this exercise block, you will be able to:\n\nAdd statistical summaries and regression lines to ggplot2 plots using geom_smooth().\nIncorporate correlation coefficients and p-values into plots using functions from the ggpubr package.\nCompare groups and display statistical test results (e.g., t-test p-values) on boxplots.\nCreate informative volcano plots to visualize differential expression data.\nLabel specific points on plots using ggrepel to avoid overplotting."
+  },
+  {
+    "objectID": "exercises/exercise_block_4.html#introduction-to-statistical-annotations",
+    "href": "exercises/exercise_block_4.html#introduction-to-statistical-annotations",
+    "title": "Exercise - Block 4",
+    "section": "Introduction to Statistical Annotations",
+    "text": "Introduction to Statistical Annotations\nIn this block, we will delve into enhancing our ggplot2 visualizations with statistical summaries and annotations. This is crucial for presenting data analysis results effectively and making plots more informative. We will explore how to add regression lines and their confidence intervals using geom_smooth(), incorporate correlation coefficients and p-values with the ggpubr package, and create specialized plots like volcano plots. Furthermore, we will learn to use ggrepel for intelligent labeling of data points, ensuring readability even with many labels."
+  },
+  {
+    "objectID": "exercises/exercise_block_4.html#installing-packages",
+    "href": "exercises/exercise_block_4.html#installing-packages",
+    "title": "Exercise - Block 4",
+    "section": "Installing packages",
+    "text": "Installing packages\n\nrenv::install(\"ggpubr\")"
+  },
+  {
+    "objectID": "exercises/exercise_block_4.html#packages",
+    "href": "exercises/exercise_block_4.html#packages",
+    "title": "Exercise - Block 4",
+    "section": "Packages",
+    "text": "Packages\n\nlibrary(ggplot2)\nlibrary(ggpubr)\nlibrary(dplyr)"
+  },
+  {
+    "objectID": "exercises/exercise_block_4.html#exploratory-data-analysis",
+    "href": "exercises/exercise_block_4.html#exploratory-data-analysis",
+    "title": "Exercise - Block 4",
+    "section": "Exploratory data analysis",
+    "text": "Exploratory data analysis\n\ndata &lt;- readRDS(gzcon(url(\n  \"https://raw.githubusercontent.com/urppeia/publication_figs/main/data.rds\"\n)))\n\nrownames(data$counts) &lt;- data$counts$Gene_ID\ndata$counts &lt;- data$counts[, -1]"
+  },
+  {
+    "objectID": "exercises/exercise_block_4.html#exercise-1-scatter-plot-with-regression-line",
+    "href": "exercises/exercise_block_4.html#exercise-1-scatter-plot-with-regression-line",
+    "title": "Exercise - Block 4",
+    "section": "Exercise 1: Scatter plot with regression line",
+    "text": "Exercise 1: Scatter plot with regression line\nLet’s investigate the relationship between the log-fold change (LFC) at 3h and 24h. Understanding this correlation can reveal how gene expression changes evolve over time. We will use geom_smooth() to visualize this relationship with a linear regression line and its confidence interval, providing insight into the trend and variability.\nA. Create a scatter plot of sucrose_3h_lfc vs. sucrose_24h_lfc from the data$diff dataframe.\n\nB. Add a linear regression line and confidence interval to the plot.\n\n\n\n\n\n\nSolution\n\n\n\n\n\n\np1 &lt;- ggplot(data$diff, aes(x = sucrose_3h_lfc, y = sucrose_24h_lfc)) +\n  geom_point() +\n  labs(\n    title = \"LFC Correlation: 3h vs. 24h\",\n    x = \"LFC at 3h\",\n    y = \"LFC at 24h\"\n  ) +\n  theme_bw() # Apply black and white theme for cleaner look\np1 + geom_smooth(method = \"lm\")\n\n`geom_smooth()` using formula = 'y ~ x'"
+  },
+  {
+    "objectID": "exercises/exercise_block_4.html#exercise-2-adding-correlation-coefficient",
+    "href": "exercises/exercise_block_4.html#exercise-2-adding-correlation-coefficient",
+    "title": "Exercise - Block 4",
+    "section": "Exercise 2: Adding correlation coefficient",
+    "text": "Exercise 2: Adding correlation coefficient\nNow, let’s add the Pearson correlation coefficient and p-value to the plot from Exercise 1. The stat_cor() function from the ggpubr package is particularly useful for this, as it automatically calculates and displays these statistical metrics directly on the plot, providing a quantitative measure of the relationship.\nA. Use stat_cor() from the ggpubr package to add the correlation.\n\n\n\n\n\n\nSolution\n\n\n\n\n\n\np2 &lt;- p1 + stat_cor(method = \"pearson\") + theme_bw() # Apply black and white theme\np2"
+  },
+  {
+    "objectID": "exercises/exercise_block_4.html#exercise-3-boxplot-with-p-values",
+    "href": "exercises/exercise_block_4.html#exercise-3-boxplot-with-p-values",
+    "title": "Exercise - Block 4",
+    "section": "Exercise 3: Boxplot with p-values",
+    "text": "Exercise 3: Boxplot with p-values\nLet’s compare the expression of a single gene between the “none” and “sucrose” conditions at 24h. Boxplots are excellent for visualizing the distribution of expression levels across different conditions. Gene expression data is often log-transformed to better visualize the variance and make the distribution more symmetric. We will use a log2(expression + 1) transformation.\nTo statistically compare these groups, we will use stat_compare_means() from ggpubr, which can perform various statistical tests (e.g., t-test) and display the resulting p-values directly on the plot.\nA. First, prepare the data. Choose a gene that is significantly differentially expressed at 24h.\n\nB. Create a boxplot of the log2 transformed expression for the selected gene, comparing “none” and “sucrose” conditions.\n\nC. Add the p-value from a t-test comparing the two groups. Use stat_compare_means().\n\n\n\n\n\n\nSolution\n\n\n\n\n\n\n# Find a significant gene at 24h\nsig_gene_24h &lt;- data$diff[data$diff$sucrose_24h_pval &lt; 0.05 & abs(data$diff$sucrose_24h_lfc) &gt; 1, ][1, \"Gene_ID\"]\n\n# Prepare the data for plotting\nplot_data &lt;- data.frame(\n  expression = as.numeric(data$counts[sig_gene_24h, ]),\n  compound = data$anno$compound,\n  time = data$anno$time\n) %&gt;%\n  filter(time == \"24 hour\")\n\n# Create the plot\np3 &lt;- ggplot(plot_data, aes(x = compound, y = log2(expression + 1), fill = compound)) +\n  geom_boxplot() +\n  labs(\n    title = paste(\"Expression of gene\", sig_gene_24h, \"at 24h\"),\n    x = \"Compound\",\n    y = expression(\"Log\"[2] * \" Expression Levels\")\n  ) +\n  theme_bw() # Apply black and white theme\n\n# Add the p-value\np3 + stat_compare_means(method = \"t.test\")"
+  },
+  {
+    "objectID": "exercises/exercise_block_4.html#exercise-4-volcano-plot",
+    "href": "exercises/exercise_block_4.html#exercise-4-volcano-plot",
+    "title": "Exercise - Block 4",
+    "section": "Exercise 4: Volcano plot",
+    "text": "Exercise 4: Volcano plot\nLet’s create a volcano plot to visualize the differential expression results at 24h. A volcano plot is a powerful visualization that combines information about fold-change (on the x-axis) and statistical significance (on the y-axis). By plotting -log10(p-value), we can easily spot the most statistically significant genes, as smaller p-values will correspond to larger values on the y-axis. This allows us to quickly identify genes that are both substantially and statistically differentially expressed. We will also use ggrepel::geom_text_repel() to add labels to significant genes without overlapping, ensuring readability.\nA. Create a scatter plot of sucrose_24h_lfc vs. -log10(sucrose_24h_pval).\n\nB. Color the points based on significance. For example, use red for genes with sucrose_24h_pval &lt; 0.05 and abs(sucrose_24h_lfc) &gt; 1.\n\nC. Add labels to the significant genes.\n\n\n\n\n\n\nSolution\n\n\n\n\n\n\n# Add a column to indicate significance\ndata$diff$significant &lt;- ifelse(data$diff$sucrose_24h_pval &lt; 0.05 & abs(data$diff$sucrose_24h_lfc) &gt; 1, \"yes\", \"no\")\n\n# Create the volcano plot\np4 &lt;- ggplot(data$diff, aes(x = sucrose_24h_lfc, y = -log10(sucrose_24h_pval), color = significant)) +\n  geom_point(alpha = 0.5) +\n  scale_color_manual(values = c(\"yes\" = \"red\", \"no\" = \"grey\")) +\n  labs(\n    title = \"Volcano Plot at 24h\",\n    x = \"Log2 Fold Change\",\n    y = expression(\"-Log\"[10] * \" (\" * italic(p) * \"-value)\")\n  ) +\n  theme(legend.position = \"none\") +\n  theme_bw() # Apply black and white theme\n\n# Add labels to significant genes\np4 + ggrepel::geom_text_repel(\n  data = subset(data$diff, significant == \"yes\"),\n  aes(label = Gene_ID),\n  size = 3,\n  box.padding = 0.5\n)\n\nWarning: ggrepel: 63 unlabeled data points (too many overlaps). Consider\nincreasing max.overlaps"
+  },
+  {
+    "objectID": "exercises/exercise_block_4.html#exercise-5-correlation-of-two-genes",
+    "href": "exercises/exercise_block_4.html#exercise-5-correlation-of-two-genes",
+    "title": "Exercise - Block 4",
+    "section": "Exercise 5: Correlation of two genes",
+    "text": "Exercise 5: Correlation of two genes\nAnother common task is to investigate the correlation between the expression of two specific genes. This can reveal co-regulation or related functions. Log-transforming the expression data can make the relationship between genes more linear and easier to interpret, especially with a wide dynamic range. Let’s dynamically select the top 2 most expressed genes for this exercise.\nA. Find the top 2 most expressed genes in the data$counts dataframe.\n\nB. Create a scatter plot of the log2 transformed expression of these two genes.\n\nC. Add a regression line and the Pearson correlation coefficient to the plot.\n\n\n\n\n\n\nSolution\n\n\n\n\n\n\n# Find the top 2 most expressed genes\ngene_means &lt;- rowMeans(data$counts, na.rm = TRUE)\ntop_genes &lt;- names(sort(gene_means, decreasing = TRUE)[1:2])\ngene1 &lt;- top_genes[1]\ngene2 &lt;- top_genes[2]\n\n# Prepare the data for plotting\nplot_data_corr &lt;- data.frame(\n  gene1_expr = as.numeric(data$counts[gene1, ]),\n  gene2_expr = as.numeric(data$counts[gene2, ]),\n  compound = data$anno$compound,\n  time = data$anno$time\n)\n\n# Remove rows with NA values\nplot_data_corr &lt;- na.omit(plot_data_corr)\n\n# Create the scatter plot\np5 &lt;- ggplot(plot_data_corr, aes(x = log2(gene1_expr + 1), y = log2(gene2_expr + 1))) +\n  geom_point(aes(color = compound, shape = time)) +\n  geom_smooth(method = \"lm\", formula = \"y ~ x\") +\n  stat_cor(method = \"pearson\") +\n  labs(\n    title = paste(\"Correlation between\", gene1, \"and\", gene2),\n    x = expression(\"Log\"[2] * \" Expression Levels\"),\n    y = expression(\"Log\"[2] * \" Expression Levels\")\n  ) +\n  theme_bw()\np5"
+  },
+  {
+    "objectID": "exercises/exercise_block_4.html#session-information",
+    "href": "exercises/exercise_block_4.html#session-information",
+    "title": "Exercise - Block 4",
+    "section": "Session information",
+    "text": "Session information\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nsessionInfo()\n\nR version 4.5.1 (2025-06-13)\nPlatform: aarch64-apple-darwin20\nRunning under: macOS Tahoe 26.1\n\nMatrix products: default\nBLAS:   /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib \nLAPACK: /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1\n\nlocale:\n[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8\n\ntime zone: Europe/Zurich\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices datasets  utils     methods   base     \n\nother attached packages:\n[1] dplyr_1.1.4   ggpubr_0.6.2  ggplot2_4.0.0\n\nloaded via a namespace (and not attached):\n [1] Matrix_1.7-3        gtable_0.3.6        jsonlite_2.0.0     \n [4] compiler_4.5.1      BiocManager_1.30.26 ggsignif_0.6.4     \n [7] renv_1.1.5          Rcpp_1.1.0          tidyselect_1.2.1   \n[10] tidyr_1.3.1         splines_4.5.1       scales_1.4.0       \n[13] yaml_2.3.10         fastmap_1.2.0       lattice_0.22-7     \n[16] R6_2.6.1            labeling_0.4.3      generics_0.1.4     \n[19] Formula_1.2-5       knitr_1.50          backports_1.5.0    \n[22] htmlwidgets_1.6.4   ggrepel_0.9.6       tibble_3.3.0       \n[25] car_3.1-3           pillar_1.11.1       RColorBrewer_1.1-3 \n[28] rlang_1.1.6         broom_1.0.10        xfun_0.53          \n[31] S7_0.2.0            cli_3.6.5           mgcv_1.9-3         \n[34] withr_3.0.2         magrittr_2.0.4      digest_0.6.37      \n[37] grid_4.5.1          rstudioapi_0.17.1   nlme_3.1-168       \n[40] lifecycle_1.0.4     vctrs_0.6.5         rstatix_0.7.3      \n[43] evaluate_1.0.5      glue_1.8.0          farver_2.1.2       \n[46] abind_1.4-8         carData_3.0-5       rmarkdown_2.30     \n[49] purrr_1.1.0         tools_4.5.1         pkgconfig_2.0.3    \n[52] htmltools_0.5.8.1"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Publication-Ready Figure Generation in R",
+    "section": "",
+    "text": "Welcome to the course website for Publication-Ready Figure Generation in R."
+  },
+  {
+    "objectID": "index.html#teacher-author",
+    "href": "index.html#teacher-author",
+    "title": "Publication-Ready Figure Generation in R",
+    "section": "Teacher & Author",
+    "text": "Teacher & Author\nDeepak Tanwar"
+  },
+  {
+    "objectID": "index.html#license",
+    "href": "index.html#license",
+    "title": "Publication-Ready Figure Generation in R",
+    "section": "License",
+    "text": "License\nThis project is licensed under the MIT License."
+  },
+  {
+    "objectID": "index.html#copyright",
+    "href": "index.html#copyright",
+    "title": "Publication-Ready Figure Generation in R",
+    "section": "Copyright",
+    "text": "Copyright\nCopyright 2025, Deepak Tanwar"
+  },
+  {
+    "objectID": "index.html#learning-objectives",
+    "href": "index.html#learning-objectives",
+    "title": "Publication-Ready Figure Generation in R",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\n\nAnalyze the principles of effective data visualization:\n\nExplain the importance of clarity, accuracy, and aesthetics in creating publication-ready figures.\nIdentify common pitfalls in data visualization and how to avoid them.\n\nApply base R graphics for figure creation:\n\nCreate basic plots (e.g., scatterplots, bar charts, histograms) using base R functions like plot(), barplot(), and hist().\nCustomize plots with titles, labels, legends, and color schemes.\n\nConstruct advanced visualizations using ggplot2:\n\nBuild complex and layered visualizations using the ggplot2 package.\nApply themes, scales, and geoms to create polished and publication-ready figures.\n\nAdapt figures for specific publication requirements:\n\nAdjust figure dimensions, resolutions, and formats (e.g., PDF, PNG, TIFF) for journal submissions.\nModify fonts, line weights, and other stylistic elements to meet publication guidelines.\n\nIntegrate statistical annotations and summaries:\n\nAdd statistical summaries (e.g., regression lines, confidence intervals) to figures.\nAnnotate plots with p-values, correlation coefficients, or other relevant statistics.\n\nGenerate high-quality figures:\n\nUse functions like ggsave() or pdf() to export figures in high resolution.\nEnsure exported figures meet the technical requirements of target journals or platforms.\n\nAssemble multi-panel figures:\n\nCombine multiple plots into a single figure using tools like patchwork.\nAlign and arrange subplots to effectively communicate complex data.\n\nImplement best practices for reproducibility:\n\nWrite clean and reusable R scripts for figure generation.\nDocument code and workflows to ensure reproducibility and transparency."
+  },
+  {
+    "objectID": "index.html#learning-experiences",
+    "href": "index.html#learning-experiences",
+    "title": "Publication-Ready Figure Generation in R",
+    "section": "Learning experiences",
+    "text": "Learning experiences\nTo reach the learning outcomes we will use lectures, exercises, and polls. During exercises, you are free to discuss with other participants. During lectures, focus on the lecture only.\n\nExercises\nEach block has practical work involved. Some more than others. The practicals are subdivided into chapters, and we’ll have a (short) discussion after each chapter. All answers to the practicals are incorporated, but they are hidden. Do the exercise first by yourself, before checking out the answer. If your answer is different from the answer in the practicals, try to figure out why they are different."
+  },
+  {
+    "objectID": "qmd/schedule.html",
+    "href": "qmd/schedule.html",
+    "title": "Schedule",
+    "section": "",
+    "text": "block\ndate\npresentation\nexercise\nvideo\n\n\n\n\n1\n13 Oct 2025\nSlides\nExercise\nVideo\n\n\n2\n20 Oct 2025\nSlides\nExercise\nVideo\n\n\n3\n27 Oct 2025\nSlides\nExercise\nVideo\n\n\n4\n03 Nov 2025\nSlides\nExercise\nVideo\n\n\n5\n10 Nov 2025\nSlides\nExercise\nVideo\n\n\n6\n17 Nov 2025\nSlides\nExercise\nVideo\n\n\n7\n24 Nov 2025\nSlides\nExercise\nVideo"
+  },
+  {
+    "objectID": "qmd/schedule.html#course-schedule",
+    "href": "qmd/schedule.html#course-schedule",
+    "title": "Schedule",
+    "section": "",
+    "text": "block\ndate\npresentation\nexercise\nvideo\n\n\n\n\n1\n13 Oct 2025\nSlides\nExercise\nVideo\n\n\n2\n20 Oct 2025\nSlides\nExercise\nVideo\n\n\n3\n27 Oct 2025\nSlides\nExercise\nVideo\n\n\n4\n03 Nov 2025\nSlides\nExercise\nVideo\n\n\n5\n10 Nov 2025\nSlides\nExercise\nVideo\n\n\n6\n17 Nov 2025\nSlides\nExercise\nVideo\n\n\n7\n24 Nov 2025\nSlides\nExercise\nVideo"
+  },
+  {
+    "objectID": "slides/slide_block_2.html#recap-of-block-1",
+    "href": "slides/slide_block_2.html#recap-of-block-1",
+    "title": "Block 2",
+    "section": "Recap of Block 1",
+    "text": "Recap of Block 1\n\nData Types: We learned about different data types (Numeric, Categorical, Time-series, etc.).\nChart Types: We explored various chart types and when to use them (Bar, Pie, Histogram, Boxplot, Scatter, etc.).\nBase R Plotting: We used base R functions like plot(), hist(), and boxplot() to create basic visualizations.\nData to Viz: We were introduced to the data-to-viz.com resource."
+  },
+  {
+    "objectID": "slides/slide_block_2.html#key-base-r-plotting-functions",
+    "href": "slides/slide_block_2.html#key-base-r-plotting-functions",
+    "title": "Block 2",
+    "section": "Key Base R Plotting Functions",
+    "text": "Key Base R Plotting Functions\nWe used several functions to create plots:\n\nplot(): For scatter plots and general purpose plotting.\nhist(): For histograms to show data distribution.\nboxplot(): For boxplots to see spread and outliers.\nbarplot(): For bar charts to compare categorical data.\n\nWhile powerful, base R plotting can be complex for custom and advanced plots."
+  },
+  {
+    "objectID": "slides/slide_block_2.html#grammar-of-data-visualization",
+    "href": "slides/slide_block_2.html#grammar-of-data-visualization",
+    "title": "Block 2",
+    "section": "Grammar of data visualization",
+    "text": "Grammar of data visualization"
+  },
+  {
+    "objectID": "slides/slide_block_2.html#the-grammar-of-graphics-gg",
+    "href": "slides/slide_block_2.html#the-grammar-of-graphics-gg",
+    "title": "Block 2",
+    "section": "The Grammar of Graphics (gg)",
+    "text": "The Grammar of Graphics (gg)\n\n\n\ndata to be drawn from\naesthetic mappings from data to some visual marking\ngeometric objects on the plot"
+  },
+  {
+    "objectID": "slides/slide_block_2.html#the-grammar-of-graphics-gg-1",
+    "href": "slides/slide_block_2.html#the-grammar-of-graphics-gg-1",
+    "title": "Block 2",
+    "section": "The Grammar of Graphics (gg)",
+    "text": "The Grammar of Graphics (gg)\n\n\n\nscales define the range of values\ncoordinates to organize location\nlabels describe the scale and markings\nfacets group into subplots\nthemes style the plot elements"
+  },
+  {
+    "objectID": "slides/slide_block_2.html#composition-of-data-visualization-data",
+    "href": "slides/slide_block_2.html#composition-of-data-visualization-data",
+    "title": "Block 2",
+    "section": "Composition of data visualization: Data",
+    "text": "Composition of data visualization: Data"
+  },
+  {
+    "objectID": "slides/slide_block_2.html#composition-of-data-visualization-aesthetics",
+    "href": "slides/slide_block_2.html#composition-of-data-visualization-aesthetics",
+    "title": "Block 2",
+    "section": "Composition of data visualization: Aesthetics",
+    "text": "Composition of data visualization: Aesthetics"
+  },
+  {
+    "objectID": "slides/slide_block_2.html#composition-of-data-visualization-geometric-shapes",
+    "href": "slides/slide_block_2.html#composition-of-data-visualization-geometric-shapes",
+    "title": "Block 2",
+    "section": "Composition of data visualization: Geometric shapes",
+    "text": "Composition of data visualization: Geometric shapes"
+  },
+  {
+    "objectID": "slides/slide_block_2.html#composition-of-data-visualization-scales-coordinates-labels",
+    "href": "slides/slide_block_2.html#composition-of-data-visualization-scales-coordinates-labels",
+    "title": "Block 2",
+    "section": "Composition of data visualization: Scales, Coordinates, Labels",
+    "text": "Composition of data visualization: Scales, Coordinates, Labels"
+  },
+  {
+    "objectID": "slides/slide_block_2.html#introducing-ggplot2",
+    "href": "slides/slide_block_2.html#introducing-ggplot2",
+    "title": "Block 2",
+    "section": "Introducing ggplot2",
+    "text": "Introducing ggplot2\n\nGrammar of Graphics: ggplot2 is based on the idea that you can build any plot from the same components: a data set, a coordinate system, and geoms (visual marks that represent data points).\nLayers: You build plots by adding layers. For example, you can add a layer of points, then a layer of lines, then a layer of labels."
+  },
+  {
     "objectID": "slides/slide_block_4.html#recap-of-block-3",
     "href": "slides/slide_block_4.html#recap-of-block-3",
     "title": "Block 4",
@@ -89,5 +824,61 @@
     "title": "Block 4",
     "section": "Let’s Practice!",
     "text": "Let’s Practice!\nNow, let’s apply these concepts in Exercise."
+  },
+  {
+    "objectID": "slides/slide_block_6.html#recap-of-block-5",
+    "href": "slides/slide_block_6.html#recap-of-block-5",
+    "title": "Block 6",
+    "section": "Recap of Block 5",
+    "text": "Recap of Block 5\n\nAdvanced Theming: We learned how to create a reusable “universal” theme object in ggplot2 for consistent plot styling.\npatchwork for Layouts: We explored advanced features of patchwork to combine multiple ggplot2 plots into complex, multi-panel figures.\nPlot Annotation: We used plot_annotation() to add titles and tags to entire compositions."
+  },
+  {
+    "objectID": "slides/slide_block_6.html#introduction-to-heatmaps",
+    "href": "slides/slide_block_6.html#introduction-to-heatmaps",
+    "title": "Block 6",
+    "section": "Introduction to Heatmaps",
+    "text": "Introduction to Heatmaps\nHeatmaps are essential for visualizing large matrices, such as gene expression data across many samples. They are powerful for identifying patterns, clusters, and relationships in the data.\nWhy ComplexHeatmap?\n\nIt’s a highly flexible and powerful package for creating publication-quality heatmaps.\nIt allows for extensive customization, including annotations, splitting, and combining multiple heatmaps.\nIt’s part of the Bioconductor ecosystem, a standard for bioinformatics in R."
+  },
+  {
+    "objectID": "slides/slide_block_6.html#a-simple-heatmap",
+    "href": "slides/slide_block_6.html#a-simple-heatmap",
+    "title": "Block 6",
+    "section": "A Simple Heatmap",
+    "text": "A Simple Heatmap\nLet’s create a basic heatmap of the most variable genes from our dataset.\n\n\nlibrary(ComplexHeatmap)\n\n# Select top 50 most variable genes\nmat &lt;- as.matrix(data$counts)\nmat_scaled &lt;- t(scale(t(mat))) # Scale data\ngene_vars &lt;- apply(mat_scaled, 1, var)\ntop_genes &lt;- names(sort(gene_vars, decreasing = TRUE)[1:50])\nmat_top &lt;- mat_scaled[top_genes, ]\n\n# Create the heatmap\nHeatmap(mat_top)"
+  },
+  {
+    "objectID": "slides/slide_block_6.html#annotating-heatmaps",
+    "href": "slides/slide_block_6.html#annotating-heatmaps",
+    "title": "Block 6",
+    "section": "Annotating Heatmaps",
+    "text": "Annotating Heatmaps\nThe “complex” in ComplexHeatmap comes from its ability to add rich annotations.\n\nHeatmapAnnotation(): Create annotation layers for columns or rows.\nWe can annotate our heatmap with sample information like compound and time.\nThis helps in correlating visual patterns with experimental conditions."
+  },
+  {
+    "objectID": "slides/slide_block_6.html#example-annotated-heatmap",
+    "href": "slides/slide_block_6.html#example-annotated-heatmap",
+    "title": "Block 6",
+    "section": "Example: Annotated Heatmap",
+    "text": "Example: Annotated Heatmap\n\n\n# Create a column annotation\ncol_anno &lt;- HeatmapAnnotation(\n  compound = data$anno$compound,\n  time = data$anno$time,\n  col = list(\n    compound = c(\"none\" = \"blue\", \"sucrose\" = \"orange\"),\n    time = c(\"3 hour\" = \"lightgrey\", \"24 hour\" = \"darkgrey\")\n  )\n)\n\n# Add annotation to the heatmap\nHeatmap(mat_top,\n        name = \"Z-Score\",\n        top_annotation = col_anno,\n        show_row_names = FALSE)"
+  },
+  {
+    "objectID": "slides/slide_block_6.html#cross-system-plot-composition",
+    "href": "slides/slide_block_6.html#cross-system-plot-composition",
+    "title": "Block 6",
+    "section": "Cross-System Plot Composition",
+    "text": "Cross-System Plot Composition\nWhat if you want to combine a ComplexHeatmap with a ggplot? patchwork is for ggplot objects, so we need a different approach.\n\nThe Problem: ComplexHeatmap and ggplot2 use different underlying graphics systems.\nThe Solution: The grid graphics system. Both plot types can be converted into “Grid Graphical Objects” (grobs) and arranged on a blank canvas.\n\nThis is an advanced technique that gives you maximum control."
+  },
+  {
+    "objectID": "slides/slide_block_6.html#combining-ggplot-and-complexheatmap",
+    "href": "slides/slide_block_6.html#combining-ggplot-and-complexheatmap",
+    "title": "Block 6",
+    "section": "Combining ggplot and ComplexHeatmap",
+    "text": "Combining ggplot and ComplexHeatmap\nA conceptual example:\n\nCreate your ggplot object (p).\nCreate your Heatmap object (ht).\nDraw the heatmap first, but get its layout information.\nUse grid functions (pushViewport, popViewport) to define a region on the plot device.\nConvert the ggplot object to a grob (ggplotGrob) and draw it in that region.\n\nThis requires careful coordination and is a powerful skill for creating complex final figures."
+  },
+  {
+    "objectID": "slides/slide_block_6.html#lets-practice",
+    "href": "slides/slide_block_6.html#lets-practice",
+    "title": "Block 6",
+    "section": "Let’s Practice!",
+    "text": "Let’s Practice!\nNow, let’s apply these concepts in the exercise for Block 6."
   }
 ]
