@@ -1,5 +1,6 @@
 ---
 title: "Publication-Ready Figure Generation in R"
+format: html
 ---
 
 Welcome to the course website for Publication-Ready Figure Generation in R.

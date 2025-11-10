@@ -32,8 +32,8 @@ website:
             text: "Block 5"
           - href: slides/slide_block_6.qmd
             text: "Block 6"
-          - href: slides/slide_block_7.qmd
-            text: "Block 7"
+          # - href: slides/slide_block_7.qmd
+          #   text: "Block 7"
       - text: Exercises
         menu:
           - href: exercises/exercise_block_1.qmd
@@ -65,7 +65,4 @@ format:
     css: styles.css
     toc: true
     code-block-height: 500px
-  revealjs:
-    theme: default
-    css: styles.css
-    code-block-height: 500px
+

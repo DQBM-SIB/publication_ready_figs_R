@@ -1,0 +1,3829 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>GGplot2</title>
+    <meta charset="utf-8" />
+    <script src="ggplot2_files/header-attrs-2.30/header-attrs.js"></script>
+    <link href="ggplot2_files/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="ggplot2_files/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/xaringan.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+class: inverse, middle, center
+
+## .LARGE[.orange[Making figures using the grammar of graphics]]
+
+---
+
+background-image: url("../figs/03_gglayers.png")
+background-size: 40%
+background-position: 100% 50%
+
+## .Large[.center[The Grammar of Graphics (`gg`)]]
+
+.large[Any graphic can be built from the same components:]
+
+.large[1.] .large[.blue[`data`] to be drawn from]
+
+.large[2.] .large[.blue[`aesthetic mappings`] from data to some visual marking]
+
+.large[3.] .large[.blue[`geometric`] objects on the plot]
+
+.large[4.] .large[.blue[`scales`] define the range of values]
+
+.large[5.] .large[.blue[`coordinates`] to organize location]
+
+.large[6.] .large[.blue[`labels`] describe the scale and markings]
+
+.large[7.] .large[.blue[`facets`] group into subplots]
+
+.large[8.] .large[.blue[`themes`] style the plot elements]
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.blue[.Large[**Not every plot needs every component, but all plots must have the first 3!**]]
+
+---
+
+background-image: url("../figs/03_gglayers.png")
+background-size: 40%
+background-position: 100% 50%
+
+## .Large[.center[The Grammar of Graphics (`gg`)]]
+
+.large[Any graphic can be built from the same components:]
+
+.large[1.] .large[.blue[`**data**`] to be drawn from]
+
+.large[2.] .large[.blue[`**aes**thetic mappings`] from data to some visual marking]
+
+.large[3.] .large[.blue[`**geom**etric`] objects on the plot]
+
+.large[4.] .large[.blue[`**scales**`] define the range of values]
+
+.large[5.] .large[.blue[`**coord**inates`] to organize location]
+
+.large[6.] .large[.blue[`**labels**`] describe the scale and markings]
+
+.large[7.] .large[.blue[`**facet**s`] group into subplots]
+
+.large[8.] .large[.blue[`**theme**s`] style the plot elements]
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.blue[.Large[**Not every plot needs every component, but all plots must have the first 3!**]]
+
+---
+
+## .Large[.center[Data]]
+
+## Data used in this course
+
+
+.pull-left[
+<div id="zacqghyjqh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#zacqghyjqh table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#zacqghyjqh thead, #zacqghyjqh tbody, #zacqghyjqh tfoot, #zacqghyjqh tr, #zacqghyjqh td, #zacqghyjqh th {
+  border-style: none;
+}
+
+#zacqghyjqh p {
+  margin: 0;
+  padding: 0;
+}
+
+#zacqghyjqh .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#zacqghyjqh .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#zacqghyjqh .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#zacqghyjqh .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#zacqghyjqh .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#zacqghyjqh .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#zacqghyjqh .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#zacqghyjqh .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#zacqghyjqh .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#zacqghyjqh .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#zacqghyjqh .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#zacqghyjqh .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#zacqghyjqh .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#zacqghyjqh .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#zacqghyjqh .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#zacqghyjqh .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#zacqghyjqh .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#zacqghyjqh .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#zacqghyjqh .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zacqghyjqh .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#zacqghyjqh .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#zacqghyjqh .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#zacqghyjqh .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zacqghyjqh .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#zacqghyjqh .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#zacqghyjqh .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#zacqghyjqh .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zacqghyjqh .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#zacqghyjqh .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#zacqghyjqh .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#zacqghyjqh .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#zacqghyjqh .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#zacqghyjqh .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zacqghyjqh .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#zacqghyjqh .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zacqghyjqh .gt_left {
+  text-align: left;
+}
+
+#zacqghyjqh .gt_center {
+  text-align: center;
+}
+
+#zacqghyjqh .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#zacqghyjqh .gt_font_normal {
+  font-weight: normal;
+}
+
+#zacqghyjqh .gt_font_bold {
+  font-weight: bold;
+}
+
+#zacqghyjqh .gt_font_italic {
+  font-style: italic;
+}
+
+#zacqghyjqh .gt_super {
+  font-size: 65%;
+}
+
+#zacqghyjqh .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#zacqghyjqh .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#zacqghyjqh .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#zacqghyjqh .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#zacqghyjqh .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#zacqghyjqh .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#zacqghyjqh .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#zacqghyjqh .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#zacqghyjqh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Sample_ID">Sample_ID</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="compound">compound</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="dose">dose</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="time">time</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="Sample_ID" class="gt_row gt_left">ERR1736192</td>
+<td headers="compound" class="gt_row gt_left">none</td>
+<td headers="dose" class="gt_row gt_left">none</td>
+<td headers="time" class="gt_row gt_left">24 hour</td></tr>
+    <tr><td headers="Sample_ID" class="gt_row gt_left">ERR1736193</td>
+<td headers="compound" class="gt_row gt_left">none</td>
+<td headers="dose" class="gt_row gt_left">none</td>
+<td headers="time" class="gt_row gt_left">3 hour</td></tr>
+    <tr><td headers="Sample_ID" class="gt_row gt_left">ERR1736194</td>
+<td headers="compound" class="gt_row gt_left">sucrose</td>
+<td headers="dose" class="gt_row gt_left">15 millimolar</td>
+<td headers="time" class="gt_row gt_left">24 hour</td></tr>
+    <tr><td headers="Sample_ID" class="gt_row gt_left">ERR1736195</td>
+<td headers="compound" class="gt_row gt_left">sucrose</td>
+<td headers="dose" class="gt_row gt_left">15 millimolar</td>
+<td headers="time" class="gt_row gt_left">3 hour</td></tr>
+    <tr><td headers="Sample_ID" class="gt_row gt_left">ERR1736196</td>
+<td headers="compound" class="gt_row gt_left">none</td>
+<td headers="dose" class="gt_row gt_left">none</td>
+<td headers="time" class="gt_row gt_left">24 hour</td></tr>
+    <tr><td headers="Sample_ID" class="gt_row gt_left">ERR1736197</td>
+<td headers="compound" class="gt_row gt_left">none</td>
+<td headers="dose" class="gt_row gt_left">none</td>
+<td headers="time" class="gt_row gt_left">3 hour</td></tr>
+    <tr><td headers="Sample_ID" class="gt_row gt_left">ERR1736198</td>
+<td headers="compound" class="gt_row gt_left">sucrose</td>
+<td headers="dose" class="gt_row gt_left">15 millimolar</td>
+<td headers="time" class="gt_row gt_left">24 hour</td></tr>
+    <tr><td headers="Sample_ID" class="gt_row gt_left">ERR1736199</td>
+<td headers="compound" class="gt_row gt_left">sucrose</td>
+<td headers="dose" class="gt_row gt_left">15 millimolar</td>
+<td headers="time" class="gt_row gt_left">3 hour</td></tr>
+    <tr><td headers="Sample_ID" class="gt_row gt_left">ERR1736200</td>
+<td headers="compound" class="gt_row gt_left">none</td>
+<td headers="dose" class="gt_row gt_left">none</td>
+<td headers="time" class="gt_row gt_left">24 hour</td></tr>
+    <tr><td headers="Sample_ID" class="gt_row gt_left">ERR1736201</td>
+<td headers="compound" class="gt_row gt_left">none</td>
+<td headers="dose" class="gt_row gt_left">none</td>
+<td headers="time" class="gt_row gt_left">3 hour</td></tr>
+  </tbody>
+  
+</table>
+</div>
+]
+
+.pull-right[
+<div id="etvecmiqon" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#etvecmiqon table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#etvecmiqon thead, #etvecmiqon tbody, #etvecmiqon tfoot, #etvecmiqon tr, #etvecmiqon td, #etvecmiqon th {
+  border-style: none;
+}
+
+#etvecmiqon p {
+  margin: 0;
+  padding: 0;
+}
+
+#etvecmiqon .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#etvecmiqon .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#etvecmiqon .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#etvecmiqon .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#etvecmiqon .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#etvecmiqon .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#etvecmiqon .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#etvecmiqon .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#etvecmiqon .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#etvecmiqon .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#etvecmiqon .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#etvecmiqon .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#etvecmiqon .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#etvecmiqon .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#etvecmiqon .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#etvecmiqon .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#etvecmiqon .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#etvecmiqon .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#etvecmiqon .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#etvecmiqon .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#etvecmiqon .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#etvecmiqon .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#etvecmiqon .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#etvecmiqon .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#etvecmiqon .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#etvecmiqon .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#etvecmiqon .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#etvecmiqon .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#etvecmiqon .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#etvecmiqon .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#etvecmiqon .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#etvecmiqon .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#etvecmiqon .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#etvecmiqon .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#etvecmiqon .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#etvecmiqon .gt_left {
+  text-align: left;
+}
+
+#etvecmiqon .gt_center {
+  text-align: center;
+}
+
+#etvecmiqon .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#etvecmiqon .gt_font_normal {
+  font-weight: normal;
+}
+
+#etvecmiqon .gt_font_bold {
+  font-weight: bold;
+}
+
+#etvecmiqon .gt_font_italic {
+  font-style: italic;
+}
+
+#etvecmiqon .gt_super {
+  font-size: 65%;
+}
+
+#etvecmiqon .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#etvecmiqon .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#etvecmiqon .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#etvecmiqon .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#etvecmiqon .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#etvecmiqon .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#etvecmiqon .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#etvecmiqon .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#etvecmiqon div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Gene_ID">Gene_ID</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="ERR1736192">ERR1736192</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="ERR1736193">ERR1736193</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="ERR1736194">ERR1736194</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="ERR1736195">ERR1736195</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="ERR1736196">ERR1736196</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="ERR1736197">ERR1736197</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="ERR1736198">ERR1736198</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="ERR1736199">ERR1736199</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="ERR1736200">ERR1736200</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="ERR1736201">ERR1736201</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="ERR1736202">ERR1736202</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="ERR1736203">ERR1736203</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="Gene_ID" class="gt_row gt_left">AT1G01090</td>
+<td headers="ERR1736192" class="gt_row gt_right">8.951818</td>
+<td headers="ERR1736193" class="gt_row gt_right">8.745436</td>
+<td headers="ERR1736194" class="gt_row gt_right">8.936055</td>
+<td headers="ERR1736195" class="gt_row gt_right">8.796355</td>
+<td headers="ERR1736196" class="gt_row gt_right">8.881562</td>
+<td headers="ERR1736197" class="gt_row gt_right">8.783848</td>
+<td headers="ERR1736198" class="gt_row gt_right">8.918614</td>
+<td headers="ERR1736199" class="gt_row gt_right">8.917665</td>
+<td headers="ERR1736200" class="gt_row gt_right">8.859714</td>
+<td headers="ERR1736201" class="gt_row gt_right">8.880689</td>
+<td headers="ERR1736202" class="gt_row gt_right">8.925662</td>
+<td headers="ERR1736203" class="gt_row gt_right">8.810786</td></tr>
+    <tr><td headers="Gene_ID" class="gt_row gt_left">AT1G01100</td>
+<td headers="ERR1736192" class="gt_row gt_right">10.714686</td>
+<td headers="ERR1736193" class="gt_row gt_right">11.049205</td>
+<td headers="ERR1736194" class="gt_row gt_right">10.760942</td>
+<td headers="ERR1736195" class="gt_row gt_right">10.925465</td>
+<td headers="ERR1736196" class="gt_row gt_right">10.586018</td>
+<td headers="ERR1736197" class="gt_row gt_right">11.018331</td>
+<td headers="ERR1736198" class="gt_row gt_right">10.720866</td>
+<td headers="ERR1736199" class="gt_row gt_right">11.003460</td>
+<td headers="ERR1736200" class="gt_row gt_right">10.697236</td>
+<td headers="ERR1736201" class="gt_row gt_right">11.038316</td>
+<td headers="ERR1736202" class="gt_row gt_right">10.602965</td>
+<td headers="ERR1736203" class="gt_row gt_right">10.990252</td></tr>
+    <tr><td headers="Gene_ID" class="gt_row gt_left">AT1G01300</td>
+<td headers="ERR1736192" class="gt_row gt_right">8.262611</td>
+<td headers="ERR1736193" class="gt_row gt_right">8.621839</td>
+<td headers="ERR1736194" class="gt_row gt_right">8.317833</td>
+<td headers="ERR1736195" class="gt_row gt_right">8.524731</td>
+<td headers="ERR1736196" class="gt_row gt_right">8.351529</td>
+<td headers="ERR1736197" class="gt_row gt_right">8.490846</td>
+<td headers="ERR1736198" class="gt_row gt_right">8.326726</td>
+<td headers="ERR1736199" class="gt_row gt_right">8.726843</td>
+<td headers="ERR1736200" class="gt_row gt_right">8.252066</td>
+<td headers="ERR1736201" class="gt_row gt_right">8.438347</td>
+<td headers="ERR1736202" class="gt_row gt_right">8.321741</td>
+<td headers="ERR1736203" class="gt_row gt_right">8.337898</td></tr>
+    <tr><td headers="Gene_ID" class="gt_row gt_left">AT1G01320</td>
+<td headers="ERR1736192" class="gt_row gt_right">10.474282</td>
+<td headers="ERR1736193" class="gt_row gt_right">9.846080</td>
+<td headers="ERR1736194" class="gt_row gt_right">10.547565</td>
+<td headers="ERR1736195" class="gt_row gt_right">10.166405</td>
+<td headers="ERR1736196" class="gt_row gt_right">10.638864</td>
+<td headers="ERR1736197" class="gt_row gt_right">9.910971</td>
+<td headers="ERR1736198" class="gt_row gt_right">10.459285</td>
+<td headers="ERR1736199" class="gt_row gt_right">9.842758</td>
+<td headers="ERR1736200" class="gt_row gt_right">10.536018</td>
+<td headers="ERR1736201" class="gt_row gt_right">9.752592</td>
+<td headers="ERR1736202" class="gt_row gt_right">10.629175</td>
+<td headers="ERR1736203" class="gt_row gt_right">10.004448</td></tr>
+  </tbody>
+  
+</table>
+</div>
+
+<div id="smdcogpxkr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#smdcogpxkr table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#smdcogpxkr thead, #smdcogpxkr tbody, #smdcogpxkr tfoot, #smdcogpxkr tr, #smdcogpxkr td, #smdcogpxkr th {
+  border-style: none;
+}
+
+#smdcogpxkr p {
+  margin: 0;
+  padding: 0;
+}
+
+#smdcogpxkr .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#smdcogpxkr .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#smdcogpxkr .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#smdcogpxkr .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#smdcogpxkr .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#smdcogpxkr .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#smdcogpxkr .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#smdcogpxkr .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#smdcogpxkr .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#smdcogpxkr .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#smdcogpxkr .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#smdcogpxkr .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#smdcogpxkr .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#smdcogpxkr .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#smdcogpxkr .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#smdcogpxkr .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#smdcogpxkr .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#smdcogpxkr .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#smdcogpxkr .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#smdcogpxkr .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#smdcogpxkr .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#smdcogpxkr .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#smdcogpxkr .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#smdcogpxkr .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#smdcogpxkr .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#smdcogpxkr .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#smdcogpxkr .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#smdcogpxkr .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#smdcogpxkr .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#smdcogpxkr .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#smdcogpxkr .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#smdcogpxkr .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#smdcogpxkr .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#smdcogpxkr .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#smdcogpxkr .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#smdcogpxkr .gt_left {
+  text-align: left;
+}
+
+#smdcogpxkr .gt_center {
+  text-align: center;
+}
+
+#smdcogpxkr .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#smdcogpxkr .gt_font_normal {
+  font-weight: normal;
+}
+
+#smdcogpxkr .gt_font_bold {
+  font-weight: bold;
+}
+
+#smdcogpxkr .gt_font_italic {
+  font-style: italic;
+}
+
+#smdcogpxkr .gt_super {
+  font-size: 65%;
+}
+
+#smdcogpxkr .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#smdcogpxkr .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#smdcogpxkr .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#smdcogpxkr .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#smdcogpxkr .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#smdcogpxkr .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#smdcogpxkr .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#smdcogpxkr .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#smdcogpxkr div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Gene_ID">Gene_ID</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Gene_name">Gene_name</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="sucrose_24h_pval">sucrose_24h_pval</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="sucrose_24h_lfc">sucrose_24h_lfc</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="sucrose_3h_pval">sucrose_3h_pval</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="sucrose_3h_lfc">sucrose_3h_lfc</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="Gene_ID" class="gt_row gt_left">AT1G01090</td>
+<td headers="Gene_name" class="gt_row gt_left">PDH-E1 ALPHA</td>
+<td headers="sucrose_24h_pval" class="gt_row gt_right">0.5905386</td>
+<td headers="sucrose_24h_lfc" class="gt_row gt_right">1.1</td>
+<td headers="sucrose_3h_pval" class="gt_row gt_right">0.9983381</td>
+<td headers="sucrose_3h_lfc" class="gt_row gt_right">0.0</td></tr>
+    <tr><td headers="Gene_ID" class="gt_row gt_left">AT1G01100</td>
+<td headers="Gene_name" class="gt_row gt_left">RPP1A</td>
+<td headers="sucrose_24h_pval" class="gt_row gt_right">0.5688959</td>
+<td headers="sucrose_24h_lfc" class="gt_row gt_right">1.1</td>
+<td headers="sucrose_3h_pval" class="gt_row gt_right">0.9983381</td>
+<td headers="sucrose_3h_lfc" class="gt_row gt_right">-1.1</td></tr>
+    <tr><td headers="Gene_ID" class="gt_row gt_left">AT1G01300</td>
+<td headers="Gene_name" class="gt_row gt_left">APF2</td>
+<td headers="sucrose_24h_pval" class="gt_row gt_right">0.5650828</td>
+<td headers="sucrose_24h_lfc" class="gt_row gt_right">1.1</td>
+<td headers="sucrose_3h_pval" class="gt_row gt_right">0.9983381</td>
+<td headers="sucrose_3h_lfc" class="gt_row gt_right">0.0</td></tr>
+    <tr><td headers="Gene_ID" class="gt_row gt_left">AT1G01320</td>
+<td headers="Gene_name" class="gt_row gt_left"></td>
+<td headers="sucrose_24h_pval" class="gt_row gt_right">0.7427942</td>
+<td headers="sucrose_24h_lfc" class="gt_row gt_right">0.0</td>
+<td headers="sucrose_3h_pval" class="gt_row gt_right">0.9983381</td>
+<td headers="sucrose_3h_lfc" class="gt_row gt_right">1.1</td></tr>
+  </tbody>
+  
+</table>
+</div>
+]
+
+---
+
+## Data for plotting: `longer` format
+
+<div id="hfecuiozmx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#hfecuiozmx table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#hfecuiozmx thead, #hfecuiozmx tbody, #hfecuiozmx tfoot, #hfecuiozmx tr, #hfecuiozmx td, #hfecuiozmx th {
+  border-style: none;
+}
+
+#hfecuiozmx p {
+  margin: 0;
+  padding: 0;
+}
+
+#hfecuiozmx .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#hfecuiozmx .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#hfecuiozmx .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#hfecuiozmx .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#hfecuiozmx .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hfecuiozmx .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hfecuiozmx .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hfecuiozmx .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#hfecuiozmx .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#hfecuiozmx .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#hfecuiozmx .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#hfecuiozmx .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#hfecuiozmx .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#hfecuiozmx .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#hfecuiozmx .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#hfecuiozmx .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#hfecuiozmx .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#hfecuiozmx .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#hfecuiozmx .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hfecuiozmx .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#hfecuiozmx .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#hfecuiozmx .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#hfecuiozmx .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hfecuiozmx .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#hfecuiozmx .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#hfecuiozmx .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hfecuiozmx .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hfecuiozmx .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#hfecuiozmx .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hfecuiozmx .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#hfecuiozmx .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hfecuiozmx .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hfecuiozmx .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hfecuiozmx .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hfecuiozmx .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hfecuiozmx .gt_left {
+  text-align: left;
+}
+
+#hfecuiozmx .gt_center {
+  text-align: center;
+}
+
+#hfecuiozmx .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#hfecuiozmx .gt_font_normal {
+  font-weight: normal;
+}
+
+#hfecuiozmx .gt_font_bold {
+  font-weight: bold;
+}
+
+#hfecuiozmx .gt_font_italic {
+  font-style: italic;
+}
+
+#hfecuiozmx .gt_super {
+  font-size: 65%;
+}
+
+#hfecuiozmx .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#hfecuiozmx .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#hfecuiozmx .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#hfecuiozmx .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#hfecuiozmx .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#hfecuiozmx .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#hfecuiozmx .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#hfecuiozmx .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#hfecuiozmx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Sample_ID">Sample_ID</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="compound">compound</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="dose">dose</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="time">time</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Gene_ID">Gene_ID</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="expression">expression</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="Sample_ID" class="gt_row gt_left">ERR1736192</td>
+<td headers="compound" class="gt_row gt_left">none</td>
+<td headers="dose" class="gt_row gt_left">none</td>
+<td headers="time" class="gt_row gt_left">24 hour</td>
+<td headers="Gene_ID" class="gt_row gt_left">AT1G01090</td>
+<td headers="expression" class="gt_row gt_right">8.951818</td></tr>
+    <tr><td headers="Sample_ID" class="gt_row gt_left">ERR1736193</td>
+<td headers="compound" class="gt_row gt_left">none</td>
+<td headers="dose" class="gt_row gt_left">none</td>
+<td headers="time" class="gt_row gt_left">3 hour</td>
+<td headers="Gene_ID" class="gt_row gt_left">AT1G01090</td>
+<td headers="expression" class="gt_row gt_right">8.951818</td></tr>
+    <tr><td headers="Sample_ID" class="gt_row gt_left">ERR1736194</td>
+<td headers="compound" class="gt_row gt_left">sucrose</td>
+<td headers="dose" class="gt_row gt_left">15 millimolar</td>
+<td headers="time" class="gt_row gt_left">24 hour</td>
+<td headers="Gene_ID" class="gt_row gt_left">AT1G01090</td>
+<td headers="expression" class="gt_row gt_right">8.951818</td></tr>
+    <tr><td headers="Sample_ID" class="gt_row gt_left">ERR1736195</td>
+<td headers="compound" class="gt_row gt_left">sucrose</td>
+<td headers="dose" class="gt_row gt_left">15 millimolar</td>
+<td headers="time" class="gt_row gt_left">3 hour</td>
+<td headers="Gene_ID" class="gt_row gt_left">AT1G01090</td>
+<td headers="expression" class="gt_row gt_right">8.951818</td></tr>
+    <tr><td headers="Sample_ID" class="gt_row gt_left">ERR1736196</td>
+<td headers="compound" class="gt_row gt_left">none</td>
+<td headers="dose" class="gt_row gt_left">none</td>
+<td headers="time" class="gt_row gt_left">24 hour</td>
+<td headers="Gene_ID" class="gt_row gt_left">AT1G01090</td>
+<td headers="expression" class="gt_row gt_right">8.951818</td></tr>
+    <tr><td headers="Sample_ID" class="gt_row gt_left">ERR1736197</td>
+<td headers="compound" class="gt_row gt_left">none</td>
+<td headers="dose" class="gt_row gt_left">none</td>
+<td headers="time" class="gt_row gt_left">3 hour</td>
+<td headers="Gene_ID" class="gt_row gt_left">AT1G01090</td>
+<td headers="expression" class="gt_row gt_right">8.951818</td></tr>
+    <tr><td headers="Sample_ID" class="gt_row gt_left">ERR1736198</td>
+<td headers="compound" class="gt_row gt_left">sucrose</td>
+<td headers="dose" class="gt_row gt_left">15 millimolar</td>
+<td headers="time" class="gt_row gt_left">24 hour</td>
+<td headers="Gene_ID" class="gt_row gt_left">AT1G01090</td>
+<td headers="expression" class="gt_row gt_right">8.951818</td></tr>
+    <tr><td headers="Sample_ID" class="gt_row gt_left">ERR1736199</td>
+<td headers="compound" class="gt_row gt_left">sucrose</td>
+<td headers="dose" class="gt_row gt_left">15 millimolar</td>
+<td headers="time" class="gt_row gt_left">3 hour</td>
+<td headers="Gene_ID" class="gt_row gt_left">AT1G01090</td>
+<td headers="expression" class="gt_row gt_right">8.951818</td></tr>
+    <tr><td headers="Sample_ID" class="gt_row gt_left">ERR1736200</td>
+<td headers="compound" class="gt_row gt_left">none</td>
+<td headers="dose" class="gt_row gt_left">none</td>
+<td headers="time" class="gt_row gt_left">24 hour</td>
+<td headers="Gene_ID" class="gt_row gt_left">AT1G01090</td>
+<td headers="expression" class="gt_row gt_right">8.951818</td></tr>
+    <tr><td headers="Sample_ID" class="gt_row gt_left">ERR1736201</td>
+<td headers="compound" class="gt_row gt_left">none</td>
+<td headers="dose" class="gt_row gt_left">none</td>
+<td headers="time" class="gt_row gt_left">3 hour</td>
+<td headers="Gene_ID" class="gt_row gt_left">AT1G01090</td>
+<td headers="expression" class="gt_row gt_right">8.951818</td></tr>
+    <tr><td headers="Sample_ID" class="gt_row gt_left">ERR1736202</td>
+<td headers="compound" class="gt_row gt_left">sucrose</td>
+<td headers="dose" class="gt_row gt_left">15 millimolar</td>
+<td headers="time" class="gt_row gt_left">24 hour</td>
+<td headers="Gene_ID" class="gt_row gt_left">AT1G01090</td>
+<td headers="expression" class="gt_row gt_right">8.951818</td></tr>
+    <tr><td headers="Sample_ID" class="gt_row gt_left">ERR1736203</td>
+<td headers="compound" class="gt_row gt_left">sucrose</td>
+<td headers="dose" class="gt_row gt_left">15 millimolar</td>
+<td headers="time" class="gt_row gt_left">3 hour</td>
+<td headers="Gene_ID" class="gt_row gt_left">AT1G01090</td>
+<td headers="expression" class="gt_row gt_right">8.951818</td></tr>
+  </tbody>
+  
+</table>
+</div>
+
+---
+
+
+
+
+
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Boxplot]]]
+.panel1-fig1-user[
+
+``` r
+*ggplot(data = dat)
+```
+]
+ 
+.panel2-fig1-user[
+&lt;img src="ggplot2_files/figure-html/fig1_user_01_output-1.png" width="576" /&gt;
+]
+
+---
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Boxplot]]]
+.panel1-fig1-user[
+
+``` r
+ggplot(data = dat) +
+* aes(x = Sample_ID)
+```
+]
+ 
+.panel2-fig1-user[
+&lt;img src="ggplot2_files/figure-html/fig1_user_02_output-1.png" width="576" /&gt;
+]
+
+---
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Boxplot]]]
+.panel1-fig1-user[
+
+``` r
+ggplot(data = dat) +
+  aes(x = Sample_ID) +
+* aes(y = expression)
+```
+]
+ 
+.panel2-fig1-user[
+&lt;img src="ggplot2_files/figure-html/fig1_user_03_output-1.png" width="576" /&gt;
+]
+
+---
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Boxplot]]]
+.panel1-fig1-user[
+
+``` r
+ggplot(data = dat) +
+  aes(x = Sample_ID) +
+  aes(y = expression) +
+* aes(color = compound)
+```
+]
+ 
+.panel2-fig1-user[
+&lt;img src="ggplot2_files/figure-html/fig1_user_04_output-1.png" width="576" /&gt;
+]
+
+---
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Boxplot]]]
+.panel1-fig1-user[
+
+``` r
+ggplot(data = dat) +
+  aes(x = Sample_ID) +
+  aes(y = expression) +
+  aes(color = compound) +
+* aes(fill = compound)
+```
+]
+ 
+.panel2-fig1-user[
+&lt;img src="ggplot2_files/figure-html/fig1_user_05_output-1.png" width="576" /&gt;
+]
+
+---
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Boxplot]]]
+.panel1-fig1-user[
+
+``` r
+ggplot(data = dat) +
+  aes(x = Sample_ID) +
+  aes(y = expression) +
+  aes(color = compound) +
+  aes(fill = compound) +
+* geom_boxplot()
+```
+]
+ 
+.panel2-fig1-user[
+&lt;img src="ggplot2_files/figure-html/fig1_user_06_output-1.png" width="576" /&gt;
+]
+
+---
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Boxplot]]]
+.panel1-fig1-user[
+
+``` r
+ggplot(data = dat) +
+  aes(x = Sample_ID) +
+  aes(y = expression) +
+  aes(color = compound) +
+  aes(fill = compound) +
+  geom_boxplot() +
+* labs(x = "Samples")
+```
+]
+ 
+.panel2-fig1-user[
+&lt;img src="ggplot2_files/figure-html/fig1_user_07_output-1.png" width="576" /&gt;
+]
+
+---
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Boxplot]]]
+.panel1-fig1-user[
+
+``` r
+ggplot(data = dat) +
+  aes(x = Sample_ID) +
+  aes(y = expression) +
+  aes(color = compound) +
+  aes(fill = compound) +
+  geom_boxplot() +
+  labs(x = "Samples") +
+* labs(y = "Expression")
+```
+]
+ 
+.panel2-fig1-user[
+&lt;img src="ggplot2_files/figure-html/fig1_user_08_output-1.png" width="576" /&gt;
+]
+
+---
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Boxplot]]]
+.panel1-fig1-user[
+
+``` r
+ggplot(data = dat) +
+  aes(x = Sample_ID) +
+  aes(y = expression) +
+  aes(color = compound) +
+  aes(fill = compound) +
+  geom_boxplot() +
+  labs(x = "Samples") +
+  labs(y = "Expression") +
+* labs(title = "Boxplot")
+```
+]
+ 
+.panel2-fig1-user[
+&lt;img src="ggplot2_files/figure-html/fig1_user_09_output-1.png" width="576" /&gt;
+]
+
+---
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Boxplot]]]
+.panel1-fig1-user[
+
+``` r
+ggplot(data = dat) +
+  aes(x = Sample_ID) +
+  aes(y = expression) +
+  aes(color = compound) +
+  aes(fill = compound) +
+  geom_boxplot() +
+  labs(x = "Samples") +
+  labs(y = "Expression") +
+  labs(title = "Boxplot") +
+* labs(subtitle = "Sucrose at 3h and 24h")
+```
+]
+ 
+.panel2-fig1-user[
+&lt;img src="ggplot2_files/figure-html/fig1_user_10_output-1.png" width="576" /&gt;
+]
+
+---
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Boxplot]]]
+.panel1-fig1-user[
+
+``` r
+ggplot(data = dat) +
+  aes(x = Sample_ID) +
+  aes(y = expression) +
+  aes(color = compound) +
+  aes(fill = compound) +
+  geom_boxplot() +
+  labs(x = "Samples") +
+  labs(y = "Expression") +
+  labs(title = "Boxplot") +
+  labs(subtitle = "Sucrose at 3h and 24h") +
+* labs(caption = "This is a Boxplot of Sucrose comparison.")
+```
+]
+ 
+.panel2-fig1-user[
+&lt;img src="ggplot2_files/figure-html/fig1_user_11_output-1.png" width="576" /&gt;
+]
+
+&lt;style&gt;
+.panel1-fig1-user {
+  color: black;
+  width: 42%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-fig1-user {
+  color: black;
+  width: 56%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-fig1-user {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
+
+---
+
+
+
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Boxplot]]]
+.panel1-fig2-rotate[
+
+``` r
+ggplot(data = dat) +
+  aes(x = Sample_ID) +
+  aes(y = expression) +
+  aes(color = compound) +
+  aes(fill = compound) +
+  geom_boxplot() +
+  labs(x = "Samples") +
+  labs(y = "Expression") +
+  labs(title = "Boxplot") +
+  labs(subtitle = "Sucrose at 3h and 24h") +
+  labs(caption = "This is a Boxplot of Sucrose comparison.") +
+* facet_wrap(~dose)
+```
+]
+ 
+.panel2-fig2-rotate[
+&lt;img src="ggplot2_files/figure-html/fig2_rotate_01_output-1.png" width="576" /&gt;
+]
+
+---
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Boxplot]]]
+.panel1-fig2-rotate[
+
+``` r
+ggplot(data = dat) +
+  aes(x = Sample_ID) +
+  aes(y = expression) +
+  aes(color = compound) +
+  aes(fill = compound) +
+  geom_boxplot() +
+  labs(x = "Samples") +
+  labs(y = "Expression") +
+  labs(title = "Boxplot") +
+  labs(subtitle = "Sucrose at 3h and 24h") +
+  labs(caption = "This is a Boxplot of Sucrose comparison.") +
+* facet_grid(dose~time)
+```
+]
+ 
+.panel2-fig2-rotate[
+&lt;img src="ggplot2_files/figure-html/fig2_rotate_02_output-1.png" width="576" /&gt;
+]
+
+&lt;style&gt;
+.panel1-fig2-rotate {
+  color: black;
+  width: 42%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-fig2-rotate {
+  color: black;
+  width: 56%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-fig2-rotate {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
+
+---
+
+
+
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Boxplot]]]
+.panel1-fig3-rotate[
+
+``` r
+ggplot(data = dat) +
+  aes(x = Sample_ID) +
+  aes(y = expression) +
+  aes(color = compound) +
+  aes(fill = compound) +
+  geom_boxplot() +
+  labs(x = "Samples") +
+  labs(y = "Expression") +
+  labs(title = "Boxplot") +
+  labs(subtitle = "Sucrose at 3h and 24h") +
+  labs(caption = "This is a Boxplot of Sucrose comparison.") +
+  facet_grid(dose~time) +
+* theme_classic()
+```
+]
+ 
+.panel2-fig3-rotate[
+&lt;img src="ggplot2_files/figure-html/fig3_rotate_01_output-1.png" width="576" /&gt;
+]
+
+---
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Boxplot]]]
+.panel1-fig3-rotate[
+
+``` r
+ggplot(data = dat) +
+  aes(x = Sample_ID) +
+  aes(y = expression) +
+  aes(color = compound) +
+  aes(fill = compound) +
+  geom_boxplot() +
+  labs(x = "Samples") +
+  labs(y = "Expression") +
+  labs(title = "Boxplot") +
+  labs(subtitle = "Sucrose at 3h and 24h") +
+  labs(caption = "This is a Boxplot of Sucrose comparison.") +
+  facet_grid(dose~time) +
+* theme_dark()
+```
+]
+ 
+.panel2-fig3-rotate[
+&lt;img src="ggplot2_files/figure-html/fig3_rotate_02_output-1.png" width="576" /&gt;
+]
+
+---
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Boxplot]]]
+.panel1-fig3-rotate[
+
+``` r
+ggplot(data = dat) +
+  aes(x = Sample_ID) +
+  aes(y = expression) +
+  aes(color = compound) +
+  aes(fill = compound) +
+  geom_boxplot() +
+  labs(x = "Samples") +
+  labs(y = "Expression") +
+  labs(title = "Boxplot") +
+  labs(subtitle = "Sucrose at 3h and 24h") +
+  labs(caption = "This is a Boxplot of Sucrose comparison.") +
+  facet_grid(dose~time) +
+* theme_light()
+```
+]
+ 
+.panel2-fig3-rotate[
+&lt;img src="ggplot2_files/figure-html/fig3_rotate_03_output-1.png" width="576" /&gt;
+]
+
+---
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Boxplot]]]
+.panel1-fig3-rotate[
+
+``` r
+ggplot(data = dat) +
+  aes(x = Sample_ID) +
+  aes(y = expression) +
+  aes(color = compound) +
+  aes(fill = compound) +
+  geom_boxplot() +
+  labs(x = "Samples") +
+  labs(y = "Expression") +
+  labs(title = "Boxplot") +
+  labs(subtitle = "Sucrose at 3h and 24h") +
+  labs(caption = "This is a Boxplot of Sucrose comparison.") +
+  facet_grid(dose~time) +
+* theme_linedraw()
+```
+]
+ 
+.panel2-fig3-rotate[
+&lt;img src="ggplot2_files/figure-html/fig3_rotate_04_output-1.png" width="576" /&gt;
+]
+
+---
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Boxplot]]]
+.panel1-fig3-rotate[
+
+``` r
+ggplot(data = dat) +
+  aes(x = Sample_ID) +
+  aes(y = expression) +
+  aes(color = compound) +
+  aes(fill = compound) +
+  geom_boxplot() +
+  labs(x = "Samples") +
+  labs(y = "Expression") +
+  labs(title = "Boxplot") +
+  labs(subtitle = "Sucrose at 3h and 24h") +
+  labs(caption = "This is a Boxplot of Sucrose comparison.") +
+  facet_grid(dose~time) +
+* theme_minimal()
+```
+]
+ 
+.panel2-fig3-rotate[
+&lt;img src="ggplot2_files/figure-html/fig3_rotate_05_output-1.png" width="576" /&gt;
+]
+
+---
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Boxplot]]]
+.panel1-fig3-rotate[
+
+``` r
+ggplot(data = dat) +
+  aes(x = Sample_ID) +
+  aes(y = expression) +
+  aes(color = compound) +
+  aes(fill = compound) +
+  geom_boxplot() +
+  labs(x = "Samples") +
+  labs(y = "Expression") +
+  labs(title = "Boxplot") +
+  labs(subtitle = "Sucrose at 3h and 24h") +
+  labs(caption = "This is a Boxplot of Sucrose comparison.") +
+  facet_grid(dose~time) +
+* theme_void()
+```
+]
+ 
+.panel2-fig3-rotate[
+&lt;img src="ggplot2_files/figure-html/fig3_rotate_06_output-1.png" width="576" /&gt;
+]
+
+---
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Boxplot]]]
+.panel1-fig3-rotate[
+
+``` r
+ggplot(data = dat) +
+  aes(x = Sample_ID) +
+  aes(y = expression) +
+  aes(color = compound) +
+  aes(fill = compound) +
+  geom_boxplot() +
+  labs(x = "Samples") +
+  labs(y = "Expression") +
+  labs(title = "Boxplot") +
+  labs(subtitle = "Sucrose at 3h and 24h") +
+  labs(caption = "This is a Boxplot of Sucrose comparison.") +
+  facet_grid(dose~time) +
+* theme_bw()
+```
+]
+ 
+.panel2-fig3-rotate[
+&lt;img src="ggplot2_files/figure-html/fig3_rotate_07_output-1.png" width="576" /&gt;
+]
+
+---
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Boxplot]]]
+.panel1-fig3-rotate[
+
+``` r
+ggplot(data = dat) +
+  aes(x = Sample_ID) +
+  aes(y = expression) +
+  aes(color = compound) +
+  aes(fill = compound) +
+  geom_boxplot() +
+  labs(x = "Samples") +
+  labs(y = "Expression") +
+  labs(title = "Boxplot") +
+  labs(subtitle = "Sucrose at 3h and 24h") +
+  labs(caption = "This is a Boxplot of Sucrose comparison.") +
+  facet_grid(dose~time) +
+* theme_bw()
+```
+]
+ 
+.panel2-fig3-rotate[
+&lt;img src="ggplot2_files/figure-html/fig3_rotate_08_output-1.png" width="576" /&gt;
+]
+
+&lt;style&gt;
+.panel1-fig3-rotate {
+  color: black;
+  width: 42%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-fig3-rotate {
+  color: black;
+  width: 56%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-fig3-rotate {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
+
+---
+
+
+
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Boxplot]]]
+.panel1-fig4-user[
+
+``` r
+*ggplot(data = dat) +
+* aes(x = Sample_ID) +
+* aes(y = expression) +
+* aes(color = compound) +
+* aes(fill = compound) +
+* geom_boxplot() +
+* labs(x = "Samples") +
+* labs(y = "Expression") +
+* labs(title = "Boxplot") +
+* labs(subtitle = "Sucrose at 3h and 24h") +
+* labs(caption = "This is a Boxplot of Sucrose comparison.") +
+* facet_grid(dose~time) +
+* theme_bw() +
+* theme(axis.text.x = element_text(angle = 90))
+```
+]
+ 
+.panel2-fig4-user[
+&lt;img src="ggplot2_files/figure-html/fig4_user_01_output-1.png" width="576" /&gt;
+]
+
+---
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Boxplot]]]
+.panel1-fig4-user[
+
+``` r
+ggplot(data = dat) +
+  aes(x = Sample_ID) +
+  aes(y = expression) +
+  aes(color = compound) +
+  aes(fill = compound) +
+  geom_boxplot() +
+  labs(x = "Samples") +
+  labs(y = "Expression") +
+  labs(title = "Boxplot") +
+  labs(subtitle = "Sucrose at 3h and 24h") +
+  labs(caption = "This is a Boxplot of Sucrose comparison.") +
+  facet_grid(dose~time) +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 90)) +
+* theme(axis.text.x = element_text(vjust = 0.5))
+```
+]
+ 
+.panel2-fig4-user[
+&lt;img src="ggplot2_files/figure-html/fig4_user_02_output-1.png" width="576" /&gt;
+]
+
+&lt;style&gt;
+.panel1-fig4-user {
+  color: black;
+  width: 42%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-fig4-user {
+  color: black;
+  width: 56%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-fig4-user {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
+
+
+---
+
+
+
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Boxplot]]]
+.panel1-fig5-user[
+
+``` r
+*ggplot(data = dat)
+```
+]
+ 
+.panel2-fig5-user[
+&lt;img src="ggplot2_files/figure-html/fig5_user_01_output-1.png" width="576" /&gt;
+]
+
+---
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Boxplot]]]
+.panel1-fig5-user[
+
+``` r
+ggplot(data = dat) +
+* aes(
+*   x = Sample_ID,
+*   y = expression,
+*   color = compound,
+*   fill = compound
+*   )
+```
+]
+ 
+.panel2-fig5-user[
+&lt;img src="ggplot2_files/figure-html/fig5_user_02_output-1.png" width="576" /&gt;
+]
+
+---
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Boxplot]]]
+.panel1-fig5-user[
+
+``` r
+ggplot(data = dat) +
+  aes(
+    x = Sample_ID,
+    y = expression,
+    color = compound,
+    fill = compound
+    ) +
+* geom_boxplot()
+```
+]
+ 
+.panel2-fig5-user[
+&lt;img src="ggplot2_files/figure-html/fig5_user_03_output-1.png" width="576" /&gt;
+]
+
+---
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Boxplot]]]
+.panel1-fig5-user[
+
+``` r
+ggplot(data = dat) +
+  aes(
+    x = Sample_ID,
+    y = expression,
+    color = compound,
+    fill = compound
+    ) +
+  geom_boxplot() +
+* labs(
+*   x = "Samples",
+*   y = "Expression",
+*   title = "Boxplot",
+*   subtitle = "Sucrose at 3h and 24h",
+*   caption = "This is a Boxplot of Sucrose comparison."
+*   )
+```
+]
+ 
+.panel2-fig5-user[
+&lt;img src="ggplot2_files/figure-html/fig5_user_04_output-1.png" width="576" /&gt;
+]
+
+---
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Boxplot]]]
+.panel1-fig5-user[
+
+``` r
+ggplot(data = dat) +
+  aes(
+    x = Sample_ID,
+    y = expression,
+    color = compound,
+    fill = compound
+    ) +
+  geom_boxplot() +
+  labs(
+    x = "Samples",
+    y = "Expression",
+    title = "Boxplot",
+    subtitle = "Sucrose at 3h and 24h",
+    caption = "This is a Boxplot of Sucrose comparison."
+    ) +
+* facet_grid(dose~time)
+```
+]
+ 
+.panel2-fig5-user[
+&lt;img src="ggplot2_files/figure-html/fig5_user_05_output-1.png" width="576" /&gt;
+]
+
+---
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Boxplot]]]
+.panel1-fig5-user[
+
+``` r
+ggplot(data = dat) +
+  aes(
+    x = Sample_ID,
+    y = expression,
+    color = compound,
+    fill = compound
+    ) +
+  geom_boxplot() +
+  labs(
+    x = "Samples",
+    y = "Expression",
+    title = "Boxplot",
+    subtitle = "Sucrose at 3h and 24h",
+    caption = "This is a Boxplot of Sucrose comparison."
+    ) +
+  facet_grid(dose~time) +
+* theme_bw()
+```
+]
+ 
+.panel2-fig5-user[
+&lt;img src="ggplot2_files/figure-html/fig5_user_06_output-1.png" width="576" /&gt;
+]
+
+---
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Boxplot]]]
+.panel1-fig5-user[
+
+``` r
+ggplot(data = dat) +
+  aes(
+    x = Sample_ID,
+    y = expression,
+    color = compound,
+    fill = compound
+    ) +
+  geom_boxplot() +
+  labs(
+    x = "Samples",
+    y = "Expression",
+    title = "Boxplot",
+    subtitle = "Sucrose at 3h and 24h",
+    caption = "This is a Boxplot of Sucrose comparison."
+    ) +
+  facet_grid(dose~time) +
+  theme_bw() +
+* theme(axis.text.x = element_text(angle = 90, vjust = 0.5))
+```
+]
+ 
+.panel2-fig5-user[
+&lt;img src="ggplot2_files/figure-html/fig5_user_07_output-1.png" width="576" /&gt;
+]
+
+&lt;style&gt;
+.panel1-fig5-user {
+  color: black;
+  width: 42%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-fig5-user {
+  color: black;
+  width: 56%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-fig5-user {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
+
+---
+
+
+
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Barplot]]]
+.panel1-fig6-user[
+
+``` r
+*ggplot(data = dat)
+```
+]
+ 
+.panel2-fig6-user[
+&lt;img src="ggplot2_files/figure-html/fig6_user_01_output-1.png" width="576" /&gt;
+]
+
+---
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Barplot]]]
+.panel1-fig6-user[
+
+``` r
+ggplot(data = dat) +
+* aes(
+*   x = Sample_ID,
+*   y = expression,
+*   color = compound,
+*   fill = compound
+*   )
+```
+]
+ 
+.panel2-fig6-user[
+&lt;img src="ggplot2_files/figure-html/fig6_user_02_output-1.png" width="576" /&gt;
+]
+
+---
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Barplot]]]
+.panel1-fig6-user[
+
+``` r
+ggplot(data = dat) +
+  aes(
+    x = Sample_ID,
+    y = expression,
+    color = compound,
+    fill = compound
+    ) +
+* geom_col()
+```
+]
+ 
+.panel2-fig6-user[
+&lt;img src="ggplot2_files/figure-html/fig6_user_03_output-1.png" width="576" /&gt;
+]
+
+---
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Barplot]]]
+.panel1-fig6-user[
+
+``` r
+ggplot(data = dat) +
+  aes(
+    x = Sample_ID,
+    y = expression,
+    color = compound,
+    fill = compound
+    ) +
+  geom_col() +
+* labs(
+*   x = "Samples",
+*   y = "Expression",
+*   title = "Barplot",
+*   subtitle = "Sucrose at 3h and 24h",
+*   caption = "This is a Barplot of Sucrose comparison."
+*   )
+```
+]
+ 
+.panel2-fig6-user[
+&lt;img src="ggplot2_files/figure-html/fig6_user_04_output-1.png" width="576" /&gt;
+]
+
+---
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Barplot]]]
+.panel1-fig6-user[
+
+``` r
+ggplot(data = dat) +
+  aes(
+    x = Sample_ID,
+    y = expression,
+    color = compound,
+    fill = compound
+    ) +
+  geom_col() +
+  labs(
+    x = "Samples",
+    y = "Expression",
+    title = "Barplot",
+    subtitle = "Sucrose at 3h and 24h",
+    caption = "This is a Barplot of Sucrose comparison."
+    ) +
+* facet_grid(dose~time)
+```
+]
+ 
+.panel2-fig6-user[
+&lt;img src="ggplot2_files/figure-html/fig6_user_05_output-1.png" width="576" /&gt;
+]
+
+---
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Barplot]]]
+.panel1-fig6-user[
+
+``` r
+ggplot(data = dat) +
+  aes(
+    x = Sample_ID,
+    y = expression,
+    color = compound,
+    fill = compound
+    ) +
+  geom_col() +
+  labs(
+    x = "Samples",
+    y = "Expression",
+    title = "Barplot",
+    subtitle = "Sucrose at 3h and 24h",
+    caption = "This is a Barplot of Sucrose comparison."
+    ) +
+  facet_grid(dose~time) +
+* theme_bw()
+```
+]
+ 
+.panel2-fig6-user[
+&lt;img src="ggplot2_files/figure-html/fig6_user_06_output-1.png" width="576" /&gt;
+]
+
+---
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Barplot]]]
+.panel1-fig6-user[
+
+``` r
+ggplot(data = dat) +
+  aes(
+    x = Sample_ID,
+    y = expression,
+    color = compound,
+    fill = compound
+    ) +
+  geom_col() +
+  labs(
+    x = "Samples",
+    y = "Expression",
+    title = "Barplot",
+    subtitle = "Sucrose at 3h and 24h",
+    caption = "This is a Barplot of Sucrose comparison."
+    ) +
+  facet_grid(dose~time) +
+  theme_bw() +
+* theme(axis.text.x = element_text(angle = 90, vjust = 0.5))
+```
+]
+ 
+.panel2-fig6-user[
+&lt;img src="ggplot2_files/figure-html/fig6_user_07_output-1.png" width="576" /&gt;
+]
+
+&lt;style&gt;
+.panel1-fig6-user {
+  color: black;
+  width: 42%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-fig6-user {
+  color: black;
+  width: 56%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-fig6-user {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
+
+---
+
+
+
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Histogram]]]
+.panel1-fig7-user[
+
+``` r
+*ggplot(data = dat)
+```
+]
+ 
+.panel2-fig7-user[
+&lt;img src="ggplot2_files/figure-html/fig7_user_01_output-1.png" width="576" /&gt;
+]
+
+---
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Histogram]]]
+.panel1-fig7-user[
+
+``` r
+ggplot(data = dat) +
+* aes(x = expression)
+```
+]
+ 
+.panel2-fig7-user[
+&lt;img src="ggplot2_files/figure-html/fig7_user_02_output-1.png" width="576" /&gt;
+]
+
+---
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Histogram]]]
+.panel1-fig7-user[
+
+``` r
+ggplot(data = dat) +
+  aes(x = expression) +
+* geom_histogram()
+```
+]
+ 
+.panel2-fig7-user[
+
+```
+## `stat_bin()` using `bins = 30`. Pick better value `binwidth`.
+```
+
+&lt;img src="ggplot2_files/figure-html/fig7_user_03_output-1.png" width="576" /&gt;
+]
+
+---
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Histogram]]]
+.panel1-fig7-user[
+
+``` r
+ggplot(data = dat) +
+  aes(x = expression) +
+  geom_histogram() +
+* labs(
+*   x = "Expression",
+*   y = "Counts",
+*   title = "Histogram",
+*   subtitle = "Sucrose at 3h and 24h",
+*   caption = "This is a Histogram of Sucrose comparison."
+*   )
+```
+]
+ 
+.panel2-fig7-user[
+
+```
+## `stat_bin()` using `bins = 30`. Pick better value `binwidth`.
+```
+
+&lt;img src="ggplot2_files/figure-html/fig7_user_04_output-1.png" width="576" /&gt;
+]
+
+---
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Histogram]]]
+.panel1-fig7-user[
+
+``` r
+ggplot(data = dat) +
+  aes(x = expression) +
+  geom_histogram() +
+  labs(
+    x = "Expression",
+    y = "Counts",
+    title = "Histogram",
+    subtitle = "Sucrose at 3h and 24h",
+    caption = "This is a Histogram of Sucrose comparison."
+    ) +
+* facet_grid(dose~time)
+```
+]
+ 
+.panel2-fig7-user[
+
+```
+## `stat_bin()` using `bins = 30`. Pick better value `binwidth`.
+```
+
+&lt;img src="ggplot2_files/figure-html/fig7_user_05_output-1.png" width="576" /&gt;
+]
+
+---
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Histogram]]]
+.panel1-fig7-user[
+
+``` r
+ggplot(data = dat) +
+  aes(x = expression) +
+  geom_histogram() +
+  labs(
+    x = "Expression",
+    y = "Counts",
+    title = "Histogram",
+    subtitle = "Sucrose at 3h and 24h",
+    caption = "This is a Histogram of Sucrose comparison."
+    ) +
+  facet_grid(dose~time) +
+* theme_bw()
+```
+]
+ 
+.panel2-fig7-user[
+
+```
+## `stat_bin()` using `bins = 30`. Pick better value `binwidth`.
+```
+
+&lt;img src="ggplot2_files/figure-html/fig7_user_06_output-1.png" width="576" /&gt;
+]
+
+---
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Histogram]]]
+.panel1-fig7-user[
+
+``` r
+ggplot(data = dat) +
+  aes(x = expression) +
+  geom_histogram() +
+  labs(
+    x = "Expression",
+    y = "Counts",
+    title = "Histogram",
+    subtitle = "Sucrose at 3h and 24h",
+    caption = "This is a Histogram of Sucrose comparison."
+    ) +
+  facet_grid(dose~time) +
+  theme_bw() +
+* theme(axis.text.x = element_text(angle = 90, vjust = 0.5))
+```
+]
+ 
+.panel2-fig7-user[
+
+```
+## `stat_bin()` using `bins = 30`. Pick better value `binwidth`.
+```
+
+&lt;img src="ggplot2_files/figure-html/fig7_user_07_output-1.png" width="576" /&gt;
+]
+
+&lt;style&gt;
+.panel1-fig7-user {
+  color: black;
+  width: 42%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-fig7-user {
+  color: black;
+  width: 56%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-fig7-user {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
+
+---
+
+
+
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Scatter plot]]]
+.panel1-fig8-user[
+
+``` r
+*ggplot(data = data$diff)
+```
+]
+ 
+.panel2-fig8-user[
+&lt;img src="ggplot2_files/figure-html/fig8_user_01_output-1.png" width="576" /&gt;
+]
+
+---
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Scatter plot]]]
+.panel1-fig8-user[
+
+``` r
+ggplot(data = data$diff) +
+* aes(
+*   x = sucrose_24h_lfc,
+*   y = sucrose_3h_lfc,
+*   color = sucrose_24h_pval,
+*   size = sucrose_3h_pval
+*   )
+```
+]
+ 
+.panel2-fig8-user[
+&lt;img src="ggplot2_files/figure-html/fig8_user_02_output-1.png" width="576" /&gt;
+]
+
+---
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Scatter plot]]]
+.panel1-fig8-user[
+
+``` r
+ggplot(data = data$diff) +
+  aes(
+    x = sucrose_24h_lfc,
+    y = sucrose_3h_lfc,
+    color = sucrose_24h_pval,
+    size = sucrose_3h_pval
+    ) +
+* geom_point()
+```
+]
+ 
+.panel2-fig8-user[
+&lt;img src="ggplot2_files/figure-html/fig8_user_03_output-1.png" width="576" /&gt;
+]
+
+---
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Scatter plot]]]
+.panel1-fig8-user[
+
+``` r
+ggplot(data = data$diff) +
+  aes(
+    x = sucrose_24h_lfc,
+    y = sucrose_3h_lfc,
+    color = sucrose_24h_pval,
+    size = sucrose_3h_pval
+    ) +
+  geom_point() +
+* labs(
+*   title = "Scatterplot",
+*   subtitle = "Sucrose at 3h and 24h",
+*   caption = "This is a Scatterplot of log-fold-change comparison."
+*   )
+```
+]
+ 
+.panel2-fig8-user[
+&lt;img src="ggplot2_files/figure-html/fig8_user_04_output-1.png" width="576" /&gt;
+]
+
+---
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Scatter plot]]]
+.panel1-fig8-user[
+
+``` r
+ggplot(data = data$diff) +
+  aes(
+    x = sucrose_24h_lfc,
+    y = sucrose_3h_lfc,
+    color = sucrose_24h_pval,
+    size = sucrose_3h_pval
+    ) +
+  geom_point() +
+  labs(
+    title = "Scatterplot",
+    subtitle = "Sucrose at 3h and 24h",
+    caption = "This is a Scatterplot of log-fold-change comparison."
+    ) +
+* theme_bw()
+```
+]
+ 
+.panel2-fig8-user[
+&lt;img src="ggplot2_files/figure-html/fig8_user_05_output-1.png" width="576" /&gt;
+]
+
+---
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Scatter plot]]]
+.panel1-fig8-user[
+
+``` r
+ggplot(data = data$diff) +
+  aes(
+    x = sucrose_24h_lfc,
+    y = sucrose_3h_lfc,
+    color = sucrose_24h_pval,
+    size = sucrose_3h_pval
+    ) +
+  geom_point() +
+  labs(
+    title = "Scatterplot",
+    subtitle = "Sucrose at 3h and 24h",
+    caption = "This is a Scatterplot of log-fold-change comparison."
+    ) +
+  theme_bw() +
+* theme(axis.text.x = element_text(angle = 90, vjust = 0.5))
+```
+]
+ 
+.panel2-fig8-user[
+&lt;img src="ggplot2_files/figure-html/fig8_user_06_output-1.png" width="576" /&gt;
+]
+
+---
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Scatter plot]]]
+.panel1-fig8-user[
+
+``` r
+ggplot(data = data$diff) +
+  aes(
+    x = sucrose_24h_lfc,
+    y = sucrose_3h_lfc,
+    color = sucrose_24h_pval,
+    size = sucrose_3h_pval
+    ) +
+  geom_point() +
+  labs(
+    title = "Scatterplot",
+    subtitle = "Sucrose at 3h and 24h",
+    caption = "This is a Scatterplot of log-fold-change comparison."
+    ) +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5)) +
+* geom_abline()
+```
+]
+ 
+.panel2-fig8-user[
+&lt;img src="ggplot2_files/figure-html/fig8_user_07_output-1.png" width="576" /&gt;
+]
+
+---
+count: false
+ 
+## .center[.Large[Step by step plotting: .blue[Scatter plot]]]
+.panel1-fig8-user[
+
+``` r
+ggplot(data = data$diff) +
+  aes(
+    x = sucrose_24h_lfc,
+    y = sucrose_3h_lfc,
+    color = sucrose_24h_pval,
+    size = sucrose_3h_pval
+    ) +
+  geom_point() +
+  labs(
+    title = "Scatterplot",
+    subtitle = "Sucrose at 3h and 24h",
+    caption = "This is a Scatterplot of log-fold-change comparison."
+    ) +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5)) +
+  geom_abline() +
+* scale_color_viridis_c()
+```
+]
+ 
+.panel2-fig8-user[
+&lt;img src="ggplot2_files/figure-html/fig8_user_08_output-1.png" width="576" /&gt;
+]
+
+&lt;style&gt;
+.panel1-fig8-user {
+  color: black;
+  width: 42%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-fig8-user {
+  color: black;
+  width: 56%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-fig8-user {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+  "ratio": "16:9",
+  "highlightLines": true,
+  "highlightSpans": false,
+  "highlightStyle": "github",
+  "countIncrementalSlides": false,
+  "slideNumberFormat": "%current%",
+  "navigation": {
+    "scroll": false
+  }
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
