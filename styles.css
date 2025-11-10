@@ -51,6 +51,8 @@ a {
   size: 0.75em
 }
 
-.reveal pre.sourceCode code {
-	height: 200px;
+
+
+.reveal code.sourceCode {
+  font-size: 0.8em !important;
 }

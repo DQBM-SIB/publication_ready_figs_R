@@ -4,12 +4,9 @@ author: "Deepak Tanwar"
 editor: visual
 format:
   revealjs:
-    theme: default
     controls-layout: bottom-right
     controls-tutorial: true
     footer: "Publication ready figures with `R`"
-    code-block-height: "6"
-    css: ../custom.css
 title-slide-attributes:
   data-background-size: contain
   data-background-opacity: "0.8"
@@ -29,44 +26,20 @@ editor_options:
 
 Creating a consistent and professional look for all your plots is key for publication. Instead of customizing each plot individually, you can create a reusable theme object.
 
-**Why create a "universal" theme?**
-
--   **Consistency**: Ensures all figures in a publication have the same style.
--   **Efficiency**: Saves time by applying a complex set of customizations in one line.
--   **Reproducibility**: Makes it easy to share and reuse your style.
-
-## Creating a Reusable Theme
-
-You can store a `theme()` configuration in an object.
-
-::::: columns
-::: {.column width="50%"}
-``` r
-# Define a universal theme
-theme_publication <- function() {
-  theme_bw(base_size = 12) +
-    theme(
-      plot.title = element_text(face = "bold", size = 14, hjust = 0.5),
-      axis.title = element_text(face = "bold"),
-      axis.text = element_text(color = "black"),
-      panel.grid.major = element_line(color = "grey90"),
-      panel.grid.minor = element_blank(),
-      legend.position = "bottom"
-    )
-}
-```
-:::
-
-::: {.column width="50%"}
-```{r, echo=FALSE, fig.align="center", fig.height=9, dpi=300}
+```{r, echo=FALSE}
+# Load data and packages
 library(ggplot2)
+library(gt)
+library(patchwork)
 data <- readRDS(gzcon(url(
   "https://raw.githubusercontent.com/urppeia/publication_figs/main/data.rds"
 )))
-
 rownames(data$counts) <- data$counts$Gene_ID
 data$counts <- data$counts[, -1]
+```
 
+```{r}
+#| echo: true
 # Define a universal theme
 theme_publication <- function() {
   theme_bw(base_size = 12) +
@@ -79,115 +52,143 @@ theme_publication <- function() {
       legend.position = "bottom"
     )
 }
+```
 
-p <- ggplot(data$diff, aes(x = sucrose_3h_lfc, y = sucrose_24h_lfc)) +
+
+---
+
+![](https://i0.wp.com/cmdlinetips.com/wp-content/uploads/2021/06/ggplot2_theme_rectangle_tips.png){width="100%" fig-align="center"}
+
+---
+
+![](https://i0.wp.com/cmdlinetips.com/wp-content/uploads/2021/05/ggplot2_theme_element_text_tricks.png){width="100%" fig-align="center"}
+
+---
+
+![](https://i0.wp.com/cmdlinetips.com/wp-content/uploads/2021/05/ggplot2_element_line_tips.png){width="100%" fig-align="center"}
+
+---
+
+![](https://i0.wp.com/cmdlinetips.com/wp-content/uploads/2021/06/ggplot2_theme_element_blank_tips.png){width="100%" fig-align="center"}
+
+---
+
+![](https://bookdown.org/alapo/learnr/images/ggplot_elements2.png){width="100%" fig-align="center"}
+
+---
+
+## Introduction to `gt` for Publication Tables
+
+![](https://gt.rstudio.com/reference/figures/gt_parts_of_a_table.svg){width="100%" fig-align="center"}
+
+## Introduction to `gt` for Publication Tables
+
+Figures aren't just plots; they can also be tables. The `gt` package uses a "grammar of tables" philosophy to build beautiful, publication-ready tables from data frames.
+
+-   Start with `gt()` to create a basic table.
+-   Add layers of formatting and styling.
+-   Functions like `tab_header()`, `fmt_number()`, and `cols_label()` give you full control.
+
+## Example: Creating a `gt` Table
+
+Let's create a table of the top 5 most significant genes at 24h.
+
+::::: columns
+::: {.column width="50%"}
+```r
+library(gt)
+library(dplyr)
+
+# Prepare data
+top_genes_table <- data$diff %>%
+  filter(sucrose_24h_pval < 0.05) %>%
+  arrange(sucrose_24h_pval) %>%
+  head(5) %>%
+  select(Gene_ID, sucrose_24h_lfc, sucrose_24h_pval)
+
+# Create and style the table
+gt_table <- gt(top_genes_table) %>%
+  tab_header(
+    title = "Top 5 DE Genes at 24h"
+  ) %>%
+  cols_label(
+    Gene_ID = "Gene",
+    sucrose_24h_lfc = "log2FC",
+    sucrose_24h_pval = "P-value"
+  ) %>%
+  fmt_number(
+    columns = vars(sucrose_24h_lfc),
+    decimals = 2
+  ) %>%
+  fmt_scientific(
+    columns = vars(sucrose_24h_pval),
+    decimals = 2
+  )
+```
+:::
+::: {.column width="50%"}
+```{r, echo=FALSE, fig.align="center", fig.height=9, dpi=300}
+library(dplyr)
+top_genes_table <- data$diff %>%
+  filter(sucrose_24h_pval < 0.05) %>%
+  arrange(sucrose_24h_pval) %>%
+  head(5) %>%
+  select(Gene_ID, sucrose_24h_lfc, sucrose_24h_pval)
+
+gt_table <- gt(top_genes_table) %>%
+  tab_header(
+    title = "Top 5 DE Genes at 24h"
+  ) %>%
+  cols_label(
+    Gene_ID = "Gene",
+    sucrose_24h_lfc = "log2FC",
+    sucrose_24h_pval = "P-value"
+  ) %>%
+  fmt_number(
+    columns = c("sucrose_24h_lfc"),
+    decimals = 2
+  ) %>%
+  fmt_scientific(
+    columns = c("sucrose_24h_pval"),
+    decimals = 2
+  )
+gt_table
+```
+:::
+:::::
+
+## Composing Plots and Tables
+
+`patchwork` is designed for `ggplot` objects, but it can compose with other elements (like `gt` tables) if they are converted to "grobs" (grid graphical objects).
+
+
+## Example: `ggplot` + `gt`
+
+Let's combine a scatter plot with our table into a single figure.
+
+::::: columns
+::: {.column width="50%"}
+```r
+library(patchwork)
+
+# Create a ggplot
+p_scatter <- ggplot(data$diff, aes(x = sucrose_24h_lfc, y = -log10(sucrose_24h_pval))) +
   geom_point(alpha = 0.5) +
-  labs(title = "LFC Correlation")
+  theme_publication() +
+  labs(title = "Volcano Plot 24h")
 
-p + theme_publication()
+# Combine with patchwork
+p_scatter / table_grob
 ```
 :::
-:::::
-
-## Advanced `patchwork`
-
-We've used `+` and `/` to combine plots. `patchwork` offers much more control over complex layouts.
-
--   `|`: A synonym for `+` to place plots side-by-side.
--   `plot_layout()`: Fine-tune the dimensions of plots in a layout (`widths`, `heights`, `guides`).
--   `plot_annotation()`: Add titles, captions, and tags to the entire composition.
-
-## Example: Complex Layout
-
-Let's create two different plots and arrange them in a more complex layout.
-
-```{r, echo=FALSE}
-p_scatter <- ggplot(data$diff, aes(x = sucrose_3h_lfc, y = sucrose_24h_lfc)) +
-  geom_point(aes(color = abs(sucrose_24h_lfc) > 1), alpha = 0.6) +
-  theme_publication() +
-  labs(x = "LFC at 3h", y = "LFC at 24h", title = "LFC Correlation") +
-  theme(legend.position = "none")
-
-sig_gene <- data$diff[data$diff$sucrose_24h_pval < 0.05 & abs(data$diff$sucrose_24h_lfc) > 1, ][1, "Gene_ID"]
-plot_data <- data.frame(
-  expression = as.numeric(data$counts[sig_gene, ]),
-  compound = data$anno$compound,
-  time = data$anno$time
-)
-p_box <- ggplot(plot_data, aes(x = time, y = expression, fill = compound)) +
-  geom_boxplot() +
-  facet_wrap(~compound) +
-  theme_publication() +
-  labs(y = "Expression", title = paste("Expression of", sig_gene))
-```
-
-::::: columns
-::: {.column width="50%"}
-``` r
-library(patchwork)
-
-# Combine scatter plot and boxplot
-# Make the scatter plot twice as wide as the boxplot
-layout <- p_scatter + p_box +
-  plot_layout(widths = c(2, 1))
-
-# Add a title and tags
-layout +
-  plot_annotation(
-    title = 'Gene Expression Analysis',
-    tag_levels = 'A'
-  )
-```
-:::
-
 ::: {.column width="50%"}
 ```{r, echo=FALSE, fig.align="center", fig.height=9, dpi=300}
-library(patchwork)
-layout <- p_scatter + p_box +
-  plot_layout(widths = c(2, 1))
-
-layout +
-  plot_annotation(
-    title = 'Gene Expression Analysis',
-    tag_levels = 'A'
-  )
-```
-:::
-:::::
-
-## Aligning Plots with Nesting
-
-You can create more advanced layouts by nesting combined plots.
-
-```{r, echo=FALSE}
-# A third plot for the example
-sig_counts <- data.frame(
-  timepoint = c("3h", "24h"),
-  count = c(
-    sum(data$diff$sucrose_3h_pval < 0.05 & abs(data$diff$sucrose_3h_lfc) > 1),
-    sum(data$diff$sucrose_24h_pval < 0.05 & abs(data$diff$sucrose_24h_lfc) > 1)
-  )
-)
-p_bar <- ggplot(sig_counts, aes(x = timepoint, y = count, fill = timepoint)) +
-  geom_bar(stat = "identity") +
+p_scatter <- ggplot(data$diff, aes(x = sucrose_24h_lfc, y = -log10(sucrose_24h_pval))) +
+  geom_point(alpha = 0.5) +
   theme_publication() +
-  theme(legend.position = "none") +
-  labs(title = "Significant Genes", y = "Count")
-```
+  labs(title = "Volcano Plot 24h")
 
-::::: columns
-::: {.column width="50%"}
-``` r
-# p_scatter and p_box are from the previous slide
-
-# Nesting plots: (scatter + boxplot) / bar chart
-(p_scatter + p_box) / p_bar
-```
-:::
-
-::: {.column width="50%"}
-```{r, echo=FALSE, fig.align="center", fig.height=9, dpi=300}
-(p_scatter + p_box) / p_bar
+p_scatter / gt_table
 ```
 :::
 :::::

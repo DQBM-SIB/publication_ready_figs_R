@@ -4,7 +4,6 @@ author: "Deepak Tanwar"
 editor: visual
 format:
   revealjs: 
-    theme: default
     controls-layout: bottom-right
     controls-tutorial: true
     footer: "Publication ready figures with `R`"

@@ -95,8 +95,8 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-aabaf2c226465e118ce3ee90c9cf6ea5.css">
-  <link rel="stylesheet" href="../custom.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-f563837468303362081e247dddd440d0.css">
+  <link rel="stylesheet" href="../styles.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -216,19 +216,8 @@ Deepak Tanwar
 <section id="advanced-theming" class="slide level2">
 <h2>Advanced Theming</h2>
 <p>Creating a consistent and professional look for all your plots is key for publication. Instead of customizing each plot individually, you can create a reusable theme object.</p>
-<p><strong>Why create a “universal” theme?</strong></p>
-<ul>
-<li><strong>Consistency</strong>: Ensures all figures in a publication have the same style.</li>
-<li><strong>Efficiency</strong>: Saves time by applying a complex set of customizations in one line.</li>
-<li><strong>Reproducibility</strong>: Makes it easy to share and reuse your style.</li>
-</ul>
-</section>
-<section id="creating-a-reusable-theme" class="slide level2">
-<h2>Creating a Reusable Theme</h2>
-<p>You can store a <code>theme()</code> configuration in an object.</p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="co"># Define a universal theme</span></span>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="co"># Define a universal theme</span></span>
 <span id="cb1-2"><a></a>theme_publication <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
 <span id="cb1-3"><a></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">12</span>) <span class="sc">+</span></span>
 <span id="cb1-4"><a></a>    <span class="fu">theme</span>(</span>
@@ -240,72 +229,597 @@ Deepak Tanwar
 <span id="cb1-10"><a></a>      <span class="at">legend.position =</span> <span class="st">"bottom"</span></span>
 <span id="cb1-11"><a></a>    )</span>
 <span id="cb1-12"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div><div class="column" style="width:50%;">
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="slide_block_5_files/figure-revealjs/unnamed-chunk-1-1.png" class="quarto-figure quarto-figure-center" width="3000"></p>
-</figure>
 </div>
-</div>
-</div>
-</div></div>
 </section>
-<section id="advanced-patchwork" class="slide level2">
-<h2>Advanced <code>patchwork</code></h2>
-<p>We’ve used <code>+</code> and <code>/</code> to combine plots. <code>patchwork</code> offers much more control over complex layouts.</p>
+<section class="slide level2">
+
+
+<img data-src="https://i0.wp.com/cmdlinetips.com/wp-content/uploads/2021/06/ggplot2_theme_rectangle_tips.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"></section>
+<section class="slide level2">
+
+
+<img data-src="https://i0.wp.com/cmdlinetips.com/wp-content/uploads/2021/05/ggplot2_theme_element_text_tricks.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"></section>
+<section class="slide level2">
+
+
+<img data-src="https://i0.wp.com/cmdlinetips.com/wp-content/uploads/2021/05/ggplot2_element_line_tips.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"></section>
+<section class="slide level2">
+
+
+<img data-src="https://i0.wp.com/cmdlinetips.com/wp-content/uploads/2021/06/ggplot2_theme_element_blank_tips.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"></section>
+<section class="slide level2">
+
+
+<img data-src="https://bookdown.org/alapo/learnr/images/ggplot_elements2.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"></section>
+<section id="introduction-to-gt-for-publication-tables" class="slide level2">
+<h2>Introduction to <code>gt</code> for Publication Tables</h2>
+
+<img data-src="https://gt.rstudio.com/reference/figures/gt_parts_of_a_table.svg" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"></section>
+<section id="introduction-to-gt-for-publication-tables-1" class="slide level2">
+<h2>Introduction to <code>gt</code> for Publication Tables</h2>
+<p>Figures aren’t just plots; they can also be tables. The <code>gt</code> package uses a “grammar of tables” philosophy to build beautiful, publication-ready tables from data frames.</p>
 <ul>
-<li><code>|</code>: A synonym for <code>+</code> to place plots side-by-side.</li>
-<li><code>plot_layout()</code>: Fine-tune the dimensions of plots in a layout (<code>widths</code>, <code>heights</code>, <code>guides</code>).</li>
-<li><code>plot_annotation()</code>: Add titles, captions, and tags to the entire composition.</li>
+<li>Start with <code>gt()</code> to create a basic table.</li>
+<li>Add layers of formatting and styling.</li>
+<li>Functions like <code>tab_header()</code>, <code>fmt_number()</code>, and <code>cols_label()</code> give you full control.</li>
 </ul>
 </section>
-<section id="example-complex-layout" class="slide level2">
-<h2>Example: Complex Layout</h2>
-<p>Let’s create two different plots and arrange them in a more complex layout.</p>
+<section id="example-creating-a-gt-table" class="slide level2">
+<h2>Example: Creating a <code>gt</code> Table</h2>
+<p>Let’s create a table of the top 5 most significant genes at 24h.</p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">library</span>(patchwork)</span>
-<span id="cb2-2"><a></a></span>
-<span id="cb2-3"><a></a><span class="co"># Combine scatter plot and boxplot</span></span>
-<span id="cb2-4"><a></a><span class="co"># Make the scatter plot twice as wide as the boxplot</span></span>
-<span id="cb2-5"><a></a>layout <span class="ot">&lt;-</span> p_scatter <span class="sc">+</span> p_box <span class="sc">+</span></span>
-<span id="cb2-6"><a></a>  <span class="fu">plot_layout</span>(<span class="at">widths =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>))</span>
-<span id="cb2-7"><a></a></span>
-<span id="cb2-8"><a></a><span class="co"># Add a title and tags</span></span>
-<span id="cb2-9"><a></a>layout <span class="sc">+</span></span>
-<span id="cb2-10"><a></a>  <span class="fu">plot_annotation</span>(</span>
-<span id="cb2-11"><a></a>    <span class="at">title =</span> <span class="st">'Gene Expression Analysis'</span>,</span>
-<span id="cb2-12"><a></a>    <span class="at">tag_levels =</span> <span class="st">'A'</span></span>
-<span id="cb2-13"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">library</span>(gt)</span>
+<span id="cb2-2"><a></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb2-3"><a></a></span>
+<span id="cb2-4"><a></a><span class="co"># Prepare data</span></span>
+<span id="cb2-5"><a></a>top_genes_table <span class="ot">&lt;-</span> data<span class="sc">$</span>diff <span class="sc">%&gt;%</span></span>
+<span id="cb2-6"><a></a>  <span class="fu">filter</span>(sucrose_24h_pval <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-7"><a></a>  <span class="fu">arrange</span>(sucrose_24h_pval) <span class="sc">%&gt;%</span></span>
+<span id="cb2-8"><a></a>  <span class="fu">head</span>(<span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-9"><a></a>  <span class="fu">select</span>(Gene_ID, sucrose_24h_lfc, sucrose_24h_pval)</span>
+<span id="cb2-10"><a></a></span>
+<span id="cb2-11"><a></a><span class="co"># Create and style the table</span></span>
+<span id="cb2-12"><a></a>gt_table <span class="ot">&lt;-</span> <span class="fu">gt</span>(top_genes_table) <span class="sc">%&gt;%</span></span>
+<span id="cb2-13"><a></a>  <span class="fu">tab_header</span>(</span>
+<span id="cb2-14"><a></a>    <span class="at">title =</span> <span class="st">"Top 5 DE Genes at 24h"</span></span>
+<span id="cb2-15"><a></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb2-16"><a></a>  <span class="fu">cols_label</span>(</span>
+<span id="cb2-17"><a></a>    <span class="at">Gene_ID =</span> <span class="st">"Gene"</span>,</span>
+<span id="cb2-18"><a></a>    <span class="at">sucrose_24h_lfc =</span> <span class="st">"log2FC"</span>,</span>
+<span id="cb2-19"><a></a>    <span class="at">sucrose_24h_pval =</span> <span class="st">"P-value"</span></span>
+<span id="cb2-20"><a></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb2-21"><a></a>  <span class="fu">fmt_number</span>(</span>
+<span id="cb2-22"><a></a>    <span class="at">columns =</span> <span class="fu">vars</span>(sucrose_24h_lfc),</span>
+<span id="cb2-23"><a></a>    <span class="at">decimals =</span> <span class="dv">2</span></span>
+<span id="cb2-24"><a></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb2-25"><a></a>  <span class="fu">fmt_scientific</span>(</span>
+<span id="cb2-26"><a></a>    <span class="at">columns =</span> <span class="fu">vars</span>(sucrose_24h_pval),</span>
+<span id="cb2-27"><a></a>    <span class="at">decimals =</span> <span class="dv">2</span></span>
+<span id="cb2-28"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column" style="width:50%;">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="slide_block_5_files/figure-revealjs/unnamed-chunk-3-1.png" class="quarto-figure quarto-figure-center" width="3000"></p>
-</figure>
+<div id="pxqwnizgny" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#pxqwnizgny table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#pxqwnizgny thead, #pxqwnizgny tbody, #pxqwnizgny tfoot, #pxqwnizgny tr, #pxqwnizgny td, #pxqwnizgny th {
+  border-style: none;
+}
+
+#pxqwnizgny p {
+  margin: 0;
+  padding: 0;
+}
+
+#pxqwnizgny .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#pxqwnizgny .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#pxqwnizgny .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#pxqwnizgny .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#pxqwnizgny .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pxqwnizgny .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pxqwnizgny .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pxqwnizgny .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#pxqwnizgny .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#pxqwnizgny .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#pxqwnizgny .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#pxqwnizgny .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#pxqwnizgny .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#pxqwnizgny .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#pxqwnizgny .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#pxqwnizgny .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#pxqwnizgny .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#pxqwnizgny .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#pxqwnizgny .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pxqwnizgny .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#pxqwnizgny .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#pxqwnizgny .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#pxqwnizgny .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pxqwnizgny .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#pxqwnizgny .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#pxqwnizgny .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pxqwnizgny .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pxqwnizgny .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#pxqwnizgny .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pxqwnizgny .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#pxqwnizgny .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pxqwnizgny .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pxqwnizgny .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pxqwnizgny .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pxqwnizgny .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pxqwnizgny .gt_left {
+  text-align: left;
+}
+
+#pxqwnizgny .gt_center {
+  text-align: center;
+}
+
+#pxqwnizgny .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#pxqwnizgny .gt_font_normal {
+  font-weight: normal;
+}
+
+#pxqwnizgny .gt_font_bold {
+  font-weight: bold;
+}
+
+#pxqwnizgny .gt_font_italic {
+  font-style: italic;
+}
+
+#pxqwnizgny .gt_super {
+  font-size: 65%;
+}
+
+#pxqwnizgny .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#pxqwnizgny .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#pxqwnizgny .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#pxqwnizgny .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#pxqwnizgny .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#pxqwnizgny .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#pxqwnizgny .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#pxqwnizgny .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#pxqwnizgny div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading header">
+<th colspan="3" class="gt_heading gt_title gt_font_normal gt_bottom_border">Top 5 DE Genes at 24h</th>
+</tr>
+<tr class="gt_col_headings even">
+<th id="Gene_ID" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Gene</th>
+<th id="sucrose_24h_lfc" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">log2FC</th>
+<th id="sucrose_24h_pval" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">P-value</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Gene_ID">AT4G25630</td>
+<td class="gt_row gt_right" headers="sucrose_24h_lfc">1.30</td>
+<td class="gt_row gt_right" headers="sucrose_24h_pval">6.58&nbsp;×&nbsp;10<sup>−7</sup></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Gene_ID">AT5G27120</td>
+<td class="gt_row gt_right" headers="sucrose_24h_lfc">1.30</td>
+<td class="gt_row gt_right" headers="sucrose_24h_pval">6.58&nbsp;×&nbsp;10<sup>−7</sup></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Gene_ID">AT3G15450</td>
+<td class="gt_row gt_right" headers="sucrose_24h_lfc">−1.40</td>
+<td class="gt_row gt_right" headers="sucrose_24h_pval">9.69&nbsp;×&nbsp;10<sup>−6</sup></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Gene_ID">AT3G18000</td>
+<td class="gt_row gt_right" headers="sucrose_24h_lfc">1.30</td>
+<td class="gt_row gt_right" headers="sucrose_24h_pval">1.31&nbsp;×&nbsp;10<sup>−4</sup></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Gene_ID">AT5G20250</td>
+<td class="gt_row gt_right" headers="sucrose_24h_lfc">−1.30</td>
+<td class="gt_row gt_right" headers="sucrose_24h_pval">1.81&nbsp;×&nbsp;10<sup>−4</sup></td>
+</tr>
+</tbody>
+</table>
+
 </div>
 </div>
 </div>
 </div></div>
 </section>
-<section id="aligning-plots-with-nesting" class="slide level2">
-<h2>Aligning Plots with Nesting</h2>
-<p>You can create more advanced layouts by nesting combined plots.</p>
+<section id="composing-plots-and-tables" class="slide level2">
+<h2>Composing Plots and Tables</h2>
+<p><code>patchwork</code> is designed for <code>ggplot</code> objects, but it can compose with other elements (like <code>gt</code> tables) if they are converted to “grobs” (grid graphical objects).</p>
+</section>
+<section id="example-ggplot-gt" class="slide level2">
+<h2>Example: <code>ggplot</code> + <code>gt</code></h2>
+<p>Let’s combine a scatter plot with our table into a single figure.</p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="co"># p_scatter and p_box are from the previous slide</span></span>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">library</span>(patchwork)</span>
 <span id="cb3-2"><a></a></span>
-<span id="cb3-3"><a></a><span class="co"># Nesting plots: (scatter + boxplot) / bar chart</span></span>
-<span id="cb3-4"><a></a>(p_scatter <span class="sc">+</span> p_box) <span class="sc">/</span> p_bar</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-3"><a></a><span class="co"># Create a ggplot</span></span>
+<span id="cb3-4"><a></a>p_scatter <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data<span class="sc">$</span>diff, <span class="fu">aes</span>(<span class="at">x =</span> sucrose_24h_lfc, <span class="at">y =</span> <span class="sc">-</span><span class="fu">log10</span>(sucrose_24h_pval))) <span class="sc">+</span></span>
+<span id="cb3-5"><a></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb3-6"><a></a>  <span class="fu">theme_publication</span>() <span class="sc">+</span></span>
+<span id="cb3-7"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Volcano Plot 24h"</span>)</span>
+<span id="cb3-8"><a></a></span>
+<span id="cb3-9"><a></a><span class="co"># Combine with patchwork</span></span>
+<span id="cb3-10"><a></a>p_scatter <span class="sc">/</span> table_grob</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column" style="width:50%;">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="slide_block_5_files/figure-revealjs/unnamed-chunk-5-1.png" class="quarto-figure quarto-figure-center" width="3000"></p>
+<p><img data-src="slide_block_5_files/figure-revealjs/unnamed-chunk-4-1.png" class="quarto-figure quarto-figure-center" width="3000"></p>
 </figure>
 </div>
 </div>

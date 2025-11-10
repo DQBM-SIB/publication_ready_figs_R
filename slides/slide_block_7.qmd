@@ -4,12 +4,9 @@ author: "Deepak Tanwar"
 editor: visual
 format:
   revealjs:
-    theme: default
     controls-layout: bottom-right
     controls-tutorial: true
     footer: "Publication ready figures with `R`"
-    code-block-height: "6"
-    css: ../custom.css
 title-slide-attributes:
   data-background-size: contain
   data-background-opacity: "0.8"

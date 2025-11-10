@@ -64,6 +64,8 @@ format:
       dark: darkly
     css: styles.css
     toc: true
-
-
-
+    code-block-height: 500px
+  revealjs:
+    theme: default
+    css: styles.css
+    code-block-height: 500px
