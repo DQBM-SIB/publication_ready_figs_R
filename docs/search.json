@@ -1,0 +1,58 @@
+[
+  {
+    "objectID": "slides/slide_block_5.html#recap-of-block-4",
+    "href": "slides/slide_block_5.html#recap-of-block-4",
+    "title": "Block 5",
+    "section": "Recap of Block 4",
+    "text": "Recap of Block 4\n\nStatistical Summaries: We learned to add regression lines and confidence intervals using geom_smooth().\nggpubr Package: We used stat_cor() to add correlation coefficients and stat_compare_means() to add p-values from statistical tests.\nAdvanced Annotations: We explored how to label specific points on plots using ggrepel to avoid overlapping text."
+  },
+  {
+    "objectID": "slides/slide_block_5.html#advanced-theming",
+    "href": "slides/slide_block_5.html#advanced-theming",
+    "title": "Block 5",
+    "section": "Advanced Theming",
+    "text": "Advanced Theming\nCreating a consistent and professional look for all your plots is key for publication. Instead of customizing each plot individually, you can create a reusable theme object.\n\n# Define a universal theme\ntheme_publication &lt;- function() {\n  theme_bw(base_size = 12) +\n    theme(\n      plot.title = element_text(face = \"bold\", size = 14, hjust = 0.5),\n      axis.title = element_text(face = \"bold\"),\n      axis.text = element_text(color = \"black\"),\n      panel.grid.major = element_line(color = \"grey90\"),\n      panel.grid.minor = element_blank(),\n      legend.position = \"bottom\"\n    )\n}"
+  },
+  {
+    "objectID": "slides/slide_block_5.html#introduction-to-gt-for-publication-tables",
+    "href": "slides/slide_block_5.html#introduction-to-gt-for-publication-tables",
+    "title": "Block 5",
+    "section": "Introduction to gt for Publication Tables",
+    "text": "Introduction to gt for Publication Tables"
+  },
+  {
+    "objectID": "slides/slide_block_5.html#introduction-to-gt-for-publication-tables-1",
+    "href": "slides/slide_block_5.html#introduction-to-gt-for-publication-tables-1",
+    "title": "Block 5",
+    "section": "Introduction to gt for Publication Tables",
+    "text": "Introduction to gt for Publication Tables\nFigures aren’t just plots; they can also be tables. The gt package uses a “grammar of tables” philosophy to build beautiful, publication-ready tables from data frames.\n\nStart with gt() to create a basic table.\nAdd layers of formatting and styling.\nFunctions like tab_header(), fmt_number(), and cols_label() give you full control."
+  },
+  {
+    "objectID": "slides/slide_block_5.html#example-creating-a-gt-table",
+    "href": "slides/slide_block_5.html#example-creating-a-gt-table",
+    "title": "Block 5",
+    "section": "Example: Creating a gt Table",
+    "text": "Example: Creating a gt Table\nLet’s create a table of the top 5 most significant genes at 24h.\n\n\nlibrary(gt)\nlibrary(dplyr)\n\n# Prepare data\ntop_genes_table &lt;- data$diff %&gt;%\n  filter(sucrose_24h_pval &lt; 0.05) %&gt;%\n  arrange(sucrose_24h_pval) %&gt;%\n  head(5) %&gt;%\n  select(Gene_ID, sucrose_24h_lfc, sucrose_24h_pval)\n\n# Create and style the table\ngt_table &lt;- gt(top_genes_table) %&gt;%\n  tab_header(\n    title = \"Top 5 DE Genes at 24h\"\n  ) %&gt;%\n  cols_label(\n    Gene_ID = \"Gene\",\n    sucrose_24h_lfc = \"log2FC\",\n    sucrose_24h_pval = \"P-value\"\n  ) %&gt;%\n  fmt_number(\n    columns = vars(sucrose_24h_lfc),\n    decimals = 2\n  ) %&gt;%\n  fmt_scientific(\n    columns = vars(sucrose_24h_pval),\n    decimals = 2\n  )\n\n\n\n\n\n\n\n\n\nTop 5 DE Genes at 24h\n\n\nGene\nlog2FC\nP-value\n\n\n\n\nAT4G25630\n1.30\n6.58 × 10−7\n\n\nAT5G27120\n1.30\n6.58 × 10−7\n\n\nAT3G15450\n−1.40\n9.69 × 10−6\n\n\nAT3G18000\n1.30\n1.31 × 10−4\n\n\nAT5G20250\n−1.30\n1.81 × 10−4"
+  },
+  {
+    "objectID": "slides/slide_block_5.html#composing-plots-and-tables",
+    "href": "slides/slide_block_5.html#composing-plots-and-tables",
+    "title": "Block 5",
+    "section": "Composing Plots and Tables",
+    "text": "Composing Plots and Tables\npatchwork is designed for ggplot objects, but it can compose with other elements (like gt tables) if they are converted to “grobs” (grid graphical objects)."
+  },
+  {
+    "objectID": "slides/slide_block_5.html#example-ggplot-gt",
+    "href": "slides/slide_block_5.html#example-ggplot-gt",
+    "title": "Block 5",
+    "section": "Example: ggplot + gt",
+    "text": "Example: ggplot + gt\nLet’s combine a scatter plot with our table into a single figure.\n\n\nlibrary(patchwork)\n\n# Create a ggplot\np_scatter &lt;- ggplot(data$diff, aes(x = sucrose_24h_lfc, y = -log10(sucrose_24h_pval))) +\n  geom_point(alpha = 0.5) +\n  theme_publication() +\n  labs(title = \"Volcano Plot 24h\")\n\n# Combine with patchwork\np_scatter / table_grob"
+  },
+  {
+    "objectID": "slides/slide_block_5.html#lets-practice",
+    "href": "slides/slide_block_5.html#lets-practice",
+    "title": "Block 5",
+    "section": "Let’s Practice!",
+    "text": "Let’s Practice!\nNow, let’s apply these concepts in the exercise for Block 5."
+  }
+]
