@@ -277,7 +277,7 @@ ggplot(
   aes(
     x = time,
     y = expression,
-    fill = compound
+    fill = time
   )
 ) +
   geom_boxplot() +
@@ -307,10 +307,13 @@ plot_data_multi <- data.frame(
 
 # Perform pairwise comparisons
 my_comparisons <- list(c("3 hour", "24 hour"))
-ggplot(plot_data_multi, aes(x = time, y = expression, fill = compound)) +
+ggplot(plot_data_multi, aes(x = time, y = expression, fill = time)) +
   geom_boxplot() +
   facet_wrap(~compound) +
-  stat_compare_means(comparisons = my_comparisons, method = "t.test") +
+  stat_compare_means(
+    comparisons = my_comparisons,
+    method = "t.test"
+  ) +
   labs(
     title = paste("Expression of gene", sig_gene, "across time"),
     x = "Time",

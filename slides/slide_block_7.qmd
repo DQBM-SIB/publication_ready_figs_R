@@ -3,15 +3,102 @@ title: "Block 7"
 author: "Deepak Tanwar"
 editor: visual
 format:
-  revealjs: 
+  revealjs:
     theme: default
     controls-layout: bottom-right
     controls-tutorial: true
     footer: "Publication ready figures with `R`"
+    code-block-height: "6"
+    css: ../custom.css
 title-slide-attributes:
   data-background-size: contain
   data-background-opacity: "0.8"
-editor_options: 
+editor_options:
   chunk_output_type: console
 ---
 
+## Recap of Block 6
+
+::: incremental
+-   **`ComplexHeatmap`**: We learned how to create and annotate complex heatmaps to visualize large data matrices effectively.
+-   **Customization**: We explored how to customize heatmaps with annotations and colors to reveal patterns in the data.
+-   **Cross-System Composition**: We discussed the need for the `grid` graphics system to combine plots from different systems like `ComplexHeatmap` and `ggplot2`.
+:::
+
+## Finalizing Figures for Publication
+
+You've created a beautiful plot. Now, how do you get it into your manuscript correctly?
+
+-   **Vector vs. Raster Formats**:
+    -   **Vector (PDF, SVG, EPS)**: Infinitely scalable. Lines and text are stored as mathematical equations. **This is the preferred format for most journals.**
+    -   **Raster (PNG, TIFF, JPG)**: Pixel-based. Can become blurry when resized. Necessary for images with complex color gradients like photos.
+
+-   **Resolution (DPI)**: For raster images, journals typically require **300 DPI** for color/grayscale and **600-1200 DPI** for line art.
+
+## Mastering `ggsave()`
+
+`ggsave()` is your best friend for exporting `ggplot2` plots.
+
+```r
+my_ggplot <- ggplot(mtcars, aes(wt, mpg)) + geom_point()
+
+# Save as a PDF (vector)
+ggsave("my_plot.pdf", plot = my_ggplot, width = 180, height = 100, units = "mm")
+
+# Save as a high-resolution TIFF (raster)
+ggsave("my_plot.tiff", plot = my_ggplot, width = 180, height = 100, units = "mm", dpi = 300)
+```
+
+**Key Parameters**:
+- `width`, `height`, `units`: Always specify the physical size required by the journal.
+- `dpi`: Crucial for raster formats.
+- `device`: Can be used to specify the graphics device (e.g., `cairo_pdf` for better font embedding).
+
+## The Importance of Reproducibility
+
+**"Can you just re-run the analysis with this one small change?"**
+
+A publication-ready figure is not just about aesthetics; it's about scientific integrity. A figure is only as good as the code that produced it.
+
+**Reproducibility means that someone else (or you, 6 months from now) can run your code and get the exact same result.**
+
+## Best Practices for Reproducibility
+
+1.  **Structure Your Code**:
+    -   Keep your code in R scripts (`.R`), not just in your R console history.
+    -   Use comments to explain the *why*, not the *what*.
+    -   Organize scripts logically: data loading, data cleaning, analysis, figure generation.
+
+2.  **Manage Your Environment**:
+    -   The `renv` package (which this course uses!) saves the versions of all packages you use. This is critical for long-term reproducibility.
+    -   Always run `renv::snapshot()` to save the state of your project.
+
+3.  **Use Version Control**:
+    -   Tools like `git` track every change you make to your code.
+    -   It's like a "lab notebook" for your analysis, allowing you to go back in time and understand how your analysis evolved.
+
+## Course Review: What We've Learned
+
+-   **Block 1**: Principles of effective data visualization and base R graphics.
+-   **Block 2**: The "Grammar of Graphics" and building plots with `ggplot2`.
+-   **Block 3**: Advanced `ggplot2` (faceting, themes, colors).
+-   **Block 4**: Adding statistical annotations and summaries.
+-   **Block 5**: Creating universal themes and assembling multi-panel `ggplot` figures with `patchwork`.
+-   **Block 6**: Building complex heatmaps and combining them with `ggplot` objects.
+-   **Block 7**: Finalizing figures for publication and ensuring reproducibility.
+
+## Capstone Project Idea
+
+**Challenge**: Create a final, publication-ready, multi-panel figure.
+
+1.  **Top Panel**: A `ComplexHeatmap` of the top 50 most variable genes, with annotations for `compound` and `time`.
+2.  **Bottom-Left Panel**: A `ggplot` volcano plot of the 24h differential expression results.
+3.  **Bottom-Right Panel**: A `ggplot` boxplot showing the expression of a single, highly significant gene.
+
+**Requirements**:
+-   All plots must share a consistent visual style (fonts, colors).
+-   The final figure should be assembled using `grid` graphics.
+-   The figure should be saved as a 300 DPI TIFF and a vector PDF.
+-   The code should be clean, commented, and reproducible.
+
+## Thank You & Final Q&A

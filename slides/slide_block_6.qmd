@@ -3,15 +3,149 @@ title: "Block 6"
 author: "Deepak Tanwar"
 editor: visual
 format:
-  revealjs: 
+  revealjs:
     theme: default
     controls-layout: bottom-right
     controls-tutorial: true
     footer: "Publication ready figures with `R`"
+    code-block-height: "6"
+    css: ../custom.css
 title-slide-attributes:
   data-background-size: contain
   data-background-opacity: "0.8"
-editor_options: 
+editor_options:
   chunk_output_type: console
 ---
 
+## Recap of Block 5
+
+::: incremental
+-   **Advanced Theming**: We learned how to create a reusable "universal" theme object in `ggplot2` for consistent plot styling.
+-   **`patchwork` for Layouts**: We explored advanced features of `patchwork` to combine multiple `ggplot2` plots into complex, multi-panel figures.
+-   **Plot Annotation**: We used `plot_annotation()` to add titles and tags to entire compositions.
+:::
+
+## Introduction to Heatmaps
+
+Heatmaps are essential for visualizing large matrices, such as gene expression data across many samples. They are powerful for identifying patterns, clusters, and relationships in the data.
+
+**Why `ComplexHeatmap`?**
+
+-   It's a highly flexible and powerful package for creating publication-quality heatmaps.
+-   It allows for extensive customization, including annotations, splitting, and combining multiple heatmaps.
+-   It's part of the Bioconductor ecosystem, a standard for bioinformatics in R.
+
+## A Simple Heatmap
+
+Let's create a basic heatmap of the most variable genes from our dataset.
+
+```{r, echo=FALSE}
+# Load data and packages
+library(ComplexHeatmap)
+library(circlize)
+data <- readRDS(gzcon(url(
+  "https://raw.githubusercontent.com/urppeia/publication_figs/main/data.rds"
+)))
+rownames(data$counts) <- data$counts$Gene_ID
+data$counts <- data$counts[, -1]
+
+# Select top 50 most variable genes
+mat <- as.matrix(data$counts)
+mat_scaled <- t(scale(t(mat)))
+gene_vars <- apply(mat_scaled, 1, var)
+top_genes <- names(sort(gene_vars, decreasing = TRUE)[1:50])
+mat_top <- mat_scaled[top_genes, ]
+```
+
+::::: columns
+::: {.column width="40%"}
+```r
+library(ComplexHeatmap)
+
+# Select top 50 most variable genes
+mat <- as.matrix(data$counts)
+mat_scaled <- t(scale(t(mat))) # Scale data
+gene_vars <- apply(mat_scaled, 1, var)
+top_genes <- names(sort(gene_vars, decreasing = TRUE)[1:50])
+mat_top <- mat_scaled[top_genes, ]
+
+# Create the heatmap
+Heatmap(mat_top)
+```
+:::
+::: {.column width="60%"}
+```{r, echo=FALSE, fig.align="center", fig.height=9, dpi=300}
+Heatmap(mat_top, name = "Expression")
+```
+:::
+:::::
+
+## Annotating Heatmaps
+
+The "complex" in `ComplexHeatmap` comes from its ability to add rich annotations.
+
+-   `HeatmapAnnotation()`: Create annotation layers for columns or rows.
+-   We can annotate our heatmap with sample information like `compound` and `time`.
+-   This helps in correlating visual patterns with experimental conditions.
+
+## Example: Annotated Heatmap
+
+::::: columns
+::: {.column width="40%"}
+```r
+# Create a column annotation
+col_anno <- HeatmapAnnotation(
+  compound = data$anno$compound,
+  time = data$anno$time,
+  col = list(
+    compound = c("none" = "blue", "sucrose" = "orange"),
+    time = c("3 hour" = "lightgrey", "24 hour" = "darkgrey")
+  )
+)
+
+# Add annotation to the heatmap
+Heatmap(mat_top,
+        name = "Z-Score",
+        top_annotation = col_anno,
+        show_row_names = FALSE)
+```
+:::
+::: {.column width="60%"}
+```{r, echo=FALSE, fig.align="center", fig.height=9, dpi=300}
+col_anno <- HeatmapAnnotation(
+  compound = data$anno$compound,
+  time = data$anno$time,
+  col = list(
+    compound = c("none" = "blue", "sucrose" = "orange"),
+    time = c("3 hour" = "lightgrey", "24 hour" = "darkgrey")
+  )
+)
+Heatmap(mat_top, name = "Z-Score", top_annotation = col_anno, show_row_names = FALSE)
+```
+:::
+:::::
+
+## Cross-System Plot Composition
+
+What if you want to combine a `ComplexHeatmap` with a `ggplot`? `patchwork` is for `ggplot` objects, so we need a different approach.
+
+-   **The Problem**: `ComplexHeatmap` and `ggplot2` use different underlying graphics systems.
+-   **The Solution**: The `grid` graphics system. Both plot types can be converted into "Grid Graphical Objects" (grobs) and arranged on a blank canvas.
+
+This is an advanced technique that gives you maximum control.
+
+## Combining `ggplot` and `ComplexHeatmap`
+
+A conceptual example:
+
+1.  Create your `ggplot` object (`p`).
+2.  Create your `Heatmap` object (`ht`).
+3.  Draw the heatmap first, but get its layout information.
+4.  Use `grid` functions (`pushViewport`, `popViewport`) to define a region on the plot device.
+5.  Convert the `ggplot` object to a grob (`ggplotGrob`) and draw it in that region.
+
+*This requires careful coordination and is a powerful skill for creating complex final figures.*
+
+## Let's Practice!
+
+Now, let's apply these concepts in the exercise for Block 6.

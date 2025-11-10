@@ -3,15 +3,189 @@ title: "Block 5"
 author: "Deepak Tanwar"
 editor: visual
 format:
-  revealjs: 
+  revealjs:
     theme: default
     controls-layout: bottom-right
     controls-tutorial: true
     footer: "Publication ready figures with `R`"
+    code-block-height: "6"
+    css: ../custom.css
 title-slide-attributes:
   data-background-size: contain
   data-background-opacity: "0.8"
-editor_options: 
+editor_options:
   chunk_output_type: console
 ---
 
+## Recap of Block 4
+
+::: incremental
+-   **Statistical Summaries**: We learned to add regression lines and confidence intervals using `geom_smooth()`.
+-   **`ggpubr` Package**: We used `stat_cor()` to add correlation coefficients and `stat_compare_means()` to add p-values from statistical tests.
+-   **Advanced Annotations**: We explored how to label specific points on plots using `ggrepel` to avoid overlapping text.
+:::
+
+## Advanced Theming
+
+Creating a consistent and professional look for all your plots is key for publication. Instead of customizing each plot individually, you can create a reusable theme object.
+
+**Why create a "universal" theme?**
+
+-   **Consistency**: Ensures all figures in a publication have the same style.
+-   **Efficiency**: Saves time by applying a complex set of customizations in one line.
+-   **Reproducibility**: Makes it easy to share and reuse your style.
+
+## Creating a Reusable Theme
+
+You can store a `theme()` configuration in an object.
+
+::::: columns
+::: {.column width="50%"}
+```r
+# Define a universal theme
+theme_publication <- function() {
+  theme_bw(base_size = 12) +
+    theme(
+      plot.title = element_text(face = "bold", size = 14, hjust = 0.5),
+      axis.title = element_text(face = "bold"),
+      axis.text = element_text(color = "black"),
+      panel.grid.major = element_line(color = "grey90"),
+      panel.grid.minor = element_blank(),
+      legend.position = "bottom"
+    )
+}
+```
+:::
+::: {.column width="50%"}
+```{r, echo=FALSE, fig.align="center", fig.height=9, dpi=300}
+library(ggplot2)
+data <- readRDS(gzcon(url(
+  "https://raw.githubusercontent.com/urppeia/publication_figs/main/data.rds"
+)))
+
+# Define a universal theme
+theme_publication <- function() {
+  theme_bw(base_size = 12) +
+    theme(
+      plot.title = element_text(face = "bold", size = 14, hjust = 0.5),
+      axis.title = element_text(face = "bold"),
+      axis.text = element_text(color = "black"),
+      panel.grid.major = element_line(color = "grey90"),
+      panel.grid.minor = element_blank(),
+      legend.position = "bottom"
+    )
+}
+
+p <- ggplot(data$diff, aes(x = sucrose_3h_lfc, y = sucrose_24h_lfc)) +
+  geom_point(alpha = 0.5) +
+  labs(title = "LFC Correlation")
+
+p + theme_publication()
+```
+:::
+:::::
+
+## Advanced `patchwork`
+
+We've used `+` and `/` to combine plots. `patchwork` offers much more control over complex layouts.
+
+-   `|`: A synonym for `+` to place plots side-by-side.
+-   `plot_layout()`: Fine-tune the dimensions of plots in a layout (`widths`, `heights`, `guides`).
+-   `plot_annotation()`: Add titles, captions, and tags to the entire composition.
+
+## Example: Complex Layout
+
+Let's create two different plots and arrange them in a more complex layout.
+
+```{r, echo=FALSE}
+p_scatter <- ggplot(data$diff, aes(x = sucrose_3h_lfc, y = sucrose_24h_lfc)) +
+  geom_point(aes(color = abs(sucrose_24h_lfc) > 1), alpha = 0.6) +
+  theme_publication() +
+  labs(x = "LFC at 3h", y = "LFC at 24h", title = "LFC Correlation") +
+  theme(legend.position = "none")
+
+sig_gene <- data$diff[data$diff$sucrose_24h_pval < 0.05 & abs(data$diff$sucrose_24h_lfc) > 1, ][1, "Gene_ID"]
+plot_data <- data.frame(
+  expression = as.numeric(data$counts[sig_gene, ]),
+  compound = data$anno$compound,
+  time = data$anno$time
+)
+p_box <- ggplot(plot_data, aes(x = time, y = expression, fill = compound)) +
+  geom_boxplot() +
+  facet_wrap(~compound) +
+  theme_publication() +
+  labs(y = "Expression", title = paste("Expression of", sig_gene))
+```
+
+::::: columns
+::: {.column width="50%"}
+```r
+library(patchwork)
+
+# Combine scatter plot and boxplot
+# Make the scatter plot twice as wide as the boxplot
+layout <- p_scatter + p_box +
+  plot_layout(widths = c(2, 1))
+
+# Add a title and tags
+layout +
+  plot_annotation(
+    title = 'Gene Expression Analysis',
+    tag_levels = 'A'
+  )
+```
+:::
+::: {.column width="50%"}
+```{r, echo=FALSE, fig.align="center", fig.height=9, dpi=300}
+library(patchwork)
+layout <- p_scatter + p_box +
+  plot_layout(widths = c(2, 1))
+
+layout +
+  plot_annotation(
+    title = 'Gene Expression Analysis',
+    tag_levels = 'A'
+  )
+```
+:::
+:::::
+
+## Aligning Plots with Nesting
+
+You can create more advanced layouts by nesting combined plots.
+
+```{r, echo=FALSE}
+# A third plot for the example
+sig_counts <- data.frame(
+  timepoint = c("3h", "24h"),
+  count = c(
+    sum(data$diff$sucrose_3h_pval < 0.05 & abs(data$diff$sucrose_3h_lfc) > 1),
+    sum(data$diff$sucrose_24h_pval < 0.05 & abs(data$diff$sucrose_24h_lfc) > 1)
+  )
+)
+p_bar <- ggplot(sig_counts, aes(x = timepoint, y = count, fill = timepoint)) +
+  geom_bar(stat = "identity") +
+  theme_publication() +
+  theme(legend.position = "none") +
+  labs(title = "Significant Genes", y = "Count")
+```
+
+::::: columns
+::: {.column width="50%"}
+```r
+# p_scatter and p_box are from the previous slide
+
+# Nesting plots: (scatter + boxplot) / bar chart
+(p_scatter + p_box) / p_bar
+```
+:::
+::: {.column width="50%"}
+```{r, echo=FALSE, fig.align="center", fig.height=9, dpi=300}
+(p_scatter + p_box) / p_bar
+```
+:::
+:::::
+
+## Let's Practice!
+
+Now, let's apply these concepts in the exercise for Block 5.
