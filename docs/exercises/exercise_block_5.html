@@ -331,6 +331,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="../slides/slide_block_6.html">
  <span class="dropdown-text">Block 6</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../slides/slide_block_7.html">
+ <span class="dropdown-text">Block 7</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -361,6 +365,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li>
     <a class="dropdown-item" href="../exercises/exercise_block_6.html">
  <span class="dropdown-text">Block 6</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../exercises/exercise_block_7.html">
+ <span class="dropdown-text">Block 7</span></a>
   </li>  
     </ul>
   </li>
@@ -570,6 +578,24 @@ Solution
 </figure>
 </div>
 </div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>p_boxplot <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.15</span>,<span class="fl">0.5</span>), </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="fl">1.5</span>,<span class="dv">2</span>, <span class="st">"cm"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="exercise_block_5_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>p_boxplot <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.1</span>,<span class="fl">0.5</span>), </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"red"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="exercise_block_5_files/figure-html/unnamed-chunk-5-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -599,56 +625,56 @@ Solution
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A: Prepare data</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>top_up_genes <span class="ot">&lt;-</span> data<span class="sc">$</span>diff <span class="sc">%&gt;%</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sucrose_24h_lfc <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> sucrose_24h_pval <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(sucrose_24h_pval) <span class="sc">%&gt;%</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Gene_ID, sucrose_24h_lfc, sucrose_24h_pval)</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># B &amp; C: Create and style the gt table</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>gt_up_genes <span class="ot">&lt;-</span> <span class="fu">gt</span>(top_up_genes) <span class="sc">%&gt;%</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Top 5 Up-regulated Genes at 24h"</span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">Gene_ID =</span> <span class="st">"Gene"</span>,</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">sucrose_24h_lfc =</span> <span class="st">"log2 Fold Change"</span>,</span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">sucrose_24h_pval =</span> <span class="st">"P-value"</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(</span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">vars</span>(sucrose_24h_lfc),</span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">2</span></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_scientific</span>(</span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">vars</span>(sucrose_24h_pval),</span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">2</span></span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A: Prepare data</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>top_up_genes <span class="ot">&lt;-</span> data<span class="sc">$</span>diff <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sucrose_24h_lfc <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> sucrose_24h_pval <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(sucrose_24h_pval) <span class="sc">%&gt;%</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Gene_ID, sucrose_24h_lfc, sucrose_24h_pval)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co"># B &amp; C: Create and style the gt table</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>gt_up_genes <span class="ot">&lt;-</span> <span class="fu">gt</span>(top_up_genes) <span class="sc">%&gt;%</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Top 5 Up-regulated Genes at 24h"</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">Gene_ID =</span> <span class="st">"Gene"</span>,</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">sucrose_24h_lfc =</span> <span class="st">"log2 Fold Change"</span>,</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">sucrose_24h_pval =</span> <span class="st">"P-value"</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">vars</span>(sucrose_24h_lfc),</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">2</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_scientific</span>(</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">vars</span>(sucrose_24h_pval),</span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">2</span></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Since gt v0.3.0, `columns = vars(...)` has been deprecated.
 • Please use `columns = c(...)` instead.
 Since gt v0.3.0, `columns = vars(...)` has been deprecated.
 • Please use `columns = c(...)` instead.</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>gt_up_genes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>gt_up_genes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="tmkwqgwgve" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#tmkwqgwgve table {
+<div id="ucwdyezren" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ucwdyezren table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#tmkwqgwgve thead, #tmkwqgwgve tbody, #tmkwqgwgve tfoot, #tmkwqgwgve tr, #tmkwqgwgve td, #tmkwqgwgve th {
+#ucwdyezren thead, #ucwdyezren tbody, #ucwdyezren tfoot, #ucwdyezren tr, #ucwdyezren td, #ucwdyezren th {
   border-style: none;
 }
 
-#tmkwqgwgve p {
+#ucwdyezren p {
   margin: 0;
   padding: 0;
 }
 
-#tmkwqgwgve .gt_table {
+#ucwdyezren .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -674,12 +700,12 @@ Since gt v0.3.0, `columns = vars(...)` has been deprecated.
   border-left-color: #D3D3D3;
 }
 
-#tmkwqgwgve .gt_caption {
+#ucwdyezren .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#tmkwqgwgve .gt_title {
+#ucwdyezren .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -691,7 +717,7 @@ Since gt v0.3.0, `columns = vars(...)` has been deprecated.
   border-bottom-width: 0;
 }
 
-#tmkwqgwgve .gt_subtitle {
+#ucwdyezren .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -703,7 +729,7 @@ Since gt v0.3.0, `columns = vars(...)` has been deprecated.
   border-top-width: 0;
 }
 
-#tmkwqgwgve .gt_heading {
+#ucwdyezren .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -715,13 +741,13 @@ Since gt v0.3.0, `columns = vars(...)` has been deprecated.
   border-right-color: #D3D3D3;
 }
 
-#tmkwqgwgve .gt_bottom_border {
+#ucwdyezren .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#tmkwqgwgve .gt_col_headings {
+#ucwdyezren .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -736,7 +762,7 @@ Since gt v0.3.0, `columns = vars(...)` has been deprecated.
   border-right-color: #D3D3D3;
 }
 
-#tmkwqgwgve .gt_col_heading {
+#ucwdyezren .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -756,7 +782,7 @@ Since gt v0.3.0, `columns = vars(...)` has been deprecated.
   overflow-x: hidden;
 }
 
-#tmkwqgwgve .gt_column_spanner_outer {
+#ucwdyezren .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -768,15 +794,15 @@ Since gt v0.3.0, `columns = vars(...)` has been deprecated.
   padding-right: 4px;
 }
 
-#tmkwqgwgve .gt_column_spanner_outer:first-child {
+#ucwdyezren .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tmkwqgwgve .gt_column_spanner_outer:last-child {
+#ucwdyezren .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tmkwqgwgve .gt_column_spanner {
+#ucwdyezren .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -788,11 +814,11 @@ Since gt v0.3.0, `columns = vars(...)` has been deprecated.
   width: 100%;
 }
 
-#tmkwqgwgve .gt_spanner_row {
+#ucwdyezren .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#tmkwqgwgve .gt_group_heading {
+#ucwdyezren .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -818,7 +844,7 @@ Since gt v0.3.0, `columns = vars(...)` has been deprecated.
   text-align: left;
 }
 
-#tmkwqgwgve .gt_empty_group_heading {
+#ucwdyezren .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -833,15 +859,15 @@ Since gt v0.3.0, `columns = vars(...)` has been deprecated.
   vertical-align: middle;
 }
 
-#tmkwqgwgve .gt_from_md > :first-child {
+#ucwdyezren .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tmkwqgwgve .gt_from_md > :last-child {
+#ucwdyezren .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tmkwqgwgve .gt_row {
+#ucwdyezren .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -860,7 +886,7 @@ Since gt v0.3.0, `columns = vars(...)` has been deprecated.
   overflow-x: hidden;
 }
 
-#tmkwqgwgve .gt_stub {
+#ucwdyezren .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -873,7 +899,7 @@ Since gt v0.3.0, `columns = vars(...)` has been deprecated.
   padding-right: 5px;
 }
 
-#tmkwqgwgve .gt_stub_row_group {
+#ucwdyezren .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -887,15 +913,15 @@ Since gt v0.3.0, `columns = vars(...)` has been deprecated.
   vertical-align: top;
 }
 
-#tmkwqgwgve .gt_row_group_first td {
+#ucwdyezren .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#tmkwqgwgve .gt_row_group_first th {
+#ucwdyezren .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#tmkwqgwgve .gt_summary_row {
+#ucwdyezren .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -905,16 +931,16 @@ Since gt v0.3.0, `columns = vars(...)` has been deprecated.
   padding-right: 5px;
 }
 
-#tmkwqgwgve .gt_first_summary_row {
+#ucwdyezren .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#tmkwqgwgve .gt_first_summary_row.thick {
+#ucwdyezren .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#tmkwqgwgve .gt_last_summary_row {
+#ucwdyezren .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -924,7 +950,7 @@ Since gt v0.3.0, `columns = vars(...)` has been deprecated.
   border-bottom-color: #D3D3D3;
 }
 
-#tmkwqgwgve .gt_grand_summary_row {
+#ucwdyezren .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -934,7 +960,7 @@ Since gt v0.3.0, `columns = vars(...)` has been deprecated.
   padding-right: 5px;
 }
 
-#tmkwqgwgve .gt_first_grand_summary_row {
+#ucwdyezren .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -944,7 +970,7 @@ Since gt v0.3.0, `columns = vars(...)` has been deprecated.
   border-top-color: #D3D3D3;
 }
 
-#tmkwqgwgve .gt_last_grand_summary_row_top {
+#ucwdyezren .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -954,11 +980,11 @@ Since gt v0.3.0, `columns = vars(...)` has been deprecated.
   border-bottom-color: #D3D3D3;
 }
 
-#tmkwqgwgve .gt_striped {
+#ucwdyezren .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#tmkwqgwgve .gt_table_body {
+#ucwdyezren .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -967,7 +993,7 @@ Since gt v0.3.0, `columns = vars(...)` has been deprecated.
   border-bottom-color: #D3D3D3;
 }
 
-#tmkwqgwgve .gt_footnotes {
+#ucwdyezren .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -981,7 +1007,7 @@ Since gt v0.3.0, `columns = vars(...)` has been deprecated.
   border-right-color: #D3D3D3;
 }
 
-#tmkwqgwgve .gt_footnote {
+#ucwdyezren .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -990,7 +1016,7 @@ Since gt v0.3.0, `columns = vars(...)` has been deprecated.
   padding-right: 5px;
 }
 
-#tmkwqgwgve .gt_sourcenotes {
+#ucwdyezren .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1004,7 +1030,7 @@ Since gt v0.3.0, `columns = vars(...)` has been deprecated.
   border-right-color: #D3D3D3;
 }
 
-#tmkwqgwgve .gt_sourcenote {
+#ucwdyezren .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1012,72 +1038,72 @@ Since gt v0.3.0, `columns = vars(...)` has been deprecated.
   padding-right: 5px;
 }
 
-#tmkwqgwgve .gt_left {
+#ucwdyezren .gt_left {
   text-align: left;
 }
 
-#tmkwqgwgve .gt_center {
+#ucwdyezren .gt_center {
   text-align: center;
 }
 
-#tmkwqgwgve .gt_right {
+#ucwdyezren .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tmkwqgwgve .gt_font_normal {
+#ucwdyezren .gt_font_normal {
   font-weight: normal;
 }
 
-#tmkwqgwgve .gt_font_bold {
+#ucwdyezren .gt_font_bold {
   font-weight: bold;
 }
 
-#tmkwqgwgve .gt_font_italic {
+#ucwdyezren .gt_font_italic {
   font-style: italic;
 }
 
-#tmkwqgwgve .gt_super {
+#ucwdyezren .gt_super {
   font-size: 65%;
 }
 
-#tmkwqgwgve .gt_footnote_marks {
+#ucwdyezren .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#tmkwqgwgve .gt_asterisk {
+#ucwdyezren .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#tmkwqgwgve .gt_indent_1 {
+#ucwdyezren .gt_indent_1 {
   text-indent: 5px;
 }
 
-#tmkwqgwgve .gt_indent_2 {
+#ucwdyezren .gt_indent_2 {
   text-indent: 10px;
 }
 
-#tmkwqgwgve .gt_indent_3 {
+#ucwdyezren .gt_indent_3 {
   text-indent: 15px;
 }
 
-#tmkwqgwgve .gt_indent_4 {
+#ucwdyezren .gt_indent_4 {
   text-indent: 20px;
 }
 
-#tmkwqgwgve .gt_indent_5 {
+#ucwdyezren .gt_indent_5 {
   text-indent: 25px;
 }
 
-#tmkwqgwgve .katex-display {
+#ucwdyezren .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#tmkwqgwgve div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ucwdyezren div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1150,20 +1176,20 @@ Solution
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A &amp; B: Combine plot and table</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Note: patchwork can work directly with gt objects</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>final_figure <span class="ot">&lt;-</span> p_boxplot <span class="sc">/</span> gt_up_genes</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># C: Adjust layout</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>final_figure <span class="ot">&lt;-</span> final_figure <span class="sc">+</span> <span class="fu">plot_layout</span>(<span class="at">heights =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>))</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co"># D: Add annotation</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>final_figure <span class="ot">&lt;-</span> final_figure <span class="sc">+</span> <span class="fu">plot_annotation</span>(</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Gene Expression and Regulation at 24h"</span>,</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">tag_levels =</span> <span class="st">'A'</span></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(final_figure)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A &amp; B: Combine plot and table</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Note: patchwork can work directly with gt objects</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>final_figure <span class="ot">&lt;-</span> p_boxplot <span class="sc">/</span> gt_up_genes</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># C: Adjust layout</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>final_figure <span class="ot">&lt;-</span> final_figure <span class="sc">+</span> <span class="fu">plot_layout</span>(<span class="at">heights =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co"># D: Add annotation</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>final_figure <span class="ot">&lt;-</span> final_figure <span class="sc">+</span> <span class="fu">plot_annotation</span>(</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Gene Expression and Regulation at 24h"</span>,</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">tag_levels =</span> <span class="st">'A'</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(final_figure)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1199,29 +1225,29 @@ Solution
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A: Recreate the volcano plot</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>p_volcano <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data<span class="sc">$</span>diff, <span class="fu">aes</span>(<span class="at">x =</span> sucrose_24h_lfc, <span class="at">y =</span> <span class="sc">-</span><span class="fu">log10</span>(sucrose_24h_pval))) <span class="sc">+</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> sucrose_24h_pval <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> <span class="fu">abs</span>(sucrose_24h_lfc) <span class="sc">&gt;</span> <span class="dv">1</span>), <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_course</span>() <span class="sc">+</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"grey"</span>, <span class="st">"red"</span>)) <span class="sc">+</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Volcano Plot (24h)"</span>)</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co"># B: Recreate the correlation plot</span></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>p_correlation <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data<span class="sc">$</span>diff, <span class="fu">aes</span>(<span class="at">x =</span> sucrose_3h_lfc, <span class="at">y =</span> sucrose_24h_lfc)) <span class="sc">+</span></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_course</span>() <span class="sc">+</span></span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"LFC Correlation (3h vs 24h)"</span>)</span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="co"># C: Create the nested layout</span></span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>nested_layout <span class="ot">&lt;-</span> (p_volcano <span class="sc">+</span> p_correlation) <span class="sc">/</span> p_boxplot</span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Add annotation</span></span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>nested_layout <span class="sc">+</span> <span class="fu">plot_annotation</span>(</span>
-<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Summary of Sucrose Treatment Effects"</span>,</span>
-<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">tag_levels =</span> <span class="st">"A"</span></span>
-<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A: Recreate the volcano plot</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>p_volcano <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data<span class="sc">$</span>diff, <span class="fu">aes</span>(<span class="at">x =</span> sucrose_24h_lfc, <span class="at">y =</span> <span class="sc">-</span><span class="fu">log10</span>(sucrose_24h_pval))) <span class="sc">+</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> sucrose_24h_pval <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> <span class="fu">abs</span>(sucrose_24h_lfc) <span class="sc">&gt;</span> <span class="dv">1</span>), <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_course</span>() <span class="sc">+</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"grey"</span>, <span class="st">"red"</span>)) <span class="sc">+</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Volcano Plot (24h)"</span>)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co"># B: Recreate the correlation plot</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>p_correlation <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data<span class="sc">$</span>diff, <span class="fu">aes</span>(<span class="at">x =</span> sucrose_3h_lfc, <span class="at">y =</span> sucrose_24h_lfc)) <span class="sc">+</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_course</span>() <span class="sc">+</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"LFC Correlation (3h vs 24h)"</span>)</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="co"># C: Create the nested layout</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>nested_layout <span class="ot">&lt;-</span> (p_volcano <span class="sc">+</span> p_correlation) <span class="sc">/</span> p_boxplot</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Add annotation</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>nested_layout <span class="sc">+</span> <span class="fu">plot_annotation</span>(</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Summary of Sucrose Treatment Effects"</span>,</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">tag_levels =</span> <span class="st">"A"</span></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
 </div>
@@ -1252,7 +1278,7 @@ Tip
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>R version 4.5.1 (2025-06-13)
 Platform: aarch64-apple-darwin20
@@ -1285,10 +1311,11 @@ loaded via a namespace (and not attached):
 [22] rlang_1.1.6         xfun_0.53           fs_1.6.6           
 [25] sass_0.4.10         S7_0.2.0            cli_3.6.5          
 [28] mgcv_1.9-3          withr_3.0.2         magrittr_2.0.4     
-[31] digest_0.6.37       grid_4.5.1          nlme_3.1-168       
-[34] lifecycle_1.0.4     vctrs_0.6.5         evaluate_1.0.5     
-[37] glue_1.8.0          farver_2.1.2        rmarkdown_2.30     
-[40] tools_4.5.1         pkgconfig_2.0.3     htmltools_0.5.8.1  </code></pre>
+[31] digest_0.6.37       grid_4.5.1          rstudioapi_0.17.1  
+[34] nlme_3.1-168        lifecycle_1.0.4     vctrs_0.6.5        
+[37] evaluate_1.0.5      glue_1.8.0          farver_2.1.2       
+[40] rmarkdown_2.30      tools_4.5.1         pkgconfig_2.0.3    
+[43] htmltools_0.5.8.1  </code></pre>
 </div>
 </div>
 </div>
