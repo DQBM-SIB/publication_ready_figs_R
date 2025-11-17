@@ -1,0 +1,58 @@
+/* css styles */
+
+/* Colorblind-friendly color palette (Okabe-Ito) */
+:root {
+  --okabe-ito-blue: #0072B2;
+  --okabe-ito-orange: #D55E00;
+  --okabe-ito-green: #009E73;
+}
+
+/* Navbar color */
+.navbar {
+  background-color: var(--okabe-ito-blue);
+}
+
+/* Navbar text color */
+.navbar-nav .nav-link, .navbar-brand {
+  color: #FFFFFF !important;
+}
+
+/* Link color */
+a {
+  color: var(--okabe-ito-blue);
+}
+
+/* Ensure all icons in the navbar are white */
+.navbar .quarto-navbar-tools .nav-link i,
+.navbar .quarto-navbar-tools .nav-link svg,
+.navbar .navbar-nav .nav-link i,
+.navbar .navbar-nav .nav-link svg {
+  color: #FFFFFF !important;
+  fill: #FFFFFF !important; /* For SVG icons */
+}
+
+/* Specific size for search icon */
+#quarto-search button.search-button i,
+#quarto-search button.search-button svg {
+  font-size: 1.5em !important;
+}
+
+/* Specific size for day/night toggle button */
+.quarto-color-scheme-toggle i,
+.quarto-color-scheme-toggle svg {
+  color: #FFFFFF !important;
+  font-size: 1.8em !important;
+}
+
+/* GitHub icon size (reverted to default, so no specific font-size here) */
+/* If it's still too small, I might need to add a small font-size here */
+
+.smallcode{
+  size: 0.75em
+}
+
+
+
+.reveal code.sourceCode {
+  font-size: 0.8em !important;
+}
