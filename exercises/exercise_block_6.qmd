@@ -1,7 +1,352 @@
 ---
 title: "Exercise - Block 6"
-format: html
 editor: source
 editor_options: 
   chunk_output_type: console
 ---
+
+## Learning Objectives
+
+Upon completing this exercise block, you will be able to:
+
+- **Create and combine figures from different graphics systems:**
+  - **Construct** complex, annotated heatmaps using the `ComplexHeatmap` package.
+  - **Combine** plots from different systems (e.g., `ComplexHeatmap` and `ggplot2`) into a cohesive figure using `grid` graphics.
+
+## Introduction
+
+In this block, we will explore one of the most common visualizations in genomics: the heatmap. We will use the `ComplexHeatmap` package, a powerful and flexible tool for creating publication-quality heatmaps. We will also learn how to combine a `ComplexHeatmap` with a `ggplot` plot into a single figure, a common task in data visualization.
+
+## Installing packages
+
+```{r, eval=FALSE}
+renv::install("ComplexHeatmap")
+renv::install("circlize")
+renv::install("dplyr")
+renv::install("ggplot2")
+renv::install("grid")
+renv::install("gganatogram")
+renv::install("cowplot")
+renv::install("patchwork")
+renv::install("RColorBrewer")
+renv::install("egg")
+```
+
+## Packages
+```{r, message=FALSE, warning=FALSE}
+library(ComplexHeatmap)
+library(circlize)
+library(dplyr)
+library(ggplot2)
+library(grid)
+library(gganatogram)
+library(cowplot)
+library(patchwork)
+library(RColorBrewer)
+library(egg)
+```
+
+## Exploratory data analysis
+
+```{r}
+data <- readRDS(gzcon(url(
+  "https://raw.githubusercontent.com/urppeia/publication_figs/main/data.rds"
+)))
+
+rownames(data$counts) <- data$counts$Gene_ID
+data$counts <- data$counts[, -1]
+```
+
+---
+
+## Exercise 1: Constructing a Complex Heatmap
+
+In this exercise, we will create a complex heatmap with multiple annotations. This will allow us to visualize the relationships between different variables in our data.
+
+**A.** First, let's prepare the data. We will scale the data and select the top 50 most variable genes.
+
+**B.** Next, we will create a `HeatmapAnnotation` object for the columns that shows the `compound` and `time` for each sample. We will also define custom colors for the annotation levels.
+
+**C.** Now, let's "precision extract" a gene profile. We will find and visualize genes that follow a very specific biological pattern: genes that are activated early and then repressed later.
+
+**D.** Let's use row annotations to "explore" and visually confirm their behavior. We can add annotations that show the log-fold changes that we used for filtering.
+
+**E.** Finally, let's combine all the elements into a single heatmap.
+
+::: {.callout-tip collapse="true"}
+
+### Solution
+```{r}
+# A: Prepare the data
+mat <- as.matrix(data$counts)
+mat_scaled <- t(scale(t(mat))) # Z-score scaling
+gene_vars <- apply(mat_scaled, 1, var, na.rm = TRUE)
+top_genes_var <- names(sort(gene_vars, decreasing = TRUE)[1:50])
+mat_top_var <- mat_scaled[top_genes_var, ]
+
+# B: Create a column annotation with custom colors
+col_anno <- HeatmapAnnotation(
+  compound = data$anno$compound,
+  time = data$anno$time,
+  col = list(
+    compound = c("none" = "steelblue", "sucrose" = "tomato"),
+    time = c("3 hour" = "lightgrey", "24 hour" = "darkgrey")
+  )
+)
+
+# C: Extract genes matching the profile
+profile_genes <- data$diff %>%
+  filter(
+    sucrose_3h_lfc > 1 & sucrose_3h_pval < 0.05 |
+      sucrose_24h_lfc < -1 & sucrose_24h_pval < 0.05
+  ) %>%
+  pull(Gene_ID)
+
+mat_profile <- mat_scaled[profile_genes, ]
+
+# D: Create a row annotation
+# First, get the LFC values for our profile genes
+rownames(data$diff) <- data$diff$Gene_ID
+lfc_data <- data$diff[profile_genes, c("sucrose_3h_lfc", "sucrose_24h_lfc")]
+
+# The anno_barplot function requires all values in a row to have the same sign
+# when given a matrix. To visualize both positive and negative LFCs for each
+# gene, we create two separate barplot annotations, one for each time point.
+row_anno <- rowAnnotation(
+  "3h LFC" = anno_barplot(
+    lfc_data[, 1],
+    gp = gpar(fill = "tomato"),
+    axis_param = list(at = c(-2, 0, 2))
+  ),
+  "24h LFC" = anno_barplot(
+    lfc_data[, 2],
+    gp = gpar(fill = "steelblue"),
+    axis_param = list(at = c(-2, 0, 2))
+  ),
+  width = unit(4, "cm")
+)
+
+# E: Combine with the heatmap
+Heatmap(mat_profile,
+  name = "Z-Score",
+  top_annotation = col_anno,
+  show_row_names = FALSE,
+  column_title = "Genes Up at 3h, Down at 24h"
+) + row_anno
+```
+:::
+
+---
+
+## Exercise 2: Combining `ComplexHeatmap` and `ggplot`
+
+In this exercise, we will combine our `ComplexHeatmap` with a `ggplot` scatter plot. This is a common task when you want to present a global view of the data (the scatter plot) along with a detailed view of a specific subset of the data (the heatmap).
+
+**A.** First, create a `ggplot` scatter plot of `sucrose_3h_lfc` vs. `sucrose_24h_lfc` for all genes.
+
+**B.** On the scatter plot, color the genes that you selected in Exercise 1 to highlight them.
+
+**C.** Use the `grid` package to combine the `ggplot` and the `ComplexHeatmap` from Exercise 1.
+
+::: {.callout-tip collapse="true"}
+
+### Solution
+This is a complex task. `ComplexHeatmap` and `ggplot2` use different graphics systems. We can't use `patchwork`. We must use the base `grid` system to arrange them.
+
+```{r, fig.height=6, fig.width=10}
+# A & B: Create the ggplot
+p_scatter <- ggplot(data$diff, aes(x = sucrose_3h_lfc, y = sucrose_24h_lfc)) +
+  geom_point(color = "grey", alpha = 0.5) +
+  geom_point(
+    data = data$diff[profile_genes, ],
+    color = "red",
+    size = 2
+  ) +
+  theme_light() +
+  labs(title = "LFC 3h vs 24h")
+
+# C: Combine the plots
+# 1. Draw the heatmap and get its object
+ht <- Heatmap(mat_profile,
+  name = "Z-Score",
+  top_annotation = col_anno,
+  show_row_names = FALSE,
+  column_title = "Genes Up at 3h, Down at 24h"
+) + row_anno
+
+ht_grob <- grid.grabExpr(draw(ht))
+
+# 2. Clear the page and set up a layout
+grid.newpage()
+pushViewport(viewport(layout = grid.layout(nrow = 1, ncol = 2, widths = unit(c(1, 1.5), "null"))))
+
+# 3. Draw the ggplot in the first column
+pushViewport(viewport(layout.pos.col = 1))
+print(p_scatter, newpage = FALSE)
+popViewport()
+
+# 4. Draw the heatmap in the second column
+pushViewport(viewport(layout.pos.col = 2))
+grid.draw(ht_grob)
+popViewport()
+popViewport()
+```
+:::
+
+## Setting a specific theme for plotting
+```{r}
+data_cols <- brewer.pal(n = 6, name = "Paired")
+
+hm_cols <- list(
+  compound = c(
+    none = data_cols[1],
+    sucrose = data_cols[2]
+  ),
+  dose = c(
+    none = data_cols[3],
+    "15 millimolar" = data_cols[4]
+  ),
+  time = c(
+    "24 hour" = data_cols[6],
+    "3 hour" = data_cols[5]
+  )
+)
+
+# Theme ----
+th <- theme_bw(base_family = "Helvetica") +
+  theme(
+    plot.title = element_text(
+      colour = "black",
+      angle = 0,
+      size = 10,
+      face = "bold",
+      vjust = 1
+    ),
+    plot.subtitle = element_text(
+      colour = "black",
+      angle = 0,
+      size = 10,
+      face = "plain",
+      vjust = 1
+    ),
+    plot.caption = element_text(
+      colour = "black",
+      angle = 0,
+      size = 10,
+      face = "plain",
+      vjust = 1,
+      hjust = 0.5
+    ),
+    axis.text.x = element_text(
+      colour = "black",
+      angle = 90,
+      size = 9
+    ),
+    axis.text.y = element_text(
+      colour = "black",
+      angle = 0,
+      size = 9
+    ),
+    axis.title.x = element_text(
+      colour = "black",
+      size = 10,
+      face = "plain"
+    ),
+    axis.title.y = element_text(
+      colour = "black",
+      size = 10,
+      face = "plain"
+    ),
+    legend.text = element_text(
+      colour = "black",
+      size = 9
+    ),
+    legend.title = element_text(
+      size = 10,
+      face = "plain",
+      colour = "black"
+    ),
+    strip.background = element_rect(
+      fill = NA,
+      colour = "black"
+    ),
+    strip.text.x = element_text(
+      face = "plain",
+      colour = "black",
+      size = 10
+    ),
+    strip.text.y = element_text(
+      face = "plain",
+      colour = "black",
+      size = 10
+    )
+  ) +
+  theme(
+    panel.background = element_rect(
+      fill = "white"
+    ),
+    panel.border = element_rect(
+      colour = "black",
+      fill = NA
+    ),
+    strip.background = element_rect(
+      color = "black"
+    )
+  )
+```
+
+## Exercise 3: Including external images and `gganatogram` plots
+
+In this exercise, we will include an image from the web and create a `gganatogram` plot.
+
+**A.** Include the image from the web.
+
+**B.** Create a `gganatogram` plot of mouse respiratory system.
+
+```{r}
+# A: Include image from the web
+img <- "https://mdpi-res.com/ijms/ijms-22-04704/article_deploy/html/images/ijms-22-04704-g004.png"
+img_draw <- ggdraw() + draw_image(img)
+
+img_draw
+
+# B: Create gganatogram plot
+mm_res <- mmMale_key %>%
+  dplyr::filter(type == "respiratory") %>%
+  gganatogram(outline = T, fillOutline = "#a6bddb", organism = "mouse", sex = "male", fill = "colour") + 
+  theme_bw() + 
+  coord_fixed()
+
+mm_res
+```
+
+## Exercise 4: Advanced setting of height and width of indivisual plots and combining all plots
+
+In this exercise, we will combine all the plots we have created so far into a single panel.
+
+**A.** Set the height and width of the scatter plot.
+
+**B.** Combine the scatter plot, heatmap, web image, and gganatogram plot into a single panel.
+
+::: {.callout-tip collapse="true"}
+
+### Solution
+```{r}
+# A: Set height and width of the scatter plot
+p1 <- gridExtra::grid.arrange(
+  egg::set_panel_size(
+    p = p_scatter + th, width = unit(4, "cm"), height = unit(4, "cm")
+    )
+  )
+
+# B: Combine all plots
+gridExtra::grid.arrange(p1, ht_grob, img_draw, mm_res, ncol = 2)
+```
+:::
+
+## Session information
+::: {.callout-tip collapse="true"}
+```{r}
+sessionInfo()
+```
+:::

@@ -1,7 +1,146 @@
 ---
-title: "Exercise - Block 7"
+title: "Exercise - Block 7: Finalizing Figures & Reproducibility"
 format: html
 editor: source
-editor_options: 
+editor_options:
   chunk_output_type: console
 ---
+
+## Learning Objectives
+
+Upon completing this exercise block, you will be able to:
+
+-   **Produce and export publication-quality figures:**
+    -   **Adapt** stylistic elements like fonts and line weights to meet publication guidelines.
+    -   **Generate** high-resolution figures in various formats (PDF, PNG, TIFF) using functions like `ggsave()`.
+-   **Implement best practices for reproducibility:**
+    -   **Write** clean and reusable R scripts for figure generation.
+    -   **Document** code and workflows to ensure reproducibility and transparency.
+
+## Introduction
+
+In this block, we will focus on finalizing figures for publication and ensuring reproducibility. We will cover how to adapt stylistic elements, generate high-resolution figures, and implement best practices for writing clean and reusable R scripts.
+
+---
+
+## Exercise 1: Exporting Figures
+
+In this exercise, we will practice exporting the figures we created in the previous blocks.
+
+**A.** Go back to `exercise_block_6.qmd`. Export the combined plot from "Exercise 4: Advanced setting of height and width of indivisual plots and combining all plots" as a high-resolution PNG file.
+
+**B.** Export the same figure as a PDF file.
+
+::: {.callout-tip collapse="true"}
+
+### Solution
+```{r, eval=FALSE}
+# Add this code to the end of the solution for Exercise 4 in exercise_block_6.qmd
+
+# Export as PNG
+png("combined_figure.png", width = 10, height = 8, units = "in", res = 300)
+gridExtra::grid.arrange(p1, ht_grob, img_draw, mm_res, ncol = 2)
+dev.off()
+
+# Export as PDF
+pdf("combined_figure.pdf", width = 10, height = 8)
+gridExtra::grid.arrange(p1, ht_grob, img_draw, mm_res, ncol = 2)
+dev.off()
+```
+:::
+
+---
+
+## Exercise 2: Reproducible Scripting
+
+In this exercise, we will focus on making our R scripts more reproducible.
+
+**A.** Review the R code in `exercise_block_6.qmd`. Identify any areas where comments could be improved or added to enhance clarity and reproducibility.
+
+**B.** Suggest ways to make the data loading and processing steps more robust (e.g., error handling, clearer variable names).
+
+**C.** Create a function that encapsulates the creation of the complex heatmap from `exercise_block_6.qmd`. The function should take the data as input and return the heatmap object.
+
+::: {.callout-tip collapse="true"}
+
+### Solution
+**A. Improved Comments:**
+- Ensure every major step (data loading, scaling, annotation creation, plotting) has a clear, concise comment explaining its purpose.
+- Add comments to complex lines of code to explain the logic.
+
+**B. More Robust Scripting:**
+- **Error Handling:** Use `tryCatch()` for data loading to gracefully handle cases where the URL might be inaccessible.
+- **Clearer Variable Names:** While `mat` and `lfc_data` are common in R, consider more descriptive names like `expression_matrix_scaled` or `log_fold_change_data`.
+- **Function Encapsulation:** For complex plotting routines, consider wrapping them in functions to improve reusability and readability.
+- **Configuration:** If parameters like the number of top genes or LFC thresholds change frequently, consider defining them as variables at the top of the script.
+
+**C. Function for Complex Heatmap:**
+```{r, eval=FALSE}
+create_complex_heatmap <- function(data) {
+  # Prepare the data
+  mat <- as.matrix(data$counts)
+  mat_scaled <- t(scale(t(mat))) # Z-score scaling
+  gene_vars <- apply(mat_scaled, 1, var, na.rm = TRUE)
+  top_genes_var <- names(sort(gene_vars, decreasing = TRUE)[1:50])
+  mat_top_var <- mat_scaled[top_genes_var, ]
+
+  # Create a column annotation with custom colors
+  col_anno <- HeatmapAnnotation(
+    compound = data$anno$compound,
+    time = data$anno$time,
+    col = list(
+      compound = c("none" = "steelblue", "sucrose" = "tomato"),
+      time = c("3 hour" = "lightgrey", "24 hour" = "darkgrey")
+    )
+  )
+
+  # Extract genes matching the profile
+  profile_genes <- data$diff %>%
+    filter(
+      sucrose_3h_lfc > 1 & sucrose_3h_pval < 0.05 |
+        sucrose_24h_lfc < -1 & sucrose_24h_pval < 0.05
+    ) %>%
+    pull(Gene_ID)
+
+  mat_profile <- mat_scaled[profile_genes, ]
+
+  # Create a row annotation
+  rownames(data$diff) <- data$diff$Gene_ID
+  lfc_data <- data$diff[profile_genes, c("sucrose_3h_lfc", "sucrose_24h_lfc")]
+
+  row_anno <- rowAnnotation(
+    "3h LFC" = anno_barplot(
+      lfc_data[, 1],
+      gp = gpar(fill = "tomato"),
+      axis_param = list(at = c(-2, 0, 2))
+    ),
+    "24h LFC" = anno_barplot(
+      lfc_data[, 2],
+      gp = gpar(fill = "steelblue"),
+      axis_param = list(at = c(-2, 0, 2))
+    ),
+    width = unit(4, "cm")
+  )
+
+  # Combine with the heatmap
+  ht <- Heatmap(mat_profile,
+    name = "Z-Score",
+    top_annotation = col_anno,
+    show_row_names = FALSE,
+    column_title = "Genes Up at 3h, Down at 24h"
+  ) + row_anno
+  
+  return(ht)
+}
+
+# Example usage:
+# ht_object <- create_complex_heatmap(data)
+```
+:::
+
+## Session information
+::: {.callout-tip collapse="true"}
+```{r}
+sessionInfo()
+```
+:::
