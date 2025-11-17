@@ -340,7 +340,7 @@ p1 <- gridExtra::grid.arrange(
   )
 
 # B: Combine all plots
-gridExtra::grid.arrange(p1, ht_grob, img_draw, mm_res, ncol = 2)
+gridExtra::grid.arrange(p1, img_draw, ht_grob, mm_res, ncol = 2, )
 ```
 :::
 
