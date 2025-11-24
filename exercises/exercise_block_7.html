@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Exercise - Block 7: Finalizing Figures &amp; Reproducibility – Publication-Ready Figure Generation in R</title>
+<title>Exercise - Block 7: Capstone Project – Publication-Ready Figure Generation in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -398,8 +398,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
   <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#exercise-1-exporting-figures" id="toc-exercise-1-exporting-figures" class="nav-link" data-scroll-target="#exercise-1-exporting-figures">Exercise 1: Exporting Figures</a></li>
-  <li><a href="#exercise-2-reproducible-scripting" id="toc-exercise-2-reproducible-scripting" class="nav-link" data-scroll-target="#exercise-2-reproducible-scripting">Exercise 2: Reproducible Scripting</a></li>
+  <li><a href="#packages-and-data" id="toc-packages-and-data" class="nav-link" data-scroll-target="#packages-and-data">Packages and Data</a></li>
+  <li><a href="#capstone-exercise-creating-a-publication-ready-figure" id="toc-capstone-exercise-creating-a-publication-ready-figure" class="nav-link" data-scroll-target="#capstone-exercise-creating-a-publication-ready-figure">Capstone Exercise: Creating a Publication-Ready Figure</a>
+  <ul class="collapse">
+  <li><a href="#part-a-top-panel---complex-heatmap" id="toc-part-a-top-panel---complex-heatmap" class="nav-link" data-scroll-target="#part-a-top-panel---complex-heatmap">Part A: Top Panel - Complex Heatmap</a></li>
+  <li><a href="#part-b-bottom-left-panel---volcano-plot" id="toc-part-b-bottom-left-panel---volcano-plot" class="nav-link" data-scroll-target="#part-b-bottom-left-panel---volcano-plot">Part B: Bottom-Left Panel - Volcano Plot</a></li>
+  <li><a href="#part-c-bottom-right-panel---boxplot" id="toc-part-c-bottom-right-panel---boxplot" class="nav-link" data-scroll-target="#part-c-bottom-right-panel---boxplot">Part C: Bottom-Right Panel - Boxplot</a></li>
+  <li><a href="#part-d-assembling-the-final-figure" id="toc-part-d-assembling-the-final-figure" class="nav-link" data-scroll-target="#part-d-assembling-the-final-figure">Part D: Assembling the Final Figure</a></li>
+  <li><a href="#part-e-exporting-for-publication" id="toc-part-e-exporting-for-publication" class="nav-link" data-scroll-target="#part-e-exporting-for-publication">Part E: Exporting for Publication</a></li>
+  </ul></li>
   <li><a href="#session-information" id="toc-session-information" class="nav-link" data-scroll-target="#session-information">Session information</a></li>
   </ul>
 </nav>
@@ -410,7 +417,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Exercise - Block 7: Finalizing Figures &amp; Reproducibility</h1>
+<h1 class="title">Exercise - Block 7: Capstone Project</h1>
 </div>
 
 
@@ -429,30 +436,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="learning-objectives" class="level2">
 <h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
-<p>Upon completing this exercise block, you will be able to:</p>
+<p>Upon completing this capstone exercise, you will be able to:</p>
 <ul>
-<li><strong>Produce and export publication-quality figures:</strong>
-<ul>
-<li><strong>Adapt</strong> stylistic elements like fonts and line weights to meet publication guidelines.</li>
-<li><strong>Generate</strong> high-resolution figures in various formats (PDF, PNG, TIFF) using functions like <code>ggsave()</code>.</li>
-</ul></li>
-<li><strong>Implement best practices for reproducibility:</strong>
-<ul>
-<li><strong>Write</strong> clean and reusable R scripts for figure generation.</li>
-<li><strong>Document</strong> code and workflows to ensure reproducibility and transparency.</li>
-</ul></li>
+<li><strong>Synthesize</strong> skills from across the course to create a complex, multi-panel, publication-ready figure.</li>
+<li><strong>Combine</strong> plots from <code>ComplexHeatmap</code> and <code>ggplot2</code> into a cohesive layout using <code>grid</code> graphics.</li>
+<li><strong>Apply</strong> consistent styling and themes across different plot types.</li>
+<li><strong>Export</strong> final figures in both high-resolution raster (TIFF) and vector (PDF) formats, adhering to typical journal specifications.</li>
 </ul>
 </section>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>In this block, we will focus on finalizing figures for publication and ensuring reproducibility. We will cover how to adapt stylistic elements, generate high-resolution figures, and implement best practices for writing clean and reusable R scripts.</p>
+<p>In this final block, we will undertake a capstone project that brings together everything we have learned. We will create a publication-ready, multi-panel figure from scratch. This figure will include a complex heatmap, a volcano plot, and a boxplot, all arranged in a clean layout and styled consistently.</p>
 <hr>
 </section>
-<section id="exercise-1-exporting-figures" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-1-exporting-figures">Exercise 1: Exporting Figures</h2>
-<p>In this exercise, we will practice exporting the figures we created in the previous blocks.</p>
-<p><strong>A.</strong> Go back to <code>exercise_block_6.qmd</code>. Export the combined plot from “Exercise 4: Advanced setting of height and width of indivisual plots and combining all plots” as a high-resolution PNG file.</p>
-<p><strong>B.</strong> Export the same figure as a PDF file.</p>
+<section id="packages-and-data" class="level2">
+<h2 class="anchored" data-anchor-id="packages-and-data">Packages and Data</h2>
+<p>First, let’s load the necessary packages and the course dataset.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load packages</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ComplexHeatmap)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(grid)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">gzcon</span>(<span class="fu">url</span>(</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://raw.githubusercontent.com/urppeia/publication_figs/main/data.rds"</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>)))</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(data<span class="sc">$</span>counts) <span class="ot">&lt;-</span> data<span class="sc">$</span>counts<span class="sc">$</span>Gene_ID</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>counts <span class="ot">&lt;-</span> data<span class="sc">$</span>counts[, <span class="sc">-</span><span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+</section>
+<section id="capstone-exercise-creating-a-publication-ready-figure" class="level2">
+<h2 class="anchored" data-anchor-id="capstone-exercise-creating-a-publication-ready-figure">Capstone Exercise: Creating a Publication-Ready Figure</h2>
+<section id="part-a-top-panel---complex-heatmap" class="level3">
+<h3 class="anchored" data-anchor-id="part-a-top-panel---complex-heatmap">Part A: Top Panel - Complex Heatmap</h3>
+<p>First, we will create a heatmap of the top 50 most variable genes, annotated by experimental conditions.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -466,29 +488,48 @@ Solution
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add this code to the end of the solution for Exercise 4 in exercise_block_6.qmd</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Export as PNG</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">png</span>(<span class="st">"combined_figure.png"</span>, <span class="at">width =</span> <span class="dv">10</span>, <span class="at">height =</span> <span class="dv">8</span>, <span class="at">units =</span> <span class="st">"in"</span>, <span class="at">res =</span> <span class="dv">300</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(p1, ht_grob, img_draw, mm_res, <span class="at">ncol =</span> <span class="dv">2</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Export as PDF</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">pdf</span>(<span class="st">"combined_figure.pdf"</span>, <span class="at">width =</span> <span class="dv">10</span>, <span class="at">height =</span> <span class="dv">8</span>)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(p1, ht_grob, img_draw, mm_res, <span class="at">ncol =</span> <span class="dv">2</span>)</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Prepare the data: scale and find top 50 variable genes</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(data<span class="sc">$</span>counts)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>mat_scaled <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">scale</span>(<span class="fu">t</span>(mat)))</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>gene_vars <span class="ot">&lt;-</span> <span class="fu">apply</span>(mat_scaled, <span class="dv">1</span>, var, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>top_genes_var <span class="ot">&lt;-</span> <span class="fu">names</span>(<span class="fu">sort</span>(gene_vars, <span class="at">decreasing =</span> <span class="cn">TRUE</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>])</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>mat_top_var <span class="ot">&lt;-</span> mat_scaled[top_genes_var, ]</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Create column annotation</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>col_anno <span class="ot">&lt;-</span> <span class="fu">HeatmapAnnotation</span>(</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">compound =</span> data<span class="sc">$</span>anno<span class="sc">$</span>compound,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> data<span class="sc">$</span>anno<span class="sc">$</span>time,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="fu">list</span>(</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">compound =</span> <span class="fu">c</span>(<span class="st">"none"</span> <span class="ot">=</span> <span class="st">"steelblue"</span>, <span class="st">"sucrose"</span> <span class="ot">=</span> <span class="st">"tomato"</span>),</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">time =</span> <span class="fu">c</span>(<span class="st">"3 hour"</span> <span class="ot">=</span> <span class="st">"lightgrey"</span>, <span class="st">"24 hour"</span> <span class="ot">=</span> <span class="st">"darkgrey"</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Create the heatmap object</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>ht <span class="ot">&lt;-</span> <span class="fu">Heatmap</span>(mat_top_var,</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="st">"Z-Score"</span>,</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">top_annotation =</span> col_anno,</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">show_row_names =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">column_title =</span> <span class="st">"Top 50 Most Variable Genes"</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Draw it to check</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="fu">draw</span>(ht)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="exercise_block_7_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
 </div>
 </div>
 </div>
-<hr>
+</div>
+</div>
 </section>
-<section id="exercise-2-reproducible-scripting" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-2-reproducible-scripting">Exercise 2: Reproducible Scripting</h2>
-<p>In this exercise, we will focus on making our R scripts more reproducible.</p>
-<p><strong>A.</strong> Review the R code in <code>exercise_block_6.qmd</code>. Identify any areas where comments could be improved or added to enhance clarity and reproducibility.</p>
-<p><strong>B.</strong> Suggest ways to make the data loading and processing steps more robust (e.g., error handling, clearer variable names).</p>
-<p><strong>C.</strong> Create a function that encapsulates the creation of the complex heatmap from <code>exercise_block_6.qmd</code>. The function should take the data as input and return the heatmap object.</p>
+<section id="part-b-bottom-left-panel---volcano-plot" class="level3">
+<h3 class="anchored" data-anchor-id="part-b-bottom-left-panel---volcano-plot">Part B: Bottom-Left Panel - Volcano Plot</h3>
+<p>Next, we’ll create a volcano plot for the 24-hour differential expression data to visualize up- and down-regulated genes.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -501,78 +542,216 @@ Solution
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><strong>A. Improved Comments:</strong> - Ensure every major step (data loading, scaling, annotation creation, plotting) has a clear, concise comment explaining its purpose. - Add comments to complex lines of code to explain the logic.</p>
-<p><strong>B. More Robust Scripting:</strong> - <strong>Error Handling:</strong> Use <code>tryCatch()</code> for data loading to gracefully handle cases where the URL might be inaccessible. - <strong>Clearer Variable Names:</strong> While <code>mat</code> and <code>lfc_data</code> are common in R, consider more descriptive names like <code>expression_matrix_scaled</code> or <code>log_fold_change_data</code>. - <strong>Function Encapsulation:</strong> For complex plotting routines, consider wrapping them in functions to improve reusability and readability. - <strong>Configuration:</strong> If parameters like the number of top genes or LFC thresholds change frequently, consider defining them as variables at the top of the script.</p>
-<p><strong>C. Function for Complex Heatmap:</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>create_complex_heatmap <span class="ot">&lt;-</span> <span class="cf">function</span>(data) {</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Prepare the data</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(data<span class="sc">$</span>counts)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  mat_scaled <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">scale</span>(<span class="fu">t</span>(mat))) <span class="co"># Z-score scaling</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  gene_vars <span class="ot">&lt;-</span> <span class="fu">apply</span>(mat_scaled, <span class="dv">1</span>, var, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  top_genes_var <span class="ot">&lt;-</span> <span class="fu">names</span>(<span class="fu">sort</span>(gene_vars, <span class="at">decreasing =</span> <span class="cn">TRUE</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>])</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  mat_top_var <span class="ot">&lt;-</span> mat_scaled[top_genes_var, ]</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Create a column annotation with custom colors</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  col_anno <span class="ot">&lt;-</span> <span class="fu">HeatmapAnnotation</span>(</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">compound =</span> data<span class="sc">$</span>anno<span class="sc">$</span>compound,</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">time =</span> data<span class="sc">$</span>anno<span class="sc">$</span>time,</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">col =</span> <span class="fu">list</span>(</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">compound =</span> <span class="fu">c</span>(<span class="st">"none"</span> <span class="ot">=</span> <span class="st">"steelblue"</span>, <span class="st">"sucrose"</span> <span class="ot">=</span> <span class="st">"tomato"</span>),</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">time =</span> <span class="fu">c</span>(<span class="st">"3 hour"</span> <span class="ot">=</span> <span class="st">"lightgrey"</span>, <span class="st">"24 hour"</span> <span class="ot">=</span> <span class="st">"darkgrey"</span>)</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Extract genes matching the profile</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  profile_genes <span class="ot">&lt;-</span> data<span class="sc">$</span>diff <span class="sc">%&gt;%</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>      sucrose_3h_lfc <span class="sc">&gt;</span> <span class="dv">1</span> <span class="sc">&amp;</span> sucrose_3h_pval <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">|</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>        sucrose_24h_lfc <span class="sc">&lt;</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">&amp;</span> sucrose_24h_pval <span class="sc">&lt;</span> <span class="fl">0.05</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(Gene_ID)</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  mat_profile <span class="ot">&lt;-</span> mat_scaled[profile_genes, ]</span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Create a row annotation</span></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(data<span class="sc">$</span>diff) <span class="ot">&lt;-</span> data<span class="sc">$</span>diff<span class="sc">$</span>Gene_ID</span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>  lfc_data <span class="ot">&lt;-</span> data<span class="sc">$</span>diff[profile_genes, <span class="fu">c</span>(<span class="st">"sucrose_3h_lfc"</span>, <span class="st">"sucrose_24h_lfc"</span>)]</span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>  row_anno <span class="ot">&lt;-</span> <span class="fu">rowAnnotation</span>(</span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    <span class="st">"3h LFC"</span> <span class="ot">=</span> <span class="fu">anno_barplot</span>(</span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>      lfc_data[, <span class="dv">1</span>],</span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>      <span class="at">gp =</span> <span class="fu">gpar</span>(<span class="at">fill =</span> <span class="st">"tomato"</span>),</span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis_param =</span> <span class="fu">list</span>(<span class="at">at =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">2</span>))</span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    <span class="st">"24h LFC"</span> <span class="ot">=</span> <span class="fu">anno_barplot</span>(</span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>      lfc_data[, <span class="dv">2</span>],</span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>      <span class="at">gp =</span> <span class="fu">gpar</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>),</span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis_param =</span> <span class="fu">list</span>(<span class="at">at =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">2</span>))</span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="fu">unit</span>(<span class="dv">4</span>, <span class="st">"cm"</span>)</span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Combine with the heatmap</span></span>
-<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>  ht <span class="ot">&lt;-</span> <span class="fu">Heatmap</span>(mat_profile,</span>
-<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Z-Score"</span>,</span>
-<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>    <span class="at">top_annotation =</span> col_anno,</span>
-<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>    <span class="at">show_row_names =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>    <span class="at">column_title =</span> <span class="st">"Genes Up at 3h, Down at 24h"</span></span>
-<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> row_anno</span>
-<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(ht)</span>
-<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a><span class="co"># Example usage:</span></span>
-<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a><span class="co"># ht_object &lt;- create_complex_heatmap(data)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Add a significance column to the differential expression data</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>diff <span class="ot">&lt;-</span> data<span class="sc">$</span>diff <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">significant =</span> sucrose_24h_pval <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> <span class="fu">abs</span>(sucrose_24h_lfc) <span class="sc">&gt;</span> <span class="dv">1</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Create the volcano plot</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>p_volcano <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data<span class="sc">$</span>diff, <span class="fu">aes</span>(<span class="at">x =</span> sucrose_24h_lfc, <span class="at">y =</span> <span class="sc">-</span><span class="fu">log10</span>(sucrose_24h_pval))) <span class="sc">+</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> significant), <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"grey"</span>, <span class="st">"red"</span>)) <span class="sc">+</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Volcano Plot (24h)"</span>,</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Log2 Fold Change"</span>,</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"-log10(p-value)"</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Print it to check</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p_volcano)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="exercise_block_7_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
 </div>
 </div>
 </div>
 </div>
 </section>
+<section id="part-c-bottom-right-panel---boxplot" class="level3">
+<h3 class="anchored" data-anchor-id="part-c-bottom-right-panel---boxplot">Part C: Bottom-Right Panel - Boxplot</h3>
+<p>Now, let’s focus on a single, highly significant gene and show its expression across samples with a boxplot. We’ll pick the gene with the lowest p-value at 24 hours.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Find the top significant gene at 24h</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>top_gene_24h <span class="ot">&lt;-</span> data<span class="sc">$</span>diff <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sucrose_24h_pval <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(sucrose_24h_pval) <span class="sc">%&gt;%</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(Gene_ID) <span class="sc">%&gt;%</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">1</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Prepare data for plotting</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>plot_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">expression =</span> <span class="fu">as.numeric</span>(mat[top_gene_24h, ]),</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">compound =</span> data<span class="sc">$</span>anno<span class="sc">$</span>compound,</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> data<span class="sc">$</span>anno<span class="sc">$</span>time</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Create the boxplot</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>p_boxplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(plot_data, <span class="fu">aes</span>(<span class="at">x =</span> compound, <span class="at">y =</span> expression, <span class="at">fill =</span> time)) <span class="sc">+</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="fu">paste</span>(<span class="st">"Expression of"</span>, top_gene_24h),</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Compound"</span>,</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Normalized Expression"</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"lightgrey"</span>, <span class="st">"darkgrey"</span>))</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Print it to check</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p_boxplot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="exercise_block_7_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="part-d-assembling-the-final-figure" class="level3">
+<h3 class="anchored" data-anchor-id="part-d-assembling-the-final-figure">Part D: Assembling the Final Figure</h3>
+<p>With all three components ready, we will now use the <code>grid</code> package to assemble them into a single, well-proportioned figure. The top panel will contain the heatmap, and the bottom panel will be split between the volcano plot and the boxplot.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Grab the heatmap as a graphical object (grob)</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>ht_grob <span class="ot">&lt;-</span> <span class="fu">grid.grabExpr</span>(<span class="fu">draw</span>(ht))</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Clear the graphics device and set up the layout</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.newpage</span>()</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Layout: 2 rows, 2 columns. Heatmap spans both columns in row 1.</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">pushViewport</span>(<span class="fu">viewport</span>(<span class="at">layout =</span> <span class="fu">grid.layout</span>(<span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">heights =</span> <span class="fu">unit</span>(<span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>), <span class="st">"null"</span>))))</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Place the heatmap in the top row (spanning columns 1 and 2)</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="fu">pushViewport</span>(<span class="fu">viewport</span>(<span class="at">layout.pos.row =</span> <span class="dv">1</span>, <span class="at">layout.pos.col =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>))</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.draw</span>(ht_grob)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="fu">popViewport</span>()</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Place the volcano plot in the bottom-left</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="fu">pushViewport</span>(<span class="fu">viewport</span>(<span class="at">layout.pos.row =</span> <span class="dv">2</span>, <span class="at">layout.pos.col =</span> <span class="dv">1</span>))</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p_volcano, <span class="at">newpage =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="fu">popViewport</span>()</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Place the boxplot in the bottom-right</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="fu">pushViewport</span>(<span class="fu">viewport</span>(<span class="at">layout.pos.row =</span> <span class="dv">2</span>, <span class="at">layout.pos.col =</span> <span class="dv">2</span>))</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p_boxplot, <span class="at">newpage =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="fu">popViewport</span>()</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="fu">popViewport</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="exercise_block_7_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="part-e-exporting-for-publication" class="level3">
+<h3 class="anchored" data-anchor-id="part-e-exporting-for-publication">Part E: Exporting for Publication</h3>
+<p>Finally, we will save our composite figure in two standard publication formats: a high-resolution TIFF and a vector-based PDF.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Save as a 300 DPI TIFF file</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tiff</span>(<span class="st">"capstone_figure.tiff"</span>, <span class="at">width =</span> <span class="dv">8</span>, <span class="at">height =</span> <span class="dv">8</span>, <span class="at">units =</span> <span class="st">"in"</span>, <span class="at">res =</span> <span class="dv">300</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Re-draw the plot for the file device</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.newpage</span>()</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">pushViewport</span>(<span class="fu">viewport</span>(<span class="at">layout =</span> <span class="fu">grid.layout</span>(<span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">heights =</span> <span class="fu">unit</span>(<span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>), <span class="st">"null"</span>))))</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">pushViewport</span>(<span class="fu">viewport</span>(<span class="at">layout.pos.row =</span> <span class="dv">1</span>, <span class="at">layout.pos.col =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>))</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.draw</span>(ht_grob)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="fu">popViewport</span>()</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="fu">pushViewport</span>(<span class="fu">viewport</span>(<span class="at">layout.pos.row =</span> <span class="dv">2</span>, <span class="at">layout.pos.col =</span> <span class="dv">1</span>))</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p_volcano, <span class="at">newpage =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="fu">popViewport</span>()</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="fu">pushViewport</span>(<span class="fu">viewport</span>(<span class="at">layout.pos.row =</span> <span class="dv">2</span>, <span class="at">layout.pos.col =</span> <span class="dv">2</span>))</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p_boxplot, <span class="at">newpage =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="fu">popViewport</span>()</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="fu">popViewport</span>()</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Close the device</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>quartz_off_screen 
+                2 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Save as a PDF file</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pdf</span>(<span class="st">"capstone_figure.pdf"</span>, <span class="at">width =</span> <span class="dv">8</span>, <span class="at">height =</span> <span class="dv">8</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Re-draw the plot for the file device</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.newpage</span>()</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">pushViewport</span>(<span class="fu">viewport</span>(<span class="at">layout =</span> <span class="fu">grid.layout</span>(<span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">heights =</span> <span class="fu">unit</span>(<span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>), <span class="st">"null"</span>))))</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">pushViewport</span>(<span class="fu">viewport</span>(<span class="at">layout.pos.row =</span> <span class="dv">1</span>, <span class="at">layout.pos.col =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>))</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.draw</span>(ht_grob)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="fu">popViewport</span>()</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="fu">pushViewport</span>(<span class="fu">viewport</span>(<span class="at">layout.pos.row =</span> <span class="dv">2</span>, <span class="at">layout.pos.col =</span> <span class="dv">1</span>))</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p_volcano, <span class="at">newpage =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="fu">popViewport</span>()</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="fu">pushViewport</span>(<span class="fu">viewport</span>(<span class="at">layout.pos.row =</span> <span class="dv">2</span>, <span class="at">layout.pos.col =</span> <span class="dv">2</span>))</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p_boxplot, <span class="at">newpage =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="fu">popViewport</span>()</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="fu">popViewport</span>()</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Close the device</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>quartz_off_screen 
+                2 </code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
 <section id="session-information" class="level2">
 <h2 class="anchored" data-anchor-id="session-information">Session information</h2>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -581,10 +760,10 @@ Tip
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>R version 4.5.1 (2025-06-13)
 Platform: aarch64-apple-darwin20
@@ -601,15 +780,32 @@ time zone: Europe/Zurich
 tzcode source: internal
 
 attached base packages:
-[1] stats     graphics  grDevices datasets  utils     methods   base     
+[1] grid      stats     graphics  grDevices datasets  utils     methods  
+[8] base     
+
+other attached packages:
+[1] RColorBrewer_1.1-3    dplyr_1.1.4           ggplot2_4.0.0        
+[4] ComplexHeatmap_2.24.1
 
 loaded via a namespace (and not attached):
- [1] htmlwidgets_1.6.4   BiocManager_1.30.26 compiler_4.5.1     
- [4] fastmap_1.2.0       cli_3.6.5           htmltools_0.5.8.1  
- [7] tools_4.5.1         yaml_2.3.10         rmarkdown_2.30     
-[10] knitr_1.50          jsonlite_2.0.0      xfun_0.53          
-[13] digest_0.6.37       rlang_1.1.6         renv_1.1.5         
-[16] evaluate_1.0.5     </code></pre>
+ [1] generics_0.1.4      renv_1.1.5          shape_1.4.6.1      
+ [4] digest_0.6.37       magrittr_2.0.4      evaluate_1.0.5     
+ [7] iterators_1.0.14    circlize_0.4.16     fastmap_1.2.0      
+[10] foreach_1.5.2       doParallel_1.0.17   jsonlite_2.0.0     
+[13] GlobalOptions_0.1.2 BiocManager_1.30.26 scales_1.4.0       
+[16] codetools_0.2-20    cli_3.6.5           rlang_1.1.6        
+[19] crayon_1.5.3        withr_3.0.2         yaml_2.3.10        
+[22] tools_4.5.1         parallel_4.5.1      colorspace_2.1-2   
+[25] GetoptLong_1.0.5    BiocGenerics_0.54.1 vctrs_0.6.5        
+[28] R6_2.6.1            png_0.1-8           magick_2.9.0       
+[31] matrixStats_1.5.0   stats4_4.5.1        lifecycle_1.0.4    
+[34] S4Vectors_0.46.0    htmlwidgets_1.6.4   IRanges_2.42.0     
+[37] clue_0.3-66         cluster_2.1.8.1     pkgconfig_2.0.3    
+[40] pillar_1.11.1       gtable_0.3.6        Rcpp_1.1.0         
+[43] glue_1.8.0          xfun_0.53           tibble_3.3.0       
+[46] tidyselect_1.2.1    knitr_1.50          farver_2.1.2       
+[49] rjson_0.2.23        htmltools_0.5.8.1   labeling_0.4.3     
+[52] rmarkdown_2.30      compiler_4.5.1      S7_0.2.0           </code></pre>
 </div>
 </div>
 </div>
@@ -705,7 +901,7 @@ loaded via a namespace (and not attached):
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/DQBM-SIB\.github\.io\/publication_ready_figs_R\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
