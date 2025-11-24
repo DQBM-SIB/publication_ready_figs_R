@@ -340,7 +340,16 @@ p1 <- gridExtra::grid.arrange(
   )
 
 # B: Combine all plots
-gridExtra::grid.arrange(p1, img_draw, ht_grob, mm_res, ncol = 2, )
+gridExtra::grid.arrange(p1, img_draw, ht_grob, mm_res, ncol = 2)
+
+gridExtra::grid.arrange(
+  p1, img_draw, mm_res,
+  ht_grob,
+  layout_matrix = rbind(
+    c(1, 2, 2, 3),
+    c(4, 4, 4, NA )
+  )
+)
 ```
 :::
 

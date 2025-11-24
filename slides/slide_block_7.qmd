@@ -78,14 +78,67 @@ A publication-ready figure is not just about aesthetics; it's about scientific i
 -   **Block 6**: Building complex heatmaps and combining them with `ggplot` objects.
 -   **Block 7**: Finalizing figures for publication and ensuring reproducibility.
 
-## Capstone Project Idea
+## Capstone Project: A Walkthrough
 
-**Challenge**: Create a final, publication-ready, multi-panel figure.
+Let's apply everything we've learned to create a final, publication-ready, multi-panel figure.
 
-1.  **Top Panel**: A `ComplexHeatmap` of the top 50 most variable genes, with annotations for `compound` and `time`.
-2.  **Bottom-Left Panel**: A `ggplot` volcano plot of the 24h differential expression results.
-3.  **Bottom-Right Panel**: A `ggplot` boxplot showing the expression of a single, highly significant gene.
+![](assets/figs/capstone_figure.png)
 
-**Requirements**: - All plots must share a consistent visual style (fonts, colors). - The final figure should be assembled using `grid` graphics. - The figure should be saved as a 300 DPI TIFF and a vector PDF. - The code should be clean, commented, and reproducible.
+::: {.callout-note collapse="true"}
+### Code for the Capstone Figure
+
+```r
+# Load packages
+library(ComplexHeatmap)
+library(ggplot2)
+library(dplyr)
+library(grid)
+library(RColorBrewer)
+
+# Load data
+data <- readRDS(gzcon(url(
+  "https://raw.githubusercontent.com/urppeia/publication_figs/main/data.rds"
+)))
+rownames(data$counts) <- data$counts$Gene_ID
+data$counts <- data$counts[, -1]
+
+# Part A: Heatmap
+mat <- as.matrix(data$counts)
+mat_scaled <- t(scale(t(mat)))
+gene_vars <- apply(mat_scaled, 1, var, na.rm = TRUE)
+top_genes_var <- names(sort(gene_vars, decreasing = TRUE)[1:50])
+mat_top_var <- mat_scaled[top_genes_var, ]
+col_anno <- HeatmapAnnotation(
+  compound = data$anno$compound, time = data$anno$time,
+  col = list(compound = c("none" = "steelblue", "sucrose" = "tomato"),
+             time = c("3 hour" = "lightgrey", "24 hour" = "darkgrey"))
+)
+ht <- Heatmap(mat_top_var, name = "Z-Score", top_annotation = col_anno,
+              show_row_names = FALSE, column_title = "Top 50 Most Variable Genes")
+
+# Part B: Volcano Plot
+data$diff <- data$diff %>%
+  mutate(significant = sucrose_24h_pval < 0.05 & abs(sucrose_24h_lfc) > 1)
+p_volcano <- ggplot(data$diff, aes(x = sucrose_24h_lfc, y = -log10(sucrose_24h_pval))) +
+  geom_point(aes(color = significant), alpha = 0.6) +
+  scale_color_manual(values = c("grey", "red")) + theme_bw() +
+  labs(title = "Volcano Plot (24h)", x = "Log2 Fold Change", y = "-log10(p-value)") +
+  theme(legend.position = "none")
+
+# Part C: Boxplot
+top_gene_24h <- data$diff %>% filter(sucrose_24h_pval < 0.05) %>%
+  arrange(sucrose_24h_pval) %>% pull(Gene_ID) %>% head(1)
+plot_data <- data.frame(expression = as.numeric(mat[top_gene_24h, ]),
+                        compound = data$anno$compound, time = data$anno$time)
+p_boxplot <- ggplot(plot_data, aes(x = compound, y = expression, fill = time)) +
+  geom_boxplot() + theme_bw() +
+  labs(title = paste("Expression of", top_gene_24h), x = "Compound", y = "Normalized Expression") +
+  scale_fill_manual(values = c("lightgrey", "darkgrey"))
+
+# Assemble and Save
+ht_grob <- grid.grabExpr(draw(ht))
+# In the exercise, we save this to PDF and TIFF.
+```
+:::
 
 ## Thank You & Final Q&A

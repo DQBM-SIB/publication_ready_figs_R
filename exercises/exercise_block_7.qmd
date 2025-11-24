@@ -1,5 +1,5 @@
 ---
-title: "Exercise - Block 7: Finalizing Figures & Reproducibility"
+title: "Exercise - Block 7: Capstone Project"
 format: html
 editor: source
 editor_options:
@@ -8,133 +8,237 @@ editor_options:
 
 ## Learning Objectives
 
-Upon completing this exercise block, you will be able to:
+Upon completing this capstone exercise, you will be able to:
 
--   **Produce and export publication-quality figures:**
-    -   **Adapt** stylistic elements like fonts and line weights to meet publication guidelines.
-    -   **Generate** high-resolution figures in various formats (PDF, PNG, TIFF) using functions like `ggsave()`.
--   **Implement best practices for reproducibility:**
-    -   **Write** clean and reusable R scripts for figure generation.
-    -   **Document** code and workflows to ensure reproducibility and transparency.
+-   **Synthesize** skills from across the course to create a complex, multi-panel, publication-ready figure.
+-   **Combine** plots from `ComplexHeatmap` and `ggplot2` into a cohesive layout using `grid` graphics.
+-   **Apply** consistent styling and themes across different plot types.
+-   **Export** final figures in both high-resolution raster (TIFF) and vector (PDF) formats, adhering to typical journal specifications.
 
 ## Introduction
 
-In this block, we will focus on finalizing figures for publication and ensuring reproducibility. We will cover how to adapt stylistic elements, generate high-resolution figures, and implement best practices for writing clean and reusable R scripts.
+In this final block, we will undertake a capstone project that brings together everything we have learned. We will create a publication-ready, multi-panel figure from scratch. This figure will include a complex heatmap, a volcano plot, and a boxplot, all arranged in a clean layout and styled consistently.
 
 ---
 
-## Exercise 1: Exporting Figures
+## Packages and Data
 
-In this exercise, we will practice exporting the figures we created in the previous blocks.
+First, let's load the necessary packages and the course dataset.
 
-**A.** Go back to `exercise_block_6.qmd`. Export the combined plot from "Exercise 4: Advanced setting of height and width of indivisual plots and combining all plots" as a high-resolution PNG file.
+```{r, message=FALSE, warning=FALSE}
+# Load packages
+library(ComplexHeatmap)
+library(ggplot2)
+library(dplyr)
+library(grid)
+library(RColorBrewer)
 
-**B.** Export the same figure as a PDF file.
+# Load data
+data <- readRDS(gzcon(url(
+  "https://raw.githubusercontent.com/urppeia/publication_figs/main/data.rds"
+)))
+
+rownames(data$counts) <- data$counts$Gene_ID
+data$counts <- data$counts[, -1]
+```
+
+---
+
+## Capstone Exercise: Creating a Publication-Ready Figure
+
+### Part A: Top Panel - Complex Heatmap
+
+First, we will create a heatmap of the top 50 most variable genes, annotated by experimental conditions.
 
 ::: {.callout-tip collapse="true"}
 
 ### Solution
-```{r, eval=FALSE}
-# Add this code to the end of the solution for Exercise 4 in exercise_block_6.qmd
 
-# Export as PNG
-png("combined_figure.png", width = 10, height = 8, units = "in", res = 300)
-gridExtra::grid.arrange(p1, ht_grob, img_draw, mm_res, ncol = 2)
-dev.off()
+```{r}
+# 1. Prepare the data: scale and find top 50 variable genes
+mat <- as.matrix(data$counts)
+mat_scaled <- t(scale(t(mat)))
+gene_vars <- apply(mat_scaled, 1, var, na.rm = TRUE)
+top_genes_var <- names(sort(gene_vars, decreasing = TRUE)[1:50])
+mat_top_var <- mat_scaled[top_genes_var, ]
 
-# Export as PDF
-pdf("combined_figure.pdf", width = 10, height = 8)
-gridExtra::grid.arrange(p1, ht_grob, img_draw, mm_res, ncol = 2)
-dev.off()
+# 2. Create column annotation
+col_anno <- HeatmapAnnotation(
+  compound = data$anno$compound,
+  time = data$anno$time,
+  col = list(
+    compound = c("none" = "steelblue", "sucrose" = "tomato"),
+    time = c("3 hour" = "lightgrey", "24 hour" = "darkgrey")
+  )
+)
+
+# 3. Create the heatmap object
+ht <- Heatmap(mat_top_var,
+  name = "Z-Score",
+  top_annotation = col_anno,
+  show_row_names = FALSE,
+  column_title = "Top 50 Most Variable Genes"
+)
+
+# 4. Draw it to check
+draw(ht)
 ```
 :::
 
----
+### Part B: Bottom-Left Panel - Volcano Plot
 
-## Exercise 2: Reproducible Scripting
-
-In this exercise, we will focus on making our R scripts more reproducible.
-
-**A.** Review the R code in `exercise_block_6.qmd`. Identify any areas where comments could be improved or added to enhance clarity and reproducibility.
-
-**B.** Suggest ways to make the data loading and processing steps more robust (e.g., error handling, clearer variable names).
-
-**C.** Create a function that encapsulates the creation of the complex heatmap from `exercise_block_6.qmd`. The function should take the data as input and return the heatmap object.
+Next, we'll create a volcano plot for the 24-hour differential expression data to visualize up- and down-regulated genes.
 
 ::: {.callout-tip collapse="true"}
 
 ### Solution
-**A. Improved Comments:**
-- Ensure every major step (data loading, scaling, annotation creation, plotting) has a clear, concise comment explaining its purpose.
-- Add comments to complex lines of code to explain the logic.
 
-**B. More Robust Scripting:**
-- **Error Handling:** Use `tryCatch()` for data loading to gracefully handle cases where the URL might be inaccessible.
-- **Clearer Variable Names:** While `mat` and `lfc_data` are common in R, consider more descriptive names like `expression_matrix_scaled` or `log_fold_change_data`.
-- **Function Encapsulation:** For complex plotting routines, consider wrapping them in functions to improve reusability and readability.
-- **Configuration:** If parameters like the number of top genes or LFC thresholds change frequently, consider defining them as variables at the top of the script.
+```{r}
+# 1. Add a significance column to the differential expression data
+data$diff <- data$diff %>%
+  mutate(significant = sucrose_24h_pval < 0.05 & abs(sucrose_24h_lfc) > 1)
 
-**C. Function for Complex Heatmap:**
-```{r, eval=FALSE}
-create_complex_heatmap <- function(data) {
-  # Prepare the data
-  mat <- as.matrix(data$counts)
-  mat_scaled <- t(scale(t(mat))) # Z-score scaling
-  gene_vars <- apply(mat_scaled, 1, var, na.rm = TRUE)
-  top_genes_var <- names(sort(gene_vars, decreasing = TRUE)[1:50])
-  mat_top_var <- mat_scaled[top_genes_var, ]
+# 2. Create the volcano plot
+p_volcano <- ggplot(data$diff, aes(x = sucrose_24h_lfc, y = -log10(sucrose_24h_pval))) +
+  geom_point(aes(color = significant), alpha = 0.6) +
+  scale_color_manual(values = c("grey", "red")) +
+  theme_bw() +
+  labs(
+    title = "Volcano Plot (24h)",
+    x = "Log2 Fold Change",
+    y = "-log10(p-value)"
+  ) +
+  theme(legend.position = "none")
 
-  # Create a column annotation with custom colors
-  col_anno <- HeatmapAnnotation(
-    compound = data$anno$compound,
-    time = data$anno$time,
-    col = list(
-      compound = c("none" = "steelblue", "sucrose" = "tomato"),
-      time = c("3 hour" = "lightgrey", "24 hour" = "darkgrey")
-    )
-  )
+# 3. Print it to check
+print(p_volcano)
+```
+:::
 
-  # Extract genes matching the profile
-  profile_genes <- data$diff %>%
-    filter(
-      sucrose_3h_lfc > 1 & sucrose_3h_pval < 0.05 |
-        sucrose_24h_lfc < -1 & sucrose_24h_pval < 0.05
-    ) %>%
-    pull(Gene_ID)
+### Part C: Bottom-Right Panel - Boxplot
 
-  mat_profile <- mat_scaled[profile_genes, ]
+Now, let's focus on a single, highly significant gene and show its expression across samples with a boxplot. We'll pick the gene with the lowest p-value at 24 hours.
 
-  # Create a row annotation
-  rownames(data$diff) <- data$diff$Gene_ID
-  lfc_data <- data$diff[profile_genes, c("sucrose_3h_lfc", "sucrose_24h_lfc")]
+::: {.callout-tip collapse="true"}
 
-  row_anno <- rowAnnotation(
-    "3h LFC" = anno_barplot(
-      lfc_data[, 1],
-      gp = gpar(fill = "tomato"),
-      axis_param = list(at = c(-2, 0, 2))
-    ),
-    "24h LFC" = anno_barplot(
-      lfc_data[, 2],
-      gp = gpar(fill = "steelblue"),
-      axis_param = list(at = c(-2, 0, 2))
-    ),
-    width = unit(4, "cm")
-  )
+### Solution
 
-  # Combine with the heatmap
-  ht <- Heatmap(mat_profile,
-    name = "Z-Score",
-    top_annotation = col_anno,
-    show_row_names = FALSE,
-    column_title = "Genes Up at 3h, Down at 24h"
-  ) + row_anno
-  
-  return(ht)
-}
+```{r}
+# 1. Find the top significant gene at 24h
+top_gene_24h <- data$diff %>%
+  filter(sucrose_24h_pval < 0.05) %>%
+  arrange(sucrose_24h_pval) %>%
+  pull(Gene_ID) %>%
+  head(1)
 
-# Example usage:
-# ht_object <- create_complex_heatmap(data)
+# 2. Prepare data for plotting
+plot_data <- data.frame(
+  expression = as.numeric(mat[top_gene_24h, ]),
+  compound = data$anno$compound,
+  time = data$anno$time
+)
+
+# 3. Create the boxplot
+p_boxplot <- ggplot(plot_data, aes(x = compound, y = expression, fill = time)) +
+  geom_boxplot() +
+  theme_bw() +
+  labs(
+    title = paste("Expression of", top_gene_24h),
+    x = "Compound",
+    y = "Normalized Expression"
+  ) +
+  scale_fill_manual(values = c("lightgrey", "darkgrey"))
+
+# 4. Print it to check
+print(p_boxplot)
+```
+:::
+
+### Part D: Assembling the Final Figure
+
+With all three components ready, we will now use the `grid` package to assemble them into a single, well-proportioned figure. The top panel will contain the heatmap, and the bottom panel will be split between the volcano plot and the boxplot.
+
+::: {.callout-tip collapse="true"}
+
+### Solution
+
+```{r, fig.height=8, fig.width=8}
+# 1. Grab the heatmap as a graphical object (grob)
+ht_grob <- grid.grabExpr(draw(ht))
+
+# 2. Clear the graphics device and set up the layout
+grid.newpage()
+# Layout: 2 rows, 2 columns. Heatmap spans both columns in row 1.
+pushViewport(viewport(layout = grid.layout(nrow = 2, ncol = 2, heights = unit(c(0.5, 0.5), "null"))))
+
+# 3. Place the heatmap in the top row (spanning columns 1 and 2)
+pushViewport(viewport(layout.pos.row = 1, layout.pos.col = 1:2))
+grid.draw(ht_grob)
+popViewport()
+
+# 4. Place the volcano plot in the bottom-left
+pushViewport(viewport(layout.pos.row = 2, layout.pos.col = 1))
+print(p_volcano, newpage = FALSE)
+popViewport()
+
+# 5. Place the boxplot in the bottom-right
+pushViewport(viewport(layout.pos.row = 2, layout.pos.col = 2))
+print(p_boxplot, newpage = FALSE)
+popViewport()
+
+popViewport()
+```
+:::
+
+### Part E: Exporting for Publication
+
+Finally, we will save our composite figure in two standard publication formats: a high-resolution TIFF and a vector-based PDF.
+
+::: {.callout-tip collapse="true"}
+
+### Solution
+
+```{r}
+# 1. Save as a 300 DPI TIFF file
+tiff("capstone_figure.tiff", width = 8, height = 8, units = "in", res = 300)
+
+# Re-draw the plot for the file device
+grid.newpage()
+pushViewport(viewport(layout = grid.layout(nrow = 2, ncol = 2, heights = unit(c(0.5, 0.5), "null"))))
+pushViewport(viewport(layout.pos.row = 1, layout.pos.col = 1:2))
+grid.draw(ht_grob)
+popViewport()
+pushViewport(viewport(layout.pos.row = 2, layout.pos.col = 1))
+print(p_volcano, newpage = FALSE)
+popViewport()
+pushViewport(viewport(layout.pos.row = 2, layout.pos.col = 2))
+print(p_boxplot, newpage = FALSE)
+popViewport()
+popViewport()
+
+# Close the device
+dev.off()
+
+
+# 2. Save as a PDF file
+pdf("capstone_figure.pdf", width = 8, height = 8)
+
+# Re-draw the plot for the file device
+grid.newpage()
+pushViewport(viewport(layout = grid.layout(nrow = 2, ncol = 2, heights = unit(c(0.5, 0.5), "null"))))
+pushViewport(viewport(layout.pos.row = 1, layout.pos.col = 1:2))
+grid.draw(ht_grob)
+popViewport()
+pushViewport(viewport(layout.pos.row = 2, layout.pos.col = 1))
+print(p_volcano, newpage = FALSE)
+popViewport()
+pushViewport(viewport(layout.pos.row = 2, layout.pos.col = 2))
+print(p_boxplot, newpage = FALSE)
+popViewport()
+popViewport()
+
+# Close the device
+dev.off()
 ```
 :::
 

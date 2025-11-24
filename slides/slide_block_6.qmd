@@ -28,12 +28,10 @@ Heatmaps are essential for visualizing large matrices, such as gene expression d
 
 ## Why `ComplexHeatmap`?
 
-
 ::: incremental
 -   It's a highly flexible and powerful package for creating publication-quality heatmaps.
 -   It allows for extensive customization, including annotations, splitting, and combining multiple heatmaps.
 -   It's part of the Bioconductor ecosystem, a standard for bioinformatics in R.
-
 :::
 
 ## A Simple Heatmap
@@ -142,14 +140,13 @@ This is an advanced technique that gives you maximum control.
 ## Combining `ggplot` and `ComplexHeatmap`
 
 ::: incremental
-
 1.  Create your `ggplot` object (`p`).
 2.  Create your `Heatmap` object (`ht`).
 3.  Draw the heatmap first, but get its layout information.
 4.  Use `grid` functions (`pushViewport`, `popViewport`) to define a region on the plot device.
 5.  Convert the `ggplot` object to a grob (`ggplotGrob`) and draw it in that region.
+:::
 
-::: 
 *This requires careful coordination and is a powerful skill for creating complex final figures.*
 
 ## Let's Practice!
