@@ -29,6 +29,8 @@ You've created a beautiful plot. Now, how do you get it into your manuscript cor
 -   **Vector vs. Raster Formats**:
     -   **Vector (PDF, SVG, EPS)**: Infinitely scalable. Lines and text are stored as mathematical equations. **This is the preferred format for most journals.**
     -   **Raster (PNG, TIFF, JPG)**: Pixel-based. Can become blurry when resized. Necessary for images with complex color gradients like photos.
+
+## Finalizing Figures for Publication
 -   **Resolution (DPI)**: For raster images, journals typically require **300 DPI** for color/grayscale and **600-1200 DPI** for line art.
 
 ## Mastering `ggsave()`
@@ -45,7 +47,11 @@ ggsave("my_plot.pdf", plot = my_ggplot, width = 180, height = 100, units = "mm")
 ggsave("my_plot.tiff", plot = my_ggplot, width = 180, height = 100, units = "mm", dpi = 300)
 ```
 
-**Key Parameters**: - `width`, `height`, `units`: Always specify the physical size required by the journal. - `dpi`: Crucial for raster formats. - `device`: Can be used to specify the graphics device (e.g., `cairo_pdf` for better font embedding).
+**Key Parameters**: 
+
+- `width`, `height`, `units`: Always specify the physical size required by the journal. 
+
+- `dpi`: Crucial for raster formats.
 
 ## The Importance of Reproducibility
 
@@ -61,9 +67,13 @@ A publication-ready figure is not just about aesthetics; it's about scientific i
     -   Keep your code in R scripts (`.R`), not just in your R console history.
     -   Use comments to explain the *why*, not the *what*.
     -   Organize scripts logically: data loading, data cleaning, analysis, figure generation.
+    
+## Best Practices for Reproducibility
 2.  **Manage Your Environment**:
     -   The `renv` package (which this course uses!) saves the versions of all packages you use. This is critical for long-term reproducibility.
     -   Always run `renv::snapshot()` to save the state of your project.
+
+## Best Practices for Reproducibility
 3.  **Use Version Control**:
     -   Tools like `git` track every change you make to your code.
     -   It's like a "lab notebook" for your analysis, allowing you to go back in time and understand how your analysis evolved.
@@ -71,74 +81,27 @@ A publication-ready figure is not just about aesthetics; it's about scientific i
 ## Course Review: What We've Learned
 
 -   **Block 1**: Principles of effective data visualization and base R graphics.
+
+## Course Review: What We've Learned
 -   **Block 2**: The "Grammar of Graphics" and building plots with `ggplot2`.
+
+## Course Review: What We've Learned
 -   **Block 3**: Advanced `ggplot2` (faceting, themes, colors).
+
+## Course Review: What We've Learned
 -   **Block 4**: Adding statistical annotations and summaries.
+
+## Course Review: What We've Learned
 -   **Block 5**: Creating universal themes and assembling multi-panel `ggplot` figures with `patchwork`.
+
+## Course Review: What We've Learned
 -   **Block 6**: Building complex heatmaps and combining them with `ggplot` objects.
+
+## Course Review: What We've Learned
 -   **Block 7**: Finalizing figures for publication and ensuring reproducibility.
 
 ## Capstone Project: A Walkthrough
 
 Let's apply everything we've learned to create a final, publication-ready, multi-panel figure.
-
-![](assets/figs/capstone_figure.png)
-
-::: {.callout-note collapse="true"}
-### Code for the Capstone Figure
-
-```r
-# Load packages
-library(ComplexHeatmap)
-library(ggplot2)
-library(dplyr)
-library(grid)
-library(RColorBrewer)
-
-# Load data
-data <- readRDS(gzcon(url(
-  "https://raw.githubusercontent.com/urppeia/publication_figs/main/data.rds"
-)))
-rownames(data$counts) <- data$counts$Gene_ID
-data$counts <- data$counts[, -1]
-
-# Part A: Heatmap
-mat <- as.matrix(data$counts)
-mat_scaled <- t(scale(t(mat)))
-gene_vars <- apply(mat_scaled, 1, var, na.rm = TRUE)
-top_genes_var <- names(sort(gene_vars, decreasing = TRUE)[1:50])
-mat_top_var <- mat_scaled[top_genes_var, ]
-col_anno <- HeatmapAnnotation(
-  compound = data$anno$compound, time = data$anno$time,
-  col = list(compound = c("none" = "steelblue", "sucrose" = "tomato"),
-             time = c("3 hour" = "lightgrey", "24 hour" = "darkgrey"))
-)
-ht <- Heatmap(mat_top_var, name = "Z-Score", top_annotation = col_anno,
-              show_row_names = FALSE, column_title = "Top 50 Most Variable Genes")
-
-# Part B: Volcano Plot
-data$diff <- data$diff %>%
-  mutate(significant = sucrose_24h_pval < 0.05 & abs(sucrose_24h_lfc) > 1)
-p_volcano <- ggplot(data$diff, aes(x = sucrose_24h_lfc, y = -log10(sucrose_24h_pval))) +
-  geom_point(aes(color = significant), alpha = 0.6) +
-  scale_color_manual(values = c("grey", "red")) + theme_bw() +
-  labs(title = "Volcano Plot (24h)", x = "Log2 Fold Change", y = "-log10(p-value)") +
-  theme(legend.position = "none")
-
-# Part C: Boxplot
-top_gene_24h <- data$diff %>% filter(sucrose_24h_pval < 0.05) %>%
-  arrange(sucrose_24h_pval) %>% pull(Gene_ID) %>% head(1)
-plot_data <- data.frame(expression = as.numeric(mat[top_gene_24h, ]),
-                        compound = data$anno$compound, time = data$anno$time)
-p_boxplot <- ggplot(plot_data, aes(x = compound, y = expression, fill = time)) +
-  geom_boxplot() + theme_bw() +
-  labs(title = paste("Expression of", top_gene_24h), x = "Compound", y = "Normalized Expression") +
-  scale_fill_manual(values = c("lightgrey", "darkgrey"))
-
-# Assemble and Save
-ht_grob <- grid.grabExpr(draw(ht))
-# In the exercise, we save this to PDF and TIFF.
-```
-:::
 
 ## Thank You & Final Q&A

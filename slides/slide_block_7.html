@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-html/tabby.min.js"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="slide_block_7_files/libs/clipboard/clipboard.min.js"></script>
+<script src="slide_block_7_files/libs/quarto-html/tabby.min.js"></script>
+<script src="slide_block_7_files/libs/quarto-html/popper.min.js"></script>
+<script src="slide_block_7_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="slide_block_7_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="slide_block_7_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="slide_block_7_files/libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.7.31">
 
   <meta name="author" content="Deepak Tanwar">
-  <title>Publication-Ready Figure Generation in R – Block 6</title>
+  <title>Block 7</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="slide_block_7_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="slide_block_7_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -95,11 +95,12 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-f563837468303362081e247dddd440d0.css">
-  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="slide_block_7_files/libs/revealjs/dist/theme/quarto-f563837468303362081e247dddd440d0.css">
+  <link rel="stylesheet" href="styles.css">
+  <link href="slide_block_7_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="slide_block_7_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="slide_block_7_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="slide_block_7_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
@@ -193,7 +194,7 @@
     <div class="slides">
 
 <section id="title-slide" data-background-opacity="0.8" data-background-size="contain" class="quarto-title-block center">
-  <h1 class="title">Block 6</h1>
+  <h1 class="title">Block 7</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -204,118 +205,132 @@ Deepak Tanwar
 </div>
 
 </section>
-<section id="recap-of-block-5" class="slide level2">
-<h2>Recap of Block 5</h2>
+<section id="recap-of-block-6" class="slide level2">
+<h2>Recap of Block 6</h2>
 <ul>
-<li class="fragment"><strong>Advanced Theming</strong>: We learned how to create a reusable “universal” theme object in <code>ggplot2</code> for consistent plot styling.</li>
-<li class="fragment"><strong><code>patchwork</code> for Layouts</strong>: We explored advanced features of <code>patchwork</code> to combine multiple <code>ggplot2</code> plots into complex, multi-panel figures.</li>
-<li class="fragment"><strong>Plot Annotation</strong>: We used <code>plot_annotation()</code> to add titles and tags to entire compositions.</li>
+<li class="fragment"><strong><code>ComplexHeatmap</code></strong>: We learned how to create and annotate complex heatmaps to visualize large data matrices effectively.</li>
+<li class="fragment"><strong>Customization</strong>: We explored how to customize heatmaps with annotations and colors to reveal patterns in the data.</li>
+<li class="fragment"><strong>Cross-System Composition</strong>: We discussed the need for the <code>grid</code> graphics system to combine plots from different systems like <code>ComplexHeatmap</code> and <code>ggplot2</code>.</li>
 </ul>
 </section>
-<section id="introduction-to-heatmaps" class="slide level2">
-<h2>Introduction to Heatmaps</h2>
-<p>Heatmaps are essential for visualizing large matrices, such as gene expression data across many samples. They are powerful for identifying patterns, clusters, and relationships in the data.</p>
-</section>
-<section id="why-complexheatmap" class="slide level2">
-<h2>Why <code>ComplexHeatmap</code>?</h2>
+<section id="finalizing-figures-for-publication" class="slide level2">
+<h2>Finalizing Figures for Publication</h2>
+<p>You’ve created a beautiful plot. Now, how do you get it into your manuscript correctly?</p>
 <ul>
-<li class="fragment">It’s a highly flexible and powerful package for creating publication-quality heatmaps.</li>
-<li class="fragment">It allows for extensive customization, including annotations, splitting, and combining multiple heatmaps.</li>
-<li class="fragment">It’s part of the Bioconductor ecosystem, a standard for bioinformatics in R.</li>
+<li><strong>Vector vs.&nbsp;Raster Formats</strong>:
+<ul>
+<li><strong>Vector (PDF, SVG, EPS)</strong>: Infinitely scalable. Lines and text are stored as mathematical equations. <strong>This is the preferred format for most journals.</strong></li>
+<li><strong>Raster (PNG, TIFF, JPG)</strong>: Pixel-based. Can become blurry when resized. Necessary for images with complex color gradients like photos.</li>
+</ul></li>
 </ul>
 </section>
-<section id="a-simple-heatmap" class="slide level2">
-<h2>A Simple Heatmap</h2>
-<p>Let’s create a basic heatmap of the most variable genes from our dataset.</p>
-<div class="columns">
-<div class="column" style="width:40%;">
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(ComplexHeatmap)</span>
-<span id="cb1-2"><a></a></span>
-<span id="cb1-3"><a></a><span class="co"># Select top 50 most variable genes</span></span>
-<span id="cb1-4"><a></a>mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(data<span class="sc">$</span>counts)</span>
-<span id="cb1-5"><a></a>mat_scaled <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">scale</span>(<span class="fu">t</span>(mat))) <span class="co"># Scale data</span></span>
-<span id="cb1-6"><a></a>gene_vars <span class="ot">&lt;-</span> <span class="fu">apply</span>(mat_scaled, <span class="dv">1</span>, var)</span>
-<span id="cb1-7"><a></a>top_genes <span class="ot">&lt;-</span> <span class="fu">names</span>(<span class="fu">sort</span>(gene_vars, <span class="at">decreasing =</span> <span class="cn">TRUE</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>])</span>
-<span id="cb1-8"><a></a>mat_top <span class="ot">&lt;-</span> mat_scaled[top_genes, ]</span>
-<span id="cb1-9"><a></a></span>
-<span id="cb1-10"><a></a><span class="co"># Create the heatmap</span></span>
-<span id="cb1-11"><a></a><span class="fu">Heatmap</span>(mat_top)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div><div class="column" style="width:60%;">
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="slide_block_6_files/figure-revealjs/unnamed-chunk-2-1.png" class="quarto-figure quarto-figure-center" width="3000"></p>
-</figure>
-</div>
-</div>
-</div>
-</div></div>
-</section>
-<section id="annotating-heatmaps" class="slide level2">
-<h2>Annotating Heatmaps</h2>
-<p>The “complex” in <code>ComplexHeatmap</code> comes from its ability to add rich annotations.</p>
+<section id="finalizing-figures-for-publication-1" class="slide level2">
+<h2>Finalizing Figures for Publication</h2>
 <ul>
-<li><code>HeatmapAnnotation()</code>: Create annotation layers for columns or rows.</li>
-<li>We can annotate our heatmap with sample information like <code>compound</code> and <code>time</code>.</li>
-<li>This helps in correlating visual patterns with experimental conditions.</li>
+<li><strong>Resolution (DPI)</strong>: For raster images, journals typically require <strong>300 DPI</strong> for color/grayscale and <strong>600-1200 DPI</strong> for line art.</li>
 </ul>
 </section>
-<section id="example-annotated-heatmap" class="slide level2">
-<h2>Example: Annotated Heatmap</h2>
-<div class="columns">
-<div class="column" style="width:40%;">
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="co"># Create a column annotation</span></span>
-<span id="cb2-2"><a></a>col_anno <span class="ot">&lt;-</span> <span class="fu">HeatmapAnnotation</span>(</span>
-<span id="cb2-3"><a></a>  <span class="at">compound =</span> data<span class="sc">$</span>anno<span class="sc">$</span>compound,</span>
-<span id="cb2-4"><a></a>  <span class="at">time =</span> data<span class="sc">$</span>anno<span class="sc">$</span>time,</span>
-<span id="cb2-5"><a></a>  <span class="at">col =</span> <span class="fu">list</span>(</span>
-<span id="cb2-6"><a></a>    <span class="at">compound =</span> <span class="fu">c</span>(<span class="st">"none"</span> <span class="ot">=</span> <span class="st">"blue"</span>, <span class="st">"sucrose"</span> <span class="ot">=</span> <span class="st">"orange"</span>),</span>
-<span id="cb2-7"><a></a>    <span class="at">time =</span> <span class="fu">c</span>(<span class="st">"3 hour"</span> <span class="ot">=</span> <span class="st">"lightgrey"</span>, <span class="st">"24 hour"</span> <span class="ot">=</span> <span class="st">"darkgrey"</span>)</span>
-<span id="cb2-8"><a></a>  )</span>
-<span id="cb2-9"><a></a>)</span>
-<span id="cb2-10"><a></a></span>
-<span id="cb2-11"><a></a><span class="co"># Add annotation to the heatmap</span></span>
-<span id="cb2-12"><a></a><span class="fu">Heatmap</span>(mat_top,</span>
-<span id="cb2-13"><a></a>        <span class="at">name =</span> <span class="st">"Z-Score"</span>,</span>
-<span id="cb2-14"><a></a>        <span class="at">top_annotation =</span> col_anno,</span>
-<span id="cb2-15"><a></a>        <span class="at">show_row_names =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div><div class="column" style="width:60%;">
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="slide_block_6_files/figure-revealjs/unnamed-chunk-3-1.png" class="quarto-figure quarto-figure-center" width="3000"></p>
-</figure>
-</div>
-</div>
-</div>
-</div></div>
-</section>
-<section id="cross-system-plot-composition" class="slide level2">
-<h2>Cross-System Plot Composition</h2>
-<p>What if you want to combine a <code>ComplexHeatmap</code> with a <code>ggplot</code>? <code>patchwork</code> is for <code>ggplot</code> objects, so we need a different approach.</p>
+<section id="mastering-ggsave" class="slide level2">
+<h2>Mastering <code>ggsave()</code></h2>
+<p><code>ggsave()</code> is your best friend for exporting <code>ggplot2</code> plots.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a>my_ggplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(wt, mpg)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span>
+<span id="cb1-2"><a href=""></a></span>
+<span id="cb1-3"><a href=""></a><span class="co"># Save as a PDF (vector)</span></span>
+<span id="cb1-4"><a href=""></a><span class="fu">ggsave</span>(<span class="st">"my_plot.pdf"</span>, <span class="at">plot =</span> my_ggplot, <span class="at">width =</span> <span class="dv">180</span>, <span class="at">height =</span> <span class="dv">100</span>, <span class="at">units =</span> <span class="st">"mm"</span>)</span>
+<span id="cb1-5"><a href=""></a></span>
+<span id="cb1-6"><a href=""></a><span class="co"># Save as a high-resolution TIFF (raster)</span></span>
+<span id="cb1-7"><a href=""></a><span class="fu">ggsave</span>(<span class="st">"my_plot.tiff"</span>, <span class="at">plot =</span> my_ggplot, <span class="at">width =</span> <span class="dv">180</span>, <span class="at">height =</span> <span class="dv">100</span>, <span class="at">units =</span> <span class="st">"mm"</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Key Parameters</strong>:</p>
 <ul>
-<li class="fragment"><strong>The Problem</strong>: <code>ComplexHeatmap</code> and <code>ggplot2</code> use different underlying graphics systems.</li>
-<li class="fragment"><strong>The Solution</strong>: The <code>grid</code> graphics system. Both plot types can be converted into “Grid Graphical Objects” (grobs) and arranged on a blank canvas.</li>
+<li><p><code>width</code>, <code>height</code>, <code>units</code>: Always specify the physical size required by the journal.</p></li>
+<li><p><code>dpi</code>: Crucial for raster formats.</p></li>
 </ul>
-<p>This is an advanced technique that gives you maximum control.</p>
 </section>
-<section id="combining-ggplot-and-complexheatmap" class="slide level2">
-<h2>Combining <code>ggplot</code> and <code>ComplexHeatmap</code></h2>
+<section id="the-importance-of-reproducibility" class="slide level2">
+<h2>The Importance of Reproducibility</h2>
+<p><strong>“Can you just re-run the analysis with this one small change?”</strong></p>
+<p>A publication-ready figure is not just about aesthetics; it’s about scientific integrity. A figure is only as good as the code that produced it.</p>
+<p><strong>Reproducibility means that someone else (or you, 6 months from now) can run your code and get the exact same result.</strong></p>
+</section>
+<section id="best-practices-for-reproducibility" class="slide level2">
+<h2>Best Practices for Reproducibility</h2>
 <ol type="1">
-<li class="fragment">Create your <code>ggplot</code> object (<code>p</code>).</li>
-<li class="fragment">Create your <code>Heatmap</code> object (<code>ht</code>).</li>
-<li class="fragment">Draw the heatmap first, but get its layout information.</li>
-<li class="fragment">Use <code>grid</code> functions (<code>pushViewport</code>, <code>popViewport</code>) to define a region on the plot device.</li>
-<li class="fragment">Convert the <code>ggplot</code> object to a grob (<code>ggplotGrob</code>) and draw it in that region.</li>
+<li><strong>Structure Your Code</strong>:
+<ul>
+<li>Keep your code in R scripts (<code>.R</code>), not just in your R console history.</li>
+<li>Use comments to explain the <em>why</em>, not the <em>what</em>.</li>
+<li>Organize scripts logically: data loading, data cleaning, analysis, figure generation.</li>
+</ul></li>
 </ol>
-<p><em>This requires careful coordination and is a powerful skill for creating complex final figures.</em></p>
 </section>
-<section id="lets-practice" class="slide level2">
-<h2>Let’s Practice!</h2>
-<p>Now, let’s apply these concepts in the exercise for Block 6.</p>
-
+<section id="best-practices-for-reproducibility-1" class="slide level2">
+<h2>Best Practices for Reproducibility</h2>
+<ol start="2" type="1">
+<li><strong>Manage Your Environment</strong>:
+<ul>
+<li>The <code>renv</code> package (which this course uses!) saves the versions of all packages you use. This is critical for long-term reproducibility.</li>
+<li>Always run <code>renv::snapshot()</code> to save the state of your project.</li>
+</ul></li>
+</ol>
+</section>
+<section id="best-practices-for-reproducibility-2" class="slide level2">
+<h2>Best Practices for Reproducibility</h2>
+<ol start="3" type="1">
+<li><strong>Use Version Control</strong>:
+<ul>
+<li>Tools like <code>git</code> track every change you make to your code.</li>
+<li>It’s like a “lab notebook” for your analysis, allowing you to go back in time and understand how your analysis evolved.</li>
+</ul></li>
+</ol>
+</section>
+<section id="course-review-what-weve-learned" class="slide level2">
+<h2>Course Review: What We’ve Learned</h2>
+<ul>
+<li><strong>Block 1</strong>: Principles of effective data visualization and base R graphics.</li>
+</ul>
+</section>
+<section id="course-review-what-weve-learned-1" class="slide level2">
+<h2>Course Review: What We’ve Learned</h2>
+<ul>
+<li><strong>Block 2</strong>: The “Grammar of Graphics” and building plots with <code>ggplot2</code>.</li>
+</ul>
+</section>
+<section id="course-review-what-weve-learned-2" class="slide level2">
+<h2>Course Review: What We’ve Learned</h2>
+<ul>
+<li><strong>Block 3</strong>: Advanced <code>ggplot2</code> (faceting, themes, colors).</li>
+</ul>
+</section>
+<section id="course-review-what-weve-learned-3" class="slide level2">
+<h2>Course Review: What We’ve Learned</h2>
+<ul>
+<li><strong>Block 4</strong>: Adding statistical annotations and summaries.</li>
+</ul>
+</section>
+<section id="course-review-what-weve-learned-4" class="slide level2">
+<h2>Course Review: What We’ve Learned</h2>
+<ul>
+<li><strong>Block 5</strong>: Creating universal themes and assembling multi-panel <code>ggplot</code> figures with <code>patchwork</code>.</li>
+</ul>
+</section>
+<section id="course-review-what-weve-learned-5" class="slide level2">
+<h2>Course Review: What We’ve Learned</h2>
+<ul>
+<li><strong>Block 6</strong>: Building complex heatmaps and combining them with <code>ggplot</code> objects.</li>
+</ul>
+</section>
+<section id="course-review-what-weve-learned-6" class="slide level2">
+<h2>Course Review: What We’ve Learned</h2>
+<ul>
+<li><strong>Block 7</strong>: Finalizing figures for publication and ensuring reproducibility.</li>
+</ul>
+</section>
+<section id="capstone-project-a-walkthrough" class="slide level2">
+<h2>Capstone Project: A Walkthrough</h2>
+<p>Let’s apply everything we’ve learned to create a final, publication-ready, multi-panel figure.</p>
+</section>
+<section id="thank-you-final-qa" class="slide level2">
+<h2>Thank You &amp; Final Q&amp;A</h2>
 
 </section>
     </div>
@@ -326,19 +341,19 @@ Deepak Tanwar
 </div></div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="../site_libs/revealjs/dist/reveal.js"></script>
+  <script src="slide_block_7_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="slide_block_7_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="slide_block_7_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="slide_block_7_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="slide_block_7_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="slide_block_7_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
-  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
+  <script src="slide_block_7_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="slide_block_7_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="slide_block_7_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="slide_block_7_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -533,44 +548,6 @@ Deepak Tanwar
         ]
       });
     </script>
-    
-    <script>
-      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
-      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
-      // slide changes (different for each slide format).
-      (function () {
-        // dispatch for htmlwidgets
-        function fireSlideEnter() {
-          const event = window.document.createEvent("Event");
-          event.initEvent("slideenter", true, true);
-          window.document.dispatchEvent(event);
-        }
-
-        function fireSlideChanged(previousSlide, currentSlide) {
-          fireSlideEnter();
-
-          // dispatch for shiny
-          if (window.jQuery) {
-            if (previousSlide) {
-              window.jQuery(previousSlide).trigger("hidden");
-            }
-            if (currentSlide) {
-              window.jQuery(currentSlide).trigger("shown");
-            }
-          }
-        }
-
-        // hookup for slidy
-        if (window.w3c_slidy) {
-          window.w3c_slidy.add_observer(function (slide_num) {
-            // slide_num starts at position 1
-            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
-          });
-        }
-
-      })();
-    </script>
-
     <script id="quarto-html-after-body" type="application/javascript">
       window.document.addEventListener("DOMContentLoaded", function (event) {
         const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
@@ -640,7 +617,7 @@ Deepak Tanwar
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp("https:\/\/DQBM-SIB\.github\.io\/publication_ready_figs_R\/");
+            var filterRegex = new RegExp('/' + window.location.host + '/');
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }
