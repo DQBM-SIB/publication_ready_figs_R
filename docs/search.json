@@ -11,14 +11,21 @@
     "href": "slides/slide_block_7.html#finalizing-figures-for-publication",
     "title": "Block 7",
     "section": "Finalizing Figures for Publication",
-    "text": "Finalizing Figures for Publication\nYou’ve created a beautiful plot. Now, how do you get it into your manuscript correctly?\n\nVector vs. Raster Formats:\n\nVector (PDF, SVG, EPS): Infinitely scalable. Lines and text are stored as mathematical equations. This is the preferred format for most journals.\nRaster (PNG, TIFF, JPG): Pixel-based. Can become blurry when resized. Necessary for images with complex color gradients like photos.\n\nResolution (DPI): For raster images, journals typically require 300 DPI for color/grayscale and 600-1200 DPI for line art."
+    "text": "Finalizing Figures for Publication\nYou’ve created a beautiful plot. Now, how do you get it into your manuscript correctly?\n\nVector vs. Raster Formats:\n\nVector (PDF, SVG, EPS): Infinitely scalable. Lines and text are stored as mathematical equations. This is the preferred format for most journals.\nRaster (PNG, TIFF, JPG): Pixel-based. Can become blurry when resized. Necessary for images with complex color gradients like photos."
+  },
+  {
+    "objectID": "slides/slide_block_7.html#finalizing-figures-for-publication-1",
+    "href": "slides/slide_block_7.html#finalizing-figures-for-publication-1",
+    "title": "Block 7",
+    "section": "Finalizing Figures for Publication",
+    "text": "Finalizing Figures for Publication\n\nResolution (DPI): For raster images, journals typically require 300 DPI for color/grayscale and 600-1200 DPI for line art."
   },
   {
     "objectID": "slides/slide_block_7.html#mastering-ggsave",
     "href": "slides/slide_block_7.html#mastering-ggsave",
     "title": "Block 7",
     "section": "Mastering ggsave()",
-    "text": "Mastering ggsave()\nggsave() is your best friend for exporting ggplot2 plots.\nmy_ggplot &lt;- ggplot(mtcars, aes(wt, mpg)) + geom_point()\n\n# Save as a PDF (vector)\nggsave(\"my_plot.pdf\", plot = my_ggplot, width = 180, height = 100, units = \"mm\")\n\n# Save as a high-resolution TIFF (raster)\nggsave(\"my_plot.tiff\", plot = my_ggplot, width = 180, height = 100, units = \"mm\", dpi = 300)\nKey Parameters: - width, height, units: Always specify the physical size required by the journal. - dpi: Crucial for raster formats. - device: Can be used to specify the graphics device (e.g., cairo_pdf for better font embedding)."
+    "text": "Mastering ggsave()\nggsave() is your best friend for exporting ggplot2 plots.\nmy_ggplot &lt;- ggplot(mtcars, aes(wt, mpg)) + geom_point()\n\n# Save as a PDF (vector)\nggsave(\"my_plot.pdf\", plot = my_ggplot, width = 180, height = 100, units = \"mm\")\n\n# Save as a high-resolution TIFF (raster)\nggsave(\"my_plot.tiff\", plot = my_ggplot, width = 180, height = 100, units = \"mm\", dpi = 300)\nKey Parameters:\n\nwidth, height, units: Always specify the physical size required by the journal.\ndpi: Crucial for raster formats."
   },
   {
     "objectID": "slides/slide_block_7.html#the-importance-of-reproducibility",
@@ -32,21 +39,77 @@
     "href": "slides/slide_block_7.html#best-practices-for-reproducibility",
     "title": "Block 7",
     "section": "Best Practices for Reproducibility",
-    "text": "Best Practices for Reproducibility\n\nStructure Your Code:\n\nKeep your code in R scripts (.R), not just in your R console history.\nUse comments to explain the why, not the what.\nOrganize scripts logically: data loading, data cleaning, analysis, figure generation.\n\nManage Your Environment:\n\nThe renv package (which this course uses!) saves the versions of all packages you use. This is critical for long-term reproducibility.\nAlways run renv::snapshot() to save the state of your project.\n\nUse Version Control:\n\nTools like git track every change you make to your code.\nIt’s like a “lab notebook” for your analysis, allowing you to go back in time and understand how your analysis evolved."
+    "text": "Best Practices for Reproducibility\n\nStructure Your Code:\n\nKeep your code in R scripts (.R), not just in your R console history.\nUse comments to explain the why, not the what.\nOrganize scripts logically: data loading, data cleaning, analysis, figure generation."
+  },
+  {
+    "objectID": "slides/slide_block_7.html#best-practices-for-reproducibility-1",
+    "href": "slides/slide_block_7.html#best-practices-for-reproducibility-1",
+    "title": "Block 7",
+    "section": "Best Practices for Reproducibility",
+    "text": "Best Practices for Reproducibility\n\nManage Your Environment:\n\nThe renv package (which this course uses!) saves the versions of all packages you use. This is critical for long-term reproducibility.\nAlways run renv::snapshot() to save the state of your project."
+  },
+  {
+    "objectID": "slides/slide_block_7.html#best-practices-for-reproducibility-2",
+    "href": "slides/slide_block_7.html#best-practices-for-reproducibility-2",
+    "title": "Block 7",
+    "section": "Best Practices for Reproducibility",
+    "text": "Best Practices for Reproducibility\n\nUse Version Control:\n\nTools like git track every change you make to your code.\nIt’s like a “lab notebook” for your analysis, allowing you to go back in time and understand how your analysis evolved."
   },
   {
     "objectID": "slides/slide_block_7.html#course-review-what-weve-learned",
     "href": "slides/slide_block_7.html#course-review-what-weve-learned",
     "title": "Block 7",
     "section": "Course Review: What We’ve Learned",
-    "text": "Course Review: What We’ve Learned\n\nBlock 1: Principles of effective data visualization and base R graphics.\nBlock 2: The “Grammar of Graphics” and building plots with ggplot2.\nBlock 3: Advanced ggplot2 (faceting, themes, colors).\nBlock 4: Adding statistical annotations and summaries.\nBlock 5: Creating universal themes and assembling multi-panel ggplot figures with patchwork.\nBlock 6: Building complex heatmaps and combining them with ggplot objects.\nBlock 7: Finalizing figures for publication and ensuring reproducibility."
+    "text": "Course Review: What We’ve Learned\n\nBlock 1: Principles of effective data visualization and base R graphics."
+  },
+  {
+    "objectID": "slides/slide_block_7.html#course-review-what-weve-learned-1",
+    "href": "slides/slide_block_7.html#course-review-what-weve-learned-1",
+    "title": "Block 7",
+    "section": "Course Review: What We’ve Learned",
+    "text": "Course Review: What We’ve Learned\n\nBlock 2: The “Grammar of Graphics” and building plots with ggplot2."
+  },
+  {
+    "objectID": "slides/slide_block_7.html#course-review-what-weve-learned-2",
+    "href": "slides/slide_block_7.html#course-review-what-weve-learned-2",
+    "title": "Block 7",
+    "section": "Course Review: What We’ve Learned",
+    "text": "Course Review: What We’ve Learned\n\nBlock 3: Advanced ggplot2 (faceting, themes, colors)."
+  },
+  {
+    "objectID": "slides/slide_block_7.html#course-review-what-weve-learned-3",
+    "href": "slides/slide_block_7.html#course-review-what-weve-learned-3",
+    "title": "Block 7",
+    "section": "Course Review: What We’ve Learned",
+    "text": "Course Review: What We’ve Learned\n\nBlock 4: Adding statistical annotations and summaries."
+  },
+  {
+    "objectID": "slides/slide_block_7.html#course-review-what-weve-learned-4",
+    "href": "slides/slide_block_7.html#course-review-what-weve-learned-4",
+    "title": "Block 7",
+    "section": "Course Review: What We’ve Learned",
+    "text": "Course Review: What We’ve Learned\n\nBlock 5: Creating universal themes and assembling multi-panel ggplot figures with patchwork."
+  },
+  {
+    "objectID": "slides/slide_block_7.html#course-review-what-weve-learned-5",
+    "href": "slides/slide_block_7.html#course-review-what-weve-learned-5",
+    "title": "Block 7",
+    "section": "Course Review: What We’ve Learned",
+    "text": "Course Review: What We’ve Learned\n\nBlock 6: Building complex heatmaps and combining them with ggplot objects."
+  },
+  {
+    "objectID": "slides/slide_block_7.html#course-review-what-weve-learned-6",
+    "href": "slides/slide_block_7.html#course-review-what-weve-learned-6",
+    "title": "Block 7",
+    "section": "Course Review: What We’ve Learned",
+    "text": "Course Review: What We’ve Learned\n\nBlock 7: Finalizing figures for publication and ensuring reproducibility."
   },
   {
     "objectID": "slides/slide_block_7.html#capstone-project-a-walkthrough",
     "href": "slides/slide_block_7.html#capstone-project-a-walkthrough",
     "title": "Block 7",
     "section": "Capstone Project: A Walkthrough",
-    "text": "Capstone Project: A Walkthrough\nLet’s apply everything we’ve learned to create a final, publication-ready, multi-panel figure.\n\n\n\n\n\n\n\nCode for the Capstone Figure\n\n\n# Load packages\nlibrary(ComplexHeatmap)\nlibrary(ggplot2)\nlibrary(dplyr)\nlibrary(grid)\nlibrary(RColorBrewer)\n\n# Load data\ndata &lt;- readRDS(gzcon(url(\n  \"https://raw.githubusercontent.com/urppeia/publication_figs/main/data.rds\"\n)))\nrownames(data$counts) &lt;- data$counts$Gene_ID\ndata$counts &lt;- data$counts[, -1]\n\n# Part A: Heatmap\nmat &lt;- as.matrix(data$counts)\nmat_scaled &lt;- t(scale(t(mat)))\ngene_vars &lt;- apply(mat_scaled, 1, var, na.rm = TRUE)\ntop_genes_var &lt;- names(sort(gene_vars, decreasing = TRUE)[1:50])\nmat_top_var &lt;- mat_scaled[top_genes_var, ]\ncol_anno &lt;- HeatmapAnnotation(\n  compound = data$anno$compound, time = data$anno$time,\n  col = list(compound = c(\"none\" = \"steelblue\", \"sucrose\" = \"tomato\"),\n             time = c(\"3 hour\" = \"lightgrey\", \"24 hour\" = \"darkgrey\"))\n)\nht &lt;- Heatmap(mat_top_var, name = \"Z-Score\", top_annotation = col_anno,\n              show_row_names = FALSE, column_title = \"Top 50 Most Variable Genes\")\n\n# Part B: Volcano Plot\ndata$diff &lt;- data$diff %&gt;%\n  mutate(significant = sucrose_24h_pval &lt; 0.05 & abs(sucrose_24h_lfc) &gt; 1)\np_volcano &lt;- ggplot(data$diff, aes(x = sucrose_24h_lfc, y = -log10(sucrose_24h_pval))) +\n  geom_point(aes(color = significant), alpha = 0.6) +\n  scale_color_manual(values = c(\"grey\", \"red\")) + theme_bw() +\n  labs(title = \"Volcano Plot (24h)\", x = \"Log2 Fold Change\", y = \"-log10(p-value)\") +\n  theme(legend.position = \"none\")\n\n# Part C: Boxplot\ntop_gene_24h &lt;- data$diff %&gt;% filter(sucrose_24h_pval &lt; 0.05) %&gt;%\n  arrange(sucrose_24h_pval) %&gt;% pull(Gene_ID) %&gt;% head(1)\nplot_data &lt;- data.frame(expression = as.numeric(mat[top_gene_24h, ]),\n                        compound = data$anno$compound, time = data$anno$time)\np_boxplot &lt;- ggplot(plot_data, aes(x = compound, y = expression, fill = time)) +\n  geom_boxplot() + theme_bw() +\n  labs(title = paste(\"Expression of\", top_gene_24h), x = \"Compound\", y = \"Normalized Expression\") +\n  scale_fill_manual(values = c(\"lightgrey\", \"darkgrey\"))\n\n# Assemble and Save\nht_grob &lt;- grid.grabExpr(draw(ht))\n# In the exercise, we save this to PDF and TIFF."
+    "text": "Capstone Project: A Walkthrough\nLet’s apply everything we’ve learned to create a final, publication-ready, multi-panel figure."
   },
   {
     "objectID": "slides/slide_block_7.html#thank-you-final-qa",

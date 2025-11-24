@@ -221,6 +221,11 @@ Deepak Tanwar
 <li><strong>Vector (PDF, SVG, EPS)</strong>: Infinitely scalable. Lines and text are stored as mathematical equations. <strong>This is the preferred format for most journals.</strong></li>
 <li><strong>Raster (PNG, TIFF, JPG)</strong>: Pixel-based. Can become blurry when resized. Necessary for images with complex color gradients like photos.</li>
 </ul></li>
+</ul>
+</section>
+<section id="finalizing-figures-for-publication-1" class="slide level2">
+<h2>Finalizing Figures for Publication</h2>
+<ul>
 <li><strong>Resolution (DPI)</strong>: For raster images, journals typically require <strong>300 DPI</strong> for color/grayscale and <strong>600-1200 DPI</strong> for line art.</li>
 </ul>
 </section>
@@ -234,7 +239,11 @@ Deepak Tanwar
 <span id="cb1-5"><a></a></span>
 <span id="cb1-6"><a></a><span class="co"># Save as a high-resolution TIFF (raster)</span></span>
 <span id="cb1-7"><a></a><span class="fu">ggsave</span>(<span class="st">"my_plot.tiff"</span>, <span class="at">plot =</span> my_ggplot, <span class="at">width =</span> <span class="dv">180</span>, <span class="at">height =</span> <span class="dv">100</span>, <span class="at">units =</span> <span class="st">"mm"</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><strong>Key Parameters</strong>: - <code>width</code>, <code>height</code>, <code>units</code>: Always specify the physical size required by the journal. - <code>dpi</code>: Crucial for raster formats. - <code>device</code>: Can be used to specify the graphics device (e.g., <code>cairo_pdf</code> for better font embedding).</p>
+<p><strong>Key Parameters</strong>:</p>
+<ul>
+<li><p><code>width</code>, <code>height</code>, <code>units</code>: Always specify the physical size required by the journal.</p></li>
+<li><p><code>dpi</code>: Crucial for raster formats.</p></li>
+</ul>
 </section>
 <section id="the-importance-of-reproducibility" class="slide level2">
 <h2>The Importance of Reproducibility</h2>
@@ -251,11 +260,21 @@ Deepak Tanwar
 <li>Use comments to explain the <em>why</em>, not the <em>what</em>.</li>
 <li>Organize scripts logically: data loading, data cleaning, analysis, figure generation.</li>
 </ul></li>
+</ol>
+</section>
+<section id="best-practices-for-reproducibility-1" class="slide level2">
+<h2>Best Practices for Reproducibility</h2>
+<ol start="2" type="1">
 <li><strong>Manage Your Environment</strong>:
 <ul>
 <li>The <code>renv</code> package (which this course uses!) saves the versions of all packages you use. This is critical for long-term reproducibility.</li>
 <li>Always run <code>renv::snapshot()</code> to save the state of your project.</li>
 </ul></li>
+</ol>
+</section>
+<section id="best-practices-for-reproducibility-2" class="slide level2">
+<h2>Best Practices for Reproducibility</h2>
+<ol start="3" type="1">
 <li><strong>Use Version Control</strong>:
 <ul>
 <li>Tools like <code>git</code> track every change you make to your code.</li>
@@ -267,80 +286,47 @@ Deepak Tanwar
 <h2>Course Review: What We’ve Learned</h2>
 <ul>
 <li><strong>Block 1</strong>: Principles of effective data visualization and base R graphics.</li>
+</ul>
+</section>
+<section id="course-review-what-weve-learned-1" class="slide level2">
+<h2>Course Review: What We’ve Learned</h2>
+<ul>
 <li><strong>Block 2</strong>: The “Grammar of Graphics” and building plots with <code>ggplot2</code>.</li>
+</ul>
+</section>
+<section id="course-review-what-weve-learned-2" class="slide level2">
+<h2>Course Review: What We’ve Learned</h2>
+<ul>
 <li><strong>Block 3</strong>: Advanced <code>ggplot2</code> (faceting, themes, colors).</li>
+</ul>
+</section>
+<section id="course-review-what-weve-learned-3" class="slide level2">
+<h2>Course Review: What We’ve Learned</h2>
+<ul>
 <li><strong>Block 4</strong>: Adding statistical annotations and summaries.</li>
+</ul>
+</section>
+<section id="course-review-what-weve-learned-4" class="slide level2">
+<h2>Course Review: What We’ve Learned</h2>
+<ul>
 <li><strong>Block 5</strong>: Creating universal themes and assembling multi-panel <code>ggplot</code> figures with <code>patchwork</code>.</li>
+</ul>
+</section>
+<section id="course-review-what-weve-learned-5" class="slide level2">
+<h2>Course Review: What We’ve Learned</h2>
+<ul>
 <li><strong>Block 6</strong>: Building complex heatmaps and combining them with <code>ggplot</code> objects.</li>
+</ul>
+</section>
+<section id="course-review-what-weve-learned-6" class="slide level2">
+<h2>Course Review: What We’ve Learned</h2>
+<ul>
 <li><strong>Block 7</strong>: Finalizing figures for publication and ensuring reproducibility.</li>
 </ul>
 </section>
 <section id="capstone-project-a-walkthrough" class="slide level2">
 <h2>Capstone Project: A Walkthrough</h2>
 <p>Let’s apply everything we’ve learned to create a final, publication-ready, multi-panel figure.</p>
-
-<img data-src="assets/figs/capstone_figure.png" class="r-stretch"><div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Code for the Capstone Figure</strong></p>
-</div>
-<div class="callout-content">
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="co"># Load packages</span></span>
-<span id="cb2-2"><a></a><span class="fu">library</span>(ComplexHeatmap)</span>
-<span id="cb2-3"><a></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb2-4"><a></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb2-5"><a></a><span class="fu">library</span>(grid)</span>
-<span id="cb2-6"><a></a><span class="fu">library</span>(RColorBrewer)</span>
-<span id="cb2-7"><a></a></span>
-<span id="cb2-8"><a></a><span class="co"># Load data</span></span>
-<span id="cb2-9"><a></a>data <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">gzcon</span>(<span class="fu">url</span>(</span>
-<span id="cb2-10"><a></a>  <span class="st">"https://raw.githubusercontent.com/urppeia/publication_figs/main/data.rds"</span></span>
-<span id="cb2-11"><a></a>)))</span>
-<span id="cb2-12"><a></a><span class="fu">rownames</span>(data<span class="sc">$</span>counts) <span class="ot">&lt;-</span> data<span class="sc">$</span>counts<span class="sc">$</span>Gene_ID</span>
-<span id="cb2-13"><a></a>data<span class="sc">$</span>counts <span class="ot">&lt;-</span> data<span class="sc">$</span>counts[, <span class="sc">-</span><span class="dv">1</span>]</span>
-<span id="cb2-14"><a></a></span>
-<span id="cb2-15"><a></a><span class="co"># Part A: Heatmap</span></span>
-<span id="cb2-16"><a></a>mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(data<span class="sc">$</span>counts)</span>
-<span id="cb2-17"><a></a>mat_scaled <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">scale</span>(<span class="fu">t</span>(mat)))</span>
-<span id="cb2-18"><a></a>gene_vars <span class="ot">&lt;-</span> <span class="fu">apply</span>(mat_scaled, <span class="dv">1</span>, var, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb2-19"><a></a>top_genes_var <span class="ot">&lt;-</span> <span class="fu">names</span>(<span class="fu">sort</span>(gene_vars, <span class="at">decreasing =</span> <span class="cn">TRUE</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>])</span>
-<span id="cb2-20"><a></a>mat_top_var <span class="ot">&lt;-</span> mat_scaled[top_genes_var, ]</span>
-<span id="cb2-21"><a></a>col_anno <span class="ot">&lt;-</span> <span class="fu">HeatmapAnnotation</span>(</span>
-<span id="cb2-22"><a></a>  <span class="at">compound =</span> data<span class="sc">$</span>anno<span class="sc">$</span>compound, <span class="at">time =</span> data<span class="sc">$</span>anno<span class="sc">$</span>time,</span>
-<span id="cb2-23"><a></a>  <span class="at">col =</span> <span class="fu">list</span>(<span class="at">compound =</span> <span class="fu">c</span>(<span class="st">"none"</span> <span class="ot">=</span> <span class="st">"steelblue"</span>, <span class="st">"sucrose"</span> <span class="ot">=</span> <span class="st">"tomato"</span>),</span>
-<span id="cb2-24"><a></a>             <span class="at">time =</span> <span class="fu">c</span>(<span class="st">"3 hour"</span> <span class="ot">=</span> <span class="st">"lightgrey"</span>, <span class="st">"24 hour"</span> <span class="ot">=</span> <span class="st">"darkgrey"</span>))</span>
-<span id="cb2-25"><a></a>)</span>
-<span id="cb2-26"><a></a>ht <span class="ot">&lt;-</span> <span class="fu">Heatmap</span>(mat_top_var, <span class="at">name =</span> <span class="st">"Z-Score"</span>, <span class="at">top_annotation =</span> col_anno,</span>
-<span id="cb2-27"><a></a>              <span class="at">show_row_names =</span> <span class="cn">FALSE</span>, <span class="at">column_title =</span> <span class="st">"Top 50 Most Variable Genes"</span>)</span>
-<span id="cb2-28"><a></a></span>
-<span id="cb2-29"><a></a><span class="co"># Part B: Volcano Plot</span></span>
-<span id="cb2-30"><a></a>data<span class="sc">$</span>diff <span class="ot">&lt;-</span> data<span class="sc">$</span>diff <span class="sc">%&gt;%</span></span>
-<span id="cb2-31"><a></a>  <span class="fu">mutate</span>(<span class="at">significant =</span> sucrose_24h_pval <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> <span class="fu">abs</span>(sucrose_24h_lfc) <span class="sc">&gt;</span> <span class="dv">1</span>)</span>
-<span id="cb2-32"><a></a>p_volcano <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data<span class="sc">$</span>diff, <span class="fu">aes</span>(<span class="at">x =</span> sucrose_24h_lfc, <span class="at">y =</span> <span class="sc">-</span><span class="fu">log10</span>(sucrose_24h_pval))) <span class="sc">+</span></span>
-<span id="cb2-33"><a></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> significant), <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb2-34"><a></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"grey"</span>, <span class="st">"red"</span>)) <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb2-35"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Volcano Plot (24h)"</span>, <span class="at">x =</span> <span class="st">"Log2 Fold Change"</span>, <span class="at">y =</span> <span class="st">"-log10(p-value)"</span>) <span class="sc">+</span></span>
-<span id="cb2-36"><a></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
-<span id="cb2-37"><a></a></span>
-<span id="cb2-38"><a></a><span class="co"># Part C: Boxplot</span></span>
-<span id="cb2-39"><a></a>top_gene_24h <span class="ot">&lt;-</span> data<span class="sc">$</span>diff <span class="sc">%&gt;%</span> <span class="fu">filter</span>(sucrose_24h_pval <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb2-40"><a></a>  <span class="fu">arrange</span>(sucrose_24h_pval) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(Gene_ID) <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">1</span>)</span>
-<span id="cb2-41"><a></a>plot_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">expression =</span> <span class="fu">as.numeric</span>(mat[top_gene_24h, ]),</span>
-<span id="cb2-42"><a></a>                        <span class="at">compound =</span> data<span class="sc">$</span>anno<span class="sc">$</span>compound, <span class="at">time =</span> data<span class="sc">$</span>anno<span class="sc">$</span>time)</span>
-<span id="cb2-43"><a></a>p_boxplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(plot_data, <span class="fu">aes</span>(<span class="at">x =</span> compound, <span class="at">y =</span> expression, <span class="at">fill =</span> time)) <span class="sc">+</span></span>
-<span id="cb2-44"><a></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb2-45"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste</span>(<span class="st">"Expression of"</span>, top_gene_24h), <span class="at">x =</span> <span class="st">"Compound"</span>, <span class="at">y =</span> <span class="st">"Normalized Expression"</span>) <span class="sc">+</span></span>
-<span id="cb2-46"><a></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"lightgrey"</span>, <span class="st">"darkgrey"</span>))</span>
-<span id="cb2-47"><a></a></span>
-<span id="cb2-48"><a></a><span class="co"># Assemble and Save</span></span>
-<span id="cb2-49"><a></a>ht_grob <span class="ot">&lt;-</span> <span class="fu">grid.grabExpr</span>(<span class="fu">draw</span>(ht))</span>
-<span id="cb2-50"><a></a><span class="co"># In the exercise, we save this to PDF and TIFF.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</div>
 </section>
 <section id="thank-you-final-qa" class="slide level2">
 <h2>Thank You &amp; Final Q&amp;A</h2>
